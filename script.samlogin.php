@@ -55,14 +55,14 @@ class Com_SamloginInstallerScript
                                 return false;
                         }
                      
-                  $filetopreserveArr=[
+                  $filetopreserveArr=array(
                           /* '/components/com_samlogin/simplesamlphp/cert/saml.key',
                            '/components/com_samlogin/simplesamlphp/cert/saml.crt',
                            '/components/com_samlogin/simplesamlphp/config/authsources.php',
                            '/components/com_samlogin/simplesamlphp/config/config-metarefresh.php',
                            '/components/com_samlogin/simplesamlphp/config/module_cron.php',
                            '/components/com_samlogin/simplesamlphp/config/config.php' */
-                        ];
+                        );
                       $tmpdir=JFactory::getApplication()->getCfg("tmp_path");
                         foreach ($filetopreserveArr as $filetopreserve){
                                         // echo "preserving...".JPATH_SITE.$filetopreserve;
@@ -112,14 +112,14 @@ class Com_SamloginInstallerScript
             if ($result)
             {
          
-                 $filetopreserveArr=[
+                 $filetopreserveArr=array(
                        /*    '/components/com_samlogin/simplesamlphp/cert/saml.key',
                            '/components/com_samlogin/simplesamlphp/cert/saml.crt',
                            '/components/com_samlogin/simplesamlphp/config/authsources.php',
                            '/components/com_samlogin/simplesamlphp/config/config-metarefresh.php',
                            '/components/com_samlogin/simplesamlphp/config/module_cron.php',
                            '/components/com_samlogin/simplesamlphp/config/config.php' */
-                        ];
+                        );
                         foreach ($filetopreserveArr as $filetorestore){
                         //    echo "restoring ".$filetorestore;
                             $tmpdir=JFactory::getApplication()->getCfg("tmp_path");

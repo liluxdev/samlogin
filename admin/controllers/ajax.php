@@ -112,14 +112,14 @@ class SAMLoginControllerAjax extends SAMLoginController {
     
     
     private function _preserveSSPConf($app){
-                      $filetopreserveArr=[
+                      $filetopreserveArr=array(
                           '/components/com_samlogin/simplesamlphp/cert/saml.key',
                            '/components/com_samlogin/simplesamlphp/cert/saml.crt',
                            '/components/com_samlogin/simplesamlphp/config/authsources.php',
                            '/components/com_samlogin/simplesamlphp/config/config-metarefresh.php',
                            '/components/com_samlogin/simplesamlphp/config/module_cron.php',
                            '/components/com_samlogin/simplesamlphp/config/config.php'
-                        ];
+                        );
                       $tmpdir=JFactory::getApplication()->getCfg("tmp_path");
                         foreach ($filetopreserveArr as $filetopreserve){
                                         $app->enqueueMessage( "preserving...".JPATH_SITE.$filetopreserve,"warning");
@@ -140,14 +140,14 @@ class SAMLoginControllerAjax extends SAMLoginController {
     }
     
     private function _restorePreservedSSPConf($app){
-                        $filetopreserveArr=[
+                        $filetopreserveArr=array(
                            '/components/com_samlogin/simplesamlphp/cert/saml.key',
                            '/components/com_samlogin/simplesamlphp/cert/saml.crt',
                            '/components/com_samlogin/simplesamlphp/config/authsources.php',
                            '/components/com_samlogin/simplesamlphp/config/config-metarefresh.php',
                            '/components/com_samlogin/simplesamlphp/config/module_cron.php',
                            '/components/com_samlogin/simplesamlphp/config/config.php' 
-                        ];
+                        );
                         foreach ($filetopreserveArr as $filetorestore){
                             
                             $tmpdir=JFactory::getApplication()->getCfg("tmp_path");
