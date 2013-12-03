@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="Login">
+        <message>
+            <![CDATA[SAMLOGIN_COM_DISPLAYS_A_SAMLOGIN_LOGIN_PAGE]]>
+        </message>
+    </layout>
+    <state>
+        <name>Login</name>
+        <description>SAMLOGIN_COM_DISPLAY_LOGIN_PAGE</description>
+        <params addpath="/administrator/components/com_samlogin/elements">
+            <param name="template" type="template" default="default" extension="com_samlogin" label="Template" description=""/>
+            <param name="introductionMessage" type="list" default="0" label="COM_SAMLOGIN_INTRO_MESSAGE" description="COM_SAMLOGIN_INTRO_MESSAGE_DESC">
+                <option value="">COM_SAMLOGIN_NONE</option>
+                <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
+                <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
+            </param>
+            <param name="customIntroductionMessage" type="textarea" rows="5" cols="30" default="" label="COM_SAMLOGIN_CUSTOM_INTRO_MSG" description="COM_SAMLOGIN_CUSTOM_INTRO_MSG_DESC"/>
+            <param name="registrationMessage" type="list" default="0" label="COM_SAMLOGIN_REGISTRATION_MSG" description="COM_SAMLOGIN_REGISTRATION_MSG_DESC">
+                <option value="">COM_SAMLOGIN_NONE</option>
+                <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
+                <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
+            </param>
+            <param name="customRegistrationMessage" type="textarea" rows="5" cols="30" default="" label="COM_SAMLOGIN_CUSTOM_REGISTRATION_MSG" description="SAMLOGIN_LOGINVIEW_FORM_CUSTOM_REGISTRATION_MESSSAGE_DESC"/>
+            <param name="signInMessage" type="list" default="0" label="COM_SAMLOGIN_LOGIN_MSG" description="COM_SAMLOGIN_LOGIN_MSG_DESC">
+                <option value="">COM_SAMLOGIN_NONE</option>
+                <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
+                <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
+            </param>
+            <param name="customSignInMessage" type="textarea" rows="5" cols="30" default="" label="COM_SAMLOGIN_CUSTOM_LOGIN_MSG" description="COM_SAMLOGIN_CUSTOM_LOGIN_MSG_DESC"/>
+            <param name="login" type="menuitem" default="" disable="separator" label="COM_SAMLOGIN_LOGIN_REDIRECTION_URL" description="" state="1"/>
+            <param name="logout" type="menuitem" default="" disable="separator" label="COM_SAMLOGIN_LOGOUT_REDIRECTION_URL" description="" state="1"/>
+            <param name="usesecure" type="radio" default="0" label="COM_SAMLOGIN_ENCRYPT_LOGIN_FORM" description="COM_SAMLOGIN_ENCRYPT_LOGIN_FORM_DESC">
+                <option value="0">SAMLOGIN_NO</option>
+                <option value="1">SAMLOGIN_YES</option>
+            </param>
+            <param name="menutype" type="menu" default="" label="COM_SAMLOGIN_RENDER_MENU" description="COM_SAMLOGIN_RENDER_MENU_DESC" />
+            <param name="style" type="style" />
+        </params>
+        <fields name="params" addfieldpath="/administrator/components/com_samlogin/elements">
+            <fieldset name="basic">
+                <field name="template" type="template" default="default" extension="com_samlogin" label="COM_SAMLOGIN_TEMPLATE" description=""/>
+                <field name="introductionMessage" type="list" default="0" label="COM_SAMLOGIN_INTRO_MESSAGE" description="COM_SAMLOGIN_INTRO_MESSAGE_DESC">
+                  <option value="">COM_SAMLOGIN_NONE</option>
+                  <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
+                  <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
+                </field>
+                <field type="spacer"/>
+                <field name="customIntroductionMessage" type="editor" filter="raw" rows="5" cols="30" width="300px" height="100px" buttons="false" default="" label="COM_SAMLOGIN_CUSTOM_INTRO_MSG" description="COM_SAMLOGIN_CUSTOM_INTRO_MSG_DESC"/>
+                <field name="registrationMessage" type="list" default="0" label="COM_SAMLOGIN_REGISTRATION_MSG" description="COM_SAMLOGIN_REGISTRATION_MSG_DESC">
+                  <option value="">COM_SAMLOGIN_NONE</option>
+                  <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
+                  <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
+                </field>
+                <field type="spacer"/>
+                <field name="customRegistrationMessage" type="editor" filter="raw" rows="5" cols="30" width="300px" height="100px" buttons="false" default="" label="SAMLOGIN_LOGINVIEW_FORM_CUSTOM_REGISTRATION_MESSSAGE" description="SAMLOGIN_LOGINVIEW_FORM_CUSTOM_REGISTRATION_MESSSAGE_DESC"/>
+                <field name="signInMessage" type="list" default="0" label="COM_SAMLOGIN_LOGIN_MSG" description="COM_SAMLOGIN_LOGIN_MSG_DESC">
+                 <option value="">COM_SAMLOGIN_NONE</option>
+                  <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
+                  <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
+                </field>
+                <field type="spacer"/>
+                <field name="customSignInMessage" type="editor" filter="raw" rows="5" cols="30" width="300px" height="100px" buttons="false" default="" label="SAMLOGIN_LOGINVIEW_FORM_CUSTOM_SIGN_IN_MESSSAGE" description="SAMLOGIN_LOGINVIEW_FORM_CUSTOM_SIGN_IN_MESSSAGE_DESC"/>
+                <field name="login" type="menuitem" default="" disable="separator" label="COM_SAMLOGIN_LOGIN_REDIRECTION_URL" description="" state="1">
+					<option value="0">off</option>
+				</field>
+                <field name="logout" type="menuitem" default="" disable="separator" label="COM_SAMLOGIN_LOGOUT_REDIRECTION_URL" description="" state="1">
+					<option value="0">off</option>
+				</field>
+                <field name="usesecure" type="radio" default="0" label="SAMLOGIN__COM_ENCRYPT_LOGIN_FORM" description="SAMLOGIN__COM_SUBMIT_ENCRYPTED_LOGIN_DATA_REQUIRES_SSL">
+                    <option value="0">SAMLOGIN__COM_NO</option>
+                    <option value="1">SAMLOGIN__COM_YES</option>
+                </field>
+                <field name="menutype" type="menu" default="" label="SAMLOGIN__RENDER_MENU" description="SAMLOGIN__RENDER_MENU_DESCRIPTION">
+                	<option value="">SAMLOGIN__SELECT_MENU</option>
+                </field>
+                <field name="style" type="style" />
+            </fieldset>
+        </fields>
+    </state>
+</metadata>

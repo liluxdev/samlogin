@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="authentication" method="upgrade">
+	<name>Authentication - SAMLogin</name>
+	<author>creativeprogramming.it</author>
+	<creationDate>August 8th, 2013</creationDate>
+        <copyright>Copyright (c) 2013 creativeprogramming.it All rights reserved.</copyright>
+        <license>Provided "as it is" http://creativeprogramming.it/provided-as-it-is</license>
+	<authorEmail>info@creativeprogramming.it</authorEmail>
+	<authorUrl>http://www.creativeprogramming.it</authorUrl>
+	<version>0.7</version>
+	<description>SAMLL_AUTHPLG_TITLE</description>
+	<files>
+		<filename plugin="samlogin">samlogin.php</filename>
+	</files>
+</extension>

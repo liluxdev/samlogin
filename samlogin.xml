@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5.0" method="upgrade">
+    <name>SAMLogin</name>
+    <creationDate>29-jul-2013 16.44.00</creationDate>
+    <author>creativeprogramming.it</author>
+    <authorEmail>info@creativeprogramming.it</authorEmail>
+    <copyright>Copyright (c) 2013 creativeprogramming.it All rights reserved.</copyright>
+    <license>Provided "as it is" http://creativeprogramming.it/provided-as-it-is</license>
+    <version>0.7.6</version>
+    <description><![CDATA[
+       <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.4.0/dojo/dojo.xd.js"></script>
+      <style>
+             @import "http://ajax.googleapis.com/ajax/libs/dojo/1.4.0/dijit/themes/tundra/tundra.css";
+             @import "http://ajax.googleapis.com/ajax/libs/dojo/1.4.0/dojox/widget/Toaster/Toaster.css";
+      </style>
+      <style>
+         .dijitToasterContent {
+            font-size: 16px !important;
+            color: white !important;
+            font-weight: bolder !important;
+            width:500px !important;
+        }
+        .dijitToasterContainer {
+           width:500px !important;
+           border: 2px outset !important;
+        }
+      </style>
+         <script>
+               dojo.require("dojox.widget.Toaster");
+               var idemsecs=5;
+               function showMess(message){
+                    _showToaster(message,idemsecs*1000,"message");
+               }
+
+
+                        function _showToaster(message,duration,level) {
+                            dojo.publish("idemauth_toaster", [{
+                                    message: message,
+                                    type: level,
+                                    duration: duration
+                                }]);
+                        }
+
+                function redirectToAdmin(){
+                       
+                            location.href=location.protocol+"://"+location.hostname+":"+location.port"/administrator/?option=com_samlogin&view=ajax";
+                        
+                }
+
+                 function undoRedirectToAdmin(){
+
+                            clearTimeout(idemauthtimer);
+
+                }
+
+     function countDownIdem(){
+        if (idemsecs>0){
+            dojo.byId('idemsecs').innerHTML=idemsecs--;
+        }
+        setTimeout(function(){ countDownIdem()(); },1000);
+     }
+
+                var idemauthtimer=null;
+                dojo.addOnLoad(function() {
+
+                        dojo.parser.parse('dojobox');
+                        showMess("<center>Thank you for installing SAMLogin component. <br/> </p> <hr/> <img src='../components/com_samlogin/resources/images/samlogin-logo300.png' alt='idemauth logo'/> <br/><hr/> Redirecting you to the first configuration page in <span id='idemsecs'>7</span> seconds... <br/> <a href='#' onClick='undoRedirectToAdmin();'>undo</a></center>");
+                        idemauthtimer=setTimeout(function(){ redirectToAdmin(); },idemsecs*1000);
+                        countDownIdem();
+                });
+       </script>
+       <div style="display:none;" id="dojobox" class="tundra">
+         <div dojoType="dojox.widget.Toaster" id="publish_subscribe_toaster" positionDirection="tr-left"
+                 duration="4000"  messageTopic="idemauth_toaster">
+            </div>
+        </div>
+
+
+       <b><a href='http://samlogin25.creativeprogramming.it'>SAMLogin</a>: SAML2 Authentication for  Joomla (SP)</b>
+
+    ]]></description>
+    <scriptfile>script.samlogin.php</scriptfile>
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+
+    <files folder="site">
+       
+   
+        <folder>controllers</folder>
+        <folder>helpers</folder>
+        <folder>language</folder>
+        <folder>libs</folder>
+        <folder>models</folder>
+        <!--<folder>simplesamlphp</folder>-->
+        <folder>templates</folder>
+        <folder>views</folder>
+        
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>loginReceiver.php</filename>
+        <filename>router.php</filename>
+        <filename>samlogin.php</filename>
+     
+    </files>
+    <media destination="samlogin" folder="media/samlogin">
+		<folder>images</folder>
+    </media>
+    <administration>
+      	<menu 
+              img="components/com_samlogin/images/samelogin-icon-16.png">SAMLogin</menu>
+		<submenu>
+			<!--
+				Note that all & must be escaped to &amp; for the file to be valid
+				XML and be parsed by the installer
+			-->
+			<menu link="option=com_samlogin&amp;view=ajax" view="feeds"  img="components/com_samlogin/images/samelogin-icon-16.png"
+				alt="SAMLogin/Admin">Configuration</menu>
+                 </submenu>
+   
+        <files folder="admin">
+            
+              <folder>controllers</folder>
+              <folder>elements</folder>
+              <folder>helpers</folder>
+              <folder>images</folder>
+              <folder>language</folder>
+              <folder>libs</folder>
+              <folder>models</folder>
+              <folder>resources</folder>
+              <folder>sql</folder>
+              <folder>tables</folder>
+              <folder>views</folder>
+              
+              <filename>access.xml</filename>
+              <filename>config.xml</filename>
+              <filename>controller.php</filename>
+              <filename>index.html</filename>
+	      <filename>samlogin.php</filename>
+           
+        </files>
+    </administration>
+    <modules>
+		<module module="mod_samlogin" client="site" />
+    </modules>
+    <plugins>
+		<plugin plugin="samlogin" group="authentication" />
+    </plugins>
+</extension>
