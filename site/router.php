@@ -1,11 +1,4 @@
 <?php
-/**
- * @version		$Id: router.php 2682 2013-04-04 12:39:07Z lefteris.kavadas $
- * @package		SocialConnect
- * @author		JoomlaWorks http://www.joomlaworks.net
- * @copyright	Copyright (c) 2006 - 2013 JoomlaWorks Ltd. All rights reserved.
- * @license		http://www.joomlaworks.net/license
- */
 
 defined('_JEXEC') or die ;
 

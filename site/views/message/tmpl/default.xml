@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="Message">
+        <message>
+            Service view
+        </message>
+    </layout>
+    <state>
+        <name>Message (Service Page)</name>
+        <description>SAMLOGIN_COM_DISPLAY_MESSAGE_PAGE</description>
+     
+    </state>
+</metadata>

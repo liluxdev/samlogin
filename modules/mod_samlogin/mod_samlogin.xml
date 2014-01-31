@@ -17,7 +17,7 @@
 	<config>
 		<fields name="params" addfieldpath="/administrator/components/com_samlogin/elements">
 			<fieldset name="basic">
-				<field name="template" type="template" default="default" extension="mod_socialconnect" label="SAMLOGIN_MOD_TEMPLATE" description="" />
+				<field name="template" type="template" default="default" extension="mod_samlogin" label="SAMLOGIN_MOD_TEMPLATE" description="" />
 				<field type="spacer"/>
 				<field name="preMessage" type="editor" filter="raw" rows="3" cols="30" width="300px" height="100px" buttons="false" default="" label="SAMLOGIN_LOGIN_FORM_CUSTOM_INTRODUCTION_MESSSAGE" description="SAMLOGIN_LOGIN_FORM_CUSTOM_INTRODUCTION_MESSSAGE_DESC"/>
                                 <field name="preLogoutMessage" type="editor" filter="raw" rows="3" cols="30" width="300px" height="100px" buttons="false" default="" label="SAMLOGIN_LOGIN_FORM_CUSTOM_INTRODUCTION_MESSSAGE" description="SAMLOGIN_LOGIN_FORM_CUSTOM_INTRODUCTION_MESSSAGE_DESC"/>

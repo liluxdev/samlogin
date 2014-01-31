@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5.0" method="upgrade">
     <name>SAMLogin</name>
-    <creationDate>29-jul-2013 16.44.00</creationDate>
+    <creationDate>Jan 2014</creationDate>
     <author>creativeprogramming.it</author>
     <authorEmail>info@creativeprogramming.it</authorEmail>
     <copyright>Copyright (c) 2013 creativeprogramming.it All rights reserved.</copyright>
-    <license>Provided "as it is" http://creativeprogramming.it/provided-as-it-is</license>
-    <version>0.7.6</version>
+    <license>Commercial</license>
+    <version>0.7.8</version>
     <description><![CDATA[
        <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.4.0/dojo/dojo.xd.js"></script>
       <style>

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * 
  * 
@@ -21,7 +20,7 @@ for ($i = 0; $i < 2; $i++) {
 }
 define('JPATH_BASE', $joomla_base);
 
-include_once(JPATH_BASE . "///phpconsole-master///phpconsole/install.php");
+//include_once(JPATH_BASE . "///phpconsole-master///phpconsole/install.php");
 ////phpconsole("loginreceiver.php hit " . $_SERVER["REQUEST_URI"], "rastrano");
 
 function _getSimpleSAMLSessionFromJoomlaSessionBackup($type = "site") {
@@ -106,7 +105,6 @@ $selfUrl = SimpleSAML_Utilities::selfURL();
 
 //new sp api
 $as = new SimpleSAML_Auth_Simple('default-sp'); //new sp api
-//print_r($as->getAttributes());
 
 
 if ($_GET['task'] == "logoutCallback") {

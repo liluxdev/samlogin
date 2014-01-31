@@ -1,11 +1,4 @@
 <?php
-/**
- * @version		$Id: default.php 2437 2013-01-29 14:14:53Z lefteris.kavadas $
- * @package		SocialConnect
- * @author		JoomlaWorks http://www.joomlaworks.net
- * @copyright	Copyright (c) 2006 - 2013 JoomlaWorks Ltd. All rights reserved.
- * @license		http://www.joomlaworks.net/license
- */
 
 defined('_JEXEC') or die; ?>
 
@@ -22,7 +15,7 @@ defined('_JEXEC') or die; ?>
 	<div class="samloginBlock">
 	        
                <div class="samloginSAMLLoginBlock">
-					<h2 class="socialConnectServicesMessage"><?php echo JText::_('SAMLOGIN_SAML_LOGIN'); ?></h2>
+					<h2 class="samloginServicesMessage"><?php echo JText::_('SAMLOGIN_SAML_LOGIN'); ?></h2>
 					<div class="samloginBlock">
 					
 						<a class="btn btn-primary uk-button uk-button-primary" href="<?php echo $this->ssoLink; ?>">
@@ -36,7 +29,7 @@ defined('_JEXEC') or die; ?>
                 <div class="SamloginOrSpacer"><h4> <?php echo JText::_('SAMLOGIN_OR') ?> </h4></div>
 
 		<div class="samloginLoginBlock">
-			<div class="socialConnectBlock">
+			<div class="samloginBlock">
 				<h3 class=""><?php echo JText::_('SAMLOGIN_SIGN_IN_PRE')?></h3>
 				<!--<h3 class=""><?php echo JText::_('SAMLOGIN_SIGN_IN') ?></h3> -->
 				<?php if($this->params->get('signInMessage')):?>
@@ -46,12 +39,12 @@ defined('_JEXEC') or die; ?>
 					<label class="" for="samloginUsername"><?php echo JText::_('SAMLOGIN_USERNAME') ?></label>
 					<div class="samloginRow">
 						<input id="samloginUsername"  type="text" name="username" />
-						<a class="socialConnectLink" href="<?php echo $this->remindUsernameLink; ?>"><?php echo JText::_('SAMLOGIN_FORGOT_USERNAME'); ?></a>
+						<a class="samloginLink" href="<?php echo $this->remindUsernameLink; ?>"><?php echo JText::_('SAMLOGIN_FORGOT_USERNAME'); ?></a>
 					</div>
 					<label class="samloginRow" for="samloginPassword"><?php echo JText::_('SAMLOGIN_PASSWORD') ?></label>
 					<div class="samloginRow">
 						<input id="samloginPassword" type="password" name="<?php echo $this->passwordFieldName; ?>" />
-						<a class="socialConnectLink" href="<?php echo $this->resetPasswordLink; ?>"><?php echo JText::_('SAMLOGIN_FORGOT_PASSWORD'); ?></a>
+						<a class="samloginLink" href="<?php echo $this->resetPasswordLink; ?>"><?php echo JText::_('SAMLOGIN_FORGOT_PASSWORD'); ?></a>
 					</div>
                                         <div class="samloginClassicLoginBttBlock">
 					<button class="uk-button btn samloginUserpassLoginButton" type="submit">

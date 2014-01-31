@@ -4,10 +4,10 @@
 	<author>creativeprogramming.it</author>
 	<creationDate>August 8th, 2013</creationDate>
         <copyright>Copyright (c) 2013 creativeprogramming.it All rights reserved.</copyright>
-        <license>Provided "as it is" http://creativeprogramming.it/provided-as-it-is</license>
+        <license>Commercial</license>
 	<authorEmail>info@creativeprogramming.it</authorEmail>
 	<authorUrl>http://www.creativeprogramming.it</authorUrl>
-	<version>0.7</version>
+	<version>0.7.7</version>
 	<description>SAMLL_AUTHPLG_TITLE</description>
 	<files>
 		<filename plugin="samlogin">samlogin.php</filename>

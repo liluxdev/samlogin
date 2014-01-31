@@ -1,12 +1,5 @@
 <?php
 
-/**
- * @version		$Id: socialconnectfacebook.php 2437 2013-01-29 14:14:53Z lefteris.kavadas $
- * @package		SocialConnect
- * @author		JoomlaWorks http://www.joomlaworks.net
- * @copyright	Copyright (c) 2006 - 2013 JoomlaWorks Ltd. All rights reserved.
- * @license		http://www.joomlaworks.net/license
- */
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
@@ -26,6 +19,8 @@ class plgAuthenticationSamlogin extends JPlugin {
         $query->from($db->quoteName('#__users'));
         $query->where($db->quoteName('username') . ' = ' . $db->quote($usernameormail) . ' OR ' . $db->quoteName('email') . ' = ' . $db->quote($usernameormail));
         $db->setQuery($query, 0, 1);
+     //   die($query);
+       // die(print_r($query->__toString(),true)); 
         //  //phpconsole(print_r($query->__toString(),true),"rastrano");
         return $db->loadResult();
     }
@@ -36,16 +31,16 @@ class plgAuthenticationSamlogin extends JPlugin {
         }
         return $attributes[$key][0];
     }
-    
-    private function _pregMatchSAMLAttributeValues($attrname,$regex, $attributes) {
+
+    private function _pregMatchSAMLAttributeValues($attrname, $regex, $attributes) {
         if (!array_key_exists($attrname, $attributes)) {
             return FALSE;
         }
-        $attrvals= $attributes[$attrname];
-        foreach($attrvals as $val){
-   //phpconsole("does ".$val." matches ".$regex,"rastrano");
-            if (preg_match("/".$regex."/", $val)){
-                   //phpconsole("YES,  ".$val." matches ".$regex,"rastrano");
+        $attrvals = $attributes[$attrname];
+        foreach ($attrvals as $val) {
+            //phpconsole("does ".$val." matches ".$regex,"rastrano");
+            if (preg_match("/" . $regex . "/", $val)) {
+                //phpconsole("YES,  ".$val." matches ".$regex,"rastrano");
                 return $val;
             }
         }
@@ -57,17 +52,16 @@ class plgAuthenticationSamlogin extends JPlugin {
         //phpconsole($rulesConf, "rastrano");
         //phpconsole($user->get("groups"), "rastrano");
         $oldusergroups = $user->get("groups");
-        
-        $defaultRegistered = $samloginParams->get("defaultRegistered",true);
-        $newusergroups = array(); 
-        if($defaultRegistered){
-            $registeredGroupId=$samloginParams->get("registeredGroupId",2);
+
+        $defaultRegistered = $samloginParams->get("defaultRegistered", true);
+        $newusergroups = array();
+        if ($defaultRegistered) {
+            $registeredGroupId = $samloginParams->get("registeredGroupId", 2);
             $newusergroups = array($registeredGroupId); //2 is registered
-        }else{
-        
-       
+        } else {
+            
         }
-       
+
         //phpconsole("New  groups:".print_r($newusergroups,true),"rastrano");
         $newusergroupsForHist[] = array();
         foreach ($rulesConf as $key => $val) {
@@ -76,22 +70,22 @@ class plgAuthenticationSamlogin extends JPlugin {
                 if (stristr($key, "_attr")) {
                     $ruleno = str_replace("rule_", "", $key);
                     $ruleno = str_replace("_attr", "", $ruleno);
-        
+
                     $ruleattr = $samloginParams->get("rule_" . $ruleno . "_attr", "");
                     if ($ruleattr) {
                         $ruleassigngroup = $samloginParams->get("rule_" . $ruleno . "_assigngroup", "");
                         $ruleRegexp = $samloginParams->get("rule_" . $ruleno . "_regex", "");
-                                   //phpconsole($ruleattr." matches ".$ruleRegexp,"rastrano");
-                        $matching = $this->_pregMatchSAMLAttributeValues($ruleattr,$ruleRegexp,$samlresponse);
-                                       ////phpconsole($ruleno." matches? ".$ruleRegexp."??? ".print_r($samlresponse,true),"rastrano");
-                        if ($matching!==FALSE){
+                        //phpconsole($ruleattr." matches ".$ruleRegexp,"rastrano");
+                        $matching = $this->_pregMatchSAMLAttributeValues($ruleattr, $ruleRegexp, $samlresponse);
+                        ////phpconsole($ruleno." matches? ".$ruleRegexp."??? ".print_r($samlresponse,true),"rastrano");
+                        if ($matching !== FALSE) {
                             //phpconsole($ruleno." matches ".$ruleRegexp,"rastrano");
                             $newusergroups[] = $ruleassigngroup;
                             $currentSession = JFactory::getSession();
                             $SAMLoginIdP = $currentSession->get("SAMLoginIdP", '');
-                            $keytomem="rule_" . $ruleno.
-                                " v:".$matching
-                                    ." idp:".$SAMLoginIdP;
+                            $keytomem = "rule_" . $ruleno .
+                                    " v:" . $matching
+                                    . " idp:" . $SAMLoginIdP;
                             $newusergroupsForHist[$keytomem] = $ruleassigngroup;
                         }
                     }
@@ -103,93 +97,99 @@ class plgAuthenticationSamlogin extends JPlugin {
 
         $timeid = time();
 
-     //   //phpconsole(print_r($latestSamloginAssignedGroups,true),"rastrano");
-      
+        //   //phpconsole(print_r($latestSamloginAssignedGroups,true),"rastrano");
+
 
         $preserveManualUserGroup = $samloginParams->get("preserveManualUserGroup", true);
         if ($preserveManualUserGroup) {
-            $latestSamloginAssignedGroups =  $this->_getLastestGroupAssigned($user);
+            $latestSamloginAssignedGroups = $this->_getLastestGroupAssigned($user);
 
-            $manualOldUsergroups = array_diff($oldusergroups, $latestSamloginAssignedGroups); 
-       
+            $manualOldUsergroups = array_diff($oldusergroups, $latestSamloginAssignedGroups);
+
             //merge only the old groups NON-samlogin assigned groups
             $newusergroups = array_merge($newusergroups, $manualOldUsergroups);
-            foreach ($newusergroupsForHist as $key => $hitem){
-                 if (in_array($hitem, $manualOldUsergroups)){
-                     //don't storicize as saml added a manually added usergroup
-                     unset($newusergroupsForHist[$key]);
-                     $newusergroupsForHist["manual"]=$hitem; //bust storicize it as a manual! (to track/log access time authz)
-                 }
-             }
+            foreach ($newusergroupsForHist as $key => $hitem) {
+                if (in_array($hitem, $manualOldUsergroups)) {
+                    //don't storicize as saml added a manually added usergroup
+                    unset($newusergroupsForHist[$key]);
+                    $newusergroupsForHist["manual"] = $hitem; //bust storicize it as a manual! (to track/log access time authz)
+                }
+            }
         }
-       
+        
         $this->_saveAddedGroupHist($newusergroupsForHist, $user, $timeid); //don't save the modified newusergroups array here: only the saml added one
         $user->set("groups", $newusergroups);
-   //     $user->name = $response->fullname; //bug: different field naming in joomla table, check will fail
-             
+        //     $user->name = $response->fullname; //bug: different field naming in joomla table, check will fail
+
         $saved = $user->save();
-        
+
         //Reflection: TODO maintain protected __authGroups in user.php JUser
-        $refObject   = new ReflectionObject( $user );
-        $refProperty = $refObject->getProperty( '_authGroups' );
-        $refProperty->setAccessible( true );
-        $refProperty->setValue($user, $newusergroups);//schedure a re fetch of auth group for the in-memory session user object
+        $refObject = new ReflectionObject($user);
+        $refProperty = $refObject->getProperty('_authGroups');
+        $refProperty->setAccessible(true);
+        $refProperty->setValue($user, $newusergroups); //schedure a re fetch of auth group for the in-memory session user object
         //
         //also JAccess has a group cache
         //
         JAccess::clearStatics(); //this clears things up $groupByUser cahced array!
         //
         //see user.php getAuthorisedGroups() method
-        @$user->getAuthorisedGroups();//ensure the re-fetch of auth groups for the in-memory session user object
-      
+        @$user->getAuthorisedGroups(); //ensure the re-fetch of auth groups for the in-memory session user object
+
         $this->_getSAMLAttributeFirstValue($attrName, $samlresponse, "");
     }
 
-    private function _getLastestGroupAssigned($user,$excludeInitiator="manual") {
-        $toret=array();
+    private function _getLastestGroupAssigned($user, $excludeInitiator = "manual") {
+        $toret = array();
         $isJoomla3 = ((float) JVERSION) >= 3.0;
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
         $query->select("username,MAX(timeid) AS timeid")
                 ->from('#__samlogin_authz_hist')
-                ->where("username = ".$db->quote($user->get("username")))
+                ->where("username = " . $db->quote($user->get("username")))
                 ->group("username");
-        $db->setQuery($query,0,1); //limit is here
+        $db->setQuery($query, 0, 1); //limit is here
 
-        
+
         $maxTidRow = $db->loadAssoc();
         $lastTimeId = $maxTidRow["timeid"];
-        $query=null;
+        if ($lastTimeId==null){
+            $lastTimeId=0;
+        }
+        $query = null;
         $query = $db->getQuery(true);
-        $query->select("username,".$db->quoteName("group")." AS grpid,initiator")
+        $query->select("username," . $db->quoteName("group") . " AS grpid,initiator")
                 ->from('#__samlogin_authz_hist')
                 ->where(array(
-                    "timeid = ".$lastTimeId,
-                    "username = ".$db->quote($user->get("username"))
-                ),"AND");
+                    "timeid = " . $lastTimeId,
+                    "username = " . $db->quote($user->get("username"))
+                        ), "AND");
         $db->setQuery($query);
+//die(print_r($query->__toString(),true));
 
-      
         $lastGroupsRow = $db->loadAssocList();
-    if (is_array($lastGroupsRow)){
-        foreach($lastGroupsRow as $row){
-            $initiator=$row["initiator"];
-            if ($initiator!=$excludeInitiator){
-                $toret[]=$row["grpid"];
+        if (is_array($lastGroupsRow)) {
+            foreach ($lastGroupsRow as $row) {
+                $initiator = $row["initiator"];
+                if ($initiator != $excludeInitiator) {
+                    $toret[] = $row["grpid"];
+                }
             }
         }
-    }
         return $toret;
-      
     }
 
     private function _saveAddedGroupHist($groups, $user, $timeid) {
+        
         foreach ($groups as $initiator => $thisgroup) {
             $db = JFactory::getDbo();
             $query = $db->getQuery(true);
             // Insert columns.
             $columns = array('username', 'group', 'email', 'initiator', 'timeid');
             // Insert values.
+            if (is_array($thisgroup)){
+                $thisgroup=-1;
+            }
             $values = array(
                 $db->quote($user->get("username"))
                 , $thisgroup
@@ -223,6 +223,7 @@ class plgAuthenticationSamlogin extends JPlugin {
                 if (!empty($val)) {
                     $attrNameAlternatives = explode("|", $val) ? explode("|", $val) : array($val);
                     //  //phpconsole($attrNameAlternatives,"rastrano");
+                //  print_r($attrNameAlternatives);
                     $attrFound = false;
                     foreach ($attrNameAlternatives as $attrNameSyntax) {
                         if ($attrFound) {
@@ -235,9 +236,10 @@ class plgAuthenticationSamlogin extends JPlugin {
                                 $response->$joomlaKey = $this->_getSAMLAttributeFirstValue($attrName, $samlresponse);
                                 $firstAttrOfConcat = false;
                             } else {
-                                $response->$joomlaKey .= " ".$this->_getSAMLAttributeFirstValue($attrName, $samlresponse, "");
+                                $response->$joomlaKey .= " " . $this->_getSAMLAttributeFirstValue($attrName, $samlresponse, "");
                             }
-                            if (!empty($response->$joomlaKey)) {
+                            if (!empty($response->$joomlaKey) && !is_null($response->$joomlaKey) && !isset($response->$joomlaKey)) {
+                                //print "<hr/>$joomlaKey : using ".print_r($attrName,true)." with value".$response->$joomlaKey."<hr/>";
                                 $attrFound = true;
                             }
                         }
@@ -316,43 +318,45 @@ class plgAuthenticationSamlogin extends JPlugin {
             // Detect changes, and update if required
             $changed = true;
             if ($changed) {
-                $getusrprop = $response->getProperties();
+                $getusrprop = version_compare(JVERSION, '3.2', 'l') ?
+                        $response->getProperties() : (array) $response;
                 $user->bind($getusrprop);
                 $user->save(true); // true means: updateOnly
             } else {
-                $getusrprop = $response->getProperties();
+                $getusrprop = version_compare(JVERSION, '3.2', 'l') ?
+                        $response->getProperties() : (array) $response;
                 $user->bind($getusrprop);
             }
         } else {
             // Store as new user
-            
-                $user = new JUser();
-                $user->username=$userid;
-                $user->usertype = 'SAMLogin';
-                if ($samloginParams->get("requireApproval", false)) {
-                    $user->block = 1;
-                    $user->activation = 0;
-                }else{
-                 $user->block = 0;    
-                 $user->activation = 0;
-                }
-                $user->sendEmail = 1;
-                //$user->registerDate='0000-00-00 00:00:00';
-                //$user->lastvisitDate='0000-00-00 00:00:00';
-                $user->params = '';
-                $user->lastResetTime = '0000-00-00 00:00:00';
-                $user->resetCount = 0;
-                
-                $user->name = $response->fullname; //different field naming in joomla table
-                
-                $getusrprop = $response->getProperties();
-                $user->bind($getusrprop);
-              
-                $saved=$user->save();
-              //  $user = JFactory::getUser($userid); //sync needed
-               
+
+            $user = new JUser();
+            $user->username = $userid;
+            $user->usertype = 'SAMLogin';
+            if ($samloginParams->get("requireApproval", false)) {
+                $user->block = 1;
+                $user->activation = 0;
+            } else {
+                $user->block = 0;
+                $user->activation = 0;
             }
-        
+            $user->sendEmail = 1;
+            //$user->registerDate='0000-00-00 00:00:00';
+            //$user->lastvisitDate='0000-00-00 00:00:00';
+            $user->params = '';
+            $user->lastResetTime = '0000-00-00 00:00:00';
+            $user->resetCount = 0;
+
+            $user->name = $response->fullname; //different field naming in joomla table
+            
+            $getusrprop = version_compare(JVERSION, '3.2', 'l') ?
+                    $response->getProperties() : (array) $response;
+            $user->bind($getusrprop);
+
+            $saved = $user->save();
+            //  $user = JFactory::getUser($userid); //sync needed
+        }
+
 
         return $user;
     }
@@ -385,7 +389,7 @@ class plgAuthenticationSamlogin extends JPlugin {
             //    //phpconsole("attributes are: " . print_r($SAMLoginAttrs, true), "rastrano");
             //  die(print_r($SAMLoginAttrs,true));
             // Check for access token
-        //phpconsole(print_r($SAMLoginAttrs,true),"rastrano");
+            //phpconsole(print_r($SAMLoginAttrs,true),"rastrano");
 
             $response->status = version_compare(JVERSION, '3.0', 'ge') ? JAuthentication::STATUS_SUCCESS : JAUTHENTICATE_STATUS_SUCCESS;
             $response->type = 'SAMLogin';
@@ -393,21 +397,19 @@ class plgAuthenticationSamlogin extends JPlugin {
 
             $this->_mapAttributes($response, $SAMLoginAttrs, $samloginParams);
 
-             print_r($response);
-             print_r($response->getErrors());
-           //  die("testing");
+               //print_r($response);
+            //   print_r($response->getErrors());
+             // die("testing");
 
 
             $user = $this->_updateAndGetUser($response, $samloginParams);
             $this->_checkAuthZRules($user, $response, $SAMLoginAttrs, $samloginParams);
             $user = $this->_updateAndGetUser($response, $samloginParams);  //final to sync group changes in session
-           
+
             $response->error_message = '';
         } else {
             $response->status = version_compare(JVERSION, '3.0', 'ge') ? JAuthentication::STATUS_FAILURE : JAUTHENTICATE_STATUS_FAILURE;
         }
-  
-        
     }
 
 }

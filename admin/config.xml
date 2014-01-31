@@ -4,7 +4,7 @@
      <fieldset name="sspsetup" label="COM_SAMLOGIN_SSP_CONF">	  
    
          
-         
+           
         
                   <field 
              name="ssp_baseurlpath"
@@ -112,6 +112,15 @@
              label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TECHEMAIL"
              description="COM_SAMLOGIN_SAMLOGIN_TECHEMAIL_DESC"
          />    
+          
+              <field 
+             name="ssp_my_sp_entityid"
+             type="text"
+             size="70"
+             default="auto"
+             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_MYENTITYID"
+             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_MYENTITYID_DESC"
+         />  
        
      </fieldset>
 
@@ -216,6 +225,7 @@
              label="COM_SAMLOGIN_DISCOTYPE"
              description="COM_SAMLOGIN_DISCOTYPE"
          >
+                  <option value="-1">No Discovery service (one IdP only)</option>
                   <option value="0">External</option>
                   <option value="null">Embedded siimple (obsolete)</option>
                   <option value="discopower">Discopower (embedded)</option>
@@ -223,6 +233,14 @@
                   <option value="discojuice_embedded">DiscoJuice embedded javascript (Advanced UX, *only for supported federations)</option>
                   <option value="discojuice_global">DiscoJuice global (Advanced UX, *only for supported federations) </option>       
          </field>
+         
+           <field 
+             name="sspas_idpentityid"
+             type="text"
+             size="70"
+             default=""
+             label="COM_SAMLOGIN_IDPONLYURL"
+         />    
          
           <field 
              name="sspas_discourl"
@@ -251,7 +269,7 @@
 			description="The provided SAML attribute that is mapped to the local Joomla 'username' attribute (i.e. 'eduPersonPrincipalName')" />
         <field name="mapping_email" type="text" label="E-mail" size="35" default="mail|eduPersonPrincipalName"
 			description="The provided SAML attribute that is mapped to the local Joomla 'email' attribute (i.e. 'mail')" />
-        <field name="mapping_fullname" type="text" label="Fullname" size="35" default="cn|sn+givenName|displayName"
+        <field name="mapping_fullname" type="text" label="Fullname" size="35" default="cn|sn+givenName|displayName|eduPersonPrincipalName"
 			description="The provided SAML attribute that is mapped to the local Joomla 'fullname' attribute (i.e. 'cn')" />
         <field name="mapping_birthdate" type="text" label="Birthdate" size="35" default=""
 			description="The provided SAML attribute that is mapped to the local Joomla 'birthdate' attribute" />
@@ -500,5 +518,19 @@
                         <option value="0">onError</option>
                         <option value="1">Always</option>
                 </field>
+                
+                
+                 <field
+                        name="logout_customhtmlmessage"
+                        type="editor"
+                        filter='safehtml' 
+                        label="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT_CUSTOMMSG"
+                        description="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT_CUSTOMMSG"
+                        default=""
+                >
+                        
+                </field>
+                
+           
      </fieldset>
 </config>

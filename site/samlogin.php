@@ -14,7 +14,7 @@ JLoader::register('SAMLoginModel', JPATH_COMPONENT_ADMINISTRATOR.'/models/model.
 JLoader::register('SAMLoginView', JPATH_COMPONENT_ADMINISTRATOR.'/views/view.php');
 
 
-//	JLoader::register('SocialConnectHelper', JPATH_COMPONENT.'/helpers/socialconnect.php');
+//	JLoader::register('SamloginHelper', JPATH_COMPONENT.'/helpers/samlogin.php');
 	require_once (JPATH_COMPONENT.'/controllers/'.$view.'.php');
 	$classname = 'SAMLoginController'.$view;
 	$controller = new $classname();

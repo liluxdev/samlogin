@@ -18,6 +18,14 @@ class SSPConfManager{
     static function mergeParamsWithConf($params,$app){
         
         $authsourcesConf = self::getAuthsourcesConf();
+        
+             $mySPEntityId=$params->get("ssp_my_sp_entityid","auto");
+             if (empty($mySPEntityId) || $mySPEntityId=="auto"){
+                 unset( $authsourcesConf["default-sp"]["entityID"]);
+             }else{
+                 $authsourcesConf["default-sp"]["entityID"]=$mySPEntityId;
+             }
+        
              $discoType=$params->get("sspas_discotype","0");
              if ($discoType==="0"||$discoType===0){
                  $authsourcesConf["default-sp"]["discoURL"]=$params->get("sspas_discourl","https://discovery.renater.fr/test");
