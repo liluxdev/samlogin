@@ -247,6 +247,15 @@ class plgAuthenticationSamlogin extends JPlugin {
                 }
             }
         }
+        
+        
+        if (empty($response->email)){
+            $useDummyEmails=$samloginParams->get("useDummyEmails",false);  
+            if ($useDummyEmails){
+                $response->email=$response->username."@".$samloginParams->get("dummyEmailDomain",strtr($_SERVER['HTTP_HOST'],array("www."=>""))); 
+            }
+        }
+        
         $response->type = 'SAMLogin';
 
 
@@ -376,6 +385,9 @@ class plgAuthenticationSamlogin extends JPlugin {
 
         $SAMLoginIsAuthN = $currentSession->get("SAMLoginIsAuthN", false);
         if ($SAMLoginIsAuthN === true) {
+            
+           
+            
             $SAMLoginSession = $currentSession->get("SAMLoginSession", '');
             $SAMLoginAttrs = $currentSession->get("SAMLoginAttrs", '');
             $SAMLoginIdP = $currentSession->get("SAMLoginIdP", '');
@@ -396,7 +408,16 @@ class plgAuthenticationSamlogin extends JPlugin {
             $response->error_message = '';
 
             $this->_mapAttributes($response, $SAMLoginAttrs, $samloginParams);
-
+            
+            $allowOnlyExistingUsernames = $samloginParams-get("allowOnlyExistingUsernames",false);
+            if ($allowOnlyExistingUsernames){
+                 $userid = JUserHelper::getUserId($response->username);
+                 if ($userid==0){ //getUserId returns 0 if user is not found
+                        $response->status = version_compare(JVERSION, '3.0', 'ge') ? JAuthentication::STATUS_FAILURE : JAUTHENTICATE_STATUS_FAILURE;
+                        $response->error_message = 'Login succedeed but you need to be approved by one of our administrators';
+                        return false;
+                 }
+            }
                //print_r($response);
             //   print_r($response->getErrors());
              // die("testing");

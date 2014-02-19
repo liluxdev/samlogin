@@ -6,7 +6,7 @@
     <authorEmail>info@creativeprogramming.it</authorEmail>
     <copyright>Copyright (c) 2013 creativeprogramming.it All rights reserved.</copyright>
     <license>Commercial</license>
-    <version>0.7.8</version>
+    <version>0.7.9</version>
     <description><![CDATA[
        <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.4.0/dojo/dojo.xd.js"></script>
       <style>
