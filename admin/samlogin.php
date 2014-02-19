@@ -1,7 +1,7 @@
 <?php
 // no direct access
 defined('_JEXEC') or die;
-
+@ini_set('user_agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9'); //avoid being blocked
 
 if (version_compare(JVERSION, '1.6.0', 'ge'))
 {
