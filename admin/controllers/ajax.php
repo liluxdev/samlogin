@@ -68,8 +68,9 @@ class SAMLoginControllerAjax extends SAMLoginController {
         $app = JFactory::getApplication();
  
         if ($user->authorise('core.admin', 'com_samlogin')) {
-          
-          $downloadURL= "https://github.com/creativeprogramming/simplesamlphp-samlogin/raw/master/ssp.zip";//"https://github.com/creativeprogramming/simplesamlphp-samlogin/archive/master.zip";
+          ini_set('user_agent', 'Mozilla/5.0 (Linux; U; Linux; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
+          $downloadURL= "https://raw.github.com/creativeprogramming/simplesamlphp-samlogin/master/ssp.zip";//"https://github.com/creativeprogramming/simplesamlphp-samlogin/archive/master.zip";
+         // $downloadURLFallback=""
           $zipTmpPath=JPATH_COMPONENT_SITE."/simplesamlphp-samlogin-master.zip";
           $extractDir=JPATH_COMPONENT_SITE."/simplesamlphp/";
           @mkdir($extractDir);
@@ -80,7 +81,20 @@ class SAMLoginControllerAjax extends SAMLoginController {
               $app->enqueueMessage("Downloading SimpleSAMLphp...");
               @ob_flush();
               $zipFileData = file_get_contents($downloadURL);
+              if (!$zipFileData){
+                 $app->enqueueMessage("PHP failed to download .zip file, please".
+                   "<a href='$downloadURL'>download manually ssp.zip</a>".
+                   //"and place it at ".$zipTmpPath." on your server (FTP upload?)".
+                   "and extract it to ".$extractDir,"error");
+              }
               file_put_contents($zipTmpPath,$zipFileData);
+              $zipFileData = file_get_contents($zipTmpPath);
+                if (!$zipFileData){
+                 $app->enqueueMessage("PHP failed to write .zip file, please check your filesystem write permission on path $extractDir or ".
+                   "<a href='$downloadURL'>download manually ssp.zip</a>".
+                   //"and place it at ".$zipTmpPath." on your server (FTP upload?)".
+                   "and extract it to ".$extractDir,"error");
+              }
               $zip = new ZipArchive;
                 $res = $zip->open($zipTmpPath);
                 if ($res === TRUE) {
