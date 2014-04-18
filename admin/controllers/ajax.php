@@ -7,11 +7,66 @@ jimport('joomla.filesystem.file');
 
 class SAMLoginControllerAjax extends SAMLoginController {
 
-    function sendAjaxHeaders() {
+    static function aquireLockTerminateOnFail($lockname) {
+        $toret = array();
+        $lockFile = JPATH_COMPONENT_SITE . "/$lockname.lockfile";
+        $lock = file_exists($lockFile);
+        if ($lock) {
+            if ((time() - filemtime($lockFile)) < 60 * 3) {
+                $toret['additionalMessages'][] = array("msg" => "Cannot aquire exclusive lock, please retry in few minutes, maybe another user is installing it now", "level" => "warning");
+                echo json_encode($toret);
+                die();
+            } else {
+                //lock expired
+            }
+        }
+        file_put_contents($lockFile, "-");
+        return true;
+    }
+
+    static function releaseLock($lockname) {
+        $toret = array();
+        $lockFile = JPATH_COMPONENT_SITE . "/$lockname.lockfile";
+        $lock = file_exists($lockFile);
+        if ($lock) {
+            unlink($lockFile);
+        }
+    }
+
+    static function sendAjaxHeaders() {
         header("Expires: 0");
         header("Cache-Control: no-cache, must-revalidate, post-check=0, pre-check=0");
         header("Pragma: no-cache");
         header('Content-type: application/json');
+    }
+
+    static $AJAX_MESSAGE_INFO = "info";
+    static $AJAX_MESSAGE_SUCCSS = "success";
+    static $AJAX_MESSAGE_WARNING = "warning";
+    static $AJAX_MESSAGE_DANGER = "danger";
+
+    /**
+     * 
+     * @param type $msg message to push
+     * @param type $level severity level: info (default) ,success,warning,danger (use AJAX_MESSAGE constants)
+     */
+    public static function enqueueAjaxMessage($msg, $level) {
+        if (!isset($level)) {
+            $level = self::$AJAX_MESSAGE_INFO;
+        }
+        self::$ajaxBuffer['additionalMessages'][] = array("msg" => $msg, "level" => $level);
+    }
+
+    private static $ajaxBuffer = array();
+
+    protected static function initAjaxBuffer() {
+        self::$ajaxBuffer = array();
+        self::$ajaxBuffer['additionalMessages'] = array(); //messae to toast
+    }
+
+    protected static function sendAjaxBuffer() {
+        echo json_encode(self::$ajaxBuffer);
+        die();
     }
 
     // Overwriting JView display method
@@ -31,49 +86,100 @@ class SAMLoginControllerAjax extends SAMLoginController {
     }
 
     public function genkey() {
+
+       self::sendAjaxHeaders();
+
+        self::initAjaxBuffer();
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
+            self::aquireLockTerminateOnFail("saveconf");
             $app = JFactory::getApplication();
             require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/keymanager.php");
-            echo KeyManager::genkey($app);
+            KeyManager::genkey($app);
+
             //   JRequest::setVar("layout", "closeme");
             //   $this->display();
+            self::releaseLock("saveconf");
         }
-        die();
+
+        self::sendAjaxBuffer();
     }
 
     public function keyRotateEndPeriod() {
+       self::sendAjaxHeaders();
+
+        self::initAjaxBuffer();
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
+            self::aquireLockTerminateOnFail("saveconf");
             $app = JFactory::getApplication();
             require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/keymanager.php");
-            echo KeyManager::keyrotateEndPeriod($app);
+            KeyManager::keyrotateEndPeriod($app);
+
             //JRequest::setVar("layout", "closeme");
             //$this->display();
+            self::releaseLock("saveconf");
         }
-        die();
+
+        self::sendAjaxBuffer();
     }
 
     public function saveSSPconf() {
-        $this->sendAjaxHeaders();
+        self::sendAjaxHeaders();
+
+        self::initAjaxBuffer();
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
-            $app = JFactory::getApplication();
+            self::aquireLockTerminateOnFail("saveconf");
+           
             require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
+            SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION);
+            
+            $app = JFactory::getApplication();
+
 
             $params = JComponentHelper::getParams('com_samlogin');
             $config = SSPConfManager::mergeParamsWithConf($params, $app);
-            $config["samlogin_test"] = time();
+            $config["samlogin_test"] = true;
 
-            echo SSPConfManager::saveConf($config, $app);
+            SSPConfManager::saveConf($config, $app);
+
             // JRequest::setVar("layout", "closeme");
             // $this->display();
+            self::releaseLock("saveconf");
         }
-        die();
+        self::sendAjaxBuffer();
+    }
+
+    private static function simulateConfigWrite() {
+        self::sendAjaxHeaders();
+        self::initAjaxBuffer(); //just for having vars, but this is not ajax call
+        $user = JFactory::getUser();
+        if ($user->authorise('core.admin', 'com_samlogin')) {
+            self::aquireLockTerminateOnFail("saveconf");
+           
+            require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
+            SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_SIMULATE);
+            
+            $app = JFactory::getApplication();
+      
+
+            $params = JComponentHelper::getParams('com_samlogin');
+            $config = SSPConfManager::mergeParamsWithConf($params, $app);
+            $config["samlogin_test"] = true;
+
+            SSPConfManager::saveConf($config, $app);
+
+            // JRequest::setVar("layout", "closeme");
+            // $this->display();
+            self::releaseLock("saveconf");
+        }
+
+        // self::sendAjaxBuffer();        
     }
 
     public function installSimpleSAMLphp_download() {
-        $this->sendAjaxHeaders();
+               self::sendAjaxHeaders();
         ini_set('user_agent', 'Mozilla/5.0 (Linux; U; Linux; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
         $toret = array();
         $toret['additionalMessages'] = array(); //messae to toast
@@ -119,26 +225,26 @@ class SAMLoginControllerAjax extends SAMLoginController {
             $extractDir = JPATH_COMPONENT_SITE . "/simplesamlphp/";
             @mkdir($extractDir);
 
-            $this->_preserveSSPConf($app,$toret);
+            $this->_preserveSSPConf($app, $toret);
 
-                $httpHeaders = get_headers($downloadURL);
-                if ($httpHeaders !== FALSE) {
-                    $responseIs200OK = stristr($httpHeaders[0], "200 OK") || stristr($httpHeaders[0], "302 Found");
-                    if ($responseIs200OK) {
-                        
-                    } else {
-                        $msg = "Failed to download from this repository, try alternate repository";
+            $httpHeaders = get_headers($downloadURL);
+            if ($httpHeaders !== FALSE) {
+                $responseIs200OK = stristr($httpHeaders[0], "200 OK") || stristr($httpHeaders[0], "302 Found");
+                if ($responseIs200OK) {
+                    
+                } else {
+                    $msg = "Failed to download from this repository, try alternate repository";
 
-                        $toret['additionalMessages'][] = array("msg" => $msg, "level" => "danger");
-                        echo json_encode($toret);
-                        $lockClean=unlink($lockFile);
-                        if (!$lockClean){
-                                   $toret['additionalMessages'][] = array("msg" => "Cannot release lock", "level" => "warning");
-                        }
-                        
-                        die();
+                    $toret['additionalMessages'][] = array("msg" => $msg, "level" => "danger");
+                    echo json_encode($toret);
+                    $lockClean = unlink($lockFile);
+                    if (!$lockClean) {
+                        $toret['additionalMessages'][] = array("msg" => "Cannot release lock", "level" => "warning");
                     }
+
+                    die();
                 }
+            }
             $zipFileData = SamloginHelperDownloader::downloadAndReturn($downloadURL); //file_get_contents($downloadURL);
             if (!$zipFileData) {
                 $msg = "PHP failed to download .zip file, please" .
@@ -161,10 +267,10 @@ class SAMLoginControllerAjax extends SAMLoginController {
                         "and extract it to " . $extractDir;
                 $toret['additionalMessages'][] = array("msg" => $msg, "level" => "danger");
             }
-               $lockClean=unlink($lockFile);
-                        if (!$lockClean){
-                                   $toret['additionalMessages'][] = array("msg" => "Cannot release lock", "level" => "warning");
-                        }
+            $lockClean = unlink($lockFile);
+            if (!$lockClean) {
+                $toret['additionalMessages'][] = array("msg" => "Cannot release lock", "level" => "warning");
+            }
         } else {
             $toret['additionalMessages'][] = array("msg" => "Your administrator login session expired or you are not authorized ", "level" => "danger");
         }
@@ -174,7 +280,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
     }
 
     public function installSimpleSAMLphp_extract() {
-        $this->sendAjaxHeaders();
+             self::sendAjaxHeaders();
         ini_set('user_agent', 'Mozilla/5.0 (Linux; U; Linux; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
         $toret = array();
         $toret['additionalMessages'] = array(); //messae to toast
@@ -246,10 +352,10 @@ class SAMLoginControllerAjax extends SAMLoginController {
             $this->_restorePreservedSSPConf($app);
             // $app->enqueueMessage("SimpleSAMLphp installed, please close this window and refresh the dashboard page now.");
 
-             $lockClean=unlink($lockFile);
-                        if (!$lockClean){
-                                   $toret['additionalMessages'][] = array("msg" => "Cannot release lock", "level" => "warning");
-                        }
+            $lockClean = unlink($lockFile);
+            if (!$lockClean) {
+                $toret['additionalMessages'][] = array("msg" => "Cannot release lock", "level" => "warning");
+            }
         } else {
             //  $app->enqueueMessage("Unauthorized", "error");
             $toret['additionalMessages'][] = array("msg" => "Your administrator login session expired or you are not authorized ", "level" => "danger");
@@ -258,14 +364,15 @@ class SAMLoginControllerAjax extends SAMLoginController {
         die();
     }
 
-
     public function doConfigTests() {
-        $this->sendAjaxHeaders();
+             self::sendAjaxHeaders();
         $user = JFactory::getUser();
         $app = JFactory::getApplication();
         if ($user->authorise('core.admin', 'com_samlogin')) {
             //error_reporting(0);
-
+            
+            
+            
             require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/downloader.php");
             $xml = simplexml_load_string(file_get_contents(JPATH_COMPONENT_ADMINISTRATOR . "/samlogin.xml"));
             $json = json_encode($xml);
@@ -283,6 +390,13 @@ class SAMLoginControllerAjax extends SAMLoginController {
             if ($vinfo === FALSE) {
                 $checks['sspCheck'] = false;
             } else {
+                
+                require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
+                $dummyarr = array();
+                SSPConfManager::checkConfSync($dummyarr); //to create file first boot
+                self::simulateConfigWrite();
+                $checks['configIsInSync'] = SSPConfManager::checkConfSync( $checks['additionalMessages']);
+                
                 $checks['sspCheck'] = $vinfo;
                 require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/lib/_autoload.php");
                 require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/config.php");
@@ -294,9 +408,21 @@ class SAMLoginControllerAjax extends SAMLoginController {
 
                 $sspConf = $config;
                 $checks['metarefresh'] = isset($config["metadata.sources"][1]["directory"]);
-
-                $checks["metarefreshSAML2IdpLastUpdate"] = @date("F d Y H:i:s", @filemtime(JPATH_SITE . "/components/com_samlogin/simplesamlphp/metadata/federations/saml20-idp-remote.php"));
-
+                $cachedMetadataFile = JPATH_SITE . "/components/com_samlogin/simplesamlphp/metadata/federations/saml20-idp-remote.php";
+                if (file_exists($cachedMetadataFile)) {
+                    $lastMetadataCacheUpdate = filemtime($cachedMetadataFile);
+                    if (time() - $lastMetadataCacheUpdate < ( (60 * 60 * 1) + 60 )) {
+                        $checks["metarefreshSAML2IdpLastUpdate"] = @date("F d Y H:i:s", $lastMetadataCacheUpdate) . " " .
+                                "<span class='uk-button uk-button-mini uk-button-success'>" .
+                                "<i class='uk-icon-check'></i> </span> ";
+                    } else {
+                        $checks["metarefreshSAML2IdpLastUpdate"] = @date("F d Y H:i:s", $lastMetadataCacheUpdate) .
+                                "<span class='uk-button uk-button-mini uk-button-danger'>" .
+                                "<i class='uk-icon-warning'></i>The cronjob isn't running with hourly frequency</span> ";
+                    }
+                } else {
+                    $checks["metarefreshSAML2IdpLastUpdate"] = "Never";
+                }
                 unset($config);
                 require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/authsources.php");
                 $sspAuthsourcesConfig = $config;
@@ -324,9 +450,9 @@ class SAMLoginControllerAjax extends SAMLoginController {
 
                 $checks["metadataURL"] = $sslTestURL;
 
-                $checks["cronLink"] = str_ireplace("http://", "https://", JURI::root()) . "/components/com_samlogin/simplesamlphp/www/module.php/cron/cron.php?key=" . $params->get("sspcron_secret", "changeme") . "&tag=hourly";
+                $checks["cronLink"] = str_ireplace("http://", "https://", JURI::root()) . "components/com_samlogin/simplesamlphp/www/module.php/cron/cron.php?key=" . $params->get("sspcron_secret", "changeme") . "&tag=hourly&output=xhtml";
                 $checks["cronSuggestion"] = "# Run cron: [hourly]\n" .
-                        "01 * * * * curl -k --silent \"" . $checks["cronLink"] . "\" > /dev/null 2>&1" .
+                        "01 * * * * /usr/bin/curl -k -A \"Mozilla/5.0\" --silent \"" . $checks["cronLink"] . "\" > /dev/null 2>&1" .
                         "";
                 //  die($sslTestURL);
 
@@ -334,7 +460,10 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 if ($metadataSSLPageContent == FALSE) {
                     $checks['metadataPublished'] = FALSE;
                 } else {
-                    $checks['metadataPublished'] = stristr($metadataSSLPageContent, "EntityDescriptor") ? TRUE : $metadataSSLPageContent;
+                    $checks['metadataPublished'] = stristr($metadataSSLPageContent, "simpleSAMLphp") ? TRUE : "No route to simpleSAMLphp, if you are using nginx add a proper location";
+                    if ($checks['metadataPublished'] === TRUE) {
+                        $checks['metadataPublished'] = stristr($metadataSSLPageContent, "EntityDescriptor") ? TRUE : "Invalid metadata";
+                    }
                 }
 
 
@@ -342,8 +471,10 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 if ($metadataSSLPageContent == FALSE) {
                     $checks['metadataPublishedSSL'] = FALSE;
                 } else {
-                    $checks['metadataPublishedSSL'] = stristr($metadataSSLPageContent, "EntityDescriptor") ? TRUE : $metadataSSLPageContent;
-                    // $checks['metadataDebugPage']= $metadataSSLPageContent;
+                    $checks['metadataPublishedSSL'] = stristr($metadataSSLPageContent, "simpleSAMLphp") ? TRUE : "No route to simpleSAMLphp, if you are using nginx add a proper location";
+                    if ($checks['metadataPublishedSSL'] === TRUE) {
+                        $checks['metadataPublishedSSL'] = stristr($metadataSSLPageContent, "EntityDescriptor") ? TRUE : "Invalid metadata";
+                    }              // $checks['metadataDebugPage']= $metadataSSLPageContent;
                 }
                 require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
                 $SSPKeyURLPath = SSPConfManager::getCertURLPath();
@@ -492,20 +623,20 @@ class SAMLoginControllerAjax extends SAMLoginController {
         die();
     }
 
-    private function _preserveSSPConf($app,&$toret) {
-      
-            $lockFile = JPATH_COMPONENT_SITE . "/preserveConf.lockfile";
-            $lock = file_exists($lockFile);
-            if ($lock) {
-                if ((time() - filemtime($lockFile)) < 60 * 3) {
-                    $toret['additionalMessages'][] = array("msg" => "Preserving configuration file skipped, lock already present", "level" => "warning");
-                   // echo json_encode($toret);
-                  //  die();
-                } else {
-                    //lock expired
-                }
+    private function _preserveSSPConf($app, &$toret) {
+
+        $lockFile = JPATH_COMPONENT_SITE . "/preserveConf.lockfile";
+        $lock = file_exists($lockFile);
+        if ($lock) {
+            if ((time() - filemtime($lockFile)) < 60 * 3) {
+                $toret['additionalMessages'][] = array("msg" => "Preserving configuration file skipped, lock already present", "level" => "warning");
+                // echo json_encode($toret);
+                //  die();
+            } else {
+                //lock expired
             }
-            file_put_contents($lockFile, "-");
+        }
+        file_put_contents($lockFile, "-");
 
         $filetopreserveArr = array(
             '/components/com_samlogin/simplesamlphp/cert/saml.key',
@@ -531,12 +662,12 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 }
             }
         }
-      //DO IT IN RESTORE:  unlink($lockFile);
+        //DO IT IN RESTORE:  unlink($lockFile);
     }
 
     private function _restorePreservedSSPConf($app) {
-        
-        
+
+
         $filetopreserveArr = array(
             '/components/com_samlogin/simplesamlphp/cert/saml.key',
             '/components/com_samlogin/simplesamlphp/cert/saml.crt',
@@ -562,10 +693,10 @@ class SAMLoginControllerAjax extends SAMLoginController {
             }
         }
         $lockFile = JPATH_COMPONENT_SITE . "/preserveConf.lockfile";
-           $lockClean=unlink($lockFile);
-                        if (!$lockClean){
-                                   $toret['additionalMessages'][] = array("msg" => "Cannot release lock", "level" => "warning");
-                        }
+        $lockClean = unlink($lockFile);
+        if (!$lockClean) {
+            $toret['additionalMessages'][] = array("msg" => "Cannot release lock", "level" => "warning");
+        }
     }
 
 }

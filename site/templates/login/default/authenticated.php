@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
                 <span class="samloginGreeting"><?php echo JText::_('SAMLOGIN_WELCOME'); ?></span>
                 <span class="samloginUsername"><?php echo $this->user->name; ?></span>
                 <br/>
-                <a class="samloginAccountLink" href="<?php echo $this->accountLink; ?>"><?php echo JText::_('SAMLOGIN_MY_ACCOUNT'); ?></a>
+              <!--  <a class="samloginAccountLink" href="<?php echo $this->accountLink; ?>"><?php echo JText::_('SAMLOGIN_MY_ACCOUNT'); ?></a>-->
             </div>
             <?php if ($this->user->samloginIdP) { ?>
             <div id="SAMLoginIdp"><i><?php echo JText::_('SAMLOGIN_AUTH_BY');?>:</i>  <?php echo($this->user->samloginIdP) ?></div>
@@ -36,9 +36,9 @@ defined('_JEXEC') or die;
                     <input type="hidden" name="task" value="<?php echo $this->task; ?>" />
                     <input type="hidden" name="return" value="<?php echo $this->returnURL; ?>" />
                     <?php echo JHTML::_('form.token'); ?>
-                    <button type="submit" class="samloginButton btn uk-btn">
+                    <button type="submit" class="<?php echo $this->params->get('logoutButtonClasses',"samloginButton btn uk-btn");?>">
                         <i></i>
-                        <span><?php echo JText::_('SAMLOGIN_SIGNOUT_CLASSIC'); ?></span>
+                        <span><?php echo $this->params->get('loginButtonLabel',JText::_('SAMLOGIN_SIGNOUT_CLASSIC'));?></span>
                     </button>
                 </form>
             <?php } ?>
@@ -47,7 +47,7 @@ defined('_JEXEC') or die;
 
 
 
-        <?php if (count($this->K2Menu) || count($this->menu)): ?>
+        <?php if (defined($this->K2Menu) && (count($this->K2Menu) || count($this->menu))): ?>
             <ul class="samloginUserMenu">
 
                 <?php if (count($this->K2Menu)): ?>

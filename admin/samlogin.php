@@ -25,8 +25,8 @@ JText::script("SAMLOGIN_JS_CONFIRM_ROTATEKEY");
 JText::script("SAMLOGIN_JS_CONFIRM_WRITESSP");
 JText::script("SAMLOGIN_JS_CONFIRM_INSTALLSSP");
 
-$document->addScriptDeclaration("window.JS_JOOMLA_JURI_ADMIN_BASE='".JURI::base(true)."'");
-$document->addScript(JURI::base(true).'/components/com_samlogin/resources/js/samlogin.js?v=5');
+$document->addScriptDeclaration("window.SAMLOGIN_JS_JOOMLA_JURI_ADMIN_BASE='".JURI::base(true)."';");
+$document->addScript(JURI::base(true).'/components/com_samlogin/resources/js/samlogin.js?v=17');
 
 JLoader::register('SAMLoginController', JPATH_COMPONENT.'/controllers/controller.php');
 JLoader::register('SAMLoginModel', JPATH_COMPONENT.'/models/model.php');

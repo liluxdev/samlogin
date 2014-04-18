@@ -11,6 +11,7 @@ include_once("sspconfmanager.php");
 class KeyManager{
 
     static function genkey($app){
+           
                     // create private key for CA cert
             // (you should probably print it out if you want to reuse it)
             $CAPrivKey = new Crypt_RSA();
@@ -98,9 +99,18 @@ class KeyManager{
         
         if ($publickeyTest!=$publickeyTmp || $pubtest!=$publickeyTmp){
             // Add a message to the message queue
-            $app->enqueueMessage(JText::_('SAMLOGIN_ERROR_PUBKEY_GENTEST'), 'error');
+           // $app->enqueueMessage(JText::_('SAMLOGIN_ERROR_PUBKEY_GENTEST'), 'error');
+            SAMLoginControllerAjax::enqueueAjaxMessage(JText::_('SAMLOGIN_ERROR_PUBKEY_GENTEST'), SAMLoginControllerAjax::$AJAX_MESSAGE_DANGER);
+            SAMLoginControllerAjax::enqueueAjaxMessage('Public key is '.$publickeyTest.' certificate file path is '.$SSPKeyPath.'. Written to file: <pre>'.$publickeyTmp."</pre>"
+                    , SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
+
             unlink($SSPKeyPath."saml.key.tmp");
             unlink($SSPKeyPath."saml.crt.tmp");
+            
+            //TODO:
+            //try exec openssl one line command without prompt:
+            //E.g. openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=US/ST=Test/L=Springfield/O=Dis/CN=www.example.com" -keyout www.example.com.key  -out www.example.com.cer
+            
             return false;
         }
         
@@ -125,7 +135,9 @@ class KeyManager{
         file_put_contents($SSPKeyPath."saml.key", $privatekeyTest);
         file_put_contents($SSPKeyPath."saml.crt", $publickeyTest );
         
-        $app->enqueueMessage(JText::_('SAMLOGIN_GENKEY_OK'));
+     //   $app->enqueueMessage(JText::_('SAMLOGIN_GENKEY_OK'));
+        SAMLoginControllerAjax::enqueueAjaxMessage(JText::_('SAMLOGIN_GENKEY_OK'), SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+        
         unlink($SSPKeyPath."saml.key.tmp");
         unlink($SSPKeyPath."saml.crt.tmp");
         return true;
@@ -176,7 +188,8 @@ class KeyManager{
         
         if ($publickeyTest!=$publickeyTmp || $pubtest!=$publickeyTmp){
             // Add a message to the message queue
-            $app->enqueueMessage(JText::_('SAMLOGIN_ERROR_PUBKEY_GENTEST'), 'error');
+            //$app->enqueueMessage(JText::_('SAMLOGIN_ERROR_PUBKEY_GENTEST'), 'error');
+                  SAMLoginControllerAjax::enqueueAjaxMessage(JText::_('SAMLOGIN_ERROR_PUBKEY_GENTEST'), SAMLoginControllerAjax::$AJAX_MESSAGE_DANGER);
             unlink($SSPKeyPath."saml.key.tmp");
             unlink($SSPKeyPath."saml.crt.tmp");
             return false;
@@ -192,7 +205,9 @@ class KeyManager{
         file_put_contents($SSPKeyPath."saml.key", $privatekeyTest);
         file_put_contents($SSPKeyPath."saml.crt", $publickeyTest );
         
-        $app->enqueueMessage(JText::_('SAMLOGIN_GENKEY_OK'));
+      //  $app->enqueueMessage(JText::_('SAMLOGIN_GENKEY_OK'));
+        SAMLoginControllerAjax::enqueueAjaxMessage(JText::_('SAMLOGIN_GENKEY_OK'), SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+        
         unlink($SSPKeyPath."saml.key.tmp");
         unlink($SSPKeyPath."saml.crt.tmp");
         return true;

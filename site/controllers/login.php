@@ -37,11 +37,18 @@ class SAMLoginControllerLogin extends SAMLoginController {
             }
         }
         if (!is_null($idp)) {
-            $extraReturnURLParams .= "&idp=" . $idp;
+            $extraReturnURLParams .= "&idp=" . urlencode($idp);
         }
 
 
         $returnTo = JURI::root() . '/components/com_samlogin/loginReceiver.php?task=initSSO' . $extraReturnURLParams;
+        
+        if(preg_match('/(?i)msie [1-8]/',$_SERVER['HTTP_USER_AGENT']))
+        {
+            // if IE<=8
+        echo("<script type='text/javascript'>window.location.href='$returnTo';</script><a href='".$returnTo."'>click here if you don't get automatically redirected to the login page...</a>");
+        die();        
+        }
         $app->redirect($returnTo);
     }
 
@@ -59,7 +66,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
         }
         /* echo JRoute::_('index.php?option=com_users&view=reset');
           echo JRoute::_('index.php?option=com_samlogin&view=login&task=initSSO');
-          die(""); */
+          //die(""); */
         require_once(JPATH_BASE . '/components/com_samlogin/simplesamlphp/lib/_autoload.php');
         $auth = new SimpleSAML_Auth_Simple('default-sp');
 
@@ -96,6 +103,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
         if ($trySLO) {
             $extraReturnURLParams .= "&trySLO=1";
         }
+
         $returnTo = JURI::root() . '/components/com_samlogin/loginReceiver.php?task=initSLO' . $extraReturnURLParams;
         $app->redirect($returnTo);
         //   }
@@ -115,6 +123,9 @@ class SAMLoginControllerLogin extends SAMLoginController {
 
             $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
             $msg = JRequest::getVar('msg', null, 'GET', 'STRING');
+
+
+
 
             if (is_null($rret) && isset($msg) && !empty($msg)) {
                 $errUrl = JRoute::_('index.php?option=com_samlogin&view=login&task=logoutAlert&msg=' . $msg);
@@ -151,6 +162,15 @@ class SAMLoginControllerLogin extends SAMLoginController {
                     // $app->redirect($return,$translatedmsg,$errtype);
                     $errUrl = JRoute::_('index.php?option=com_samlogin&view=login&task=logoutAlert&msg=' . $msg);
                     //  phpconsole("Errurl: ".$errUrl,"rastrano");
+
+                    $useCustomSLO = $params->get("useCustomSLO", 0) == 1;
+                    if ($useCustomSLO) {
+                        $customSLOURL = $params->get("customSLOURL", ''); //TODO implement variable $idp in custom slo url
+                        $app->redirect($customSLOURL);
+                    }
+
+
+
                     $alwaysShowLogoutAlert = $params->get("alwayslogoutalert", 0) == 1;
                     if ($alwaysShowLogoutAlert) {
                         $app->redirect($errUrl);
@@ -168,9 +188,10 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $user = JFactory::getUser();
         $params = JComponentHelper::getParams('com_samlogin');
 
-        $loginStatus = $app->login(array('username' => '', 'password' => ''));
+        $loginStatus = $app->login(array('username' => '', 'password' => ''), array('silent' => true, 'remember' => false));
 
         $user = JFactory::getUser();
+        //die("testing at line".print_r($user,true).__LINE__);
         if (!$user->guest) {
             $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
             if (!is_null($rret)) {
@@ -179,7 +200,9 @@ class SAMLoginControllerLogin extends SAMLoginController {
                 $app->redirect($return);
             }
         } else {
-            $this->handleError("JOOMLA_LOGIN_FAILED");
+            $sess = JFactory::getSession();
+            $errcode = $sess->get("samloginFailErrcode", "GENERIC");
+            $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
         }
     }
 
@@ -198,6 +221,35 @@ class SAMLoginControllerLogin extends SAMLoginController {
         }
         $app->enqueueMessage(JText::_("SAMLOGIN_ERROR_ALERT_$msg"), $errtype);
         // $app->redirect(JURI::root());
+    }
+
+    public function unauthzAlert($msg = "") {
+        if ($msg == "") {
+            $msg = JRequest::getVar('msg', "", 'GET', 'STRING');
+        }
+        $app = JFactory::getApplication();
+        $sess = JFactory::getSession();
+        $user = JFactory::getUser();
+
+        $errtype = "error";
+
+        if ($msg == "session") {
+            $msg = $sess->get("samloginUnauthzMessage", "");
+        }
+        $app->enqueueMessage($msg, $errtype);
+        $errReturnUrl = JURI::root();
+        $errReturnUrl = JRoute::_('index.php?option=com_user&view=login&nocache=unauthz');
+        $app->redirect($errReturnUrl);
+        //    die($msg);
+        $vName = 'message';
+        $vFormat = 'html'; // raw
+        if ($view = $this->getView($vName, $vFormat)) {
+            //         $app->enqueueMessage($msg, $errtype);
+            $view->assignRef('message', ' ');
+            $view->display();
+        } else {
+            $app->enqueueMessage($msg, $errtype);
+        }
     }
 
     public function logoutAlert($msg = "") {

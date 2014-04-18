@@ -6,79 +6,10 @@
     <authorEmail>info@creativeprogramming.it</authorEmail>
     <copyright>Copyright (c) 2013 creativeprogramming.it All rights reserved.</copyright>
     <license>Commercial</license>
-    <version>0.7.9</version>
-    <description><![CDATA[
-       <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.4.0/dojo/dojo.xd.js"></script>
-      <style>
-             @import "http://ajax.googleapis.com/ajax/libs/dojo/1.4.0/dijit/themes/tundra/tundra.css";
-             @import "http://ajax.googleapis.com/ajax/libs/dojo/1.4.0/dojox/widget/Toaster/Toaster.css";
-      </style>
-      <style>
-         .dijitToasterContent {
-            font-size: 16px !important;
-            color: white !important;
-            font-weight: bolder !important;
-            width:500px !important;
-        }
-        .dijitToasterContainer {
-           width:500px !important;
-           border: 2px outset !important;
-        }
-      </style>
-         <script>
-               dojo.require("dojox.widget.Toaster");
-               var idemsecs=5;
-               function showMess(message){
-                    _showToaster(message,idemsecs*1000,"message");
-               }
-
-
-                        function _showToaster(message,duration,level) {
-                            dojo.publish("idemauth_toaster", [{
-                                    message: message,
-                                    type: level,
-                                    duration: duration
-                                }]);
-                        }
-
-                function redirectToAdmin(){
-                       
-                            location.href=location.protocol+"://"+location.hostname+":"+location.port"/administrator/?option=com_samlogin&view=ajax";
-                        
-                }
-
-                 function undoRedirectToAdmin(){
-
-                            clearTimeout(idemauthtimer);
-
-                }
-
-     function countDownIdem(){
-        if (idemsecs>0){
-            dojo.byId('idemsecs').innerHTML=idemsecs--;
-        }
-        setTimeout(function(){ countDownIdem()(); },1000);
-     }
-
-                var idemauthtimer=null;
-                dojo.addOnLoad(function() {
-
-                        dojo.parser.parse('dojobox');
-                        showMess("<center>Thank you for installing SAMLogin component. <br/> </p> <hr/> <img src='../components/com_samlogin/resources/images/samlogin-logo300.png' alt='idemauth logo'/> <br/><hr/> Redirecting you to the first configuration page in <span id='idemsecs'>7</span> seconds... <br/> <a href='#' onClick='undoRedirectToAdmin();'>undo</a></center>");
-                        idemauthtimer=setTimeout(function(){ redirectToAdmin(); },idemsecs*1000);
-                        countDownIdem();
-                });
-       </script>
-       <div style="display:none;" id="dojobox" class="tundra">
-         <div dojoType="dojox.widget.Toaster" id="publish_subscribe_toaster" positionDirection="tr-left"
-                 duration="4000"  messageTopic="idemauth_toaster">
-            </div>
-        </div>
-
-
-       <b><a href='http://samlogin25.creativeprogramming.it'>SAMLogin</a>: SAML2 Authentication for  Joomla (SP)</b>
-
-    ]]></description>
+    <version>0.9</version>
+    <description>
+       SAMLogin: SAML2 Authentication for  Joomla (SP)
+    </description>
     <scriptfile>script.samlogin.php</scriptfile>
     <install>
         <sql>
@@ -117,6 +48,7 @@
     </files>
     <media destination="samlogin" folder="media/samlogin">
 		<folder>images</folder>
+                <folder>assets</folder>
     </media>
     <administration>
       	<menu 
@@ -157,5 +89,6 @@
     </modules>
     <plugins>
 		<plugin plugin="samlogin" group="authentication" />
+                <plugin plugin="samlogin" group="system" />
     </plugins>
 </extension>

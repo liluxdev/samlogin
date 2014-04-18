@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
                 <span class="samloginGreeting"><?php echo JText::_('SAMLOGIN_WELCOME'); ?></span>
                 <span class="samloginUsername"><?php echo $this->user->name; ?></span>
                 <br/>
-                <a class="samloginAccountLink" href="<?php echo $this->accountLink; ?>"><?php echo JText::_('SAMLOGIN_MY_ACCOUNT'); ?></a>
+         <!--       <a class="samloginAccountLink" href="<?php echo $this->accountLink; ?>"><?php echo JText::_('SAMLOGIN_MY_ACCOUNT'); ?></a> -->
             </div>
             <?php if ($this->user->samloginIdP) { ?>
             <div id="SAMLoginIdp"><i><?php echo JText::_('SAMLOGIN_AUTH_BY');?>:</i>  <?php echo($this->user->samloginIdP) ?></div>

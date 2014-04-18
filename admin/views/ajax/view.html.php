@@ -9,10 +9,23 @@ class SAMLoginViewAjax extends SAMLoginView
 
 	function display($tpl = null)
 	{
-		$user = JFactory::getUser();
+            
+                $doc=JFactory::getDocument();
+                
+                $xml = simplexml_load_string(file_get_contents(JPATH_COMPONENT_ADMINISTRATOR."/samlogin.xml"));
+                $json = json_encode($xml);
+                $componentInfoArray = json_decode($json,TRUE);
+                $version=$componentInfoArray["version"];
+                $this->assignRef('version', $version);
+
+             
+                $user = JFactory::getUser();
 		$params = JComponentHelper::getParams('com_samlogin');
 		JToolBarHelper::title('', 'samlogin-logo.png');
 		$toolbar = JToolBar::getInstance('toolbar');
+                
+                
+                
 		if (version_compare(JVERSION, '1.6.0', 'ge'))
 		{
 			if ($user->authorise('core.admin', 'com_samlogin'))
@@ -28,21 +41,35 @@ class SAMLoginViewAjax extends SAMLoginView
 		if (version_compare(JVERSION, '3.0', 'ge'))
 		{
 			JHtml::_('behavior.framework');
-			$helpButton = '<button class="btn btn-small" rel="'.JText::_('SAMLOGIN_HELP').'" onclick="Joomla.popupWindow(\'http://www.creativeprogramming.it/samlogin/docs\', \''.JText::_('SAMLOGIN_COM_HELP', true).'\', 990, 600, 1)" href="#"><i class="icon-question-sign"></i>'.JText::_('SAMLOGIN_COM_HELP').'</button>';
+                        JHtml::_('jquery.framework');
+                       
+      
+			$helpButton = '
+     <button class="btn btn-small" rel="'.JText::_('SAMLOGIN_HELP').'" 
+        onClick="
+        Joomla.popupWindow(\'http://www.creativeprogramming.it/doc/samlogin\', \''.JText::_('SAMLOGIN_COM_HELP', true).'\', 990, 600, 1)" href="#">'
+                                . '<i class="uk-icon-question-circle"></i> '.JText::_('SAMLOGIN_COM_HELP').'</button>'
+                                . '';
+                       
                         if ($user->authorise('core.admin', 'com_samlogin'))
 			{
-                            $genkeyButton = '<button class="btn btn-small" rel="'.JText::_('SAMLOGIN_GENKEY').'" onclick="samlogin_regenkeys();" href="#"><i class="icon-keygenerate"></i>'.JText::_('SAMLOGIN_GENKEY').'</button>';
+                            $genkeyButton = '<button class="btn btn-small" rel="'.JText::_('SAMLOGIN_GENKEY').'" onclick="samlogin_regenkeys();" href="#"><i class="uk-icon-random"></i> '.JText::_('SAMLOGIN_GENKEY').'</button>';
                             $toolbar->appendButton('Custom', $genkeyButton);
-                            $rotateEndButton = '<button class="btn btn-small" rel="'.JText::_('SAMLOGIN_KEYROTATEEND').'" onclick="samlogin_keyRotateEndPeriod();" href="#"><i class="icon-keyrotate"></i>'.JText::_('SAMLOGIN_KEYROTATE_END').'</button>';
+                            $rotateEndButton = '<button class="btn btn-small" rel="'.JText::_('SAMLOGIN_KEYROTATEEND').'" onclick="samlogin_keyRotateEndPeriod();" href="#"><i class="uk-icon-legal"></i> '.JText::_('SAMLOGIN_KEYROTATE_END').'</button>';
                             $toolbar->appendButton('Custom', $rotateEndButton);    
-                            $saveconfButton = '<button class="btn btn-small" rel="'.JText::_('SAMLOGIN_SAVESSPCONF').'" onclick="samlogin_saveSSPConf();" href="#"><i class="icon-save-ssp"></i>'.JText::_('SAMLOGIN_SAVESSPCONF').'</button>';
+                            $saveconfButton = '<button class="btn btn-small" rel="'.JText::_('SAMLOGIN_SAVESSPCONF').'" onclick="samlogin_saveSSPConf();" href="#"><i class="uk-icon-download"></i> '.JText::_('SAMLOGIN_SAVESSPCONF').'</button>';
                             $toolbar->appendButton('Custom', $saveconfButton);      
                         }
                         
                 }
 		else
 		{
-			$helpButton = '<a class="toolbar" onclick="popupWindow(\'http://www.creativeprogramming.it/samlogin/docs\', \''.JText::_('SAMLOGIN_COM_HELP', true).'\', 990, 600, 1)" href="#"><span title="Help" class="icon-32-help"></span>'.JText::_('SAMLOGIN_COM_HELP').'</a>';
+                     $doc->addScript("/media/samlogin/assets/js/jquery-1.11.0.min.js");
+                     $doc->addScript("/media/samlogin/assets/js/jquery-migrate-1.2.1.min.js");
+                  //   $doc->addScript("http://www.skypeassets.com/i/scom/js/skype-uri.js");
+		
+                     $helpButton = '        
+<a class="toolbar" onclick="popupWindow(\'http://www.creativeprogramming.it/doc/samlogin\', \''.JText::_('SAMLOGIN_COM_HELP', true).'\', 990, 600, 1)" href="#"><span title="Help" class="icon-32-help"></span>'.JText::_('SAMLOGIN_COM_HELP').'</a>';
 		
                         if ($user->authorise('core.admin', 'com_samlogin'))
 			{
@@ -54,7 +81,24 @@ class SAMLoginViewAjax extends SAMLoginView
                             $toolbar->appendButton('Custom', $saveconfButton);
                         }
                 }
-		$toolbar->appendButton('Custom', $helpButton);
+                $baseAjaxURL= JUri::base()."?option=com_samlogin&view=ajax"; //base() returns administrator if called from it
+                $doc->addScriptDeclaration("window.samloginBaseAjaxURL='$baseAjaxURL';");
+                
+                //$doc->addScript("http://www.skypeassets.com/i/scom/js/skype-uri.js");
+                 
+                
+                $doc->addScript("https://samlogin25.creativeprogramming.it/samloginUpdaterVersionCheck.js.php?v=$version");
+		
+                $doc->addStyleSheet("/media/samlogin/assets/uikit/css/uikit.almost-flat.min.css");
+                $doc->addStyleSheet("/media/samlogin/assets/uikit/css/addons/uikit.almost-flat.addons.min.css");
+               // $doc->addStyleSheet("/media/samlogin/assets/uikit/css/uikit.min.css");
+               // $doc->addStyleSheet("/media/samlogin/assets/uikit/css/addons/uikit.addons.min.css");
+                
+                $doc->addScript("/media/samlogin/assets/uikit/js/uikit.min.js");
+                $doc->addScript("/media/samlogin/assets/uikit/js/addons/notify.min.js");
+		
+               
+                $toolbar->appendButton('Custom', $helpButton); //TODO: redmine ask for support
 		$checks = array();
                 
                 $SSPCheckFile= JPATH_COMPONENT_SITE."/simplesamlphp/VERSION_INFO";
@@ -89,7 +133,7 @@ class SAMLoginViewAjax extends SAMLoginView
                     $checks['secretsaltChanged'] = $checks['sspConf']["secretsalt"]=="defaultsecretsalt" ? false : true;
                     $checks['adminpassChanged'] =  $checks['sspConf']["auth.adminpassword"]!="1234"  ? true : false;
                     //die ($checks['sspConf']["auth.adminpassword"].  $checks['adminpassChanged']);
-                    $sslTestURL=str_ireplace("http://","https://",JURI::root())."/components/com_samlogin/simplesamlphp/www/module.php/saml/sp/metadata.php/default-sp?output=xhtml";
+                    $sslTestURL=str_ireplace("http://","https://",JURI::root())."components/com_samlogin/simplesamlphp/www/module.php/saml/sp/metadata.php/default-sp?output=xhtml";
 
 
                     $JoomlaBaseURLPath= JURI::root( true );
@@ -102,10 +146,10 @@ class SAMLoginViewAjax extends SAMLoginView
 
                     $checks["metadataURL"]=$sslTestURL;
 
-                     $checks["cronLink"]=str_ireplace("http://","https://",JURI::root())."/components/com_samlogin/simplesamlphp/www/module.php/cron/cron.php?key=".$params->get("sspcron_secret","changeme")."&tag=hourly";
+                     $checks["cronLink"]=str_ireplace("http://","https://",JURI::root())."components/com_samlogin/simplesamlphp/www/module.php/cron/cron.php?key=".$params->get("sspcron_secret","changeme")."&tag=hourly";
                       $checks["cronSuggestion"]=
                     "# Run cron: [hourly]\n".
-                    "01 * * * * curl -k --silent \"". $checks["cronLink"]."\" > /dev/null 2>&1".
+                    "01 * * * * /usr/bin/curl -k -A \"Mozilla/5.0\" --silent \"". $checks["cronLink"]."\" > /dev/null 2>&1".
                     "";
                       //  die($sslTestURL);
                     $httpHeaders=get_headers($sslTestURL);
@@ -172,30 +216,18 @@ class SAMLoginViewAjax extends SAMLoginView
 
                     $checks['authPlugin'] = JPluginHelper::isEnabled('authentication', 'samlogin');
                     $checks['userPlugin'] = JPluginHelper::isEnabled('user', 'samlogin');
-                    if ($params->get('facebookApplicationId') && $params->get('facebookApplicationSecret'))
-                    {
-                            $checks['facebookParams'] = true;
-                    }
-                    else
-                    {
-                            $checks['facebookParams'] = false;
-                    }
-                    if ($params->get('twitterConsumerKey') && $params->get('twitterConsumerSecret'))
-                    {
-                            $checks['twitterParams'] = true;
-                    }
-                    else
-                    {
-                            $checks['twitterParams'] = false;
-                    }
+                   
+                   
                 }
 	
 		$checks['php'] = phpversion();
 		$checks['curl'] = extension_loaded('curl');
                 $checks['mcrypt'] = extension_loaded('mcrypt');
+                $checks['xml'] = extension_loaded('xml');
 		$checks['hash_hmac'] = function_exists('hash_hmac');
 		$checks['json'] = extension_loaded('json');
 		$this->assignRef('checks', $checks);
+            
 		if ($checks['userPlugin'])
 		{
 			$application = JFactory::getApplication();

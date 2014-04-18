@@ -15,17 +15,19 @@ defined('_JEXEC') or die; ?>
 	<div class="samloginBlock">
 	        
                <div class="samloginSAMLLoginBlock">
-					<h2 class="samloginServicesMessage"><?php echo JText::_('SAMLOGIN_SAML_LOGIN'); ?></h2>
+					<h2 class="samloginServicesMessage"><?php echo $this->params->get('ssoLoginTitle',"Federated Login");?></h2>
 					<div class="samloginBlock">
 					
-						<a class="btn btn-primary uk-button uk-button-primary" href="<?php echo $this->ssoLink; ?>">
+						<a class="<?php echo $this->params->get('loginButtonClasses',"btn btn-primary uk-button uk-button-primary");?>" href="<?php echo $this->ssoLink; ?>">
 							<i></i>
-							<span> <?php echo JText::_('SAMLOGIN_SSO') ?> </span>
+							<span> <?php echo $this->params->get('loginButtonLabel',JText::_('SAMLOGIN_SSO'));?> </span>
 						</a>
 						
 					</div>
 	        </div>
 	
+            <?php if ($this->params->get('showClassic', 1)) : ?>
+            
                 <div class="SamloginOrSpacer"><h4> <?php echo JText::_('SAMLOGIN_OR') ?> </h4></div>
 
 		<div class="samloginLoginBlock">
@@ -82,6 +84,8 @@ defined('_JEXEC') or die; ?>
 			</div>
 		</div>
 		<?php endif; ?>
+                                
+                <?php endif; ?>
                                 
 			</div>
 		</div>

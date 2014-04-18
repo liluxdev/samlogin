@@ -8,6 +8,7 @@
  * 
  * 
  */
+
 define('DS', DIRECTORY_SEPARATOR);
 /**
  * Getting Joomla BasePath
@@ -86,7 +87,7 @@ $config = SimpleSAML_Configuration::getInstance();
 SAMLoginSessionBridge::$SSBase = $config->getBaseURL();
 $session = SimpleSAML_Session::getInstance();
 
-
+$samlsession=null;
 if (($_GET['task'] == "initSLO")) {
 
     $samlsession = _getSimpleSAMLSessionFromJoomlaSessionBackup();
@@ -190,11 +191,22 @@ if ($_GET['task'] == "initSSO") {
     if (isset($_GET["idp"]) && $_GET["idp"] != "" && $_GET["idp"] != "DS") {
 
         if (!$as->isAuthenticated()) {
-
+            if(preg_match('/(?i)msie [1-8]/',$_SERVER['HTTP_USER_AGENT']))
+            {
+                // if IE<=8$url = $auth->getLoginURL();
+            $loginUrl = htmlspecialchars($as->getLoginURL($returnTo)); //."&idpentityid=".$_GET["idp"]);
+            //print('<a href="' . htmlspecialchars($url) . '">Login</a>');
+           
+            echo("<script type='text/javascript'>window.location.href='".$loginUrl."';</script>");
+            echo("<a href='".$loginUrl."'>click here if you don't get automatically redirected to the login page...</a>");
+            die();        
+            }
             $as->requireAuth(array(
-                'saml:idp' => $_GET["idp"],
+                'saml:idp' => urldecode($_GET["idp"]),
                 "ReturnTo" => $returnTo,
             ));
+            
+            
         } else {
             $app = _getJoomlaApp();
             $app->redirect($returnTo);
@@ -205,9 +217,19 @@ if ($_GET['task'] == "initSSO") {
     //    //phpconsole($as->isAuthenticated(), "rastrano");
 
         if (!$as->isAuthenticated()) {
+            if(preg_match('/(?i)msie [1-8]/',$_SERVER['HTTP_USER_AGENT']))
+            {
+                // if IE<=8$url = $auth->getLoginURL();
+            $loginUrl = htmlspecialchars($as->getLoginURL($returnTo));
+            //print('<a href="' . htmlspecialchars($url) . '">Login</a>');
+            echo("<script type='text/javascript'>window.location.href='".$loginUrl."';</script><a href='".$loginUrl."'>click here if you don't get automatically redirected to the login page...</a>");
+            die();        
+            }
+            
             $as->requireAuth(array(
                 "ReturnTo" => $returnTo
             ));
+            
         } else {
             $app = _getJoomlaApp();
             $app->redirect($returnTo);
@@ -271,7 +293,13 @@ if (($as->isAuthenticated() || $session->isValid('default-sp')) && (!($_GET['tas
     SAMLoginSessionBridge::$SAMLSess = $session;
     SAMLoginSessionBridge::$SAMLIdP = $session->getIdP();
     SAMLoginSessionBridge::$SAMLSP = $metadata->getMetaDataCurrentEntityID();
-    //   SAMLoginSJSessionBridge::$SAMLNameId = json_encode($session->getNameId());
+     //SAMLoginSessionBridge::$SAMLNameId = json_encode($session->getNameId());
+   
+    SAMLoginSessionBridge::$SAMLNameId = $session->getNameID();
+  
+        
+ //  echo ("Attributes are <pre>". print_r($attributes,true) ."</pre>");
+ //  die ("Name ID is <pre>". print_r(SAMLoginSessionBridge::$SAMLNameId,true) ."</pre>");
 }
 
 
@@ -280,7 +308,7 @@ if (($as->isAuthenticated() || $session->isValid('default-sp')) && (!($_GET['tas
  */
 // Set flag that this is a parent file.
 define('_JEXEC', 1);
-define('DS', DIRECTORY_SEPARATOR);
+//already def at top: define('DS', DIRECTORY_SEPARATOR);
 
 
 
@@ -321,13 +349,14 @@ if ($_GET['task'] == "loginCallback") {
     /**
      * Creating Joomla Session
      */
+
     $currentSession = JFactory::getSession();
     $currentSession->set("SAMLoginIsAuthN", SAMLoginSessionBridge::$isAuthN);
     $currentSession->set("SAMLoginSession", SAMLoginSessionBridge::$SAMLSess);
     $currentSession->set("SAMLoginAttrs", SAMLoginSessionBridge::$SAMLAttrs);
     $currentSession->set("SAMLoginIdP", SAMLoginSessionBridge::$SAMLIdP);
     $currentSession->set("SAMLoginSP", SAMLoginSessionBridge::$SAMLSP);
-    $currentSession->set("SAMLoginNameId", SAMLoginSessionBridge::$SAMLNameId);
+    $currentSession->set("SAMLoginNameId", json_encode(SAMLoginSessionBridge::$SAMLNameId));
     /* this fixes issue 4 */ $currentSession->close(); //ensure session data storage session_write_close()
 
 

@@ -103,7 +103,7 @@ class SamloginHelper
 		$params->set('allowUserRegistration', $usersConfig->get('allowUserRegistration'));
 
 
-		$document->addScript(JURI::root(true).'/components/com_samlogin/js/samlogin.js?v=1.0.2');
+		//$document->addScript(JURI::root(true).'/components/com_samlogin/js/samlogin.js?v=1.0.2');
 
 	}
 
@@ -131,6 +131,10 @@ class SamloginHelper
 			$uri = JFactory::getURI();
 			$url = $uri->toString(array('path', 'query', 'fragment'));
 		}
+                
+                if ($params->get('usesecure',false)){
+                   $url = strtr($url,array("http://"=>"https://"));
+                }
 		return base64_encode($url);
 	}
 

@@ -145,7 +145,7 @@ class Com_SamloginInstallerScript
                 JFile::move(JPATH_SITE.'/plugins/'.$group.'/'.$name.'/'.$name.'.j25.xml', JPATH_SITE.'/plugins/'.$group.'/'.$name.'/'.$name.'.xml');
            */
             }  
-            $query = "UPDATE #__extensions SET enabled=1, ordering=99 WHERE type='plugin' AND element=".$db->Quote($name)." AND folder=".$db->Quote($group);
+            $query = "UPDATE #__extensions SET enabled=1, ordering=-1 WHERE type='plugin' AND element=".$db->Quote($name)." AND folder=".$db->Quote($group);
             $db->setQuery($query);
             $db->query();
             $status->plugins[] = array('name' => $name, 'group' => $group, 'result' => $result);

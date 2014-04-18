@@ -426,12 +426,13 @@ class plgAuthenticationSamlogin extends JPlugin {
         // //phpconsole($response, "rastrano");
 
         $userid = $this->getUserIdByUsernameOrMail($response->username);
-
-
+        $updateUsernameIfMailOverlap = $samloginParams->get("updateUsernameIfMailOverlap", false);
+        if ($updateUsernameIfMailOverlap && empty($userid)){
+             $userid = $this->getUserIdByUsernameOrMail($response->email);
+        }
+        
         if ($userid) {
             $user = JFactory::getUser($userid);
-
-            $updateUsernameIfMailOverlap = $samloginParams->get("updateUsernameIfMailOverlap", false);
 
             if ($updateUsernameIfMailOverlap && $response->username != $user->username) {
                 //  $user->username = $response->username;
@@ -662,7 +663,8 @@ class plgAuthenticationSamlogin extends JPlugin {
                 return false;
             }
             $user = $this->_updateAndGetUser($response, $samloginParams, $extraFields);  //final to sync group changes in session
-            // die(print_r($user,true)."debbuging at line: ".__LINE__);
+    //print_r($response);
+   //         die(print_r($user,true)."debbuging at line: ".__LINE__);
             $response->error_message = '';
         } else {
             $response->status = version_compare(JVERSION, '3.0', 'ge') ? JAuthentication::STATUS_FAILURE : JAUTHENTICATE_STATUS_FAILURE;

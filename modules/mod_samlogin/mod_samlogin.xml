@@ -6,7 +6,7 @@
 	
 	<authorEmail>info@creativeprogramming.it</authorEmail>
 	<authorUrl>http://www.creativeprogramming.it</authorUrl>
-	<version>0.7</version>
+	<version>0.9</version>
         <copyright>Copyright (c) 2013 creativeprogramming.it All rights reserved.</copyright>
         <license>Provided "as it is" http://creativeprogramming.it/provided-as-it-is</license>
 	<description>SAMLL_SC_FRONTEND_MOD_DESC</description>
@@ -20,11 +20,33 @@
 				<field name="template" type="template" default="default" extension="mod_samlogin" label="SAMLOGIN_MOD_TEMPLATE" description="" />
 				<field type="spacer"/>
 				<field name="preMessage" type="editor" filter="raw" rows="3" cols="30" width="300px" height="100px" buttons="false" default="" label="SAMLOGIN_LOGIN_FORM_CUSTOM_INTRODUCTION_MESSSAGE" description="SAMLOGIN_LOGIN_FORM_CUSTOM_INTRODUCTION_MESSSAGE_DESC"/>
+                               
+                                 <field name="loginButtonLabel" 
+                                    type="text" default="SSO Login" 
+                                    label="SAMLOGIN_LOGIN_BUTTON_LABEL" 
+                                    description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
                                 <field name="preLogoutMessage" type="editor" filter="raw" rows="3" cols="30" width="300px" height="100px" buttons="false" default="" label="SAMLOGIN_LOGIN_FORM_CUSTOM_INTRODUCTION_MESSSAGE" description="SAMLOGIN_LOGIN_FORM_CUSTOM_INTRODUCTION_MESSSAGE_DESC"/>
-                             
+                              
+                                <field name="logoutButtonLabel" 
+                                    type="text" default="SSO Logout" 
+                                    label="SAMLOGIN_LOGOUT_BUTTON_LABEL" 
+                                    description="SAMLOGIN_LOGOUT_BUTTON_LABEL"/>
+                              
 				<field name="usesecure" type="radio" default="0" label="SAMLOGIN_COM_ENCRYPT_LOGIN_FORM" description="SAMLOGIN_COM_SUBMIT_ENCRYPTED_LOGIN_DATA_REQUIRES_SSL">
-					<option value="0">SAMLOGIN_COM_NO</option>
-					<option value="1">SAMLOGIN_COM_YES</option>
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+                                
+                                <field name="greeting" type="radio" default="1" label="SAMLOGIN_SHOWGREETING" description="SAMLOGIN_SHOWGREETING">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+                                
+                                <field name="login" type="menuitem" default="" disable="separator" label="SAMLOGIN_LOGIN_REDIRECTION_URL" description="" state="1">
+					<option value="0">SAMLOGIN_AUTO</option>
+				</field>
+				<field name="logout" type="menuitem" default="" disable="separator" label="SAMLOGIN_LOGOUT_REDIRECTION_URL" description="" state="1">
+					<option value="0">SAMLOGIN_AUTO</option>
 				</field>
                                 
 				<field name="menutype" type="menu" default="" label="SAMLOGIN_RENDER_MENU" description="SAMLOGIN_RENDER_MENU_DESCRIPTION">

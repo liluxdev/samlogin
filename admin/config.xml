@@ -3,7 +3,17 @@
 
      <fieldset name="sspsetup" label="COM_SAMLOGIN_SSP_CONF">	  
    
-         
+           <field 
+             name="ssphp_session_storage"
+             type="list"
+             default="0"
+             label="COM_SAMLOGIN_SESSION_STORAGE"
+             description="COM_SAMLOGIN_SESSION_STORAGE"
+         >
+              
+                  <option value="0">Joomla Database</option>
+                  <option value="1">PHPSESSION</option>
+         </field>
            
         
                   <field 
@@ -70,6 +80,29 @@
                   <option value="1">JSHOW</option>
          </field>
          
+         
+             <field 
+             name="ssp_signassertion"
+             type="radio"
+             default="0"
+             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SIGNASSERTION"
+             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SIGNASSERTION"
+         >
+                   <option value="0">Off</option>
+                  <option value="1">On</option>
+         </field>
+         
+         
+                  <field 
+             name="ssp_validateassertion"
+             type="radio"
+             default="0"
+             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_VALIDATEASSERTION"
+             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_VALIDATEASSERTION"
+         >
+                   <option value="0">Off</option>
+                  <option value="1">On</option>
+         </field>
           <field 
              name="ssp_debug__validatexml"
              type="radio"
@@ -264,9 +297,20 @@
        </fieldset>
      
      <fieldset name="mappings" label="COM_SAMLOGIN_CONF_MAPPINGS">	  
-        <field name="Map" type="spacer" label="&lt;i&gt;Attribute Map&lt;/i&gt;&lt;br/&gt;Enter attribute mappings. Syntax is: 'attributeName' or 'attributeName|backupAttributeName' + operator to concat attrs with a space e.g. 'cn|displayName|sn+givenName' "/>
+        <field name="Map" type="spacer" label="&lt;i&gt;Attribute Map&lt;/i&gt;&lt;br/&gt;Enter attribute mappings. Syntax is: 'attributeName' or 'attributeName|backupAttributeName' + operator to concat attrs with a space e.g. 'cn|displayName|givenName+sn' "/>
         <field name="mapping_username" type="text" label="Username" size="35" default="mail|eduPersonPrincipalName"
 			description="The provided SAML attribute that is mapped to the local Joomla 'username' attribute (i.e. 'eduPersonPrincipalName')" />
+        
+        <field name="useNameId"           
+               type="radio"
+                        label="Use NameID as username"
+                        description="COM_SAMLOGIN_USENAMEID_AS_USERNAME"
+                        default="0"
+                >
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+        </field>
+        
         <field name="mapping_email" type="text" label="E-mail" size="35" default="mail|eduPersonPrincipalName"
 			description="The provided SAML attribute that is mapped to the local Joomla 'email' attribute (i.e. 'mail')" />
         <field name="useDummyEmails"           
@@ -280,7 +324,7 @@
         </field>
         <field name="dummyEmailDomain" type="text" label="Dummy email domain" size="35" default=""
 			description="The dummy email domain (only if using dummy emails, default is hostname, do not change in production please)" />   
-        <field name="mapping_fullname" type="text" label="Fullname" size="35" default="cn|sn+givenName|displayName|eduPersonPrincipalName"
+        <field name="mapping_fullname" type="text" label="Fullname" size="35" default="cn|givenName+sn|displayName|eduPersonPrincipalName"
 			description="The provided SAML attribute that is mapped to the local Joomla 'fullname' attribute (i.e. 'cn')" />
         <field name="mapping_birthdate" type="text" label="Birthdate" size="35" default=""
 			description="The provided SAML attribute that is mapped to the local Joomla 'birthdate' attribute" />
@@ -294,6 +338,10 @@
 			description="The provided SAML attribute that is mapped to the local Joomla 'language' attribute (i.e. 'preferredLanguage')" />
         <field name="mapping_timezone" type="text" label="Timezone" size="35" default=""
 			description="The provided SAML attribute that is mapped to the local Joomla 'timezone' attribute" />
+        
+         <field name="extramapping" type="textarea" label="Extra Fields Mappings"  default=''
+			description="JSON Array of extra mappings for profile extension plugins" />
+   
         
       </fieldset>
        
@@ -348,6 +396,14 @@
                 description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
                 name="rule_1_regex"/>
      
+            
+             <field 
+                default="" 
+                type="text" 
+                size="60"
+                label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_1" 
+                description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+                name="rule_1_sql"/>
      
             <field 
                 default="1" 
@@ -384,6 +440,16 @@
                 label="COM_SAMLOGIN_AUTHZRULE_REGEX_2" 
                 description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
                 name="rule_2_regex"/>
+            
+            
+               
+             <field 
+                default="" 
+                type="text" 
+                size="60"
+                label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_2" 
+                description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+                name="rule_2_sql"/>
      
      
             <field 
@@ -418,6 +484,15 @@
                 label="COM_SAMLOGIN_AUTHZRULE_REGEX_3" 
                 description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
                 name="rule_3_regex"/>
+            
+                        
+             <field 
+                default="" 
+                type="text" 
+                size="60"
+                label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_3" 
+                description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+                name="rule_3_sql"/>
      
      
             <field 
@@ -450,6 +525,15 @@
                 label="COM_SAMLOGIN_AUTHZRULE_REGEX_4" 
                 description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
                 name="rule_4_regex"/>
+            
+            
+                         <field 
+                default="" 
+                type="text" 
+                size="60"
+                label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_4" 
+                description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+                name="rule_4_sql"/>
      
      
             <field 
@@ -482,6 +566,15 @@
                 label="COM_SAMLOGIN_AUTHZRULE_REGEX_5" 
                 description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
                 name="rule_5_regex"/>
+            
+            
+                         <field 
+                default="" 
+                type="text" 
+                size="60"
+                label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_5" 
+                description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+                name="rule_5_sql"/>
      
      
             <field 
@@ -496,7 +589,11 @@
             
         </fieldset>
         
-             <fieldset name="extras" label="COM_SAMLOGIN_CONF_EXTRAS">	  
+             <fieldset name="extras" label="COM_SAMLOGIN_CONF_EXTRAS">	 
+                 
+                 
+                 
+                  
                 <field
                         name="defaultRegistered"
                         type="radio"
@@ -507,6 +604,30 @@
                         <option value="0">No</option>
                         <option value="1">Yes</option>
                 </field>
+                
+                <field
+                        name="defaultDeny"
+                        type="radio"
+                        label="COM_SAMLOGIN_DEFAULT_DENY"
+                        description="COM_SAMLOGIN_DEFAULT_DENY"
+                        default="0"
+                >
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </field>
+                
+                      
+                  <field 
+             name="defaultDenyMsg"
+             type="textarea"
+             filter="safehtml"
+             default=""
+             label="COM_SAMLOGIN_DEFAULT_DENY_MSG"
+             description="COM_SAMLOGIN_DEFAULT_DENY_MSG"
+             ></field>    
+                
+                
+                 
                 <field type="usergroup" default="2" name="registeredGroupId" label="Registered Group"></field>
                <field
                         name="updateUsernameIfMailOverlap"
@@ -520,7 +641,25 @@
                 </field>
                 
                 
+              <field
+                        name="overrideJoomlaLoginPage"
+                        type="menuitem"
+                        label="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN"
+                        description="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN"
+                        default="1"
+                >
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </field>
+                
+                <field name="loginPage" type="menuitem" default="0" disable="separator" label="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN_MENU_ITEM" description="" state="1">
+				<option value="0">SAMLOGIN_AUTO</option>
+		</field>
+			
+                
+                
              </fieldset>
+             
              <fieldset name="logout" label="COM_SAMLOGIN_CONF_LOGOUT">	 
                   <field
                         name="trysinglelogout"
@@ -543,6 +682,27 @@
                         <option value="0">onError</option>
                         <option value="1">Always</option>
                 </field>
+                
+                  <field
+                        name="useCustomSLO"
+                        type="radio"
+                        label="COM_SAMLOGIN_SAMLOGIN_TRYSLO_CUSTOM"
+                        description="COM_SAMLOGIN_SAMLOGIN_TRYSLO_CUSTOM"
+                        default="0"
+                >
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </field>
+                
+           <field 
+             name="customSLOURL"
+             type="text"
+             size="70"
+             default=""
+             label="COM_SAMLOGIN_SAMLOGIN_CUSTOM_SLO_URL"
+             description="COM_SAMLOGIN_SAMLOGIN_CUSTOM_SLO_URL_DESC"
+          />   
+                
                  <field
                         name="logout_customhtmlmessage"
                         type="editor"
