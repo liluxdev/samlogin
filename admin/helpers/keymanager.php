@@ -122,21 +122,28 @@ class KeyManager{
         $pubkeybackupname="saml.backup_until_$datetimestring.crt";
         file_put_contents($SSPKeyPath.$pubkeybackupname, $pubBackup );
         
-        $config = SSPConfManager::getAuthsourcesConf();
+        if (SAMLoginControllerAjax::aquireLock("nosimulate") ){
+                    SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION);
+                        $config = SSPConfManager::getAuthsourcesConf();
 
-        $config["default-sp"]["new_privatekey"] = "saml.key";
-        $config["default-sp"]["new_certificate"] = "saml.crt";
-        $config["default-sp"]["privatekey"] = $privkeybackupname;
-        $config["default-sp"]["certificate"] = $pubkeybackupname;
+                        $config["default-sp"]["new_privatekey"] = "saml.key";
+                        $config["default-sp"]["new_certificate"] = "saml.crt";
+                        $config["default-sp"]["privatekey"] = $privkeybackupname;
+                        $config["default-sp"]["certificate"] = $pubkeybackupname;
+                        SSPConfManager::saveAuthsourcesConf($config, $app,true);
+                    
+                    SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
+        SAMLoginControllerAjax::releaseLock("nosimulate");
+        }
+    
         
-        SSPConfManager::saveAuthsourcesConf($config, $app);
         
         
         file_put_contents($SSPKeyPath."saml.key", $privatekeyTest);
         file_put_contents($SSPKeyPath."saml.crt", $publickeyTest );
         
      //   $app->enqueueMessage(JText::_('SAMLOGIN_GENKEY_OK'));
-        SAMLoginControllerAjax::enqueueAjaxMessage(JText::_('SAMLOGIN_GENKEY_OK'), SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+        SAMLoginControllerAjax::enqueueAjaxMessage("A New x.509 certificate was generated for the XML encryption & signing needed by the SAML endpoints (N.B. this is not related and does not substitute the HTTPS certificate of your webserver)", SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
         
         unlink($SSPKeyPath."saml.key.tmp");
         unlink($SSPKeyPath."saml.crt.tmp");
@@ -144,14 +151,17 @@ class KeyManager{
     }
     
     static function keyrotateEndPeriod($app){
-        $config = SSPConfManager::getAuthsourcesConf();
-       
-        $config["default-sp"]["privatekey"] = "saml.key";
-        $config["default-sp"]["certificate"] = "saml.crt";
-        unset($config["default-sp"]["new_privatekey"]);
-        unset($config["default-sp"]["new_certificate"]);
-
-        SSPConfManager::saveAuthsourcesConf($config, $app);
+        if (SAMLoginControllerAjax::aquireLock("nosimulate") ){
+            SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION);
+                $config = SSPConfManager::getAuthsourcesConf();
+                $config["default-sp"]["privatekey"] = "saml.key";
+                $config["default-sp"]["certificate"] = "saml.crt";
+                unset($config["default-sp"]["new_privatekey"]);
+                unset($config["default-sp"]["new_certificate"]);
+                SSPConfManager::saveAuthsourcesConf($config, $app,true);
+                SAMLoginControllerAjax::releaseLock("nosimulate");
+            SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
+        }
     }
     
     static  function _depr_genkey($app){

@@ -6,8 +6,25 @@ jimport('joomla.application.component.controlleradmin');
 jimport('joomla.filesystem.file');
 
 class SAMLoginControllerAjax extends SAMLoginController {
+    
+    
+    public static function aquireLock($lockname) {
+        $toret = array();
+        $lockFile = JPATH_COMPONENT_SITE . "/$lockname.lockfile";
+        $lock = file_exists($lockFile);
+        if ($lock) {
+            if ((time() - filemtime($lockFile)) < 60 * 3) {
+               // $toret['additionalMessages'][] = array("msg" => "Cannot aquire exclusive lock, please retry in few minutes, maybe another user is installing it now", "level" => "warning");
+                return false;
+            } else {
+                //lock expired
+            }
+        }
+        file_put_contents($lockFile, "-");
+        return true;
+    }
 
-    static function aquireLockTerminateOnFail($lockname) {
+    public static function aquireLockTerminateOnFail($lockname) {
         $toret = array();
         $lockFile = JPATH_COMPONENT_SITE . "/$lockname.lockfile";
         $lock = file_exists($lockFile);
@@ -24,7 +41,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
         return true;
     }
 
-    static function releaseLock($lockname) {
+    public static function releaseLock($lockname) {
         $toret = array();
         $lockFile = JPATH_COMPONENT_SITE . "/$lockname.lockfile";
         $lock = file_exists($lockFile);
@@ -93,12 +110,18 @@ class SAMLoginControllerAjax extends SAMLoginController {
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
             self::aquireLockTerminateOnFail("saveconf");
+                       
+            require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
+            SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION);
+            
+        
             $app = JFactory::getApplication();
             require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/keymanager.php");
             KeyManager::genkey($app);
 
             //   JRequest::setVar("layout", "closeme");
             //   $this->display();
+                     SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
             self::releaseLock("saveconf");
         }
 
@@ -112,12 +135,18 @@ class SAMLoginControllerAjax extends SAMLoginController {
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
             self::aquireLockTerminateOnFail("saveconf");
+            
+            require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
+            SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION);
+            
+
             $app = JFactory::getApplication();
             require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/keymanager.php");
             KeyManager::keyrotateEndPeriod($app);
 
             //JRequest::setVar("layout", "closeme");
             //$this->display();
+                     SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
             self::releaseLock("saveconf");
         }
 
@@ -146,6 +175,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
 
             // JRequest::setVar("layout", "closeme");
             // $this->display();
+                     SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
             self::releaseLock("saveconf");
         }
         self::sendAjaxBuffer();
@@ -172,6 +202,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
 
             // JRequest::setVar("layout", "closeme");
             // $this->display();
+                     SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_SIMULATE);
             self::releaseLock("saveconf");
         }
 
@@ -393,9 +424,13 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 
                 require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
                 $dummyarr = array();
-                SSPConfManager::checkConfSync($dummyarr); //to create file first boot
-                self::simulateConfigWrite();
-                $checks['configIsInSync'] = SSPConfManager::checkConfSync( $checks['additionalMessages']);
+                if ( self::aquireLock("nosimluate") )
+                {
+                    SSPConfManager::checkConfSync($dummyarr); //to create file first boot
+                    self::simulateConfigWrite();
+                    $checks['configIsInSync'] = SSPConfManager::checkConfSync( $checks['additionalMessages']);
+                    self::releaseLock("nosimluate");
+                }
                 
                 $checks['sspCheck'] = $vinfo;
                 require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/lib/_autoload.php");
