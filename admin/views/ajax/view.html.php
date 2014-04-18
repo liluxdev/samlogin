@@ -64,8 +64,8 @@ class SAMLoginViewAjax extends SAMLoginView
                 }
 		else
 		{
-                     $doc->addScript("/media/samlogin/assets/js/jquery-1.11.0.min.js");
-                     $doc->addScript("/media/samlogin/assets/js/jquery-migrate-1.2.1.min.js");
+                     $doc->addScript(JURI::root(true)."/media/samlogin/assets/js/jquery-1.11.0.min.js");
+                     $doc->addScript(JURI::root(true)."/media/samlogin/assets/js/jquery-migrate-1.2.1.min.js");
                   //   $doc->addScript("http://www.skypeassets.com/i/scom/js/skype-uri.js");
 		
                      $helpButton = '        
@@ -89,13 +89,13 @@ class SAMLoginViewAjax extends SAMLoginView
                 
                 $doc->addScript("https://samlogin25.creativeprogramming.it/samloginUpdaterVersionCheck.js.php?v=$version");
 		
-                $doc->addStyleSheet("/media/samlogin/assets/uikit/css/uikit.almost-flat.min.css");
-                $doc->addStyleSheet("/media/samlogin/assets/uikit/css/addons/uikit.almost-flat.addons.min.css");
+                $doc->addStyleSheet(JURI::root(true)."/media/samlogin/assets/uikit/css/uikit.almost-flat.min.css");
+                $doc->addStyleSheet(JURI::root(true)."/media/samlogin/assets/uikit/css/addons/uikit.almost-flat.addons.min.css");
                // $doc->addStyleSheet("/media/samlogin/assets/uikit/css/uikit.min.css");
                // $doc->addStyleSheet("/media/samlogin/assets/uikit/css/addons/uikit.addons.min.css");
                 
-                $doc->addScript("/media/samlogin/assets/uikit/js/uikit.min.js");
-                $doc->addScript("/media/samlogin/assets/uikit/js/addons/notify.min.js");
+                $doc->addScript(JURI::root(true)."/media/samlogin/assets/uikit/js/uikit.min.js");
+                $doc->addScript(JURI::root(true)."/media/samlogin/assets/uikit/js/addons/notify.min.js");
 		
                
                 $toolbar->appendButton('Custom', $helpButton); //TODO: redmine ask for support

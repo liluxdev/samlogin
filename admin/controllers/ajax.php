@@ -6,15 +6,14 @@ jimport('joomla.application.component.controlleradmin');
 jimport('joomla.filesystem.file');
 
 class SAMLoginControllerAjax extends SAMLoginController {
-    
-    
+
     public static function aquireLock($lockname) {
         $toret = array();
         $lockFile = JPATH_COMPONENT_SITE . "/$lockname.lockfile";
         $lock = file_exists($lockFile);
         if ($lock) {
             if ((time() - filemtime($lockFile)) < 60 * 3) {
-               // $toret['additionalMessages'][] = array("msg" => "Cannot aquire exclusive lock, please retry in few minutes, maybe another user is installing it now", "level" => "warning");
+                // $toret['additionalMessages'][] = array("msg" => "Cannot aquire exclusive lock, please retry in few minutes, maybe another user is installing it now", "level" => "warning");
                 return false;
             } else {
                 //lock expired
@@ -104,24 +103,27 @@ class SAMLoginControllerAjax extends SAMLoginController {
 
     public function genkey() {
 
-       self::sendAjaxHeaders();
+        self::sendAjaxHeaders();
 
         self::initAjaxBuffer();
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
             self::aquireLockTerminateOnFail("saveconf");
-                       
-            require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
-            SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION);
-            
-        
-            $app = JFactory::getApplication();
-            require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/keymanager.php");
-            KeyManager::genkey($app);
 
-            //   JRequest::setVar("layout", "closeme");
-            //   $this->display();
-                     SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
+            require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
+            if (SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION)) {
+
+
+                $app = JFactory::getApplication();
+                require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/keymanager.php");
+                KeyManager::genkey($app);
+
+                //   JRequest::setVar("layout", "closeme");
+                //   $this->display();
+                SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
+            } else {
+                self::enqueueAjaxMessage("Cannot aquire lock for production settings overriding, please retry later", self::$AJAX_MESSAGE_WARNING);
+            }
             self::releaseLock("saveconf");
         }
 
@@ -129,24 +131,27 @@ class SAMLoginControllerAjax extends SAMLoginController {
     }
 
     public function keyRotateEndPeriod() {
-       self::sendAjaxHeaders();
+        self::sendAjaxHeaders();
 
         self::initAjaxBuffer();
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
             self::aquireLockTerminateOnFail("saveconf");
-            
+
             require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
-            SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION);
-            
+            if (SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION)) {
 
-            $app = JFactory::getApplication();
-            require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/keymanager.php");
-            KeyManager::keyrotateEndPeriod($app);
 
-            //JRequest::setVar("layout", "closeme");
-            //$this->display();
-                     SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
+                $app = JFactory::getApplication();
+                require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/keymanager.php");
+                KeyManager::keyrotateEndPeriod($app);
+
+                //JRequest::setVar("layout", "closeme");
+                //$this->display();
+                SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
+            } else {
+                self::enqueueAjaxMessage("Cannot aquire lock for production settings overriding, please retry later", self::$AJAX_MESSAGE_WARNING);
+            }
             self::releaseLock("saveconf");
         }
 
@@ -160,22 +165,25 @@ class SAMLoginControllerAjax extends SAMLoginController {
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
             self::aquireLockTerminateOnFail("saveconf");
-           
+
             require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
-            SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION);
-            
-            $app = JFactory::getApplication();
+            if (SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION)) {
+
+                $app = JFactory::getApplication();
 
 
-            $params = JComponentHelper::getParams('com_samlogin');
-            $config = SSPConfManager::mergeParamsWithConf($params, $app);
-            $config["samlogin_test"] = true;
+                $params = JComponentHelper::getParams('com_samlogin');
+                $config = SSPConfManager::mergeParamsWithConf($params, $app);
+                $config["samlogin_test"] = true;
 
-            SSPConfManager::saveConf($config, $app);
+                SSPConfManager::saveConf($config, $app);
 
-            // JRequest::setVar("layout", "closeme");
-            // $this->display();
-                     SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
+                // JRequest::setVar("layout", "closeme");
+                // $this->display();
+                SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
+            } else {
+                self::enqueueAjaxMessage("Cannot aquire lock for production settings overriding, please retry later", self::$AJAX_MESSAGE_WARNING);
+            }
             self::releaseLock("saveconf");
         }
         self::sendAjaxBuffer();
@@ -187,22 +195,25 @@ class SAMLoginControllerAjax extends SAMLoginController {
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
             self::aquireLockTerminateOnFail("saveconf");
-           
+
             require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
-            SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_SIMULATE);
-            
-            $app = JFactory::getApplication();
-      
+            if (SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_SIMULATE)) {
 
-            $params = JComponentHelper::getParams('com_samlogin');
-            $config = SSPConfManager::mergeParamsWithConf($params, $app);
-            $config["samlogin_test"] = true;
+                $app = JFactory::getApplication();
 
-            SSPConfManager::saveConf($config, $app);
 
-            // JRequest::setVar("layout", "closeme");
-            // $this->display();
-                     SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_SIMULATE);
+                $params = JComponentHelper::getParams('com_samlogin');
+                $config = SSPConfManager::mergeParamsWithConf($params, $app);
+                $config["samlogin_test"] = true;
+
+                SSPConfManager::saveConf($config, $app);
+
+                // JRequest::setVar("layout", "closeme");
+                // $this->display();
+                SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_SIMULATE);
+            } else {
+                self::enqueueAjaxMessage("Cannot aquire lock for preview settings overriding, please retry later", self::$AJAX_MESSAGE_WARNING);
+            }
             self::releaseLock("saveconf");
         }
 
@@ -210,7 +221,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
     }
 
     public function installSimpleSAMLphp_download() {
-               self::sendAjaxHeaders();
+        self::sendAjaxHeaders();
         ini_set('user_agent', 'Mozilla/5.0 (Linux; U; Linux; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
         $toret = array();
         $toret['additionalMessages'] = array(); //messae to toast
@@ -220,12 +231,12 @@ class SAMLoginControllerAjax extends SAMLoginController {
         require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/downloader.php");
 
         if ($user->authorise('core.admin', 'com_samlogin')) {
-            $downloadURLs = [
+            $downloadURLs = array(
                 "1.11.n" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/ssp.zip",
                 "1.11.f" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/ssp.f.zip",
-                "1.11.n-a" => "http://creativeprogramming.it/dev/dist/ssp.zip",
-                "1.11.f-a" => "http://creativeprogramming.it/dev/dist/ssp.f.zip",
-            ];
+                "1.11.n-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.zip",
+                "1.11.f-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.f.zip",
+            );
 
             $dlid = str_ireplace("../", "", $_GET["dlid"]);
             if (!isset($dlid)) {
@@ -311,7 +322,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
     }
 
     public function installSimpleSAMLphp_extract() {
-             self::sendAjaxHeaders();
+        self::sendAjaxHeaders();
         ini_set('user_agent', 'Mozilla/5.0 (Linux; U; Linux; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
         $toret = array();
         $toret['additionalMessages'] = array(); //messae to toast
@@ -396,14 +407,14 @@ class SAMLoginControllerAjax extends SAMLoginController {
     }
 
     public function doConfigTests() {
-             self::sendAjaxHeaders();
+        self::sendAjaxHeaders();
         $user = JFactory::getUser();
         $app = JFactory::getApplication();
         if ($user->authorise('core.admin', 'com_samlogin')) {
             //error_reporting(0);
-            
-            
-            
+
+
+
             require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/downloader.php");
             $xml = simplexml_load_string(file_get_contents(JPATH_COMPONENT_ADMINISTRATOR . "/samlogin.xml"));
             $json = json_encode($xml);
@@ -421,27 +432,32 @@ class SAMLoginControllerAjax extends SAMLoginController {
             if ($vinfo === FALSE) {
                 $checks['sspCheck'] = false;
             } else {
-                
+
                 require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
                 $dummyarr = array();
-                if ( self::aquireLock("nosimluate") )
-                {
+
+                if (self::aquireLock("nosimluate")) {
                     SSPConfManager::checkConfSync($dummyarr); //to create file first boot
                     self::simulateConfigWrite();
-                    $checks['configIsInSync'] = SSPConfManager::checkConfSync( $checks['additionalMessages']);
+                    $checks['configIsInSync'] = SSPConfManager::checkConfSync($checks['additionalMessages']);
                     self::releaseLock("nosimluate");
                 }
-                
+
                 $checks['sspCheck'] = $vinfo;
                 require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/lib/_autoload.php");
-                require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/config.php");
+
+                if (isset($config)) {
+                    unset($config);
+                }
+                require(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/config.php");
 
 
 
 
-                // $checks['sspConfDebug'] = "<pre>" . print_r($config, true) . "</pre>";
+                $checks['sspConfDebug'] = "<pre>" . print_r($config, true) . "</pre>";
 
                 $sspConf = $config;
+
                 $checks['metarefresh'] = isset($config["metadata.sources"][1]["directory"]);
                 $cachedMetadataFile = JPATH_SITE . "/components/com_samlogin/simplesamlphp/metadata/federations/saml20-idp-remote.php";
                 if (file_exists($cachedMetadataFile)) {
@@ -458,8 +474,10 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 } else {
                     $checks["metarefreshSAML2IdpLastUpdate"] = "Never";
                 }
-                unset($config);
-                require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/authsources.php");
+
+                if (isset($config)) {
+                    unset($config);
+                } require(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/authsources.php");
                 $sspAuthsourcesConfig = $config;
                 if (isset($sspAuthsourcesConfig) && isset($sspAuthsourcesConfig["default-sp"]) && isset($sspAuthsourcesConfig["default-sp"]["new_privatekey"])) {
                     $checks['keyrotation'] = true;
@@ -500,6 +518,14 @@ class SAMLoginControllerAjax extends SAMLoginController {
                         $checks['metadataPublished'] = stristr($metadataSSLPageContent, "EntityDescriptor") ? TRUE : "Invalid metadata";
                     }
                 }
+                if ($checks['metadataPublished'] === FALSE) {
+                    $httpHeaders = get_headers($nonsslTestURL);
+                    if ($httpHeaders === FALSE) {
+                        $checks['metadataPublished'] = "<i class='uk-icon-question-circle'></i> your PHP wasn't able to check the metadata URL"
+                                . " (maybe your server is behind a proxy and can't reach your final url and port, or php has allow_url_fopen off) "
+                                . "<a target='_blank'  href='$nonsslTestURL'>please verify the url manually</a> (it should show xml metadata to pass this test)";
+                    }
+                }
 
 
                 $metadataSSLPageContent = SamloginHelperDownloader::downloadAndReturn($sslTestURL);
@@ -511,6 +537,15 @@ class SAMLoginControllerAjax extends SAMLoginController {
                         $checks['metadataPublishedSSL'] = stristr($metadataSSLPageContent, "EntityDescriptor") ? TRUE : "Invalid metadata";
                     }              // $checks['metadataDebugPage']= $metadataSSLPageContent;
                 }
+                if ($checks['metadataPublishedSSL'] === FALSE) {
+                    $httpHeaders = get_headers($sslTestURL);
+                    if ($httpHeaders === FALSE) {
+                        $checks['metadataPublishedSSL'] = "<i class='uk-icon-question-circle'></i> your PHP wasn't able to check the metadata SSL URL"
+                                . " (maybe your server is behind a proxy and can't reach your final url and port, or php has allow_url_fopen off) "
+                                . "<a target='_blank' href='$sslTestURL'>please verify the url manually</a> (it should show xml metadata to pass this test)";
+                    }
+                }
+
                 require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
                 $SSPKeyURLPath = SSPConfManager::getCertURLPath();
 
@@ -518,7 +553,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 // echo $privatekeyTestURL;
                 $privatekeyTestURLContent = SamloginHelperDownloader::downloadAndReturn($privatekeyTestURL);
                 $checks['privatekey'] = $privatekeyTestURLContent === FALSE ? TRUE : $privatekeyTestURLContent;
-                if ($checks['privatekey'] !== FALSE) {
+                if ($checks['privatekey'] !== TRUE) {
                     $httpHeaders = get_headers($privatekeyTestURL);
                     if ($httpHeaders !== FALSE) {
                         $responseIs200OK = stristr($httpHeaders[0], "200 OK");
@@ -528,14 +563,23 @@ class SAMLoginControllerAjax extends SAMLoginController {
                             $checks['privatekey'] = TRUE;
                         }
                     }
+                } else {
+
+                    $httpHeaders = get_headers($privatekeyTestURL);
+                    if ($httpHeaders === FALSE) {
+                        $checks['privatekey'] = "<i class='uk-icon-question-warning'></i> <i class='uk-icon-question-circle'></i> your PHP wasn't able to check the private key URL"
+                                . " (maybe your server is behind a proxy and can't reach your final url and port, or php has allow_url_fopen off) "
+                                . "<a target='_blank' href='$privatekeyTestURL'>please verify the url manually</a> (it should return forbidden error to pass this check)";
+                    }
                 }
+
 
 
                 $privatekeySSLTestURL = str_ireplace("http://", "https://", JURI::root()) . $SSPKeyURLPath . "saml.key";
                 //  die(print_r(get_headers($privatekeySSLTestURL),true));
                 $privatekeySSLTestURLContent = SamloginHelperDownloader::downloadAndReturn($privatekeySSLTestURL);
                 $checks['privatekeySSL'] = $privatekeySSLTestURLContent === FALSE ? TRUE : $privatekeySSLTestURLContent;
-                if ($checks['privatekeySSL'] !== FALSE) {
+                if ($checks['privatekeySSL'] !== TRUE) {
                     $httpHeaders = get_headers($privatekeySSLTestURL);
                     if ($httpHeaders !== FALSE) {
                         $responseIs200OK = stristr($httpHeaders[0], "200 OK");
@@ -544,6 +588,14 @@ class SAMLoginControllerAjax extends SAMLoginController {
                         } else {
                             $checks['privatekeySSL'] = TRUE;
                         }
+                    }
+                } else {
+
+                    $httpHeaders = get_headers($privatekeySSLTestURL);
+                    if ($httpHeaders === FALSE) {
+                        $checks['privatekeySSL'] = "<i class='uk-icon-question-warning'></i> <i class='uk-icon-question-circle'></i> your PHP wasn't able to check the private key SSL URL"
+                                . " (maybe your server is behind a proxy and can't reach your final url and port, or php has allow_url_fopen off) "
+                                . "<a target='_blank' href='$privatekeySSLTestURL'>please verify the url manually</a> (it should return 403 to pass this check)";
                     }
                 }
 
@@ -554,13 +606,21 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 $checks['logswww'] = $logUrlContent === FALSE ? TRUE : $logUrlContent;
                 if ($checks['logswww'] !== FALSE) {
                     $httpHeaders = get_headers($testURL);
-                    if ($httpHeaders !== FALSE) {
+                    if ($httpHeaders !== TRUE) {
                         $responseIs200OK = stristr($httpHeaders[0], "200 OK");
                         if ($responseIs200OK) {
                             $checks['logswww'] = FALSE;
                         } else {
                             $checks['logswww'] = TRUE;
                         }
+                    }
+                } else {
+
+                    $httpHeaders = get_headers($testURL);
+                    if ($httpHeaders === FALSE) {
+                        $checks['logswww'] = "<i class='uk-icon-question-warning'></i> <i class='uk-icon-question-circle'></i> your PHP wasn't able to check the log URL"
+                                . " (maybe your server is behind a proxy and can't reach your final url and port, or php has allow_url_fopen off) "
+                                . "<a target='_blank' href='$testURL'>please verify the url manually</a> (it should return forbidden error to pass this check)";
                     }
                 }
 
@@ -571,13 +631,21 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 $checks['logswwws'] = $logUrlContent === FALSE ? TRUE : $logUrlContent;
                 if ($checks['logswwws'] !== FALSE) {
                     $httpHeaders = get_headers($testURL);
-                    if ($httpHeaders !== FALSE) {
+                    if ($httpHeaders !== TRUE) {
                         $responseIs200OK = stristr($httpHeaders[0], "200 OK");
                         if ($responseIs200OK) {
                             $checks['logswwws'] = FALSE;
                         } else {
                             $checks['logswwws'] = TRUE;
                         }
+                    }
+                } else {
+
+                    $httpHeaders = get_headers($testURL);
+                    if ($httpHeaders === FALSE) {
+                        $checks['logswww'] = "<i class='uk-icon-question-warning'></i> <i class='uk-icon-question-circle'></i> your PHP wasn't able to check the log URL"
+                                . " (maybe your server is behind a proxy and can't reach your final url and port, or php has allow_url_fopen off) "
+                                . "<a target='_blank' href='$testURL'>please verify the url manually</a> (it should return forbidden error to pass this check)";
                     }
                 }
 

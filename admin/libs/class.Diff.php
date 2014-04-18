@@ -312,6 +312,64 @@ class Diff{
     return $html;
 
   }
+  
+  
+   /* Returns a diff as an HTML string, where unmodified lines are contained
+   * within 'span' elements, deletions are contained within 'del' elements, and
+   * insertions are contained within 'ins' elements. The parameters are:
+   *
+   * $diff      - the diff array
+   * $separator - the separator between lines; this optional parameter defaults
+   *              to '<br>'
+   */
+  public static function toHTMLDiffOnlySkipSecrets($diff, $separator = '<br>',$showOmisiss=false){
+
+    // initialise the HTML
+    $html = '';
+    $lineCount=0;
+    // loop over the lines in the diff
+    foreach ($diff as $line){
+      $lineCount++;
+      // extend the HTML with the line
+      switch ($line[1]){
+        case self::UNMODIFIED : $element = 'span'; break;
+        case self::DELETED    : $element = 'del';  break;
+        case self::INSERTED   : $element = 'ins';  break;
+      }
+      if (!$line[1] == self::UNMODIFIED){
+          if(
+                  !stristr($line[0],"password") 
+                  && !stristr($line[1], "password")
+                  && !stristr($line[0],"secret") 
+                  && !stristr($line[1],"secret") 
+                  && !stristr($line[0],"username")
+                  && !stristr($line[1],"username")
+            ){
+      
+            $html .=
+                '<' . $element . '>'
+                . htmlspecialchars($line[0])
+                . '</' . $element . '>';
+
+            // extend the HTML with the separator
+            $html .= $separator;
+          }else{
+              if ($showOmisiss){
+                 $html .=
+                '<' . $element . '>'
+                .' omisiss... (secret)  '
+                . '</' . $element . '>';
+                  $html .= $separator;
+              }
+          }
+      }
+
+    }
+
+    // return the HTML
+    return $html;
+
+  }
 
   /* Returns a diff as an HTML table. The parameters are:
    *

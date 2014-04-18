@@ -91,6 +91,7 @@ defined('_JEXEC') or die;
     function samlogin_doConfigTests() {
 
         jQuery(".statusOfCheck").html("<i class='uk-icon-refresh uk-icon-spin'></i>");
+        jQuery(".configIsInSync").html("<i class='uk-icon-refresh uk-icon-spin'></i>");
         jQuery.ajax({
             url: window.samloginBaseAjaxURL,
             data: {
@@ -129,16 +130,16 @@ defined('_JEXEC') or die;
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
                 jQuery(".sspCheck .guideLink").html("<div style='cursor:pointer;' class='uk-button uk-button-success' data-uk-modal=\"{target:'#install-ssp-modal'}\">install now</div>");
             }
-            
-            if (data.configIsInSync != undefined){
-                if( data.configIsInSync !== false) {
-                           jQuery(".sspCheck .configIsInSync").removeClass("uk-button-danger").addClass("uk-button-success")
-                            .html("<i class='uk-icon-check'></i> Config is in sync").off("click");
-                }else{
-                    jQuery(".sspCheck .configIsInSync").css("cursor","pointer").removeClass("uk-button-success").addClass("uk-button-danger")
-                            .html("<i class='uk-icon-warning'></i> Config is not in sync. \"Put in production\" needed, click here to write config files <i class='uk-icon-download'></i>").on("click",function(e){
-                                samlogin_saveSSPConf();
-                            });
+
+            if (data.configIsInSync != undefined) {
+                if (data.configIsInSync !== false) {
+                    jQuery(".sspCheck .configIsInSync").removeClass("uk-button-danger").addClass("uk-button-success")
+                            .html("<i class='uk-icon-check'> </i>").off("click");
+                } else {
+                    jQuery(".sspCheck .configIsInSync").css("cursor", "pointer").removeClass("uk-button-success").addClass("uk-button-danger")
+                            .html("<i class='uk-icon-warning'></i> conf. not in sync").on("click", function(e) {
+                        samlogin_saveSSPConf();
+                    });
                 }
             }
 
@@ -206,6 +207,8 @@ defined('_JEXEC') or die;
                 if (data.metadataPublishedSSL !== true) {
                     jQuery(".metadataPublishedSSL .statusOfCheck").html("<i class='uk-icon-warning'></i> " + data.metadataPublishedSSL)
                             .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
+                    
+                   
                 } else {
                     jQuery(".metadataPublished .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
                     jQuery(".metadataPublishedSSL .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
@@ -217,14 +220,24 @@ defined('_JEXEC') or die;
             }
 
             if (data.privatekey !== false) {
-                jQuery(".certProtected .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
+                if (data.privatekey === true) {
+                    jQuery(".certProtected .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
+                } else {
+                    jQuery(".certProtected .statusOfCheck").html(data.privatekey).removeClass("uk-button-danger").removeClass("uk-button-primary");
+
+                }
             } else {
                 jQuery(".certProtected .statusOfCheck").html("<i class='uk-icon-times'></i>")
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
             }
 
             if (data.privatekeySSL !== false) {
-                jQuery(".certProtected_ssl .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
+                if (data.privatekeySSL === true) {
+                    jQuery(".certProtected_ssl .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
+                } else {
+                    jQuery(".certProtected_ssl .statusOfCheck").html(data.privatekeySSL).removeClass("uk-button-danger").removeClass("uk-button-primary");
+
+                }
             } else {
                 jQuery(".certProtected_ssl .statusOfCheck").html("<i class='uk-icon-times'></i>")
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
@@ -233,14 +246,26 @@ defined('_JEXEC') or die;
 
 
             if (data.logswww !== false) {
-                jQuery(".logsProtected .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
+                if (data.logswww === true) {
+                    jQuery(".logsProtected .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
+                } else {
+                    jQuery(".logsProtected .statusOfCheck").html(data.logswww).removeClass("uk-button-danger").removeClass("uk-button-primary");
+
+                }
+
             } else {
                 jQuery(".logsProtected .statusOfCheck").html("<i class='uk-icon-times'></i>")
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
             }
 
             if (data.logswwws !== false) {
-                jQuery(".logsProtected_ssl .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
+                if (data.logswwws === true) {
+                    jQuery(".logsProtected_ssl .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
+                } else {
+                    jQuery(".logsProtected_ssl .statusOfCheck").html(data.logswwws).removeClass("uk-button-danger").removeClass("uk-button-primary");
+
+                }
+
             } else {
                 jQuery(".logsProtected_ssl .statusOfCheck").html("<i class='uk-icon-times'></i>")
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
@@ -260,6 +285,8 @@ defined('_JEXEC') or die;
                 jQuery(".lastCronjobUpdate .statusOfCheck").html("<i class='uk-icon-times'></i>")
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
             }
+            
+            jQuery('.statusOfCheck .uk-icon-question-circle').parent().removeClass('uk-button-danger'); //this makes the metadata not red when check result is unknown
 
         });
     }
@@ -303,7 +330,7 @@ defined('_JEXEC') or die;
                 <tr class="sspCheck">
                     <td class="">Linked SimpleSAMLphp installation</td>
                     <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                    <td class=""><span class="guideLink"></span><span class="configIsInSync uk-button uk-button-mini"></span></td>
+                    <td class=""><span class="guideLink"></span> <span style="margin-top: 2px;" class="configIsInSync uk-button uk-button-mini"></span></td>
                 </tr>
                 <?php if ($this->checks['sspCheck']) { ?>
                     <tr class='keyRotation'>
@@ -502,7 +529,7 @@ defined('_JEXEC') or die;
             </p>
             <p>
                 SimpleSAMLphp LGPL License:
-                <textarea style="width:100%; height: 150px; font-size: 90%;"><? echo htmlentities(file_get_contents(dirname(__FILE__) . "/SSP_LGPL_LICENSE")); ?></textarea>
+                <textarea style="width:100%; height: 150px; font-size: 90%;"><?php echo htmlentities(file_get_contents(dirname(__FILE__) . "/SSP_LGPL_LICENSE")); ?></textarea>
             </p>
             <div style="display: block; width: 50%; margin: 0 auto; text-align: center;">
                 <div style='' data-uk-dropdown="{mode:'click'}">

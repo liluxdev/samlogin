@@ -12,13 +12,16 @@ class SSPConfManager {
     static $SAVECONF_SIMULATE = ".virtual";
 
     public static function setSaveConfMode($type) {
-        if (SAMLoginControllerAjax::aquireLock("confmode_".$type) ){
+        if (SAMLoginControllerAjax::aquireLock("saveconfmode") ){
             self::$saveConfModeSuffix = $type;
+        }else{
+            return false;
         }
+        return true;
     }
     
     public static function commitSaveConfModeLock($type) {
-        SAMLoginControllerAjax::releaseLock("confmode_".$type);
+        SAMLoginControllerAjax::releaseLock("saveconfmode");
     }
 
     public static function checkConfSync(&$ajaxMessages) {
@@ -56,16 +59,39 @@ class SSPConfManager {
                         // include the Diff class
                         require_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/class.Diff.php");
                         // output the result of comparing two files as HTML
-                        $msgdiff = Diff::toHTMLDiffOnly(Diff::compare($contentA, $contentB, false));
+                        
+                        
+                       //OR a param $advancedUserMode= isset($_COOKIE["samlogin_advanced_user_mode"]);
+                        $advancedUserMode =true;
+                        
+                        if ($advancedUserMode){
+                                $msgdiff = Diff::toHTMLDiffOnlySkipSecrets(Diff::compare($contentA, $contentB, false));
+                                $msgdiffCheck = strip_tags(trim($msgdiff));
+                                $msg=  "simpleSAMLphp's configuration file ". strtr(
+                                        $filetocheck, array(
+                                    "/components/com_samlogin/simplesamlphp/config/" => ""
+                                        )
+                                ) . " is not in sync with your latest changes, click the "
+                                . "<span class='uk-button uk-button-mini' style='cursor:pointer;' onClick='samlogin_saveSSPConf();'>"
+                                . "<i class='uk-icon-download'></i>Put settings in production (SSP)</span>"
+                                . " toolbar button to commit changes.";
 
-                        $ajaxMessages[] = array("msg" => "" .
-                            strtr(
-                                    $filetocheck, array(
-                                "/components/com_samlogin/simplesamlphp/config/" => ""
-                                    )
-                            ) . " is still not in sync with your desired configuration, A <i>put in production</i> operation is required to apply your latest changes:"
-                            . "<hr/>Changes that will be applied: " .
-                            $msgdiff,
+                                if (!empty($msgdiffCheck) && strlen($msgdiffCheck) < 500){
+                                                            $msg.=  "<hr style='margin:0px; margin-top:2px;margin-bottom:2px;'/>"
+                                                            ."<small>Changes that will be applied (preview):</small> "
+                                                            . "<span style='font-size:80%;font-family: monospace;'>"
+                                                            .$msgdiff
+                                                            ."</span>";
+                                }
+                        }else{
+                                $msg=  "SimpleSAMLphp requires a "
+                                . "<span class='uk-button uk-button-mini' style='cursor:pointer;' onClick='samlogin_saveSSPConf();'>"
+                                . "<i class='uk-icon-download'></i>Put settings in production (SSP)</span>"
+                                . "";
+                            
+                        }
+
+                        $ajaxMessages[] = array("msg" => $msg,
                             //  "<code style='font-size: 80%;' lang='php'><pre class='diffFile'> $msgdiff </pre></code>",
                             "level" => SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
                     }
@@ -81,6 +107,9 @@ class SSPConfManager {
 
     static function getAuthsourcesConf() {
         require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/lib/_autoload.php");
+        if (isset($config)){
+            unset($config);
+        }
         require(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/authsources" . self::$saveConfModeSuffix . ".php");
         return $config;
     }
@@ -309,8 +338,10 @@ class SSPConfManager {
             SAMLoginControllerAjax::enqueueAjaxMessage("Failed while writing backup config file in $SSPConfPath, please check file permissions "
                     , SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
         }
-
-        require($SSPConfPath . "module_cron.php");
+if (isset($config)){
+    unset($config);
+}
+require($SSPConfPath . "module_cron.php");
         $config = array_merge($config, $cronconf);
         $config["samlogin_lastchanged"] = "deprecated";
         $newConfFileStr = array_smart_dump($config, "config");
@@ -339,6 +370,9 @@ class SSPConfManager {
             SAMLoginControllerAjax::enqueueAjaxMessage("Failed while writing backup of config file in $SSPConfPath, please check file permissions "
                     , SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
         }
+        if (isset($config)){
+    unset($config);
+}
         require($SSPConfPath . "config-metarefresh" . self::$saveConfModeSuffix . ".php");
         $config["sets"]["samlogin"]["sources"] = $srcArray;
         $config["sets"]["samlogin"]["expireAfter"] = 60 * 60 * 24 * 31;
@@ -400,6 +434,9 @@ class SSPConfManager {
 
     static function getConf() {
         require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/lib/_autoload.php");
+        if (isset($config)){
+    unset($config);
+}
         require(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/config.php");
         return $config;
     }
