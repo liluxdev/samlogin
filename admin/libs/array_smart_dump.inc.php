@@ -24,6 +24,13 @@
 
 ______________________________________________________________________________*/
 
+/** ensure always same order */
+function samlogin_recursive_ksort(&$array) {
+   foreach ($array as &$value) {
+      if (is_array($value)) samlogin_recursive_ksort($value);
+   }
+   return ksort($array,SORT_STRING);
+}
 
 // kw_tidy_array
 /*____________________________________________________________________________*/
@@ -91,7 +98,7 @@ function kw_tidy_array($ARRAY, $name='ARRAY')
 function array_smart_dump($ARRAY, $name='ARRAY')
 {
 // *** DATA
-
+samlogin_recursive_ksort($ARRAY);
 	// internal
 	$nl = "\n";
 	$nt = "\t";

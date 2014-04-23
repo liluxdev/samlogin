@@ -148,12 +148,19 @@ defined('_JEXEC') or die;
 
             } else {
                 jQuery(".keyRotation .statusOfCheck").html("<i class='uk-icon-check'></i> Key Rotation is OFF")
-                        .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
+                        .removeClass("uk-button-primary").removeClass("uk-button-danger").addClass("uk-button-success");
             }
 
 
-            if (data.baseurlpath) {
-                jQuery(".baseURLPath .statusOfCheck").html("<i class='uk-icon-check'></i>").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
+            if (data.baseurlpath !== false) {
+                if (data.baseurlpath !== true) {
+                    jQuery(".baseURLPath .statusOfCheck").html("<i class='uk-icon-warning'></i> " + data.baseurlpath).removeClass("uk-button-success").removeClass("uk-button-primary").addClass("uk-button-danger");
+                } else {
+                    jQuery(".baseURLPath .statusOfCheck").html("<i class='uk-icon-check'></i> ")
+                            .removeClass("uk-button-primary").addClass("uk-button-success").removeClass("uk-button-danger");
+
+                }
+                //jQuery(".baseURLPath .statusOfCheck").html("<i class='uk-icon-check'></i>").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
             } else {
                 jQuery(".baseURLPath .statusOfCheck").html("<i class='uk-icon-times'></i>")
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
@@ -495,10 +502,33 @@ defined('_JEXEC') or die;
     </button>
     <div class="uk-text-bold"><i class="uk-icon-cogs"></i> Cronjob Setup Info: </div>
     <p>
-        <a class="cronjoLink" target="_blank" href="<?php echo $this->checks["cronLink"]; ?>">
-            <i class="uk-icon-link"></i>  Cronjob URL</a> <p/>
+        <a class="cronLink" target="_blank" href="<?php echo $this->checks["cronLink"]; ?>">
+              Cronjob URL (click to run now) <i class="uk-icon-external-link-square"></i></a> <p/>
     <i class="uk-icon-clock-o"></i>
     Crontab scheduling example:<p/><textarea class="cronSuggestion" style="font-size:10px; width: 100%; height: 10em;"><?php echo $this->checks["cronSuggestion"]; ?></textarea> 
+</div>
+
+
+
+<div style="clear: right;  margin-left: 10px; margin-top: 10px;"  class="uk-panel uk-panel-box uk-panel-box-secondary samlogin-dash-minipanel samlogin-dash-minipanel-right samlogin-dash-minipanel-bottom" id="samlogin-testlogin">
+    <button style="float:right;" class='uk-button uk-button-mini' data-uk-tooltip="{pos:'top-left'}" 
+            title="This box contains information on how to do a test SSO login to check if all is fine with simpleSAMLphp SSO trust and discoverying what attributes you are getting from the IdP">
+        <i class='uk-icon-question-circle'></i>
+    </button>
+    <div class="uk-text-bold"><i class="uk-icon-info-circle"></i> SimpleSAMLphp SP test login procedure: </div>
+    <p>
+    <ol>
+        <li> Ensure you have all green in the configuration checklist and that you are browsing the Joomla administrator with https://</li>
+        <li> Ensure you added the XML metadata of the remote IdP or federation in <i>SAMLogin->Settings->Federation Metadata<i> and you set a proper discovery service or IdP EntityId in <i>SAMLogin->Settings->Discovery Service</i> </li>
+        <li> Ensure you shared your <a target="_blank" href="<?php echo $this->checks["metadataURL"];?>">Self-metadata URL <i class="uk-icon-external-link-square"></i> </a> with the IdP/Federation managers and they approved your SP entity in the trusted relying parties</li>
+        <li> Open this <a target='_blank' href='<?php echo JUri::root()."/components/com_samlogin/simplesamlphp/www/module.php/core/authenticate.php?as=default-sp";?>'>SimpleSAMLphp authsource test page <i class="uk-icon-external-link-square"></i> </a> 
+        </li>
+        <li> Click forward (evenutally select your IdP if you have multiple choices)</li>
+        <li> Login at your IdP </li>
+        <li> You should see now a page showing a list of attribute names and values take note of this as this will help you to define AuthZ rules and tuning the Attr. Mappings in SAMLogin</li>
+        <li> If all went fine you are ready to publish the SAMLogin module or the login view and test a real Joomla login (if it fails try to tune Attr.Mappings accoding to the attribute names, N.B. you need an email attribute from your IdP, this is required by Joomla!)</li>
+    </ol>    
+    </p>
 </div>
 
 
@@ -540,11 +570,27 @@ defined('_JEXEC') or die;
                     <div style="width: 100%; font-size: 90%;" class="uk-dropdown">
                         <ul style="text-align: center;" class="uk-nav uk-nav-dropdown">
                             <li class="uk-nav-header">Select version and flavour</li>
-                            <li><a href="#" onClick="samlogin_installSSP('1.11.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.11</b><i>.n (from our github repo)</i> 
+                            <li><a href="#" onClick="samlogin_installSSP('1.12.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.12</b><i>.n (from our github repo)</i> 
                                     <span style="float: none; font-size: 70%;">
                                         <div class="uk-badge uk-badge-warning">samlogin</div>
                                         <div class="uk-badge uk-badge-warning">nginx</div>
                                         <div class="uk-badge uk-badge-success">suggested choice</div>
+                                    </span>
+                                </a>
+                            </li>
+                            <li><a href="#" onClick="samlogin_installSSP('1.12.n',true);" in_tag="ul"><i class="uk-icon-cloud-download"></i> Migration from SimpleSAMLphp v.1.11 to <b>v.1.12</b><i>.n (from our github repo)</i> 
+                                    <span style="float: none; font-size: 70%;">
+                                        <div class="uk-badge uk-badge-warning">samlogin</div>
+                                        <div class="uk-badge uk-badge-warning">nginx</div>
+                                        <div class="uk-badge uk-badge-success">suggested choice</div>
+                                         <div class="uk-badge uk-badge-danger">migration mode - from 1.11, use this if you was on 1.11</div>
+                                    </span>
+                                </a>
+                            </li>
+                            <li><a href="#" onClick="samlogin_installSSP('1.11.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.11</b><i>.n (from our github repo)</i> 
+                                    <span style="float: none; font-size: 70%;">
+                                        <div class="uk-badge uk-badge-warning">samlogin</div>
+                                        <div class="uk-badge uk-badge-warning">nginx</div>
                                     </span>
                                 </a>
                             </li>
@@ -557,11 +603,18 @@ defined('_JEXEC') or die;
                                 </a>
                             </li>
                             <li class="uk-nav-header">If the Github download fails try those alternative repos:</li>
-                            <li><a href="#" onClick="samlogin_installSSP('1.11.n-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.11</b><i>.n (from alternate repo)</i> 
+                               <li><a href="#" onClick="samlogin_installSSP('1.12.n-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.12</b><i>.n (from alternate repo)</i> 
                                     <span style="float: none; font-size: 70%;">
                                         <div class="uk-badge uk-badge-warning">samlogin</div>
                                         <div class="uk-badge uk-badge-warning">nginx</div>
                                         <div class="uk-badge uk-badge-success">alternative repo</div>
+                                    </span>
+                                </a>
+                            </li>
+                            <li><a href="#" onClick="samlogin_installSSP('1.11.n-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.11</b><i>.n (from alternate repo)</i> 
+                                    <span style="float: none; font-size: 70%;">
+                                        <div class="uk-badge uk-badge-warning">samlogin</div>
+                                        <div class="uk-badge uk-badge-warning">nginx</div>
                                     </span>
                                 </a>
                             </li>

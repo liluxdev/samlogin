@@ -344,6 +344,7 @@ class Diff{
                   && !stristr($line[1],"secret") 
                   && !stristr($line[0],"username")
                   && !stristr($line[1],"username")
+                  && !stristr($line[1],"'key'")
             ){
       
             $html .=

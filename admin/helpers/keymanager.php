@@ -28,7 +28,7 @@ class KeyManager {
             // create a self-signed cert that'll serve as the CA
             $subject = new File_X509();
             $subject->setPublicKey($pubKey);
-            $subject->setDNProp('id-at-organizationName', 'PHP Generated');
+            $subject->setDNProp('samlogin', 'SAMLogin Generated Cert');
 
             $issuer = new File_X509();
             $issuer->setPrivateKey($CAPrivKey);
@@ -55,8 +55,15 @@ class KeyManager {
 
             $subject = new File_X509();
             $subject->setPublicKey($pubKey);
-            $subject->setDNProp('id-at-organizationName', 'PHP Generated Cert');
-            $subject->setDomain('nomatter.nomatter');
+            $subject->setDNProp('samlogin', 'SAMLogin Generated Cert');
+           // $subject->setDomain('nomatter.nomatter');
+            
+            $domain = JURI::getInstance()->getHost(); 
+                
+            $subject->setDomain($domain);
+            
+            SAMLoginControllerAjax::enqueueAjaxMessage("Notice: Using '$domain' as domain name in the CN of the XML Signing & Encryption certificate", SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
+
 
             $issuer = new File_X509();
             $issuer->setPrivateKey($CAPrivKey);

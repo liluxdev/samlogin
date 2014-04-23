@@ -146,7 +146,7 @@ class SAMLoginViewAjax extends SAMLoginView
 
                     $checks["metadataURL"]=$sslTestURL;
 
-                     $checks["cronLink"]=str_ireplace("http://","https://",JURI::root())."components/com_samlogin/simplesamlphp/www/module.php/cron/cron.php?key=".$params->get("sspcron_secret","changeme")."&tag=hourly";
+                     $checks["cronLink"]=str_ireplace("http://","https://",JURI::root())."components/com_samlogin/simplesamlphp/www/module.php/cron/cron.php?key=".$params->get("sspcron_secret","changeme")."&tag=hourly&output=xhtml";
                       $checks["cronSuggestion"]=
                     "# Run cron: [hourly]\n".
                     "01 * * * * /usr/bin/curl -k -A \"Mozilla/5.0\" --silent \"". $checks["cronLink"]."\" > /dev/null 2>&1".

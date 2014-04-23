@@ -128,10 +128,38 @@ class SSPConfManager {
         }
 
         $authsourcesConf["default-sp"]["signature.algorithm"] = $params->get("sp_signature.algorithm", null);
+        if (is_null( $authsourcesConf["default-sp"]["signature.algorithm"])  || $authsourcesConf["default-sp"]["signature.algorithm"]=="default"){
+            unset($authsourcesConf["default-sp"]["signature.algorithm"]);
+        }
         $authsourcesConf["default-sp"]["NameIDPolicy"] = $params->get("sp_NameIDPolicy", null);
+        if (is_null( $authsourcesConf["default-sp"]["NameIDPolicy"])  || $authsourcesConf["default-sp"]["NameIDPolicy"]=="default" ){
+            unset($authsourcesConf["default-sp"]["NameIDPolicy"]);
+        }
         $authsourcesConf["default-sp"]["ProtocolBinding"] = $params->get("sp_ProtocolBinding", null);
-        $authsourcesConf["default-sp"]["acs.Bindings"] = $params->get("sp_acs.Bindings", null);
-
+        if (is_null($authsourcesConf["default-sp"]["ProtocolBinding"]) || $authsourcesConf["default-sp"]["ProtocolBinding"]=="default"){
+            unset($authsourcesConf["default-sp"]["ProtocolBinding"]);
+        }
+        $authsourcesConf["default-sp"]["acs.Bindings"] = $params->get("sp_acs_bindings",null);
+        
+        if (is_null($authsourcesConf["default-sp"]["acs.Bindings"]) || in_array("*", $authsourcesConf["default-sp"]["acs.Bindings"])){
+            unset($authsourcesConf["default-sp"]["acs.Bindings"]);
+        }
+        
+        /*
+         * TODO: it only support one single value, but default is multiple, maybe report issue to SSP team
+         * 
+         $authsourcesConf["default-sp"]["SingleLogoutServiceBinding"] = $params->get("sp_slo_bindings",null);
+        
+        if (  is_null($authsourcesConf["default-sp"]["SingleLogoutServiceBinding"]) || in_array("*", $authsourcesConf["default-sp"]["SingleLogoutServiceBinding"])){
+            unset($authsourcesConf["default-sp"]["SingleLogoutServiceBinding"]);
+        }
+        
+         * *
+         */
+        
+        
+        //SAMLoginControllerAjax::enqueueAjaxMessage("dbg: ".print_r( $authsourcesConf["default-sp"]["acs.Bindings"],true), "info");
+    //        $authsourcesConf["default-sp"]["debugall"]=print_r(   $authsourcesConf["default-sp"]["acs.Bindings"],true);
         $authsourcesConf["default-sp"]["isPassive"] = $params->get("sp_isPassive", 0) == 1 ? TRUE : FALSE;
         //sp_acs.Bindings
         $authsourcesConf["default-sp"]["assertion.encryption"] = $params->get("sp_assertion.encryption", 0) == 1 ? TRUE : FALSE;

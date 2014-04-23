@@ -1,417 +1,563 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 
-     <fieldset name="sspsetup" label="COM_SAMLOGIN_SSP_CONF">	  
+    <fieldset name="sspsetup" label="COM_SAMLOGIN_SSP_CONF">	  
    
-           <field 
-             name="ssphp_session_storage"
-             type="list"
-             default="0"
-             label="COM_SAMLOGIN_SESSION_STORAGE"
-             description="COM_SAMLOGIN_SESSION_STORAGE"
-         >
+        <field 
+            name="ssphp_session_storage"
+            type="list"
+            default="0"
+            label="COM_SAMLOGIN_SESSION_STORAGE"
+            description="COM_SAMLOGIN_SESSION_STORAGE"
+        >
               
-                  <option value="0">Joomla Database</option>
-                  <option value="1">PHPSESSION</option>
-         </field>
-           
-        
-                  <field 
-             name="ssp_baseurlpath"
-             type="text"
-             size="70"
-             default="components/com_samlogin/simplesamlphp/www/"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_BASEURLPATH"
-         />    
-         <field 
-             name="ssp_certdir"
-             type="text"
-             size="70"
-             default="cert/"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CERTDIR"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CERTDIR_DESC"
-          />   
-          <field 
-             name="ssp_loggingdir"
-             type="text"
-             size="70"
-             default="log/"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_LOGGINGDIR"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_LOGGINGDIR_DESC"
-         />    
-          <field 
-             name="ssp_datadir"
-             type="text"
-               size="70"
-             default="data/"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DATADIR"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DATADIR_DESC"
+            <option value="0">Joomla Database</option>
+            <option value="1">PHPSESSION</option>
+        </field>
+         
+          
+        <field 
+            name="ssp_baseurlpath"
+            type="text"
+            size="70"
+            default="components/com_samlogin/simplesamlphp/www/"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_BASEURLPATH"
+        />    
+        <field 
+            name="ssp_certdir"
+            type="text"
+            size="70"
+            default="cert/"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CERTDIR"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CERTDIR_DESC"
+        />   
+        <field 
+            name="ssp_loggingdir"
+            type="text"
+            size="70"
+            default="log/"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_LOGGINGDIR"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_LOGGINGDIR_DESC"
+        />    
+        <field 
+            name="ssp_datadir"
+            type="text"
+            size="70"
+            default="data/"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DATADIR"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DATADIR_DESC"
         />    
        
-         <field 
-             name="ssp_tempdir"
-             type="text"
-             size="70"
-             default="tmp/simplesaml"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TEMPDIR"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TEMPDIR_DESC"
-          />    
+        <field 
+            name="ssp_tempdir"
+            type="text"
+            size="70"
+            default="tmp/simplesaml"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TEMPDIR"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TEMPDIR_DESC"
+        />    
        
-           <field 
-             name="ssp_debug"
-             type="radio"
-             default="0"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUG"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUG_DESC"
-         >
-                   <option value="0">Off</option>
-                  <option value="1">On</option>
-         </field>
+        <field 
+            name="ssp_debug"
+            type="radio"
+            default="0"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUG"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUG_DESC"
+        >
+            <option value="0">Off</option>
+            <option value="1">On</option>
+        </field>
          
          
+        <field 
+            name="ssp_showerrors"
+            type="radio"
+            default="1"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SHOWERRORS"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SHOWERRORS_DESC"
+        >
+            <option value="0">JHIDE</option>
+            <option value="1">JSHOW</option>
+        </field>
+         
+        <field 
+            name="sp_signature.algorithm"
+            type="list"
+            default="default"
+            label="COM_SAMLOGIN_SIGNATURE_ALGO_SP"
+            description="COM_SAMLOGIN_SIGNATURE_ALGO_SP"
+        >
+              <option value="default">simpleSAMLphp default (suggested choice)</option>
+            <option value="http://www.w3.org/2000/09/xmldsig#rsa-sha1">SHA-1 (WARN: deprecated in 2014)</option>
+            <option value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256">SHA-256 (2nd suggested choice)</option>
+            <option value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha384">SHA-384</option>
+            <option value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512">SHA-512</option>
+        </field>
+         
+         
+        <field 
+            name="sp_NameIDPolicy"
+            type="list"
+            default="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+            label="COM_SAMLOGIN_NAMEIDPOLICY_SP"
+            description="COM_SAMLOGIN_NAMEIDPOLICY_SP"
+        >
+                   <option value="default">simpleSAMLphp default (suggested choice) </option>
+            <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">unspecified (2nd suggested choice)</option>
+            <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">emailAddress</option>
+            <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName">X509SubjectName</option>
+            <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName">WindowsDomainQualifiedName</option>
+            <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos">kerberos</option>
+            <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:entity">entity</option>
+            <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent">persistent</option>
+            <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:transient">transient</option>
+        </field>
+        
+        
+           
+        <field 
+            name="sp_ProtocolBinding"
+            type="list"
+            default="default"
+            label="COM_SAMLOGIN_PROTOCOL_BINDING"
+            description="COM_SAMLOGIN_PROTOCOL_BINDING"
+        >
+                    <option value="default">simpleSAMLphp default (suggested choice) </option>
+            <option value="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST">HTTP-POST</option>
+            <option value="urn:oasis:names.tc:SAML:2.0:bindings:HTTP-Redirect">HTTP-Redirect</option>
+            <option value="urn:oasis:names:tc:SAML:1.0:profiles:browser-post">browser-post (SAML 1.0)</option>
+            <option value="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact">HTTP-Artifact</option>
+            <option value="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01">artifact-01 (SAML 1.0)</option>
+            <option value="urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser">holder-of-key</option>
+        </field>
+
+        
+        <field 
+            name="sp_acs_bindings"
+            type="list"
+            multiple="true"
+            default="*"
+            label="COM_SAMLOGIN_ACS_BINDINGS"
+            description="COM_SAMLOGIN_ACS_BINDINGS"
+        >
+            <option  value="*">Only and all the default simpleSAMLphp bindings (suggested choice)</option>
+            <option  value="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST">HTTP-POST</option>
+            <option value="urn:oasis:names:tc:SAML:1.0:profiles:browser-post">browser-post (deprecated SAML 1.0)</option>
+            <option  value="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact">HTTP-Artifact</option>
+            <option value="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01">artifact-01 (deprecated SAML 1.0)</option>
+            <option value="urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser">holder-of-key (new)</option>
+        </field>
+        
+        <!-- it seems to not support multiple values (at simplesamlphp side)
+        <field 
+            name="sp_slo_bindings"
+            type="list"
+            multiple="true"
+            default="*"
+            label="COM_SAMLOGIN_SLO_BINDINGS"
+            description="COM_SAMLOGIN_SLO_BINDINGS"
+        >
+            <option  value="*">Only and all the default simpleSAMLphp bindings (suggested choice)</option>
+            <option  value="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect">HTTP-Redirect</option>
+            <option value="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST">HTTP-POST</option>
+            <option  value="urn:oasis:names:tc:SAML:2.0:bindings:SOAP">SOAP</option>
+        </field>
+        
+        -->
+
+         
+        <field 
+            name="sp_signassertion"
+            type="radio"
+            default="0"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SIGNASSERTION"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SIGNASSERTION"
+        >
+            <option value="0">Off</option>
+            <option value="1">On</option>
+        </field>
+         
+         
+        <field 
+            name="sp_assertion.encryption"
+            type="radio"
+            default="0"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_ENCRYPTASSERTION"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_ENCRYPTASSERTION"
+        >
+            <option value="0">Off</option>
+            <option value="1">On</option>
+        </field>
+        
+        
          <field 
-             name="ssp_showerrors"
-             type="radio"
-             default="1"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SHOWERRORS"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SHOWERRORS_DESC"
-         >
-                   <option value="0">JHIDE</option>
-                  <option value="1">JSHOW</option>
-         </field>
+            name="sp_isPassive"
+            type="radio"
+            default="0"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_PASSIVE"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_PASSIVE"
+        >
+            <option value="0">Off</option>
+            <option value="1">On</option>
+        </field>
          
-         
-             <field 
-             name="ssp_signassertion"
-             type="radio"
-             default="0"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SIGNASSERTION"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SIGNASSERTION"
-         >
-                   <option value="0">Off</option>
-                  <option value="1">On</option>
-         </field>
-         
-         
-                  <field 
-             name="ssp_validateassertion"
-             type="radio"
-             default="0"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_VALIDATEASSERTION"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_VALIDATEASSERTION"
-         >
-                   <option value="0">Off</option>
-                  <option value="1">On</option>
-         </field>
-          <field 
-             name="ssp_debug__validatexml"
-             type="radio"
-             default="0"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUGVALIDATEXML"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUGVALIDATEXML_DESC"
-         >
-                   <option value="0">Off</option>
-                  <option value="1">On</option>
-         </field>
-            <field 
-             name="ssp_auth__adminpassword"
-             type="password"
-             default="123"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_AUTH_ADMINPASS"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_AUTH_ADMINPASS_DESC"
-          />    
-              <field 
-             name="ssp_secretsalt"
-             type="text"
-             default="defaultsecretsalt"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SECRETSALT"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SECRETSALT_DESC"
+        <field 
+            name="sp_validateassertion"
+            type="radio"
+            default="0"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_VALIDATEASSERTION"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_VALIDATEASSERTION"
+        >
+            <option value="0">Off</option>
+            <option value="1">On</option>
+        </field>
+        
+        <field 
+            name="ssp_debug__validatexml"
+            type="radio"
+            default="0"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUGVALIDATEXML"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUGVALIDATEXML_DESC"
+        >
+            <option value="0">Off</option>
+            <option value="1">On</option>
+        </field>
+        <field 
+            name="ssp_auth__adminpassword"
+            type="password"
+            default="123"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_AUTH_ADMINPASS"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_AUTH_ADMINPASS_DESC"
+        />    
+        <field 
+            name="ssp_secretsalt"
+            type="text"
+            default="defaultsecretsalt"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SECRETSALT"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SECRETSALT_DESC"
         />    
                
-         <field 
-             name="ssp_technicalcontact_name"
-             type="text"
-              size="50"
-             default="Name Surname"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TECHNAME"
-             description="COM_SAMLOGIN_SAMLOGIN_TECHNAME_DESC"
-          />    
+        <field 
+            name="ssp_technicalcontact_name"
+            type="text"
+            size="50"
+            default="Name Surname"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TECHNAME"
+            description="COM_SAMLOGIN_SAMLOGIN_TECHNAME_DESC"
+        />    
        
-          <field 
-             name="ssp_technicalcontact_email"
-             type="text"
-             size="50"
-             default="info@creativeprogramming.it"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TECHEMAIL"
-             description="COM_SAMLOGIN_SAMLOGIN_TECHEMAIL_DESC"
-         />    
+        <field 
+            name="ssp_technicalcontact_email"
+            type="text"
+            size="50"
+            default="info@creativeprogramming.it"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TECHEMAIL"
+            description="COM_SAMLOGIN_SAMLOGIN_TECHEMAIL_DESC"
+        />    
           
-              <field 
-             name="ssp_my_sp_entityid"
-             type="text"
-             size="70"
-             default="auto"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_MYENTITYID"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_MYENTITYID_DESC"
-         />  
+        <field 
+            name="ssp_my_sp_entityid"
+            type="text"
+            size="70"
+            default="auto"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_MYENTITYID"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_MYENTITYID_DESC"
+        />  
        
-     </fieldset>
+    </fieldset>
 
 
 
- <fieldset name="sspmetasetup" label="COM_SAMLOGIN_SSP_METADATA">	  
+    <fieldset name="sspmetasetup" label="COM_SAMLOGIN_SSP_METADATA">	  
    
          
-         <field 
-             name="ssp_use_metarefresh"
-             type="radio"
-             default="0"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_USEMETAREFRESH"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_USEMETAREFRESH"
-         >
-                   <option value="0">No</option>
-                  <option value="1">Yes</option>
-         </field>
+        <field 
+            name="ssp_use_metarefresh"
+            type="radio"
+            default="0"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_USEMETAREFRESH"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_USEMETAREFRESH"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
          
-         <field 
-             name="sspcron_secret"
-             type="text"
-             size="20"
-             default="changeme"
-             label="COM_SAMLOGIN_CRON_SECRET"
-         />  
-         
-         
-         <field 
-             name="sspcron_debug"
-             type="radio"
-             default="0"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONDEBUG"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONDEBUG"
-         >
-                   <option value="0">No</option>
-                  <option value="1">Yes</option>
-         </field>
+        <field 
+            name="sspcron_secret"
+            type="text"
+            size="20"
+            default="changeme"
+            label="COM_SAMLOGIN_CRON_SECRET"
+        />  
          
          
-         <field 
-             name="sspcron_email"
-             type="radio"
-             default="0"
-             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONEMAIL"
-             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONEMAIL"
-         >
-                   <option value="0">No</option>
-                  <option value="1">Yes</option>
-         </field>
+        <field 
+            name="sspcron_debug"
+            type="radio"
+            default="0"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONDEBUG"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONDEBUG"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
+         
+         
+        <field 
+            name="sspcron_email"
+            type="radio"
+            default="0"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONEMAIL"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONEMAIL"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
          
          
         
         
-         <field 
-             name="sspmeta_metadata_url_1"
-             type="text"
-             size="100"
-             default="https://services-federation.renater.fr/metadata/renater-test-metadata.xml"
-             label="COM_SAMLOGIN_SAMLOGIN_METADATAURL_1"
-         />    
+        <field 
+            name="sspmeta_metadata_url_1"
+            type="text"
+            size="100"
+            default="https://services-federation.renater.fr/metadata/renater-test-metadata.xml"
+            label="COM_SAMLOGIN_SAMLOGIN_METADATAURL_1"
+        />    
          
             
-         <field 
-             name="sspmeta_metadata_url_2"
-             type="text"
-             size="100"
-             default=""
-             label="COM_SAMLOGIN_SAMLOGIN_METADATAURL_2"
-         /> 
+        <field 
+            name="sspmeta_metadata_url_2"
+            type="text"
+            size="100"
+            default=""
+            label="COM_SAMLOGIN_SAMLOGIN_METADATAURL_2"
+        /> 
       
-           <field 
-             name="sspmeta_metadata_url_3"
-             type="text"
-             size="100"
-             default=""
-             label="COM_SAMLOGIN_SAMLOGIN_METADATAURL_3"
-         /> 
+        <field 
+            name="sspmeta_metadata_url_3"
+            type="text"
+            size="100"
+            default=""
+            label="COM_SAMLOGIN_SAMLOGIN_METADATAURL_3"
+        /> 
        
-            <field 
-             name="sspmeta_metadata_url_4"
-             type="text"
-             size="100"
-             default=""
-             label="COM_SAMLOGIN_SAMLOGIN_METADATAURL_4"
-         /> 
+        <field 
+            name="sspmeta_metadata_url_4"
+            type="text"
+            size="100"
+            default=""
+            label="COM_SAMLOGIN_SAMLOGIN_METADATAURL_4"
+        /> 
       
-            <field 
-             name="sspmeta_metadata_url_5"
-             type="text"
-             size="100"
-             default=""
-             label="COM_SAMLOGIN_SAMLOGIN_METADATAURL_5"
-         /> 
-     </fieldset>
+        <field 
+            name="sspmeta_metadata_url_5"
+            type="text"
+            size="100"
+            default=""
+            label="COM_SAMLOGIN_SAMLOGIN_METADATAURL_5"
+        /> 
+    </fieldset>
      
-     <fieldset name="discoserv" label="COM_SAMLOGIN_CONF_DISCOSERVICE">	
-      <field 
-             name="sspas_discotype"
-             type="list"
-             default="0"
-             label="COM_SAMLOGIN_DISCOTYPE"
-             description="COM_SAMLOGIN_DISCOTYPE"
-         >
-                  <option value="-1">No Discovery service (one IdP only)</option>
-                  <option value="0">External</option>
-                  <option value="null">Embedded siimple (obsolete)</option>
-                  <option value="discopower">Discopower (embedded)</option>
-                  <option value="discojuice_standalone">DiscoJuice embedded page (Advanced UX, *only for supported federations)</option>
-                  <option value="discojuice_embedded">DiscoJuice embedded javascript (Advanced UX, *only for supported federations)</option>
-                  <option value="discojuice_global">DiscoJuice global (Advanced UX, *only for supported federations) </option>       
-         </field>
+    <fieldset name="discoserv" label="COM_SAMLOGIN_CONF_DISCOSERVICE">	
+        <field 
+            name="sspas_discotype"
+            type="list"
+            default="0"
+            label="COM_SAMLOGIN_DISCOTYPE"
+            description="COM_SAMLOGIN_DISCOTYPE"
+        >
+            <option value="-1">No Discovery service (one IdP only)</option>
+            <option value="0">External</option>
+            <option value="null">Embedded siimple (obsolete)</option>
+            <option value="discopower">Discopower (embedded)</option>
+            <option value="discojuice_standalone">DiscoJuice embedded page (Advanced UX, *only for supported federations)</option>
+            <option value="discojuice_embedded">DiscoJuice embedded javascript (Advanced UX, *only for supported federations)</option>
+            <option value="discojuice_global">DiscoJuice global (Advanced UX, *only for supported federations) </option>       
+        </field>
          
-           <field 
-             name="sspas_idpentityid"
-             type="text"
-             size="70"
-             default=""
-             label="COM_SAMLOGIN_IDPONLYURL"
-         />    
+        <field 
+            name="sspas_idpentityid"
+            type="text"
+            size="70"
+            default=""
+            label="COM_SAMLOGIN_IDPONLYURL"
+        />    
          
-          <field 
-             name="sspas_discourl"
-             type="text"
-             size="70"
-             default="https://discovery.renater.fr/test"
-             label="COM_SAMLOGIN_DISCOURL"
-         />    
+        <field 
+            name="sspas_discourl"
+            type="text"
+            size="70"
+            default="https://discovery.renater.fr/test"
+            label="COM_SAMLOGIN_DISCOURL"
+        />    
          
-         <field 
-             name="sspas_discojuice_feeds"
-             type="checkboxes"
-             default="renater"
-             label="COM_SAMLOGIN_DISCOJUICE_METAFEEDS"
-             description="COM_SAMLOGIN_DISCOJUICE_METAFEEDS"
-         >
-       <option value="aaf">aaf</option><option value="aconet">aconet</option><option value="arnes">arnes</option><option value="arnes-test">arnes-test</option><option value="caf">caf</option><option value="carsi">carsi</option><option value="cesnet">cesnet</option><option value="dfn">dfn</option><option value="edugain">edugain</option><option value="edugate">edugate</option><option value="feide">feide</option><option value="gakunin">gakunin</option><option value="garr">garr</option><option value="garr-test">garr-test</option><option value="gridp">gridp</option><option value="grnet">grnet</option><option value="haka">haka</option><option value="incommon">incommon</option><option value="kalmar">kalmar</option><option value="laife">laife</option><option value="niif">niif</option><option value="poland">poland</option><option value="rctsaai">rctsaai</option><option value="rctsaai-test">rctsaai-test</option><option value="redclara">redclara</option><option value="rediris">rediris</option><option value="renater">renater</option><option value="skolfederation">skolfederation</option><option value="skolfederation2">skolfederation2</option><option value="surfnet">surfnet</option><option value="surfnet-foodl">surfnet-foodl</option><option value="surfnet-uwap">surfnet-uwap</option><option value="surfnet2">surfnet2</option><option value="swamid">swamid</option><option value="sweden-eid">sweden-eid</option><option value="switch">switch</option><option value="uk">uk</option>
+        <field 
+            name="sspas_discojuice_feeds"
+            type="list"
+            multiple="true"
+            default="renater"
+            label="COM_SAMLOGIN_DISCOJUICE_METAFEEDS"
+            description="COM_SAMLOGIN_DISCOJUICE_METAFEEDS"
+        >
+            <option value="aaf">aaf</option>
+            <option value="aconet">aconet</option>
+            <option value="arnes">arnes</option>
+            <option value="arnes-test">arnes-test</option>
+            <option value="caf">caf</option>
+            <option value="carsi">carsi</option>
+            <option value="cesnet">cesnet</option>
+            <option value="dfn">dfn</option>
+            <option value="edugain">edugain</option>
+            <option value="edugate">edugate</option>
+            <option value="feide">feide</option>
+            <option value="gakunin">gakunin</option>
+            <option value="garr">garr</option>
+            <option value="garr-test">garr-test</option>
+            <option value="gridp">gridp</option>
+            <option value="grnet">grnet</option>
+            <option value="haka">haka</option>
+            <option value="incommon">incommon</option>
+            <option value="kalmar">kalmar</option>
+            <option value="laife">laife</option>
+            <option value="niif">niif</option>
+            <option value="poland">poland</option>
+            <option value="rctsaai">rctsaai</option>
+            <option value="rctsaai-test">rctsaai-test</option>
+            <option value="redclara">redclara</option>
+            <option value="rediris">rediris</option>
+            <option value="renater">renater</option>
+            <option value="skolfederation">skolfederation</option>
+            <option value="skolfederation2">skolfederation2</option>
+            <option value="surfnet">surfnet</option>
+            <option value="surfnet-foodl">surfnet-foodl</option>
+            <option value="surfnet-uwap">surfnet-uwap</option>
+            <option value="surfnet2">surfnet2</option>
+            <option value="swamid">swamid</option>
+            <option value="sweden-eid">sweden-eid</option>
+            <option value="switch">switch</option>
+            <option value="uk">uk</option>
     
-         </field>
+        </field>
          
-       </fieldset>
+    </fieldset>
      
-     <fieldset name="mappings" label="COM_SAMLOGIN_CONF_MAPPINGS">	  
+    <fieldset name="mappings" label="COM_SAMLOGIN_CONF_MAPPINGS">	  
         <field name="Map" type="spacer" label="&lt;i&gt;Attribute Map&lt;/i&gt;&lt;br/&gt;Enter attribute mappings. Syntax is: 'attributeName' or 'attributeName|backupAttributeName' + operator to concat attrs with a space e.g. 'cn|displayName|givenName+sn' "/>
         <field name="mapping_username" type="text" label="Username" size="35" default="mail|eduPersonPrincipalName"
-			description="The provided SAML attribute that is mapped to the local Joomla 'username' attribute (i.e. 'eduPersonPrincipalName')" />
+               description="The provided SAML attribute that is mapped to the local Joomla 'username' attribute (i.e. 'eduPersonPrincipalName')" />
         
         <field name="useNameId"           
                type="radio"
-                        label="Use NameID as username"
-                        description="COM_SAMLOGIN_USENAMEID_AS_USERNAME"
-                        default="0"
-                >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
+               label="Use NameID as username"
+               description="COM_SAMLOGIN_USENAMEID_AS_USERNAME"
+               default="0"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
         </field>
         
         <field name="mapping_email" type="text" label="E-mail" size="35" default="mail|eduPersonPrincipalName"
-			description="The provided SAML attribute that is mapped to the local Joomla 'email' attribute (i.e. 'mail')" />
+               description="The provided SAML attribute that is mapped to the local Joomla 'email' attribute (i.e. 'mail')" />
         <field name="useDummyEmails"           
                type="radio"
-                        label="Use dummy email if mail is empty"
-                        description="COM_SAMLOGIN_SAMLOGIN_USE_DUMMY_EMAIL_DESCR"
-                        default="0"
-                >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
+               label="Use dummy email if mail is empty"
+               description="COM_SAMLOGIN_SAMLOGIN_USE_DUMMY_EMAIL_DESCR"
+               default="0"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
         </field>
         <field name="dummyEmailDomain" type="text" label="Dummy email domain" size="35" default=""
-			description="The dummy email domain (only if using dummy emails, default is hostname, do not change in production please)" />   
+               description="The dummy email domain (only if using dummy emails, default is hostname, do not change in production please)" />   
         <field name="mapping_fullname" type="text" label="Fullname" size="35" default="cn|givenName+sn|displayName|eduPersonPrincipalName"
-			description="The provided SAML attribute that is mapped to the local Joomla 'fullname' attribute (i.e. 'cn')" />
+               description="The provided SAML attribute that is mapped to the local Joomla 'fullname' attribute (i.e. 'cn')" />
         <field name="mapping_birthdate" type="text" label="Birthdate" size="35" default=""
-			description="The provided SAML attribute that is mapped to the local Joomla 'birthdate' attribute" />
+               description="The provided SAML attribute that is mapped to the local Joomla 'birthdate' attribute" />
         <field name="mapping_gender" type="text" label="Gender" size="35" default="schacGender"
-			description="The provided SAML attribute that is mapped to the local Joomla 'gender' attribute" />
+               description="The provided SAML attribute that is mapped to the local Joomla 'gender' attribute" />
         <field name="mapping_postcode" type="text" label="Postcode" size="35" default="postalCode"
-			description="The provided SAML attribute that is mapped to the local Joomla 'postcode' attribute" />
+               description="The provided SAML attribute that is mapped to the local Joomla 'postcode' attribute" />
         <field name="mapping_country" type="text" label="Country" size="35" default="countryName"
-			description="The provided SAML attribute that is mapped to the local Joomla 'country' attribute" />
+               description="The provided SAML attribute that is mapped to the local Joomla 'country' attribute" />
         <field name="mappung_language" type="text" label="Language" size="35" default="preferredLanguage"
-			description="The provided SAML attribute that is mapped to the local Joomla 'language' attribute (i.e. 'preferredLanguage')" />
+               description="The provided SAML attribute that is mapped to the local Joomla 'language' attribute (i.e. 'preferredLanguage')" />
         <field name="mapping_timezone" type="text" label="Timezone" size="35" default=""
-			description="The provided SAML attribute that is mapped to the local Joomla 'timezone' attribute" />
+               description="The provided SAML attribute that is mapped to the local Joomla 'timezone' attribute" />
         
-         <field name="extramapping" type="textarea" label="Extra Fields Mappings"  default=''
-			description="JSON Array of extra mappings for profile extension plugins" />
+        <field name="extramapping" type="textarea" label="Extra Fields Mappings"  default=''
+                description="JSON Array of extra mappings for profile extension plugins" />
    
         
-      </fieldset>
+    </fieldset>
        
-        <fieldset
-                name="authzrules"
-                label="COM_SAMLOGIN_AUTHZRULES"
-                description="COM_SAMLOGIN_AUTHZRULES"
+    <fieldset
+        name="authzrules"
+        label="COM_SAMLOGIN_AUTHZRULES"
+        description="COM_SAMLOGIN_AUTHZRULES"
+    >
+            
+        <field
+            name="allowOnlyExistingUsernames"
+            type="radio"
+            label="COM_SAMLOGIN_SAMLOGIN_ONLY_EXISTING_USERS"
+            description="COM_SAMLOGIN_SAMLOGIN_ONLY_EXISTING_USERS_DESR"
+            default="0"
         >
-            
-              <field
-                        name="allowOnlyExistingUsernames"
-                        type="radio"
-                        label="COM_SAMLOGIN_SAMLOGIN_ONLY_EXISTING_USERS"
-                        description="COM_SAMLOGIN_SAMLOGIN_ONLY_EXISTING_USERS_DESR"
-                        default="0"
-                >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                </field>
-             <field
-                        name="preserveManualUserGroup"
-                        type="radio"
-                        label="COM_SAMLOGIN_SAMLOGIN_PRESEVE_MANUAL_USERGROUPS"
-                        description="COM_SAMLOGIN_SAMLOGIN_PRESEVE_MANUAL_USERGROUPS_DESR"
-                        default="1"
-                >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                </field>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
+        <field
+            name="preserveManualUserGroup"
+            type="radio"
+            label="COM_SAMLOGIN_SAMLOGIN_PRESEVE_MANUAL_USERGROUPS"
+            description="COM_SAMLOGIN_SAMLOGIN_PRESEVE_MANUAL_USERGROUPS_DESR"
+            default="1"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
            
-           <field name="Rulesdesc" type="spacer" label="SAMLOGIN_AUTHZRULES_DESC"/>
+        <field name="Rulesdesc" type="spacer" label="SAMLOGIN_AUTHZRULES_DESC"/>
      
-           <field 
-             name="rulespacer_1" 
-             type="spacer" 
-             label="COM_SAMLOGIN_AUTHZRULE_1"/>
+        <field 
+            name="rulespacer_1" 
+            type="spacer" 
+            label="COM_SAMLOGIN_AUTHZRULE_1"/>
 
-            <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_ATTR_1" 
-                description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
-                name="rule_1_attr"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_ATTR_1" 
+            description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
+            name="rule_1_attr"/>
             
            
-            <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_REGEX_1" 
-                description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
-                name="rule_1_regex"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_REGEX_1" 
+            description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
+            name="rule_1_regex"/>
      
             
-             <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_1" 
-                description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
-                name="rule_1_sql"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_1" 
+            description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+            name="rule_1_sql"/>
      
-            <field 
-                default="1" 
-                type="usergroup" 
-                label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_1" 
-                description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
-                name="rule_1_assigngroup">
-            </field>     
+        <field 
+            default="1" 
+            type="usergroup" 
+            label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_1" 
+            description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
+            name="rule_1_assigngroup">
+        </field>     
             
             
             
@@ -419,301 +565,302 @@
             
             
             
-             <field 
-             name="rulespacer_2" 
-             type="spacer" 
-             label="COM_SAMLOGIN_AUTHZRULE_2"/>
+        <field 
+            name="rulespacer_2" 
+            type="spacer" 
+            label="COM_SAMLOGIN_AUTHZRULE_2"/>
 
-            <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_ATTR_2" 
-                description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
-                name="rule_2_attr"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_ATTR_2" 
+            description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
+            name="rule_2_attr"/>
             
            
-            <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_REGEX_2" 
-                description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
-                name="rule_2_regex"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_REGEX_2" 
+            description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
+            name="rule_2_regex"/>
             
             
                
-             <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_2" 
-                description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
-                name="rule_2_sql"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_2" 
+            description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+            name="rule_2_sql"/>
      
      
-            <field 
-                default="1" 
-                type="usergroup" 
-                label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_2" 
-                description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
-                name="rule_2_assigngroup">
-            </field>     
+        <field 
+            default="1" 
+            type="usergroup" 
+            label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_2" 
+            description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
+            name="rule_2_assigngroup">
+        </field>     
             
             
             
             
-               <field 
-             name="rulespacer_3" 
-             type="spacer" 
-             label="COM_SAMLOGIN_AUTHZRULE_3"/>
+        <field 
+            name="rulespacer_3" 
+            type="spacer" 
+            label="COM_SAMLOGIN_AUTHZRULE_3"/>
 
-            <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_ATTR_3" 
-                description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
-                name="rule_3_attr"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_ATTR_3" 
+            description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
+            name="rule_3_attr"/>
             
            
-            <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_REGEX_3" 
-                description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
-                name="rule_3_regex"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_REGEX_3" 
+            description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
+            name="rule_3_regex"/>
             
                         
-             <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_3" 
-                description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
-                name="rule_3_sql"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_3" 
+            description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+            name="rule_3_sql"/>
      
      
-            <field 
-                default="1" 
-                type="usergroup" 
-                label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_3" 
-                description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
-                name="rule_3_assigngroup">
-            </field>     
+        <field 
+            default="1" 
+            type="usergroup" 
+            label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_3" 
+            description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
+            name="rule_3_assigngroup">
+        </field>     
             
             
-               <field 
-             name="rulespacer_4" 
-             type="spacer" 
-             label="COM_SAMLOGIN_AUTHZRULE_4"/>
+        <field 
+            name="rulespacer_4" 
+            type="spacer" 
+            label="COM_SAMLOGIN_AUTHZRULE_4"/>
 
-            <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_ATTR_4" 
-                description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
-                name="rule_4_attr"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_ATTR_4" 
+            description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
+            name="rule_4_attr"/>
             
            
-            <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_REGEX_4" 
-                description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
-                name="rule_4_regex"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_REGEX_4" 
+            description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
+            name="rule_4_regex"/>
             
             
-                         <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_4" 
-                description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
-                name="rule_4_sql"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_4" 
+            description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+            name="rule_4_sql"/>
      
      
-            <field 
-                default="1" 
-                type="usergroup" 
-                label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_4" 
-                description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
-                name="rule_4_assigngroup">
-            </field>     
+        <field 
+            default="1" 
+            type="usergroup" 
+            label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_4" 
+            description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
+            name="rule_4_assigngroup">
+        </field>     
             
             
-               <field 
-             name="rulespacer_5" 
-             type="spacer" 
-             label="COM_SAMLOGIN_AUTHZRULE_5"/>
+        <field 
+            name="rulespacer_5" 
+            type="spacer" 
+            label="COM_SAMLOGIN_AUTHZRULE_5"/>
 
-            <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_ATTR_5" 
-                description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
-                name="rule_5_attr"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_ATTR_5" 
+            description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
+            name="rule_5_attr"/>
             
            
-            <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_REGEX_5" 
-                description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
-                name="rule_5_regex"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_REGEX_5" 
+            description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
+            name="rule_5_regex"/>
             
             
-                         <field 
-                default="" 
-                type="text" 
-                size="60"
-                label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_5" 
-                description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
-                name="rule_5_sql"/>
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_5" 
+            description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+            name="rule_5_sql"/>
      
      
-            <field 
-                default="1" 
-                type="usergroup" 
-                label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_5" 
-                description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
-                name="rule_5_assigngroup">
-            </field>     
+        <field 
+            default="1" 
+            type="usergroup" 
+            label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_5" 
+            description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
+            name="rule_5_assigngroup">
+        </field>     
             
             
             
-        </fieldset>
+    </fieldset>
         
-             <fieldset name="extras" label="COM_SAMLOGIN_CONF_EXTRAS">	 
+    <fieldset name="extras" label="COM_SAMLOGIN_CONF_EXTRAS">	 
                  
                  
                  
                   
-                <field
-                        name="defaultRegistered"
-                        type="radio"
-                        label="COM_SAMLOGIN_DEFAULT_REGISTERED"
-                        description="COM_SAMLOGIN_DEFAULT_REGISTERED"
-                        default="1"
-                >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                </field>
+        <field
+            name="defaultRegistered"
+            type="radio"
+            label="COM_SAMLOGIN_DEFAULT_REGISTERED"
+            description="COM_SAMLOGIN_DEFAULT_REGISTERED"
+            default="1"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
                 
-                <field
-                        name="defaultDeny"
-                        type="radio"
-                        label="COM_SAMLOGIN_DEFAULT_DENY"
-                        description="COM_SAMLOGIN_DEFAULT_DENY"
-                        default="0"
-                >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                </field>
+        <field
+            name="defaultDeny"
+            type="radio"
+            label="COM_SAMLOGIN_DEFAULT_DENY"
+            description="COM_SAMLOGIN_DEFAULT_DENY"
+            default="0"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
                 
                       
-                  <field 
-             name="defaultDenyMsg"
-             type="textarea"
-             filter="safehtml"
-             default=""
-             label="COM_SAMLOGIN_DEFAULT_DENY_MSG"
-             description="COM_SAMLOGIN_DEFAULT_DENY_MSG"
-             ></field>    
+        <field 
+            name="defaultDenyMsg"
+            type="textarea"
+            filter="safehtml"
+            default=""
+            label="COM_SAMLOGIN_DEFAULT_DENY_MSG"
+            description="COM_SAMLOGIN_DEFAULT_DENY_MSG"
+        >
+        </field>    
                 
                 
                  
-                <field type="usergroup" default="2" name="registeredGroupId" label="Registered Group"></field>
-               <field
-                        name="updateUsernameIfMailOverlap"
-                        type="radio"
-                        label="COM_SAMLOGIN_SAMLOGIN_UPDATE_EXISTING_EMAIL"
-                        description="COM_SAMLOGIN_SAMLOGIN_TRUST_IDP_EMAIL"
-                        default="0"
-                >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                </field>
+        <field type="usergroup" default="2" name="registeredGroupId" label="Registered Group"></field>
+        <field
+            name="updateUsernameIfMailOverlap"
+            type="radio"
+            label="COM_SAMLOGIN_SAMLOGIN_UPDATE_EXISTING_EMAIL"
+            description="COM_SAMLOGIN_SAMLOGIN_TRUST_IDP_EMAIL"
+            default="0"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
                 
                 
-              <field
-                        name="overrideJoomlaLoginPage"
-                        type="menuitem"
-                        label="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN"
-                        description="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN"
-                        default="1"
-                >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                </field>
+        <field
+            name="overrideJoomlaLoginPage"
+            type="menuitem"
+            label="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN"
+            description="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN"
+            default="1"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
                 
-                <field name="loginPage" type="menuitem" default="0" disable="separator" label="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN_MENU_ITEM" description="" state="1">
-				<option value="0">SAMLOGIN_AUTO</option>
-		</field>
+        <field name="loginPage" type="menuitem" default="0" disable="separator" label="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN_MENU_ITEM" description="" state="1">
+            <option value="0">SAMLOGIN_AUTO</option>
+        </field>
 			
                 
                 
-             </fieldset>
+    </fieldset>
              
-             <fieldset name="logout" label="COM_SAMLOGIN_CONF_LOGOUT">	 
-                  <field
-                        name="trysinglelogout"
-                        type="radio"
-                        label="COM_SAMLOGIN_SAMLOGIN_TRYSLO"
-                        description="COM_SAMLOGIN_SAMLOGIN_TRYSLO_DESC"
-                        default="0"
-                >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                </field>
+    <fieldset name="logout" label="COM_SAMLOGIN_CONF_LOGOUT">	 
+        <field
+            name="trysinglelogout"
+            type="radio"
+            label="COM_SAMLOGIN_SAMLOGIN_TRYSLO"
+            description="COM_SAMLOGIN_SAMLOGIN_TRYSLO_DESC"
+            default="0"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
                 
-                 <field
-                        name="alwayslogoutalert"
-                        type="radio"
-                        label="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT"
-                        description="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT"
-                        default="0"
-                >
-                        <option value="0">onError</option>
-                        <option value="1">Always</option>
-                </field>
+        <field
+            name="alwayslogoutalert"
+            type="radio"
+            label="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT"
+            description="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT"
+            default="0"
+        >
+            <option value="0">onError</option>
+            <option value="1">Always</option>
+        </field>
                 
-                  <field
-                        name="useCustomSLO"
-                        type="radio"
-                        label="COM_SAMLOGIN_SAMLOGIN_TRYSLO_CUSTOM"
-                        description="COM_SAMLOGIN_SAMLOGIN_TRYSLO_CUSTOM"
-                        default="0"
-                >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                </field>
+        <field
+            name="useCustomSLO"
+            type="radio"
+            label="COM_SAMLOGIN_SAMLOGIN_TRYSLO_CUSTOM"
+            description="COM_SAMLOGIN_SAMLOGIN_TRYSLO_CUSTOM"
+            default="0"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
                 
-           <field 
-             name="customSLOURL"
-             type="text"
-             size="70"
-             default=""
-             label="COM_SAMLOGIN_SAMLOGIN_CUSTOM_SLO_URL"
-             description="COM_SAMLOGIN_SAMLOGIN_CUSTOM_SLO_URL_DESC"
-          />   
+        <field 
+            name="customSLOURL"
+            type="text"
+            size="70"
+            default=""
+            label="COM_SAMLOGIN_SAMLOGIN_CUSTOM_SLO_URL"
+            description="COM_SAMLOGIN_SAMLOGIN_CUSTOM_SLO_URL_DESC"
+        />   
                 
-                 <field
-                        name="logout_customhtmlmessage"
-                        type="editor"
-                        filter='safehtml' 
-                        label="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT_CUSTOMMSG"
-                        description="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT_CUSTOMMSG"
-                        default=""
-                >
+        <field
+            name="logout_customhtmlmessage"
+            type="editor"
+            filter='safehtml' 
+            label="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT_CUSTOMMSG"
+            description="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT_CUSTOMMSG"
+            default=""
+        >
                         
-                </field>
+        </field>
                 
            
-     </fieldset>
+    </fieldset>
 </config>

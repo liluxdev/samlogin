@@ -232,13 +232,22 @@ class SAMLoginControllerAjax extends SAMLoginController {
 
         if ($user->authorise('core.admin', 'com_samlogin')) {
             $downloadURLs = array(
-                "1.11.n" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/ssp.zip",
-                "1.11.f" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/ssp.f.zip",
-                "1.11.n-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.zip",
-                "1.11.f-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.f.zip",
+                "1.11.legacy" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.zip",
+                "1.11.n" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.11.n.zip",
+                "1.11.f" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.11.f.zip",
+                "1.12.n" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.11.n.zip",
+                //alternate:
+                "1.11.legacy-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.zip",
+                "1.11.n-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.11.n.zip",
+                "1.11.f-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.11.f.zip",
+                "1.12.n-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.12.n.zip",
             );
 
+
+
             $dlid = str_ireplace("../", "", $_GET["dlid"]);
+
+
             if (!isset($dlid)) {
                 die("no download id specified");
             }
@@ -267,7 +276,16 @@ class SAMLoginControllerAjax extends SAMLoginController {
             $extractDir = JPATH_COMPONENT_SITE . "/simplesamlphp/";
             @mkdir($extractDir);
 
-            $this->_preserveSSPConf($app, $toret);
+            $migrationMode = ($_GET["migrationMode"] == 1);
+
+
+            if (!$migrationMode) {
+                $this->_preserveSSPConf($app, $toret);
+            } else {
+
+                $this->_preserveSSPConfMigration($app, $toret);
+                $toret['additionalMessages'][] = array("msg" => "Migration mode on", "level" => "warning");
+            }
 
             $httpHeaders = get_headers($downloadURL);
             if ($httpHeaders !== FALSE) {
@@ -391,7 +409,19 @@ class SAMLoginControllerAjax extends SAMLoginController {
                         "and extract it to " . $extractDir;
                 $toret['additionalMessages'][] = array("msg" => $msg, "level" => "danger");
             }
-            $this->_restorePreservedSSPConf($app);
+
+            $migrationMode = ($_GET["migrationMode"] == 1);
+
+
+            if (!$migrationMode) {
+                $this->_restorePreservedSSPConf($app);
+            } else {
+
+                $this->_restorePreservedSSPConfMigration($app);
+                $toret['additionalMessages'][] = array("msg" => "Migration succeeded", "level" => "success");
+            }
+
+
             // $app->enqueueMessage("SimpleSAMLphp installed, please close this window and refresh the dashboard page now.");
 
             $lockClean = unlink($lockFile);
@@ -404,6 +434,14 @@ class SAMLoginControllerAjax extends SAMLoginController {
         }
         echo json_encode($toret);
         die();
+    }
+
+    private static function _startsWith($haystack, $needle) {
+        return $needle === "" || strpos($haystack, $needle) === 0;
+    }
+
+    private static function _endsWith($haystack, $needle) {
+        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
     }
 
     public function doConfigTests() {
@@ -493,13 +531,14 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 $sslTestURL = str_ireplace("http://", "https://", JURI::root()) . "/components/com_samlogin/simplesamlphp/www/module.php/saml/sp/metadata.php/default-sp?output=xhtml";
 
 
-                $JoomlaBaseURLPath = JURI::root(true);
-                //    die($JoomlaBaseURLPath);
-                if ($JoomlaBaseURLPath == "" || stripos("/" . $sspConf["baseurlpath"], $JoomlaBaseURLPath) === 0) {
-                    $checks['baseurlpath'] = true;
-                } else {
-                    $checks['baseurlpath'] = false;
+                $neededJoomlaBaseURLPath = JURI::root(true) . '/components/com_samlogin/simplesamlphp/www/';
+                while (self::_startsWith($neededJoomlaBaseURLPath, "/")) {
+                    $neededJoomlaBaseURLPath = substr($neededJoomlaBaseURLPath, 1);
                 }
+
+                //   die($JoomlaBaseURLPath);
+                $checks['baseurlpath'] = ($sspConf["baseurlpath"] == $neededJoomlaBaseURLPath) ? TRUE : "Should be: `" . $neededJoomlaBaseURLPath . "` but `" . $sspConf["baseurlpath"] . "` found";
+
 
                 $checks["metadataURL"] = $sslTestURL;
 
@@ -724,6 +763,99 @@ class SAMLoginControllerAjax extends SAMLoginController {
 
         print json_encode($checks);
         die();
+    }
+
+    private function recursiveRemoveDirButNotBackups($dir) {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != ".." && !stristr($object,".backup_until")) {
+                    if (filetype($dir . "/" . $object) == "dir") {
+                        rrmdir($dir . "/" . $object);
+                    } else {
+                        unlink($dir . "/" . $object);
+                    }
+                }
+            }
+            reset($objects);
+            rmdir($dir);
+        }
+    }
+
+    private function _preserveSSPConfMigration($app, &$toret) {
+        $this->recursiveRemoveDirButNotBackups("/components/com_samlogin/simplesamlphp/");
+        $lockFile = JPATH_COMPONENT_SITE . "/preserveConf.lockfile";
+        $lock = file_exists($lockFile);
+        if ($lock) {
+            if ((time() - filemtime($lockFile)) < 60 * 3) {
+                $toret['additionalMessages'][] = array("msg" => "Preserving configuration file skipped, lock already present", "level" => "warning");
+                // echo json_encode($toret);
+                //  die();
+            } else {
+                //lock expired
+            }
+        }
+        file_put_contents($lockFile, "-");
+
+        $filetopreserveArr = array(
+            '/components/com_samlogin/simplesamlphp/cert/saml.key',
+            '/components/com_samlogin/simplesamlphp/cert/saml.crt',
+                //    '/components/com_samlogin/simplesamlphp/config/authsources.php',
+                //    '/components/com_samlogin/simplesamlphp/config/config-metarefresh.php',
+                //    '/components/com_samlogin/simplesamlphp/config/module_cron.php',
+                //    '/components/com_samlogin/simplesamlphp/config/config.php'
+        );
+
+        $tmpdir = JFactory::getApplication()->getCfg("tmp_path");
+        foreach ($filetopreserveArr as $filetopreserve) {
+            //  $app->enqueueMessage("preserving..." . JPATH_SITE . $filetopreserve, "warning");
+            if (JFile::exists(JPATH_SITE . $filetopreserve)) {
+                //  echo "preserved..".$tmpdir.$filetopreserve;
+                try {
+                    $copyop = JFile::copy(JPATH_SITE . $filetopreserve, JPATH_SITE . $filetopreserve . "_TPS");
+                    if (!$copyop) {
+                        throw new Exception("copy failed");
+                    }
+                } catch (Exception $failcopy) {
+                    // $app->enqueueMessage("failed to preserve conf file: " . $filetopreserve, "error");
+                }
+            }
+        }
+        //DO IT IN RESTORE:  unlink($lockFile);
+    }
+
+    private function _restorePreservedSSPConfMigration($app) {
+
+
+        $filetopreserveArr = array(
+            '/components/com_samlogin/simplesamlphp/cert/saml.key',
+            '/components/com_samlogin/simplesamlphp/cert/saml.crt',
+                //   '/components/com_samlogin/simplesamlphp/config/authsources.php',
+                //   '/components/com_samlogin/simplesamlphp/config/config-metarefresh.php',
+                //   '/components/com_samlogin/simplesamlphp/config/module_cron.php',
+                //   '/components/com_samlogin/simplesamlphp/config/config.php'
+        );
+        foreach ($filetopreserveArr as $filetorestore) {
+
+            $tmpdir = JFactory::getApplication()->getCfg("tmp_path");
+            if (JFile::exists(JPATH_SITE . $filetorestore . "_TPS")) {
+                // $app->enqueueMessage("restored " . $filetorestore, "warning");
+                try {
+                    $copyop = JFile::move(JPATH_SITE . $filetorestore . "_TPS", JPATH_SITE . $filetorestore);
+                    if (!$copyop) {
+                        throw new Exception("copy failed");
+                    }
+                    // $status->confpreserved[]=$filetorestore;
+                } catch (Exception $failcopy) {
+                    //   $app->enqueueMessage("failed to restore conf file: " . $filetorestore, "error");
+                }
+            }
+        }
+        $lockFile = JPATH_COMPONENT_SITE . "/preserveConf.lockfile";
+        $lockClean = unlink($lockFile);
+        if (!$lockClean) {
+            $toret['additionalMessages'][] = array("msg" => "Cannot release lock", "level" => "warning");
+        }
     }
 
     private function _preserveSSPConf($app, &$toret) {

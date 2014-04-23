@@ -5,26 +5,27 @@ function samlogin_regenkeys() {
      }
      Joomla.popupWindow(window.SAMLOGIN_JS_JOOMLA_JURI_ADMIN_BASE+"?option=com_samlogin&view=ajax&task=genkey", Joomla.JText._('SAMLOGIN_JS_REGENKEY_POPUP_TITLE') , 990, 600, 1);
      }*/
-    
-    try {
-        window.clearTimeout(window.samlogin_configTestTimeout);
-    } catch (ie) {
-    }
-    
-    samlogin_showToaster("Generating a new key and rotating old (this will change your SP metadata)","warning");
-    
-    jQuery.ajax({
-        url: window.samloginBaseAjaxURL,
-        dataType: "json",
-        data: {
-            task: "genkey",
+    if (confirm(Joomla.JText._('SAMLOGIN_JS_CONFIRM_GENKEY')) ){
+        try {
+            window.clearTimeout(window.samlogin_configTestTimeout);
+        } catch (ie) {
         }
-    }).done(function(data) {
-        samlogin_processMessages(data);
-        setTimeout(function() {
-            samlogin_doConfigTests();
-        }, 1000);
-    });
+
+        samlogin_showToaster("Generating a new key and rotating old (this will change your SP metadata)","warning");
+
+        jQuery.ajax({
+            url: window.samloginBaseAjaxURL,
+            dataType: "json",
+            data: {
+                task: "genkey",
+            }
+        }).done(function(data) {
+            samlogin_processMessages(data);
+            setTimeout(function() {
+                samlogin_doConfigTests();
+            }, 1000);
+        });
+    }
 }
 
 function samlogin_keyRotateEndPeriod() {
@@ -35,24 +36,26 @@ function samlogin_keyRotateEndPeriod() {
      }
      Joomla.popupWindow(window.SAMLOGIN_JS_JOOMLA_JURI_ADMIN_BASE+"?option=com_samlogin&view=ajax&task=keyRotateEndPeriod", Joomla.JText._('SAMLOGIN_JS_REGENKEY_POPUP_TITLE') , 990, 600, 1);
      }*/
-    try {
-        window.clearTimeout(window.samlogin_configTestTimeout);
-    } catch (ie) {
-    }
-    
-    samlogin_showToaster("Ending key-rotation period... (this changed your SP metadata)","warning");
-    jQuery.ajax({
-        url: window.samloginBaseAjaxURL,
-        dataType: "json",
-        data: {
-            task: "keyRotateEndPeriod",
+    if (confirm(Joomla.JText._('SAMLOGIN_JS_CONFIRM_ROTATEKEY')) ){
+        try {
+            window.clearTimeout(window.samlogin_configTestTimeout);
+        } catch (ie) {
         }
-    }).done(function(data) {
-        samlogin_processMessages(data);
-        setTimeout(function() {
-            samlogin_doConfigTests();
-        }, 1000);
-    });
+
+        samlogin_showToaster("Ending key-rotation period... (this changed your SP metadata)","warning");
+        jQuery.ajax({
+            url: window.samloginBaseAjaxURL,
+            dataType: "json",
+            data: {
+                task: "keyRotateEndPeriod",
+            }
+        }).done(function(data) {
+            samlogin_processMessages(data);
+            setTimeout(function() {
+                samlogin_doConfigTests();
+            }, 1000);
+        });
+    }
 }
 
 window.samlogin_configTestTimeout = 0;
@@ -96,7 +99,7 @@ function  samlogin_processMessages(data) {
     }
 }
 
-function samlogin_installSSP(version) {
+function samlogin_installSSP(version,migrationMode) {
     jQuery(".install-ssp-modal-a").hide();
     jQuery(".install-ssp-modal-b").show();
     var tm1 = setTimeout(function() {
@@ -105,6 +108,12 @@ function samlogin_installSSP(version) {
     var tm2 = setTimeout(function() {
         jQuery(".install-ssp-modal-b .uk-progress-bar").css("width", "7%");
     }, 1500);
+  
+    if (migrationMode==undefined){
+        migrationMode=0;
+    }else{
+        migrationMode=1;
+    }
        
     jQuery.ajax({
         url: window.samloginBaseAjaxURL,
@@ -112,6 +121,7 @@ function samlogin_installSSP(version) {
         data: {
             task: "installSimpleSAMLphp_download",
             dlid: version,
+            migrationMode:migrationMode
         }
     }).done(function(data) {
         samlogin_processMessages(data);
@@ -124,6 +134,7 @@ function samlogin_installSSP(version) {
                 data: {
                     task: "installSimpleSAMLphp_extract",
                     dlid: version,
+                    migrationMode:migrationMode
                 }
             }).done(function(data) {
                 try {
