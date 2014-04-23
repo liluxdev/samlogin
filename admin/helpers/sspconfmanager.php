@@ -12,14 +12,14 @@ class SSPConfManager {
     static $SAVECONF_SIMULATE = ".virtual";
 
     public static function setSaveConfMode($type) {
-        if (SAMLoginControllerAjax::aquireLock("saveconfmode") ){
+        if (SAMLoginControllerAjax::aquireLock("saveconfmode")) {
             self::$saveConfModeSuffix = $type;
-        }else{
+        } else {
             return false;
         }
         return true;
     }
-    
+
     public static function commitSaveConfModeLock($type) {
         SAMLoginControllerAjax::releaseLock("saveconfmode");
     }
@@ -59,36 +59,33 @@ class SSPConfManager {
                         // include the Diff class
                         require_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/class.Diff.php");
                         // output the result of comparing two files as HTML
-                        
-                        
-                       //OR a param $advancedUserMode= isset($_COOKIE["samlogin_advanced_user_mode"]);
-                        $advancedUserMode =true;
-                        
-                        if ($advancedUserMode){
-                                $msgdiff = Diff::toHTMLDiffOnlySkipSecrets(Diff::compare($contentA, $contentB, false));
-                                $msgdiffCheck = strip_tags(trim($msgdiff));
-                                $msg=  "simpleSAMLphp's configuration file ". strtr(
-                                        $filetocheck, array(
-                                    "/components/com_samlogin/simplesamlphp/config/" => ""
-                                        )
-                                ) . " is not in sync with your latest changes, click the "
-                                . "<span class='uk-button uk-button-mini' style='cursor:pointer;' onClick='samlogin_saveSSPConf();'>"
-                                . "<i class='uk-icon-download'></i>Put settings in production (SSP)</span>"
-                                . " toolbar button to commit changes.";
+                        //OR a param $advancedUserMode= isset($_COOKIE["samlogin_advanced_user_mode"]);
+                        $advancedUserMode = true;
 
-                                if (!empty($msgdiffCheck) && strlen($msgdiffCheck) < 500){
-                                                            $msg.=  "<hr style='margin:0px; margin-top:2px;margin-bottom:2px;'/>"
-                                                            ."<small>Changes that will be applied (preview):</small> "
-                                                            . "<span style='font-size:80%;font-family: monospace;'>"
-                                                            .$msgdiff
-                                                            ."</span>";
-                                }
-                        }else{
-                                $msg=  "SimpleSAMLphp requires a "
-                                . "<span class='uk-button uk-button-mini' style='cursor:pointer;' onClick='samlogin_saveSSPConf();'>"
-                                . "<i class='uk-icon-download'></i>Put settings in production (SSP)</span>"
-                                . "";
-                            
+                        if ($advancedUserMode) {
+                            $msgdiff = Diff::toHTMLDiffOnlySkipSecrets(Diff::compare($contentA, $contentB, false));
+                            $msgdiffCheck = strip_tags(trim($msgdiff));
+                            $msg = "simpleSAMLphp's configuration file " . strtr(
+                                            $filetocheck, array(
+                                        "/components/com_samlogin/simplesamlphp/config/" => ""
+                                            )
+                                    ) . " is not in sync with your latest changes, click the "
+                                    . "<span class='uk-button uk-button-mini' style='cursor:pointer;' onClick='samlogin_saveSSPConf();'>"
+                                    . "<i class='uk-icon-download'></i>Put settings in production (SSP)</span>"
+                                    . " toolbar button to commit changes.";
+
+                            if (!empty($msgdiffCheck) && strlen($msgdiffCheck) < 500) {
+                                $msg.= "<hr style='margin:0px; margin-top:2px;margin-bottom:2px;'/>"
+                                        . "<small>Changes that will be applied (preview):</small> "
+                                        . "<span style='font-size:80%;font-family: monospace;'>"
+                                        . $msgdiff
+                                        . "</span>";
+                            }
+                        } else {
+                            $msg = "SimpleSAMLphp requires a "
+                                    . "<span class='uk-button uk-button-mini' style='cursor:pointer;' onClick='samlogin_saveSSPConf();'>"
+                                    . "<i class='uk-icon-download'></i>Put settings in production (SSP)</span>"
+                                    . "";
                         }
 
                         $ajaxMessages[] = array("msg" => $msg,
@@ -105,12 +102,17 @@ class SSPConfManager {
         return $toret;
     }
 
-    static function getAuthsourcesConf() {
+    static function getAuthsourcesConf($getItFromProduction=true) {
+        
         require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/lib/_autoload.php");
-        if (isset($config)){
+        if (isset($config)) {
             unset($config);
         }
-        require(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/authsources" . self::$saveConfModeSuffix . ".php");
+        if ($getItFromProduction){
+                 require(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/authsources" . self::$SAVECONF_PRODUCTION . ".php");
+        }else{
+            require(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/authsources" . self::$saveConfModeSuffix . ".php");
+        }
         return $config;
     }
 
@@ -125,6 +127,14 @@ class SSPConfManager {
             $authsourcesConf["default-sp"]["entityID"] = $mySPEntityId;
         }
 
+        $authsourcesConf["default-sp"]["signature.algorithm"] = $params->get("sp_signature.algorithm", null);
+        $authsourcesConf["default-sp"]["NameIDPolicy"] = $params->get("sp_NameIDPolicy", null);
+        $authsourcesConf["default-sp"]["ProtocolBinding"] = $params->get("sp_ProtocolBinding", null);
+        $authsourcesConf["default-sp"]["acs.Bindings"] = $params->get("sp_acs.Bindings", null);
+
+        $authsourcesConf["default-sp"]["isPassive"] = $params->get("sp_isPassive", 0) == 1 ? TRUE : FALSE;
+        //sp_acs.Bindings
+        $authsourcesConf["default-sp"]["assertion.encryption"] = $params->get("sp_assertion.encryption", 0) == 1 ? TRUE : FALSE;
 
         $authsourcesConf["default-sp"]["sign.authnrequest"] = $params->get("ssp_signassertion", 0) == 1 ? TRUE : FALSE;
         $authsourcesConf["default-sp"]["sign.logout"] = $params->get("ssp_signassertion", 0) == 1 ? TRUE : FALSE;
@@ -338,12 +348,12 @@ class SSPConfManager {
             SAMLoginControllerAjax::enqueueAjaxMessage("Failed while writing backup config file in $SSPConfPath, please check file permissions "
                     , SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
         }
-if (isset($config)){
-    unset($config);
-}
-require($SSPConfPath . "module_cron.php");
+        if (isset($config)) {
+            unset($config);
+        }
+        require($SSPConfPath . "module_cron.php");
         $config = array_merge($config, $cronconf);
-        $config["samlogin_lastchanged"] = "deprecated";
+        $config["samlogin_lastchanged"] = array("deprecated");
         $newConfFileStr = array_smart_dump($config, "config");
 
         $fwrite = file_put_contents($SSPConfPath . "module_cron" . self::$saveConfModeSuffix . ".php", "<?php /* This conf file was generated by samlogin for Joomla!, but you can modify it! */\n" . $newConfFileStr);
@@ -353,9 +363,9 @@ require($SSPConfPath . "module_cron.php");
             $success = false;
         }
         // $app->enqueueMessage(JText::_('SAMLOGIN_GENCRONSECRET_CONF_OK'));
-        if($success){
-        SAMLoginControllerAjax::enqueueAjaxMessage("module_cron" . self::$saveConfModeSuffix . ".php written"
-                , SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+        if ($success) {
+            SAMLoginControllerAjax::enqueueAjaxMessage("module_cron" . self::$saveConfModeSuffix . ".php written"
+                    , SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
         }
         return $success;
     }
@@ -370,13 +380,13 @@ require($SSPConfPath . "module_cron.php");
             SAMLoginControllerAjax::enqueueAjaxMessage("Failed while writing backup of config file in $SSPConfPath, please check file permissions "
                     , SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
         }
-        if (isset($config)){
-    unset($config);
-}
+        if (isset($config)) {
+            unset($config);
+        }
         require($SSPConfPath . "config-metarefresh" . self::$saveConfModeSuffix . ".php");
         $config["sets"]["samlogin"]["sources"] = $srcArray;
         $config["sets"]["samlogin"]["expireAfter"] = 60 * 60 * 24 * 31;
-        $config["samlogin_lastchanged"] = "deprecated";
+        $config["samlogin_lastchanged"] = array("deprecated");
         $newConfFileStr = array_smart_dump($config, "config");
 
         $fwrite = file_put_contents($SSPConfPath . "config-metarefresh" . self::$saveConfModeSuffix . ".php", "<?php /* This conf file was generated by samlogin for Joomla!, but you can modify it! */\n" . $newConfFileStr);
@@ -386,14 +396,14 @@ require($SSPConfPath . "module_cron.php");
                     , SAMLoginControllerAjax::$AJAX_MESSAGE_DANGER);
         }
         //$app->enqueueMessage(JText::_('SAMLOGIN_GENMETARERESH_CONF_OK'));
-        if($success){ SAMLoginControllerAjax::enqueueAjaxMessage("config-metarefresh" . self::$saveConfModeSuffix . ".php written"
-                , SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+        if ($success) {
+            SAMLoginControllerAjax::enqueueAjaxMessage("config-metarefresh" . self::$saveConfModeSuffix . ".php written"
+                    , SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
         }
         return $success;
-        
     }
 
-    static function saveAuthsourcesConf($config, $app,$writeAlsoVirtualFile=false) {
+    static function saveAuthsourcesConf($config, $app, $writeAlsoVirtualFile = false) {
         $success = true;
         $SSPConfPath = JPATH_COMPONENT_SITE . "/simplesamlphp/config/";
 
@@ -406,7 +416,7 @@ require($SSPConfPath . "module_cron.php");
         }
 
 
-        $config["samlogin_lastchanged"] = "deprecated";
+        $config["samlogin_lastchanged"] = array("deprecated");
         $newConfFileStr = array_smart_dump($config, "config");
 
         $fwrite = file_put_contents($SSPConfPath . "authsources" . self::$saveConfModeSuffix . ".php", "<?php /* This conf file was generated by samlogin for Joomla!, but you can modify it! */\n" . $newConfFileStr);
@@ -415,29 +425,35 @@ require($SSPConfPath . "module_cron.php");
             SAMLoginControllerAjax::enqueueAjaxMessage("Failed while writing config file in $SSPConfPath, please check file permissions "
                     , SAMLoginControllerAjax::$AJAX_MESSAGE_DANGER);
         }
-        if ($writeAlsoVirtualFile){ //useful to prevent usync issue when we generate new keys
-            $fwrite = file_put_contents($SSPConfPath . "authsources" . self::$SAVECONF_SIMULATE . ".php", "<?php /* This conf file was generated by samlogin for Joomla!, but you can modify it! */\n" . $newConfFileStr);
+        if ($writeAlsoVirtualFile) { //useful to prevent unsync issue when we generate new keys
+            $fwrite = JFile::copy($SSPConfPath . "authsources" . self::$saveConfModeSuffix . ".php", $SSPConfPath . "authsources" . self::$SAVECONF_SIMULATE . ".php");
+
+//file_put_contents($SSPConfPath . "authsources" . self::$SAVECONF_SIMULATE . ".php", "<?php /* This conf file was generated by samlogin for Joomla!, but you can modify it! */\n" . $newConfFileStr);
             if ($fwrite == false) {
                 $success = false;
                 SAMLoginControllerAjax::enqueueAjaxMessage("Failed while writing config file in $SSPConfPath, please check file permissions "
                         , SAMLoginControllerAjax::$AJAX_MESSAGE_DANGER);
             }
-            
         }
         //  $app->enqueueMessage(JText::_('SAMLOGIN_GENAUTHSOURCES_OK'));
-        if($success){
-        SAMLoginControllerAjax::enqueueAjaxMessage("authsources" . self::$saveConfModeSuffix . ".php written"
-                , SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+        if ($success) {
+            SAMLoginControllerAjax::enqueueAjaxMessage("authsources" . self::$saveConfModeSuffix . ".php written"
+                    , SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
         }
         return $success;
     }
 
-    static function getConf() {
+    static function getConf($getItFromProduction=true) {
         require_once(JPATH_SITE . "/components/com_samlogin/simplesamlphp/lib/_autoload.php");
-        if (isset($config)){
-    unset($config);
-}
-        require(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/config.php");
+        if (isset($config)) {
+            unset($config);
+        }
+      
+        if ($getItFromProduction){
+                 require(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/config" . self::$SAVECONF_PRODUCTION . ".php");
+        }else{
+            require(JPATH_SITE . "/components/com_samlogin/simplesamlphp/config/config" . self::$saveConfModeSuffix . ".php");
+        }
         return $config;
     }
 
@@ -452,7 +468,7 @@ require($SSPConfPath . "module_cron.php");
             SAMLoginControllerAjax::enqueueAjaxMessage("Failed while writing backup config file in $SSPConfPath, please check file permissions "
                     , SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
         }
-        $config["samlogin_lastchanged"] = "deprecated";
+        $config["samlogin_lastchanged"] = array("deprecated");
 
         $newConfFileStr = array_smart_dump($config, "config");
 
@@ -464,14 +480,13 @@ require($SSPConfPath . "module_cron.php");
         }
 
         // $app->enqueueMessage(JText::_('SAMLOGIN_GENCONF_OK'));
-        if($success){
-        SAMLoginControllerAjax::enqueueAjaxMessage("config" . self::$saveConfModeSuffix . ".php written"
-                , SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+        if ($success) {
+            SAMLoginControllerAjax::enqueueAjaxMessage("config" . self::$saveConfModeSuffix . ".php written"
+                    , SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
         }
         return $success;
     }
 
 }
-
 
 ?>
