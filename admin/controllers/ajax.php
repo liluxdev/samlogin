@@ -235,7 +235,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 "1.11.legacy" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.zip",
                 "1.11.n" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.11.n.zip",
                 "1.11.f" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.11.f.zip",
-                "1.12.n" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.11.n.zip",
+                "1.12.n" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.12.n.zip",
                 //alternate:
                 "1.11.legacy-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.zip",
                 "1.11.n-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.11.n.zip",
@@ -765,25 +765,32 @@ class SAMLoginControllerAjax extends SAMLoginController {
         die();
     }
 
-    private function recursiveRemoveDirButNotBackups($dir) {
+   private function recursiveRemoveDirButNotBackups($dir,&$toret) {
+        $rmcountdir=0;
+        $rmfiledir=0;
         if (is_dir($dir)) {
             $objects = scandir($dir);
             foreach ($objects as $object) {
                 if ($object != "." && $object != ".." && !stristr($object,".backup_until")) {
                     if (filetype($dir . "/" . $object) == "dir") {
-                        rrmdir($dir . "/" . $object);
+                        rmdir($dir . "/" . $object);
+                        $rmcountdir++;
                     } else {
                         unlink($dir . "/" . $object);
+                        $rmfiledir++;
                     }
                 }
             }
             reset($objects);
             rmdir($dir);
+            $rmcountdir++;
+                   $toret['additionalMessages'][] = array("msg" => "Cleaning $rmcountdir dirs and $rmfiledir files (old SimpleSAMLphp)", "level" => "info");
+            
         }
     }
 
     private function _preserveSSPConfMigration($app, &$toret) {
-        $this->recursiveRemoveDirButNotBackups("/components/com_samlogin/simplesamlphp/");
+        $this->recursiveRemoveDirButNotBackups(JPATH_SITE."/components/com_samlogin/simplesamlphp/",$toret);
         $lockFile = JPATH_COMPONENT_SITE . "/preserveConf.lockfile";
         $lock = file_exists($lockFile);
         if ($lock) {

@@ -139,7 +139,8 @@ if ($_GET['task'] == "logoutCallback") {
 if ($_GET['task'] == "initSLO") {
 
     // die($samlsession->getIdP());
-    if ($samlsession != null) {
+    $usingPhpSession=false; //TODO: detect from params, anyway get rid of this loginReceiver.php is better
+    if ($samlsession != null && $usingPhpSession) {
         SimpleSAML_Session::setInstance($samlsession);
         //phpconsole("logging out at idp: " . $samlsession->getIdP(), "rastrano");
     }

@@ -81,7 +81,7 @@
         </field>
          
         <field 
-            name="sp_signature.algorithm"
+            name="sp_signature_algorithm"
             type="list"
             default="default"
             label="COM_SAMLOGIN_SIGNATURE_ALGO_SP"
@@ -96,7 +96,7 @@
          
          
         <field 
-            name="sp_NameIDPolicy"
+            name="sp_nameidpolicy"
             type="list"
             default="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
             label="COM_SAMLOGIN_NAMEIDPOLICY_SP"
@@ -116,7 +116,7 @@
         
            
         <field 
-            name="sp_ProtocolBinding"
+            name="sp_protocol_binding"
             type="list"
             default="default"
             label="COM_SAMLOGIN_PROTOCOL_BINDING"
@@ -179,7 +179,7 @@
          
          
         <field 
-            name="sp_assertion.encryption"
+            name="sp_assertion_encryption"
             type="radio"
             default="0"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_ENCRYPTASSERTION"

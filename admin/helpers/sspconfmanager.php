@@ -127,15 +127,15 @@ class SSPConfManager {
             $authsourcesConf["default-sp"]["entityID"] = $mySPEntityId;
         }
 
-        $authsourcesConf["default-sp"]["signature.algorithm"] = $params->get("sp_signature.algorithm", null);
+        $authsourcesConf["default-sp"]["signature.algorithm"] = $params->get("sp_signature_algorithm", null);
         if (is_null( $authsourcesConf["default-sp"]["signature.algorithm"])  || $authsourcesConf["default-sp"]["signature.algorithm"]=="default"){
             unset($authsourcesConf["default-sp"]["signature.algorithm"]);
         }
-        $authsourcesConf["default-sp"]["NameIDPolicy"] = $params->get("sp_NameIDPolicy", null);
+        $authsourcesConf["default-sp"]["NameIDPolicy"] = $params->get("sp_nameidpolicy", null);
         if (is_null( $authsourcesConf["default-sp"]["NameIDPolicy"])  || $authsourcesConf["default-sp"]["NameIDPolicy"]=="default" ){
             unset($authsourcesConf["default-sp"]["NameIDPolicy"]);
         }
-        $authsourcesConf["default-sp"]["ProtocolBinding"] = $params->get("sp_ProtocolBinding", null);
+        $authsourcesConf["default-sp"]["ProtocolBinding"] = $params->get("sp_protocol_binding", null);
         if (is_null($authsourcesConf["default-sp"]["ProtocolBinding"]) || $authsourcesConf["default-sp"]["ProtocolBinding"]=="default"){
             unset($authsourcesConf["default-sp"]["ProtocolBinding"]);
         }
@@ -162,13 +162,13 @@ class SSPConfManager {
     //        $authsourcesConf["default-sp"]["debugall"]=print_r(   $authsourcesConf["default-sp"]["acs.Bindings"],true);
         $authsourcesConf["default-sp"]["isPassive"] = $params->get("sp_isPassive", 0) == 1 ? TRUE : FALSE;
         //sp_acs.Bindings
-        $authsourcesConf["default-sp"]["assertion.encryption"] = $params->get("sp_assertion.encryption", 0) == 1 ? TRUE : FALSE;
+        $authsourcesConf["default-sp"]["assertion.encryption"] = $params->get("sp_assertion_encryption", 0) == 1 ? TRUE : FALSE;
 
-        $authsourcesConf["default-sp"]["sign.authnrequest"] = $params->get("ssp_signassertion", 0) == 1 ? TRUE : FALSE;
-        $authsourcesConf["default-sp"]["sign.logout"] = $params->get("ssp_signassertion", 0) == 1 ? TRUE : FALSE;
+        $authsourcesConf["default-sp"]["sign.authnrequest"] = $params->get("sp_signassertion", 0) == 1 ? TRUE : FALSE;
+        $authsourcesConf["default-sp"]["sign.logout"] = $params->get("sp_signassertion", 0) == 1 ? TRUE : FALSE;
 
-        $authsourcesConf["default-sp"]["redirect.sign"] = $params->get("ssp_signassertion", 0) == 1 ? TRUE : FALSE;
-        $authsourcesConf["default-sp"]["redirect.validate"] = $params->get("ssp_validateassertion", 0) == 1 ? TRUE : FALSE;
+        $authsourcesConf["default-sp"]["redirect.sign"] = $params->get("sp_signassertion", 0) == 1 ? TRUE : FALSE;
+        $authsourcesConf["default-sp"]["redirect.validate"] = $params->get("sp_signassertion", 0) == 1 ? TRUE : FALSE;
 
         $discoType = $params->get("sspas_discotype", "0");
         if ($discoType === "0" || $discoType === 0) {
