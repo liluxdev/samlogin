@@ -11,6 +11,53 @@ defined('_JEXEC') or die;
     .samlogin-dash-minipanel-right{float:right;  margin-left: 10px;}
     .samlogin-dash-minipanel-bottom{}
 
+    #tab-settings-content_intab{
+
+        width: 550px;
+
+    }
+    /*
+    
+        .settingsFieldsetTabs{
+            float:left; margin-right: 5px;
+            height: 500px;
+        }
+    
+    
+        #tab-settings-content{
+            float: none;
+              height: 500px;
+              overflow-y: scroll;
+              overflow-x: visible;
+              padding-left: 5px;
+              padding-right: 7px;
+        }
+        /* when non modal
+        #paramsForm{
+            width: 800px;
+            
+        }*/
+    /*
+     #paramsForm{
+        width: 100% !important;
+        
+    }
+    */
+
+    @media (max-width:767px){
+        .settingsFieldsetTabs{
+            float:none; 
+            height: inherit;
+        }
+        #tab-settings-content{
+            float: none;
+            /*     width: 700px; */
+            height: inherit;
+            overflow-y: auto;
+            overflow-x: auto;
+            padding-left: 5px;
+        }
+    }
 
     @media (min-width:700px){
         .samlogin-dash-main{
@@ -74,6 +121,8 @@ defined('_JEXEC') or die;
             -khtml-box-sizing: border-box;
             box-sizing: border-box;
         }
+
+
     }
 
     /* hide Joomla 2.5 huglyness*/
@@ -214,8 +263,8 @@ defined('_JEXEC') or die;
                 if (data.metadataPublishedSSL !== true) {
                     jQuery(".metadataPublishedSSL .statusOfCheck").html("<i class='uk-icon-warning'></i> " + data.metadataPublishedSSL)
                             .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
-                    
-                   
+
+
                 } else {
                     jQuery(".metadataPublished .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
                     jQuery(".metadataPublishedSSL .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
@@ -292,7 +341,7 @@ defined('_JEXEC') or die;
                 jQuery(".lastCronjobUpdate .statusOfCheck").html("<i class='uk-icon-times'></i>")
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
             }
-            
+
             jQuery('.statusOfCheck .uk-icon-question-circle').parent().removeClass('uk-button-danger'); //this makes the metadata not red when check result is unknown
 
         });
@@ -319,103 +368,139 @@ defined('_JEXEC') or die;
     </div>
 </aside>
 -->
-<div style='margin-top: 0px; margin-bottom: 10px;  max-width: 670px;' class="samlogin-dash-leftcontent uk-panel uk-panel-box samlogin-dash-main">
-    <h3 style='margin: 0px;'><i class='uk-icon-check-square-o'></i><i class='uk-icon-ellipsis-v'></i> Configuration checklist 
-        <div style='cursor:pointer;' onclick="samlogin_doConfigTests();" class="uk-button uk-button-primary uk-button-mini"><i class='uk-icon-refresh'></i> test now</div></h3>
-    <hr style=" margin-top: 4px; margin-bottom: 6px;"/>
-    <div class="">
-        <table class="uk-table uk-table-condensed uk-table-hover uk-table-striped">
-            <thead>
-                <tr>
-                    <th class=""><span>Check</span></th>
-                    <th class=""><span>Status</span></th>
-                    <th class=""><span>Action / Help</span></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr></tr>
-                <tr class="sspCheck">
-                    <td class="">Linked SimpleSAMLphp installation</td>
-                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                    <td class=""><span class="guideLink"></span> <span style="margin-top: 2px;" class="configIsInSync uk-button uk-button-mini"></span></td>
-                </tr>
-                <?php if ($this->checks['sspCheck']) { ?>
-                    <tr class='keyRotation'>
-                        <td class=" ">Key Rotation Status</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_KEYROTATE_GUIDELINK'); ?></span></td>
-                    </tr>
-                    <tr class='baseURLPath'>
-                        <td class="samlogin-spare-check">SimpleSAML BaseURL Path</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_BASEURLPATH_GUIDELINK'); ?></span></td>
-                    </tr>
-                    <tr class='authPlugin'>
-                        <td class="samlogin-auth-plugin">Auth Plugin Enabled</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_AUTHPLUGIN_GUIDELINK'); ?></span></td>
-                    </tr>
-                    <tr class='secretSalt'>
-                        <td class="samlogin-cert-protected">SSP Secret Salt Changed</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_SECRETSALT_GUIDELINK'); ?></span></td>
-                    </tr>
-                    <tr class='adminPass'>
-                        <td class="samlogin-adminpass">SSP AdminPass is disabled or changed from default</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_ADMINPASS_GUIDELINK'); ?></span></td>
-                    </tr>
-                    <tr class='metadataPublished'>
-                        <td class="samlogin-cert-protected">Metadata URL is published</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_SSL_GUIDELINK'); ?></span></td>
-                    </tr>      
-                    <tr class='metadataPublishedSSL'>
-                        <td class="samlogin-cert-protected">Metadata URL is published on SSL (HTTPS)</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_SSL_GUIDELINK'); ?></span></td>
-                    </tr>        
-                    <tr class='certChanged'>
-                        <td class="samlogin-cert-changed">SAML endpoint's default certificate was changed</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_PRIVATEKEY_GENERATE_GUIDELINK'); ?></span></td>
-                    </tr>
-                    <tr class='certProtected'>
-                        <td class="samlogin-cert-protected">SAML endpoint's private key is protected form www access</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_PRIVATEKEY_PROTECT_GUIDELINK'); ?></span></td>
-                    </tr>
-                    <tr class='certProtected_ssl'>
-                        <td class="samlogin-cert-protected">SAML endpoint's private key is protected form www access (https)</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_PRIVATEKEY_PROTECT_GUIDELINK'); ?></span></td>
-                    </tr>
-                    <tr class='logsProtected'>
-                        <td class="samlogin-cert-protected">SSP logs are protected form www access</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_PRIVATEKEY_PROTECT_GUIDELINK'); ?></span></td>
-                    </tr>
-                    <tr class='logsProtected_ssl'>
-                        <td class="samlogin-cert-protected">SSP logs are protected form www access (https)</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_PRIVATEKEY_PROTECT_GUIDELINK'); ?></span></td>
-                    </tr>
 
-                    <tr class='usingMetarefresh'>
-                        <td class=" ">Using Metarefresh</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_METAREFRESH_GUIDELINK'); ?></span></td>
-                    </tr>
 
-                    <tr class='lastCronjobUpdate'>
-                        <td class=" ">Last metarefresh cronjob update</td>
-                        <td class=" "><span class='statusOfCheck uk-button uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
-                        <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_METAREFRESH_GUIDELINK'); ?></span></td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-    </div>
+
+
+
+
+<div id="mainSamloginAdminBlock" style="float: left;">
+    <!-- uk-tab-left uk-width-medium-1-2 -->
+    <ul class="uk-tab " data-uk-tab="{connect:'#tab-content'}">
+        <li class="uk-active"><a href="#">Checklist</a></li>
+        <li><a href="">Settings</a></li>
+        <li class="uk-disabled"><a href="">Logs</a></li>
+    </ul>
+    <ul id="tab-content" class="uk-switcher uk-margin">
+        <li class="checklistTab">
+            <div id="mainSamloginAdminBlock" style='margin-top: 0px; margin-bottom: 10px;  max-width: 670px;' class="samlogin-dash-leftcontent uk-panel uk-panel-box samlogin-dash-main">
+
+                <h3 style='margin: 0px;'><i class='uk-icon-check-square-o'></i><i class='uk-icon-ellipsis-v'></i> Configuration checklist 
+                    <div style='cursor:pointer;' onclick="samlogin_doConfigTests();" class="uk-button uk-button-primary uk-button-mini"><i class='uk-icon-refresh'></i> test now</div></h3>
+                <hr style=" margin-top: 4px; margin-bottom: 6px;"/>
+                <div class="">
+                    <table class="uk-table uk-table-condensed uk-table-hover uk-table-striped">
+                        <thead>
+                            <tr>
+                                <th class=""><span>Check</span></th>
+                                <th class=""><span>Status</span></th>
+                                <th class=""><span>Action / Help</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+                            <tr class="sspCheck">
+                                <td class="">Linked SimpleSAMLphp installation</td>
+                                <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                <td class=""><span class="guideLink"></span> <span style="margin-top: 2px;" class="configIsInSync uk-button uk-button-mini"></span></td>
+                            </tr>
+                            <?php if ($this->checks['sspCheck']) { ?>
+                                <tr class='keyRotation'>
+                                    <td class=" ">Key Rotation Status</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_KEYROTATE_GUIDELINK'); ?></span></td>
+                                </tr>
+                                <tr class='baseURLPath'>
+                                    <td class="samlogin-spare-check">SimpleSAML BaseURL Path</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_BASEURLPATH_GUIDELINK'); ?></span></td>
+                                </tr>
+                                <tr class='authPlugin'>
+                                    <td class="samlogin-auth-plugin">Auth Plugin Enabled</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_AUTHPLUGIN_GUIDELINK'); ?></span></td>
+                                </tr>
+                                <tr class='secretSalt'>
+                                    <td class="samlogin-cert-protected">SSP Secret Salt Changed</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_SECRETSALT_GUIDELINK'); ?></span></td>
+                                </tr>
+                                <tr class='adminPass'>
+                                    <td class="samlogin-adminpass">SSP AdminPass is disabled or changed from default</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_ADMINPASS_GUIDELINK'); ?></span></td>
+                                </tr>
+                                <tr class='metadataPublished'>
+                                    <td class="samlogin-cert-protected">Metadata URL is published</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_SSL_GUIDELINK'); ?></span></td>
+                                </tr>      
+                                <tr class='metadataPublishedSSL'>
+                                    <td class="samlogin-cert-protected">Metadata URL is published on SSL (HTTPS)</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_SSL_GUIDELINK'); ?></span></td>
+                                </tr>        
+                                <tr class='certChanged'>
+                                    <td class="samlogin-cert-changed">SAML endpoint's default certificate was changed</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_PRIVATEKEY_GENERATE_GUIDELINK'); ?></span></td>
+                                </tr>
+                                <tr class='certProtected'>
+                                    <td class="samlogin-cert-protected">SAML endpoint's private key is protected form www access</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_PRIVATEKEY_PROTECT_GUIDELINK'); ?></span></td>
+                                </tr>
+                                <tr class='certProtected_ssl'>
+                                    <td class="samlogin-cert-protected">SAML endpoint's private key is protected form www access (https)</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_PRIVATEKEY_PROTECT_GUIDELINK'); ?></span></td>
+                                </tr>
+                                <tr class='logsProtected'>
+                                    <td class="samlogin-cert-protected">SSP logs are protected form www access</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_PRIVATEKEY_PROTECT_GUIDELINK'); ?></span></td>
+                                </tr>
+                                <tr class='logsProtected_ssl'>
+                                    <td class="samlogin-cert-protected">SSP logs are protected form www access (https)</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_PRIVATEKEY_PROTECT_GUIDELINK'); ?></span></td>
+                                </tr>
+
+                                <tr class='usingMetarefresh'>
+                                    <td class=" ">Using Metarefresh</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_METAREFRESH_GUIDELINK'); ?></span></td>
+                                </tr>
+
+                                <tr class='lastCronjobUpdate'>
+                                    <td class=" ">Last metarefresh cronjob update</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_METAREFRESH_GUIDELINK'); ?></span></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </li> 
+
+        <li class="SettingsTab">
+            <div style="float: right;" 
+                 title="Open settings in a modal"
+
+                 class="uk-button uk-button-mini" 
+                 data-uk-modal="{target:'#settings-modal'}">
+                <i class="uk-icon-external-link-square"></i>
+            </div>
+            <!-- now modal -->
+            <?php
+            $fromHTMLUniqueIdSuffix = "intab";
+            include dirname(__FILE__) . "/snippets/settings-form.php";
+            ?>
+        </li> 
+        <li class="uk-active">Test!</li>
+    </ul>
 </div>
 
 <aside>
@@ -503,7 +588,7 @@ defined('_JEXEC') or die;
     <div class="uk-text-bold"><i class="uk-icon-cogs"></i> Cronjob Setup Info: </div>
     <p>
         <a class="cronLink" target="_blank" href="<?php echo $this->checks["cronLink"]; ?>">
-              Cronjob URL (click to run now) <i class="uk-icon-external-link-square"></i></a> <p/>
+            Cronjob URL (click to run now) <i class="uk-icon-external-link-square"></i></a> <p/>
     <i class="uk-icon-clock-o"></i>
     Crontab scheduling example:<p/><textarea class="cronSuggestion" style="font-size:10px; width: 100%; height: 10em;"><?php echo $this->checks["cronSuggestion"]; ?></textarea> 
 </div>
@@ -520,152 +605,167 @@ defined('_JEXEC') or die;
     <ol>
         <li> Ensure you have all green in the configuration checklist and that you are browsing the Joomla administrator with https://</li>
         <li> Ensure you added the XML metadata of the remote IdP or federation in <i>SAMLogin->Settings->Federation Metadata<i> and you set a proper discovery service or IdP EntityId in <i>SAMLogin->Settings->Discovery Service</i> </li>
-        <li> Ensure you shared your <a target="_blank" href="<?php echo $this->checks["metadataURL"];?>">Self-metadata URL <i class="uk-icon-external-link-square"></i> </a> with the IdP/Federation managers and they approved your SP entity in the trusted relying parties</li>
-        <li> Open this <a target='_blank' href='<?php echo JUri::root()."/components/com_samlogin/simplesamlphp/www/module.php/core/authenticate.php?as=default-sp";?>'>SimpleSAMLphp authsource test page <i class="uk-icon-external-link-square"></i> </a> 
-        </li>
-        <li> Click forward (evenutally select your IdP if you have multiple choices)</li>
-        <li> Login at your IdP </li>
-        <li> You should see now a page showing a list of attribute names and values take note of this as this will help you to define AuthZ rules and tuning the Attr. Mappings in SAMLogin</li>
-        <li> If all went fine you are ready to publish the SAMLogin module or the login view and test a real Joomla login (if it fails try to tune Attr.Mappings accoding to the attribute names, N.B. you need an email attribute from your IdP, this is required by Joomla!)</li>
-    </ol>    
-    </p>
-</div>
+                    <li> Ensure you shared your <a target="_blank" href="<?php echo $this->checks["metadataURL"]; ?>">Self-metadata URL <i class="uk-icon-external-link-square"></i> </a> with the IdP/Federation managers and they approved your SP entity in the trusted relying parties</li>
+                    <li> Open this <a target='_blank' href='<?php echo JUri::root() . "/components/com_samlogin/simplesamlphp/www/module.php/core/authenticate.php?as=default-sp"; ?>'>SimpleSAMLphp authsource test page <i class="uk-icon-external-link-square"></i> </a> 
+                    </li>
+                    <li> Click forward (evenutally select your IdP if you have multiple choices)</li>
+                    <li> Login at your IdP </li>
+                    <li> You should see now a page showing a list of attribute names and values take note of this as this will help you to define AuthZ rules and tuning the Attr. Mappings in SAMLogin</li>
+                    <li> If all went fine you are ready to publish the SAMLogin module or the login view and test a real Joomla login (if it fails try to tune Attr.Mappings accoding to the attribute names, N.B. you need an email attribute from your IdP, this is required by Joomla!)</li>
+                    </ol>    
+                    </p>
+                    </div>
 
 
 
 
-<!--
-       <div id="ssp-conf-debug">
-           <h2><?php echo JText::_('SAMLOGIN_SSP_CONF_DEBUG'); ?></h2>
-<?php //echo $this->checks['sspConfDebug'];  ?>
-       </div>
--->
+                    <!--
+                           <div id="ssp-conf-debug">
+                               <h2><?php echo JText::_('SAMLOGIN_SSP_CONF_DEBUG'); ?></h2>
+                    <?php //echo $this->checks['sspConfDebug'];  ?>
+                           </div>
+                    -->
 
-<!-- modals: -->   
+                    <!-- modals: -->   
 
-<div  id='install-ssp-modal'class="uk-modal">
-    <div class="uk-modal-dialog">
-        <a class="uk-modal-close uk-close"></a>
-        <h4 style='margin-bottom: 0px; margin-top: 0px;'>Install simpleSAMLphp Wizard</h4> <hr style='margin:0; margin-bottom: 3px;'/>
-        <!-- This is the container enabling the JavaScript in click mode -->
-        <div class="install-ssp-modal-a">
-            <p style="text-align: left;">
-                SimpleSAMLphp is a free software developed by UNINETT AS*  licensed under the CC-GNU LGPL version 2.1,
-                this procedure will let you install a custom copy embedded in your Joomla just with a click.
-                (It's a proven opensource SAML 2.0 library/software)
-                <br/>
-                <small>*Anyway the version you will install through this wizard may be a custom distro modified by the SAMlogin developer(s) 
-                    to better achieve integration with Joomla and your system environment</small>
-            </p>
-            <p>
-                SimpleSAMLphp LGPL License:
-                <textarea style="width:100%; height: 150px; font-size: 90%;"><?php echo htmlentities(file_get_contents(dirname(__FILE__) . "/SSP_LGPL_LICENSE")); ?></textarea>
-            </p>
-            <div style="display: block; width: 50%; margin: 0 auto; text-align: center;">
-                <div style='' data-uk-dropdown="{mode:'click'}">
-                    <!-- This is the element toggling the dropdown -->
-                    <div ><button class="uk-button ">Click here to install it <i class="uk-icon-caret-down"></i></button></div>
 
-                    <!-- This is the dropdown -->
-                    <div style="width: 100%; font-size: 90%;" class="uk-dropdown">
-                        <ul style="text-align: center;" class="uk-nav uk-nav-dropdown">
-                            <li class="uk-nav-header">Select version and flavour</li>
-                            <li><a href="#" onClick="samlogin_installSSP('1.12.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.12</b><i>.n (from our github repo)</i> 
-                                    <span style="float: none; font-size: 70%;">
-                                        <div class="uk-badge uk-badge-warning">samlogin</div>
-                                        <div class="uk-badge uk-badge-warning">nginx</div>
-                                        <div class="uk-badge uk-badge-success">suggested choice</div>
+
+
+                    <div  id='install-ssp-modal'class="uk-modal">
+                        <div class="uk-modal-dialog">
+                            <a class="uk-modal-close uk-close"></a>
+                            <h4 style='margin-bottom: 0px; margin-top: 0px;'>Install simpleSAMLphp Wizard</h4> <hr style='margin:0; margin-bottom: 3px;'/>
+                            <!-- This is the container enabling the JavaScript in click mode -->
+                            <div class="install-ssp-modal-a">
+                                <p style="text-align: left;">
+                                    SimpleSAMLphp is a free software developed by UNINETT AS*  licensed under the CC-GNU LGPL version 2.1,
+                                    this procedure will let you install a custom copy embedded in your Joomla just with a click.
+                                    (It's a proven opensource SAML 2.0 library/software)
+                                    <br/>
+                                    <small>*Anyway the version you will install through this wizard may be a custom distro modified by the SAMlogin developer(s) 
+                                        to better achieve integration with Joomla and your system environment</small>
+                                </p>
+                                <p>
+                                    SimpleSAMLphp LGPL License:
+                                    <textarea style="width:100%; height: 150px; font-size: 90%;"><?php echo htmlentities(file_get_contents(dirname(__FILE__) . "/SSP_LGPL_LICENSE")); ?></textarea>
+                                </p>
+                                <div style="display: block; width: 50%; margin: 0 auto; text-align: center;">
+                                    <div style='' data-uk-dropdown="{mode:'click'}">
+                                        <!-- This is the element toggling the dropdown -->
+                                        <div ><button class="uk-button ">Click here to install it <i class="uk-icon-caret-down"></i></button></div>
+
+                                        <!-- This is the dropdown -->
+                                        <div style="width: 100%; font-size: 90%;" class="uk-dropdown">
+                                            <ul style="text-align: center;" class="uk-nav uk-nav-dropdown">
+                                                <li class="uk-nav-header">Select version and flavour</li>
+                                                <li><a href="#" onClick="samlogin_installSSP('1.12.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.12</b><i>.n (from our github repo)</i> 
+                                                        <span style="float: none; font-size: 70%;">
+                                                            <div class="uk-badge uk-badge-warning">samlogin</div>
+                                                            <div class="uk-badge uk-badge-warning">nginx</div>
+                                                            <div class="uk-badge uk-badge-success">suggested choice</div>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li><a href="#" onClick="samlogin_installSSP('1.12.n', true);" in_tag="ul"><i class="uk-icon-cloud-download"></i> Migration from SimpleSAMLphp v.1.11 to <b>v.1.12</b><i>.n (from our github repo)</i> 
+                                                        <span style="float: none; font-size: 70%;">
+                                                            <div class="uk-badge uk-badge-warning">samlogin</div>
+                                                            <div class="uk-badge uk-badge-warning">nginx</div>
+                                                            <div class="uk-badge uk-badge-success">suggested choice</div>
+                                                            <div class="uk-badge uk-badge-danger">migration mode - from 1.11, use this if you was on 1.11</div>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li><a href="#" onClick="samlogin_installSSP('1.11.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.11</b><i>.n (from our github repo)</i> 
+                                                        <span style="float: none; font-size: 70%;">
+                                                            <div class="uk-badge uk-badge-warning">samlogin</div>
+                                                            <div class="uk-badge uk-badge-warning">nginx</div>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li><a href="#" onClick="samlogin_installSSP('1.11.f');"  in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.11</b><i>.f (from our github repo)</i> 
+                                                        <span style="float: none; font-size: 70%;">
+                                                            <div class="uk-badge uk-badge-warning">samlogin</div>
+                                                            <div class="uk-badge uk-badge-warning">nginx</div>
+                                                            <div class="uk-badge uk-badge-warning">F5 patch</div>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="uk-nav-header">If the Github download fails try those alternative repos:</li>
+                                                <li><a href="#" onClick="samlogin_installSSP('1.12.n-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.12</b><i>.n (from alternate repo)</i> 
+                                                        <span style="float: none; font-size: 70%;">
+                                                            <div class="uk-badge uk-badge-warning">samlogin</div>
+                                                            <div class="uk-badge uk-badge-warning">nginx</div>
+                                                            <div class="uk-badge uk-badge-success">alternative repo</div>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li><a href="#" onClick="samlogin_installSSP('1.11.n-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.11</b><i>.n (from alternate repo)</i> 
+                                                        <span style="float: none; font-size: 70%;">
+                                                            <div class="uk-badge uk-badge-warning">samlogin</div>
+                                                            <div class="uk-badge uk-badge-warning">nginx</div>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li><a href="#" onClick="samlogin_installSSP('1.11.f-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.11</b><i>.f (from alternate repo)</i> 
+                                                        <span style="float: none; font-size: 70%;">
+                                                            <div class="uk-badge uk-badge-warning">samlogin</div>
+                                                            <div class="uk-badge uk-badge-warning">nginx</div>
+                                                            <div class="uk-badge uk-badge-warning">F5 patch</div>
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="install-ssp-modal-b" style="display: none;">
+                                <p style="text-align: center;">
+                                    <i class="install-ssp-modal-b-icon uk-icon-cloud-download"></i> 
+                                    <span class="install-ssp-modal-b-msg">
+                                        Downloading from remote repository...
                                     </span>
-                                </a>
-                            </li>
-                            <li><a href="#" onClick="samlogin_installSSP('1.12.n',true);" in_tag="ul"><i class="uk-icon-cloud-download"></i> Migration from SimpleSAMLphp v.1.11 to <b>v.1.12</b><i>.n (from our github repo)</i> 
-                                    <span style="float: none; font-size: 70%;">
-                                        <div class="uk-badge uk-badge-warning">samlogin</div>
-                                        <div class="uk-badge uk-badge-warning">nginx</div>
-                                        <div class="uk-badge uk-badge-success">suggested choice</div>
-                                         <div class="uk-badge uk-badge-danger">migration mode - from 1.11, use this if you was on 1.11</div>
-                                    </span>
-                                </a>
-                            </li>
-                            <li><a href="#" onClick="samlogin_installSSP('1.11.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.11</b><i>.n (from our github repo)</i> 
-                                    <span style="float: none; font-size: 70%;">
-                                        <div class="uk-badge uk-badge-warning">samlogin</div>
-                                        <div class="uk-badge uk-badge-warning">nginx</div>
-                                    </span>
-                                </a>
-                            </li>
-                            <li><a href="#" onClick="samlogin_installSSP('1.11.f');"  in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.11</b><i>.f (from our github repo)</i> 
-                                    <span style="float: none; font-size: 70%;">
-                                        <div class="uk-badge uk-badge-warning">samlogin</div>
-                                        <div class="uk-badge uk-badge-warning">nginx</div>
-                                        <div class="uk-badge uk-badge-warning">F5 patch</div>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="uk-nav-header">If the Github download fails try those alternative repos:</li>
-                               <li><a href="#" onClick="samlogin_installSSP('1.12.n-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.12</b><i>.n (from alternate repo)</i> 
-                                    <span style="float: none; font-size: 70%;">
-                                        <div class="uk-badge uk-badge-warning">samlogin</div>
-                                        <div class="uk-badge uk-badge-warning">nginx</div>
-                                        <div class="uk-badge uk-badge-success">alternative repo</div>
-                                    </span>
-                                </a>
-                            </li>
-                            <li><a href="#" onClick="samlogin_installSSP('1.11.n-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.11</b><i>.n (from alternate repo)</i> 
-                                    <span style="float: none; font-size: 70%;">
-                                        <div class="uk-badge uk-badge-warning">samlogin</div>
-                                        <div class="uk-badge uk-badge-warning">nginx</div>
-                                    </span>
-                                </a>
-                            </li>
-                            <li><a href="#" onClick="samlogin_installSSP('1.11.f-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.11</b><i>.f (from alternate repo)</i> 
-                                    <span style="float: none; font-size: 70%;">
-                                        <div class="uk-badge uk-badge-warning">samlogin</div>
-                                        <div class="uk-badge uk-badge-warning">nginx</div>
-                                        <div class="uk-badge uk-badge-warning">F5 patch</div>
-                                    </span>
-                                </a>
-                            </li>
 
-                        </ul>
+                                <div class="uk-progress uk-progress-small uk-progress-danger uk-progress-striped uk-active">
+                                    <div class="uk-progress-bar" style="width: 5%;"></div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
+
+
+                    <div id='settings-modal'class="uk-modal">
+                        <div style='width: 80%;'  class="uk-modal-dialog">
+                            <a class="uk-modal-close uk-close"></a>
+                            <?php
+                            $fromHTMLUniqueIdSuffix = "modal";
+                            include dirname(__FILE__) . "/snippets/settings-form.php";
+                            ?>
+                        </div>
+                    </div>
+
+
+                    <div  id='empty-modal'class="uk-modal">
+                        <div class="uk-modal-dialog">
+                            <a class="uk-modal-close uk-close"></a>
+                            <h4 style='margin-bottom: 0px; margin-top: 0px;'>Install simpleSAMLphp Wizard</h4> <hr style='margin:0; margin-bottom: 3px;'/>
+                            template
+                        </div>
+                    </div>
+
+                    <!-- end modals: -->   
 
                     </div>
 
-                </div>
-            </div>
-        </div>
-        <div class="install-ssp-modal-b" style="display: none;">
-            <p style="text-align: center;">
-                <i class="install-ssp-modal-b-icon uk-icon-cloud-download"></i> 
-                <span class="install-ssp-modal-b-msg">
-                    Downloading from remote repository...
-                </span>
-
-            <div class="uk-progress uk-progress-small uk-progress-danger uk-progress-striped uk-active">
-                <div class="uk-progress-bar" style="width: 5%;"></div>
-            </div>
-            </p>
-        </div>
-    </div>
-</div>
-
-
-<div  id='empty-modal'class="uk-modal">
-    <div class="uk-modal-dialog">
-        <a class="uk-modal-close uk-close"></a>
-        <h4 style='margin-bottom: 0px; margin-top: 0px;'>Install simpleSAMLphp Wizard</h4> <hr style='margin:0; margin-bottom: 3px;'/>
-        template
-    </div>
-</div>
-
-<!-- end modals: -->   
-
-</div>
-
-<div class="samlogin-dash-leftcontent-large" id="samlogin-headfooter">
-    <hr/>
-    <small>
-        <a target="_blank" href="http://creativeprogramming.it/samlogin">SAMLogin</a> | Copyright &copy; 2013-<?php echo date('Y'); ?> <a href="http://www.creativeprogramming.it" target="_blank">creativeprogramming.it.</a>
-    </small>
-</div>
+                    <div class="samlogin-dash-leftcontent-large" id="samlogin-headfooter">
+                        <hr/>
+                        <small>
+                            <a target="_blank" href="http://creativeprogramming.it/samlogin">SAMLogin</a> | Copyright &copy; 2013-<?php echo date('Y'); ?> <a href="http://www.creativeprogramming.it" target="_blank">creativeprogramming.it.</a>
+                        </small>
+                    </div>
