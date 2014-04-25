@@ -348,6 +348,15 @@ defined('_JEXEC') or die;
     }
     jQuery(document).ready(function() {
         samlogin_doConfigTests();
+        jQuery(".samloginParamForm").on("submit", function(e) {
+            samlogin_saveSettings();
+            e.preventDefault();
+            return false;
+        });
+
+        jQuery(".samloginParamForm input,.samloginParamForm select,.samloginParamForm textarea").on("change", function(e) {
+            jQuery(".saveSettingsButton").addClass("uk-button-primary");
+        });
     });
 </script>
 <!--
@@ -369,17 +378,17 @@ defined('_JEXEC') or die;
 </aside>
 -->
 
-
+<span id='samlogin_top' style="position:absolute; top: 0px;"></span>
 
 
 
 
 <div id="mainSamloginAdminBlock" style="float: left;">
     <!-- uk-tab-left uk-width-medium-1-2 -->
-    <ul class="uk-tab " data-uk-tab="{connect:'#tab-content'}">
-        <li class="uk-active"><a href="#">Checklist</a></li>
-        <li><a href="">Settings</a></li>
-        <li class="uk-disabled"><a href="">Logs</a></li>
+    <ul  class="uk-tab " data-uk-tab="{connect:'#tab-content'}">
+        <li class="uk-active"><a href="#"><i class="uk-icon-check-square-o"></i><i class="uk-icon-ellipsis-v"></i> Checklist</a></li>
+        <li><a href=""><i class='uk-icon-cogs'></i> Settings</a></li>
+        <li class="uk-disabled"><a href=""><i class='uk-icon-eye'></i> Logs</a></li>
     </ul>
     <ul id="tab-content" class="uk-switcher uk-margin">
         <li class="checklistTab">
@@ -486,13 +495,66 @@ defined('_JEXEC') or die;
         </li> 
 
         <li class="SettingsTab">
-            <div style="float: right;" 
-                 title="Open settings in a modal"
+            <div class="SettingsTab_Actionbar" style="position: relative;">  
 
-                 class="uk-button uk-button-mini" 
-                 data-uk-modal="{target:'#settings-modal'}">
-                <i class="uk-icon-external-link-square"></i>
+                <div data-uk-sticky="{top:90}" style="text-align: right;
+                     margin-top: -16px;
+                     background: whitesmoke;
+                     position: relative;
+                     top: 0px;
+                     left: 0px;
+                     margin-bottom: -4px;
+                     padding-bottom: 5px;
+                     padding-top: 5px;
+                     padding: 5px;
+                     border: 1px solid lightgray; 
+                     border-radius: 0px;
+                     z-index: 999;
+                     display: block;">
+                    <span style='float: left;'><strong><i class='uk-icon-cogs'></i> Samlogin Settings</strong></span>   
+
+
+
+
+
+                    <a style='margin-left: 3px; margin-left: 3px;'
+                       href="#samlogin_top" class="uk-button uk-button-mini" 
+                       data-uk-smooth-scroll>
+                        <i class="uk-icon-arrow-circle-up"></i> Scroll to top
+                    </a>
+
+                    <button style="margin-right: 3px;" 
+                            onClick="samlogin_saveSettings('intab');"
+
+                            class="uk-button uk-button-mini saveSettingsButton" 
+                            >
+                        <i class="uk-icon-download"></i> Save Settings
+                    </button>
+
+                    <button style="" 
+                            title="Open settings in a modal"
+
+                            class="uk-button uk-button-mini" 
+                            data-uk-modal="{target:'#settings-modal'}">
+                        <i class="uk-icon-external-link-square"></i>
+                    </button> 
+
+                </div>
+
+                <div class="stickyplaceholder" style="margin-top: -16px;
+                     margin-top: -12px;
+                     background: whitesmoke;
+                     margin-bottom: -4px;
+                     padding-bottom: 0px;
+                     padding-top: 5px;
+                     padding: 3px;
+                     height: 23px;
+                     border: 1px solid lightgray;
+                     border-radius: 0px;
+                     display: block;"></div>
+
             </div>
+            <hr style='margin-top: 3px; margin-bottom: 6px;'/>
             <!-- now modal -->
             <?php
             $fromHTMLUniqueIdSuffix = "intab";
@@ -743,6 +805,17 @@ defined('_JEXEC') or die;
                     <div id='settings-modal'class="uk-modal">
                         <div style='width: 80%;'  class="uk-modal-dialog">
                             <a class="uk-modal-close uk-close"></a>
+                            <h4 style='margin-bottom: 0px; margin-top: 0px; display: inline-block;'>Edit Samlogin Settings</h4> 
+                            <div style="margin-right: 3px;" 
+                                 onClick="samlogin_saveSettings('modal');"
+
+                                 class="uk-button uk-button-mini uk-button-success" 
+                                 >
+                                <i class="uk-icon-download"></i> Save
+                            </div> <hr style='margin:0; margin-bottom: 3px;'/>
+
+
+
                             <?php
                             $fromHTMLUniqueIdSuffix = "modal";
                             include dirname(__FILE__) . "/snippets/settings-form.php";

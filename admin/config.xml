@@ -59,7 +59,7 @@
        
         <field 
             name="ssp_debug"
-            type="radio"
+            type="radio" class="btn-group"
             default="0"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUG"
             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUG_DESC"
@@ -71,7 +71,7 @@
          
         <field 
             name="ssp_showerrors"
-            type="radio"
+            type="radio" class="btn-group"
             default="1"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SHOWERRORS"
             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SHOWERRORS_DESC"
@@ -168,7 +168,7 @@
          
         <field 
             name="sp_signassertion"
-            type="radio"
+            type="radio" class="btn-group"
             default="0"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SIGNASSERTION"
             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SIGNASSERTION"
@@ -180,7 +180,7 @@
          
         <field 
             name="sp_assertion_encryption"
-            type="radio"
+            type="radio" class="btn-group"
             default="0"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_ENCRYPTASSERTION"
             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_ENCRYPTASSERTION"
@@ -192,7 +192,7 @@
         
          <field 
             name="sp_isPassive"
-            type="radio"
+            type="radio" class="btn-group"
             default="0"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_PASSIVE"
             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_PASSIVE"
@@ -203,7 +203,7 @@
          
         <field 
             name="sp_validateassertion"
-            type="radio"
+            type="radio" class="btn-group"
             default="0"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_VALIDATEASSERTION"
             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_VALIDATEASSERTION"
@@ -214,7 +214,7 @@
         
         <field 
             name="ssp_debug__validatexml"
-            type="radio"
+            type="radio" class="btn-group"
             default="0"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUGVALIDATEXML"
             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUGVALIDATEXML_DESC"
@@ -273,7 +273,7 @@
          
         <field 
             name="ssp_use_metarefresh"
-            type="radio"
+            type="radio" class="btn-group"
             default="0"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_USEMETAREFRESH"
             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_USEMETAREFRESH"
@@ -293,7 +293,7 @@
          
         <field 
             name="sspcron_debug"
-            type="radio"
+            type="radio" class="btn-group"
             default="0"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONDEBUG"
             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONDEBUG"
@@ -305,7 +305,7 @@
          
         <field 
             name="sspcron_email"
-            type="radio"
+            type="radio" class="btn-group"
             default="0"
             label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONEMAIL"
             description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_CRONEMAIL"
@@ -449,7 +449,7 @@
                description="The provided SAML attribute that is mapped to the local Joomla 'username' attribute (i.e. 'eduPersonPrincipalName')" />
         
         <field name="useNameId"           
-               type="radio"
+               type="radio" class="btn-group"
                label="Use NameID as username"
                description="COM_SAMLOGIN_USENAMEID_AS_USERNAME"
                default="0"
@@ -461,7 +461,7 @@
         <field name="mapping_email" type="text" label="E-mail" size="35" default="mail|eduPersonPrincipalName"
                description="The provided SAML attribute that is mapped to the local Joomla 'email' attribute (i.e. 'mail')" />
         <field name="useDummyEmails"           
-               type="radio"
+               type="radio" class="btn-group"
                label="Use dummy email if mail is empty"
                description="COM_SAMLOGIN_SAMLOGIN_USE_DUMMY_EMAIL_DESCR"
                default="0"
@@ -500,7 +500,7 @@
             
         <field
             name="allowOnlyExistingUsernames"
-            type="radio"
+            type="radio" class="btn-group"
             label="COM_SAMLOGIN_SAMLOGIN_ONLY_EXISTING_USERS"
             description="COM_SAMLOGIN_SAMLOGIN_ONLY_EXISTING_USERS_DESR"
             default="0"
@@ -510,7 +510,7 @@
         </field>
         <field
             name="preserveManualUserGroup"
-            type="radio"
+            type="radio" class="btn-group"
             label="COM_SAMLOGIN_SAMLOGIN_PRESEVE_MANUAL_USERGROUPS"
             description="COM_SAMLOGIN_SAMLOGIN_PRESEVE_MANUAL_USERGROUPS_DESR"
             default="1"
@@ -743,7 +743,7 @@
                   
         <field
             name="defaultRegistered"
-            type="radio"
+            type="radio" class="btn-group"
             label="COM_SAMLOGIN_DEFAULT_REGISTERED"
             description="COM_SAMLOGIN_DEFAULT_REGISTERED"
             default="1"
@@ -754,7 +754,7 @@
                 
         <field
             name="defaultDeny"
-            type="radio"
+            type="radio" class="btn-group"
             label="COM_SAMLOGIN_DEFAULT_DENY"
             description="COM_SAMLOGIN_DEFAULT_DENY"
             default="0"
@@ -779,7 +779,7 @@
         <field type="usergroup" default="2" name="registeredGroupId" label="Registered Group"></field>
         <field
             name="updateUsernameIfMailOverlap"
-            type="radio"
+            type="radio" class="btn-group"
             label="COM_SAMLOGIN_SAMLOGIN_UPDATE_EXISTING_EMAIL"
             description="COM_SAMLOGIN_SAMLOGIN_TRUST_IDP_EMAIL"
             default="0"
@@ -811,7 +811,7 @@
     <fieldset name="logout" label="COM_SAMLOGIN_CONF_LOGOUT">	 
         <field
             name="trysinglelogout"
-            type="radio"
+            type="radio" class="btn-group"
             label="COM_SAMLOGIN_SAMLOGIN_TRYSLO"
             description="COM_SAMLOGIN_SAMLOGIN_TRYSLO_DESC"
             default="0"
@@ -822,7 +822,7 @@
                 
         <field
             name="alwayslogoutalert"
-            type="radio"
+            type="radio" class="btn-group"
             label="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT"
             description="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT"
             default="0"
@@ -833,7 +833,7 @@
                 
         <field
             name="useCustomSLO"
-            type="radio"
+            type="radio" class="btn-group"
             label="COM_SAMLOGIN_SAMLOGIN_TRYSLO_CUSTOM"
             description="COM_SAMLOGIN_SAMLOGIN_TRYSLO_CUSTOM"
             default="0"

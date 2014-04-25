@@ -61,7 +61,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
     static $AJAX_MESSAGE_WARNING = "warning";
     static $AJAX_MESSAGE_DANGER = "danger";
 
-       /**
+    /**
      * 
      * @param type $msg message to push
      * @param type $level severity level: info (default) ,success,warning,danger (use AJAX_MESSAGE constants)
@@ -73,11 +73,10 @@ class SAMLoginControllerAjax extends SAMLoginController {
         self::$ajaxBuffer['additionalMessages'][] = array("msg" => $msg, "level" => $level);
     }
 
-    public static function appendAjaxReturnVar($name,$value){
-          self::$ajaxBuffer[$name]=$value;
+    public static function appendAjaxReturnVar($name, $value) {
+        self::$ajaxBuffer[$name] = $value;
     }
-    
-    
+
     private static $ajaxBuffer = array();
 
     protected static function initAjaxBuffer() {
@@ -90,8 +89,6 @@ class SAMLoginControllerAjax extends SAMLoginController {
         die();
     }
 
-
-
     public function getParametersJSON() {
 
         self::sendAjaxHeaders();
@@ -99,34 +96,175 @@ class SAMLoginControllerAjax extends SAMLoginController {
         self::initAjaxBuffer();
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
-                    //  $params = JComponentHelper::getParams('com_samlogin');
-          /*  	$component = JTable::getInstance('component');
-			$component->loadByOption('com_samlogin');
-			$instance = new JParameter($component->params, JPATH_ADMINISTRATOR.'/components/com_samlogin/config.xml');          
-            */
+            //  $params = JComponentHelper::getParams('com_samlogin');
+            /*  	$component = JTable::getInstance('component');
+              $component->loadByOption('com_samlogin');
+              $instance = new JParameter($component->params, JPATH_ADMINISTRATOR.'/components/com_samlogin/config.xml');
+             */
             self::appendAjaxReturnVar("params", $instance);
-           
         }
 
         self::sendAjaxBuffer();
     }
-    
-    
-    
-      public function saveParameters() {
+
+    public static function _saveParams() {
+        $option = "com_samlogin";
+
+        if (version_compare(JVERSION, '2.5.0', 'ge')) {
+
+
+            $data = JRequest::getVar('jform', array(), 'post', 'array');
+
+
+            // Validate the form
+            JForm::addFormPath(JPATH_ADMINISTRATOR . '/components/' . $option);
+            $form = JForm::getInstance('com_samlogin.settings', 'config', array(
+                        'control' => 'jform',
+                        'load_data' => true
+                            ), false, '/config');
+
+            // Use Joomla! model for saving settings
+            if (version_compare(JVERSION, '3.2', 'ge')) {
+                require_once JPATH_SITE . '/components/com_config/model/cms.php';
+                require_once JPATH_SITE . '/components/com_config/model/form.php';
+            }
+
+            JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_config/models');
+            $model = JModelLegacy::getInstance('Component', 'ConfigModel');
+            $params = $model->validate($form, $data);
+            if ($params === false) {
+                $errors = $model->getErrors();
+                $msg = $errors[0] instanceof Exception ? $errors[0]->getMessage() : $errors[0];
+                self::enqueueAjaxMessage($msg, "warning");
+            }
+
+            $data = array(
+                'params' => $params,
+                //'id' => $id,
+                'option' => $option
+            );
+        } else {
+            //JRequest::checkToken() or jexit('Invalid Token');
+            $data = JRequest::get('post');
+        }
+
+
+        if (version_compare(JVERSION, '2.5.0', 'ge')) {
+            $component = JComponentHelper::getComponent($option);
+            $data["id"] = $component->id;
+            JForm::addFormPath(JPATH_ADMINISTRATOR . '/components/' . $option);
+            $form = JForm::getInstance($option . '.settings', 'config', array('control' => 'jform'), false, '/config');
+            $form->bind($component->params);
+        } else {
+            $component = JTable::getInstance('component');
+            $component->loadByOption($option);
+            $data["id"] = $component->id;
+
+            $form = new JParameter($component->params, JPATH_ADMINISTRATOR . DS . 'components' . DS . $option . DS . 'config.xml');
+        }
+
+
+        // die(print_r($component, true));
+
+
+        if (version_compare(JVERSION, '2.5.0', 'ge')) {
+
+            $table = JTable::getInstance('extension');
+
+            // Save the rules.
+            if (isset($data['params']) && isset($data['params']['rules'])) {
+                $rules = new JAccessRules($data['params']['rules']);
+                $asset = JTable::getInstance('asset');
+
+                if (!$asset->loadByName($data['option'])) {
+                    $root = JTable::getInstance('asset');
+                    $root->loadByName('root.1');
+                    $asset->name = $data['option'];
+                    $asset->title = $data['option'];
+                    $asset->setLocation($root->id, 'last-child');
+                }
+                $asset->rules = (string) $rules;
+
+                if (!$asset->check() || !$asset->store()) {
+                    self::enqueueAjaxMessage($table->getError(), "danger");
+                    return false;
+                }
+
+                // We don't need this anymore
+                unset($data['option']);
+                unset($data['params']['rules']);
+            }
+
+            // Load the previous Data
+            if (!$table->load($data['id'])) {
+                self::enqueueAjaxMessage($table->getError(), "danger");
+                return false;
+            }
+
+            unset($data['id']);
+
+            // Bind the data.
+            if (!$table->bind($data)) {
+                self::enqueueAjaxMessage($table->getError(), "danger");
+                return false;
+            }
+
+            // Check the data.
+            if (!$table->check()) {
+
+                self::enqueueAjaxMessage($table->getError(), "danger");
+                return false;
+            }
+
+            // Store the data.
+            if (!$table->store()) {
+                self::enqueueAjaxMessage($table->getError(), "danger");
+                return false;
+            }
+
+            // Clean the component cache.
+         //is protected   $model->cleanCache('_system');
+            $reflectionMethod = new ReflectionMethod(get_class($model), 'cleanCache');
+            $reflectionMethod->setAccessible(true);
+            $reflectionMethod->invoke($model, '_system');
+            
+            self::enqueueAjaxMessage("Samlogin settings saved", "success");
+            return true;
+        } else {
+            $component = JTable::getInstance('component');
+            $component->loadByOption($data['option']);
+            $component->bind($data);
+            if (!$component->check()) {
+
+                self::enqueueAjaxMessage($component->getError(), "danger");
+                return false;
+            }
+            if (!$component->store()) {
+                self::enqueueAjaxMessage($component->getError(), "danger");
+                return false;
+            }
+        }
+
+        self::enqueueAjaxMessage("Samlogin settings saved", "success");
+        return true;
+    }
+
+    public function saveSettings() {
 
         self::sendAjaxHeaders();
 
         self::initAjaxBuffer();
         $user = JFactory::getUser();
         if ($user->authorise('core.admin', 'com_samlogin')) {
-                      $params = JComponentHelper::getParams('com_samlogin');
-                      self::appendAjaxReturnVar("params", $params);
+            self::aquireLockTerminateOnFail("saveparams");
+                self::_saveParams();
+                $params = JComponentHelper::getParams('com_samlogin');
+                self::appendAjaxReturnVar("params", $params);
+            self::releaseLock("saveparams");
         }
 
         self::sendAjaxBuffer();
     }
-    
 
     // Overwriting JView display method
     function display($tpl = null) {
@@ -808,13 +946,13 @@ class SAMLoginControllerAjax extends SAMLoginController {
         die();
     }
 
-   private function recursiveRemoveDirButNotBackups($dir,&$toret) {
-        $rmcountdir=0;
-        $rmfiledir=0;
+    private function recursiveRemoveDirButNotBackups($dir, &$toret) {
+        $rmcountdir = 0;
+        $rmfiledir = 0;
         if (is_dir($dir)) {
             $objects = scandir($dir);
             foreach ($objects as $object) {
-                if ($object != "." && $object != ".." && !stristr($object,".backup_until")) {
+                if ($object != "." && $object != ".." && !stristr($object, ".backup_until")) {
                     if (filetype($dir . "/" . $object) == "dir") {
                         rmdir($dir . "/" . $object);
                         $rmcountdir++;
@@ -827,13 +965,12 @@ class SAMLoginControllerAjax extends SAMLoginController {
             reset($objects);
             rmdir($dir);
             $rmcountdir++;
-                   $toret['additionalMessages'][] = array("msg" => "Cleaning $rmcountdir dirs and $rmfiledir files (old SimpleSAMLphp)", "level" => "info");
-            
+            $toret['additionalMessages'][] = array("msg" => "Cleaning $rmcountdir dirs and $rmfiledir files (old SimpleSAMLphp)", "level" => "info");
         }
     }
 
     private function _preserveSSPConfMigration($app, &$toret) {
-        $this->recursiveRemoveDirButNotBackups(JPATH_SITE."/components/com_samlogin/simplesamlphp/",$toret);
+        $this->recursiveRemoveDirButNotBackups(JPATH_SITE . "/components/com_samlogin/simplesamlphp/", $toret);
         $lockFile = JPATH_COMPONENT_SITE . "/preserveConf.lockfile";
         $lock = file_exists($lockFile);
         if ($lock) {

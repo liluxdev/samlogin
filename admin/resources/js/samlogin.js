@@ -1,3 +1,36 @@
+function samlogin_saveSettings(formSourceSuffix) {
+    /* if (confirm(Joomla.JText._('SAMLOGIN_JS_CONFIRM_GENKEY')) ){
+     if (!Joomla.popupWindow){
+     Joomla.popupWindow=window.popupWindow; //old joomla version have it global
+     }
+     Joomla.popupWindow(window.SAMLOGIN_JS_JOOMLA_JURI_ADMIN_BASE+"?option=com_samlogin&view=ajax&task=genkey", Joomla.JText._('SAMLOGIN_JS_REGENKEY_POPUP_TITLE') , 990, 600, 1);
+     }*/
+ 
+        try {
+            window.clearTimeout(window.samlogin_configTestTimeout);
+        } catch (ie) {
+        }
+
+        samlogin_showToaster("Saving Settings...","success");
+
+jQuery(".saveSettingsButton").removeClass("uk-button-primary");
+
+        jQuery.ajax({
+            url: window.samloginBaseAjaxURL+"&task=saveSettings",
+            dataType: "json",
+            data: jQuery(".samloginParamForm_"+formSourceSuffix).serialize(),
+            type: "post"
+        }).done(function(data) {
+            samlogin_processMessages(data);
+            setTimeout(function() {
+                samlogin_doConfigTests();
+            }, 1500);
+        });
+    
+}
+
+
+
 function samlogin_regenkeys() {
     /* if (confirm(Joomla.JText._('SAMLOGIN_JS_CONFIRM_GENKEY')) ){
      if (!Joomla.popupWindow){

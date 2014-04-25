@@ -30,13 +30,13 @@ class SAMLoginViewAjax extends SAMLoginView
 		{
 			if ($user->authorise('core.admin', 'com_samlogin'))
 			{
-				JToolBarHelper::preferences('com_samlogin', 480, 740, 'SAMLOGIN_SETTINGS', '', 'window.parent.location.reload()');
+				//deprecated JToolBarHelper::preferences('com_samlogin', 480, 740, 'SAMLOGIN_SETTINGS', '', 'window.parent.location.reload()');
                              	//JToolBarHelper::custom('ajax.genkey', "genkey.png", "genkey-over.png", 'SAMLOGIN_GENKEYS', false);
 			}
 		}
 		else
 		{
-			$toolbar->appendButton('Popup', 'config', 'SAMLOGIN_COM_SETTINGS', 'index.php?option=com_samlogin&view=settings', 720, 480);
+		//deprecated	$toolbar->appendButton('Popup', 'config', 'SAMLOGIN_COM_SETTINGS', 'index.php?option=com_samlogin&view=settings', 720, 480);
 		}
 		if (version_compare(JVERSION, '3.0', 'ge'))
 		{
@@ -96,7 +96,7 @@ class SAMLoginViewAjax extends SAMLoginView
                 
                 $doc->addScript(JURI::root(true)."/media/samlogin/assets/uikit/js/uikit.min.js");
                 $doc->addScript(JURI::root(true)."/media/samlogin/assets/uikit/js/addons/notify.min.js");
-		
+		$doc->addScript(JURI::root(true)."/media/samlogin/assets/uikit/js/addons/sticky.min.js");
                
                 $toolbar->appendButton('Custom', $helpButton); //TODO: redmine ask for support
 		$checks = array();
@@ -310,95 +310,7 @@ class SAMLoginViewAjax extends SAMLoginView
 		}
 		return $form;
 	}
-       
-	public function save()
-	{
-		$option = $this->getState('option');
-		$data = $this->getState('data');
-		if (version_compare(JVERSION, '2.5.0', 'ge'))
-		{
-			$table = JTable::getInstance('extension');
-
-			// Save the rules.
-			if (isset($data['params']) && isset($data['params']['rules']))
-			{
-				$rules = new JAccessRules($data['params']['rules']);
-				$asset = JTable::getInstance('asset');
-
-				if (!$asset->loadByName($data['option']))
-				{
-					$root = JTable::getInstance('asset');
-					$root->loadByName('root.1');
-					$asset->name = $data['option'];
-					$asset->title = $data['option'];
-					$asset->setLocation($root->id, 'last-child');
-				}
-				$asset->rules = (string)$rules;
-
-				if (!$asset->check() || !$asset->store())
-				{
-					$this->setError($asset->getError());
-					return false;
-				}
-
-				// We don't need this anymore
-				unset($data['option']);
-				unset($data['params']['rules']);
-			}
-
-			// Load the previous Data
-			if (!$table->load($data['id']))
-			{
-				$this->setError($table->getError());
-				return false;
-			}
-
-			unset($data['id']);
-
-			// Bind the data.
-			if (!$table->bind($data))
-			{
-				$this->setError($table->getError());
-				return false;
-			}
-
-			// Check the data.
-			if (!$table->check())
-			{
-				$this->setError($table->getError());
-				return false;
-			}
-
-			// Store the data.
-			if (!$table->store())
-			{
-				$this->setError($table->getError());
-				return false;
-			}
-
-			// Clean the component cache.
-			$this->cleanCache('_system');
-
-			return true;
-		}
-		else
-		{
-			$component = JTable::getInstance('component');
-			$component->loadByOption($option);
-			$component->bind($data);
-			if (!$component->check())
-			{
-				$this->setError($component->getError());
-				return false;
-			}
-			if (!$component->store())
-			{
-				$this->setError($component->getError());
-				return false;
-			}
-		}
-		return true;
-	}
+      
 
 
 }
