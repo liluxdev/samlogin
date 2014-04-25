@@ -52,15 +52,15 @@ defined('_JEXEC') or die;
 
                 <?php if (count($this->K2Menu)): ?>
                     <li>
-                        <a class="samloginUserLink" href="<?php echo $this->K2Menu['user']; ?>"><?php echo JText::_('JW_SC_MY_PAGE'); ?></a>
+                        <a class="samloginUserLink" href="<?php echo $this->K2Menu['user']; ?>"><?php echo JText::_('SAMLOGIN__MY_PAGE'); ?></a>
                     </li>
                     <?php if (isset($this->K2Menu['add'])): ?>
                         <li>
-                            <a class="modal samloginAddLink" rel="{handler:'iframe',size:{x:990,y:550}}" href="<?php echo $this->K2Menu['add']; ?>"><?php echo JText::_('JW_SC_ADD_NEW_ITEM'); ?></a>
+                            <a class="modal samloginAddLink" rel="{handler:'iframe',size:{x:990,y:550}}" href="<?php echo $this->K2Menu['add']; ?>"><?php echo JText::_('SAMLOGIN__ADD_NEW_ITEM'); ?></a>
                         </li>
                     <?php endif; ?>
                     <li>
-                        <a class="samloginCommentsLink modal" rel="{handler:'iframe',size:{x:990,y:550}}" href="<?php echo $this->K2Menu['comments']; ?>"><?php echo JText::_('JW_SC_MY_COMMENTS'); ?></a>
+                        <a class="samloginCommentsLink modal" rel="{handler:'iframe',size:{x:990,y:550}}" href="<?php echo $this->K2Menu['comments']; ?>"><?php echo JText::_('SAMLOGIN__MY_COMMENTS'); ?></a>
                     </li>
                 <?php endif; ?>
 

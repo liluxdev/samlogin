@@ -46,10 +46,10 @@ class SamloginHelper
 			$variables['passwordFieldName'] = 'passwd';
 		}
 
-		$variables['introductionMessage'] = ($params->get('introductionMessage') == 'custom') ? $params->get('customIntroductionMessage') : JText::_('JW_SC_LOGIN_INTRODUCTION_MESSAGE_VALUE');
-		$variables['registrationMessage'] = ($params->get('registrationMessage') == 'custom') ? $params->get('customRegistrationMessage') : JText::_('JW_SC_LOGIN_REGISTRATION_MESSAGE_VALUE');
-		$variables['signInMessage'] = ($params->get('signInMessage') == 'custom') ? $params->get('customSignInMessage') : JText::_('JW_SC_LOGIN_SIGN_IN_MESSAGE_VALUE');
-		$variables['footerMessage'] = ($params->get('footerMessage') == 'custom') ? $params->get('customFooterMessage') : JText::_('JW_SC_LOGIN_FOOTER_MESSAGE_VALUE');
+		$variables['introductionMessage'] = ($params->get('introductionMessage') == 'custom') ? $params->get('customIntroductionMessage') : JText::_('SAMLOGIN__LOGIN_INTRODUCTION_MESSAGE_VALUE');
+		$variables['registrationMessage'] = ($params->get('registrationMessage') == 'custom') ? $params->get('customRegistrationMessage') : JText::_('SAMLOGIN__LOGIN_REGISTRATION_MESSAGE_VALUE');
+		$variables['signInMessage'] = ($params->get('signInMessage') == 'custom') ? $params->get('customSignInMessage') : JText::_('SAMLOGIN_SIGN_IN_MESSAGE_VALUE');
+		$variables['footerMessage'] = ($params->get('footerMessage') == 'custom') ? $params->get('customFooterMessage') : JText::_('SAMLOGIN__LOGIN_FOOTER_MESSAGE_VALUE');
 		$variables['rememberMe'] = JPluginHelper::isEnabled('system', 'remember');
 	        	
                 $variables['ssoLink'] = JRoute::_('index.php?option=com_samlogin&view=login&task=initSSO&return='.$variables['returnURL']);  

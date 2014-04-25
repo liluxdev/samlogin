@@ -359,7 +359,8 @@
         /> 
     </fieldset>
      
-    <fieldset name="discoserv" label="COM_SAMLOGIN_CONF_DISCOSERVICE">	
+    <fieldset name="discoserv" label="COM_SAMLOGIN_CONF_DISCOSERVICE"
+    addfieldpath="/administrator/components/com_samlogin/elements/">	
         <field 
             name="sspas_discotype"
             type="list"
@@ -376,13 +377,13 @@
             <option value="discojuice_global">DiscoJuice global (Advanced UX, *only for supported federations) </option>       
         </field>
          
-        <field 
-            name="sspas_idpentityid"
-            type="text"
-            size="70"
-            default=""
-            label="COM_SAMLOGIN_IDPONLYURL"
-        />    
+  
+       <field 
+           name="sspas_idpentityid" 
+           type="idpentity"
+           default="" 
+           label="COM_SAMLOGIN_IDPONLYURL" 
+           description="COM_SAMLOGIN_IDPONLYURL"/>
          
         <field 
             name="sspas_discourl"

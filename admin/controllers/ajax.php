@@ -61,7 +61,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
     static $AJAX_MESSAGE_WARNING = "warning";
     static $AJAX_MESSAGE_DANGER = "danger";
 
-    /**
+       /**
      * 
      * @param type $msg message to push
      * @param type $level severity level: info (default) ,success,warning,danger (use AJAX_MESSAGE constants)
@@ -73,6 +73,11 @@ class SAMLoginControllerAjax extends SAMLoginController {
         self::$ajaxBuffer['additionalMessages'][] = array("msg" => $msg, "level" => $level);
     }
 
+    public static function appendAjaxReturnVar($name,$value){
+          self::$ajaxBuffer[$name]=$value;
+    }
+    
+    
     private static $ajaxBuffer = array();
 
     protected static function initAjaxBuffer() {
@@ -84,6 +89,44 @@ class SAMLoginControllerAjax extends SAMLoginController {
         echo json_encode(self::$ajaxBuffer);
         die();
     }
+
+
+
+    public function getParametersJSON() {
+
+        self::sendAjaxHeaders();
+
+        self::initAjaxBuffer();
+        $user = JFactory::getUser();
+        if ($user->authorise('core.admin', 'com_samlogin')) {
+                    //  $params = JComponentHelper::getParams('com_samlogin');
+          /*  	$component = JTable::getInstance('component');
+			$component->loadByOption('com_samlogin');
+			$instance = new JParameter($component->params, JPATH_ADMINISTRATOR.'/components/com_samlogin/config.xml');          
+            */
+            self::appendAjaxReturnVar("params", $instance);
+           
+        }
+
+        self::sendAjaxBuffer();
+    }
+    
+    
+    
+      public function saveParameters() {
+
+        self::sendAjaxHeaders();
+
+        self::initAjaxBuffer();
+        $user = JFactory::getUser();
+        if ($user->authorise('core.admin', 'com_samlogin')) {
+                      $params = JComponentHelper::getParams('com_samlogin');
+                      self::appendAjaxReturnVar("params", $params);
+        }
+
+        self::sendAjaxBuffer();
+    }
+    
 
     // Overwriting JView display method
     function display($tpl = null) {
