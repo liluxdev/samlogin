@@ -19,7 +19,12 @@ display: inline-block;
 margin: 5px;
 }
 
+.j3ClearFixFieldsets .radio.btn-group label{
+    margin: 0 !important;
+}
+
 .j3ClearFixFieldsets input[type="text"],
+.j3ClearFixFieldsets input[type="password"],
 .j3ClearFixFieldsets textarea,
 .j3ClearFixFieldsets .uneditable-input {
 	width: 90%;

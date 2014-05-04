@@ -188,7 +188,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $user = JFactory::getUser();
         $params = JComponentHelper::getParams('com_samlogin');
 
-        $loginStatus = $app->login(array('username' => '', 'password' => ''), array('silent' => true, 'remember' => false));
+        $loginStatus = $app->login(array('username' => '', 'password' => ''), array('silent' => true, 'remember' => false)); //TODO: when silent is enabled and login fails this returns false, add a check for this
 
         $user = JFactory::getUser();
         //die("testing at line".print_r($user,true).__LINE__);

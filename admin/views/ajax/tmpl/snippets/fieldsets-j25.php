@@ -7,6 +7,24 @@
 float: inherit !important;
 width: auto;
 margin: inherit !important;
+
+}
+
+    .j25ClearFixFieldsets  input, 
+    .j25ClearFixFieldsets  textarea, 
+    .j25ClearFixFieldsets  select, 
+    .j25ClearFixFieldsets  img, 
+    .j25ClearFixFieldsets  button {
+font-size: 12px !important;
+}
+
+    .j25ClearFixFieldsets  input[type="text"], 
+    .j25ClearFixFieldsets  input[type="password"], 
+    .j25ClearFixFieldsets  textarea, 
+    .j25ClearFixFieldsets  select, 
+    .j25ClearFixFieldsets  img, 
+    .j25ClearFixFieldsets  button {
+width: 90% !important;
 }
 
 .j25ClearFixFieldsets fieldset{

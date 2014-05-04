@@ -80,7 +80,65 @@
             <option value="1">JSHOW</option>
         </field>
          
+     
+        
         <field 
+            name="ssp_debug__validatexml"
+            type="radio" class="btn-group"
+            default="0"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUGVALIDATEXML"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUGVALIDATEXML_DESC"
+        >
+            <option value="0">Off</option>
+            <option value="1">On</option>
+        </field>
+        <field 
+            name="ssp_auth__adminpassword"
+            type="password"
+            default="123"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_AUTH_ADMINPASS"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_AUTH_ADMINPASS_DESC"
+        />    
+        <field 
+            name="ssp_secretsalt"
+            type="password"
+            default="defaultsecretsalt"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SECRETSALT"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SECRETSALT_DESC"
+        />    
+               
+        <field 
+            name="ssp_technicalcontact_name"
+            type="text"
+            size="50"
+            default="Name Surname"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TECHNAME"
+            description="COM_SAMLOGIN_SAMLOGIN_TECHNAME_DESC"
+        />    
+       
+        <field 
+            name="ssp_technicalcontact_email"
+            type="text"
+            size="50"
+            default="info@creativeprogramming.it"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TECHEMAIL"
+            description="COM_SAMLOGIN_SAMLOGIN_TECHEMAIL_DESC"
+        />    
+          
+        <field 
+            name="ssp_my_sp_entityid"
+            type="text"
+            size="70"
+            default="auto"
+            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_MYENTITYID"
+            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_MYENTITYID_DESC"
+        />  
+       
+    </fieldset>
+
+ <fieldset name="spsamlsetup" label="COM_SAMLOGIN_SP_SAML_SETTINGS">	 
+
+   <field 
             name="sp_signature_algorithm"
             type="list"
             default="default"
@@ -211,64 +269,14 @@
             <option value="0">Off</option>
             <option value="1">On</option>
         </field>
-        
-        <field 
-            name="ssp_debug__validatexml"
-            type="radio" class="btn-group"
-            default="0"
-            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUGVALIDATEXML"
-            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_DEBUGVALIDATEXML_DESC"
-        >
-            <option value="0">Off</option>
-            <option value="1">On</option>
-        </field>
-        <field 
-            name="ssp_auth__adminpassword"
-            type="password"
-            default="123"
-            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_AUTH_ADMINPASS"
-            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_AUTH_ADMINPASS_DESC"
-        />    
-        <field 
-            name="ssp_secretsalt"
-            type="text"
-            default="defaultsecretsalt"
-            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SECRETSALT"
-            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_SECRETSALT_DESC"
-        />    
-               
-        <field 
-            name="ssp_technicalcontact_name"
-            type="text"
-            size="50"
-            default="Name Surname"
-            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TECHNAME"
-            description="COM_SAMLOGIN_SAMLOGIN_TECHNAME_DESC"
-        />    
-       
-        <field 
-            name="ssp_technicalcontact_email"
-            type="text"
-            size="50"
-            default="info@creativeprogramming.it"
-            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_TECHEMAIL"
-            description="COM_SAMLOGIN_SAMLOGIN_TECHEMAIL_DESC"
-        />    
-          
-        <field 
-            name="ssp_my_sp_entityid"
-            type="text"
-            size="70"
-            default="auto"
-            label="COM_SAMLOGIN_SAMLOGIN_SSPCONF_MYENTITYID"
-            description="COM_SAMLOGIN_SAMLOGIN_SSPCONF_MYENTITYID_DESC"
-        />  
-       
-    </fieldset>
-
-
-
-    <fieldset name="sspmetasetup" label="COM_SAMLOGIN_SSP_METADATA">	  
+ </fieldset>
+ 
+ 
+<fieldset name="idpsettings" label="COM_SAMLOGIN_IDP_SETTINGS">
+    <field name="idpinfo" type="spacer" label="IdP behaivor is not available in this samlogin version"></field>  
+</fieldset>
+ 
+<fieldset name="sspmetasetup" label="COM_SAMLOGIN_SSP_METADATA">	  
    
          
         <field 

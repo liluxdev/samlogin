@@ -388,6 +388,7 @@ defined('_JEXEC') or die;
     <ul  class="uk-tab " data-uk-tab="{connect:'#tab-content'}">
         <li class="uk-active"><a href="#"><i class="uk-icon-check-square-o"></i><i class="uk-icon-ellipsis-v"></i> Checklist</a></li>
         <li><a href=""><i class='uk-icon-cogs'></i> Settings</a></li>
+        <li><a href=""><i class='uk-icon-wrench'></i> Tools </a></li>
         <li class="uk-disabled"><a href=""><i class='uk-icon-eye'></i> Logs</a></li>
     </ul>
     <ul id="tab-content" class="uk-switcher uk-margin">
@@ -496,8 +497,11 @@ defined('_JEXEC') or die;
 
         <li class="SettingsTab">
             <div class="SettingsTab_Actionbar" style="position: relative;">  
-
+    <?php if (version_compare(JVERSION, '3.0', 'ge')) { ?>
                 <div data-uk-sticky="{top:90}" style="text-align: right;
+           <?php }else{ ?>
+                 <div data-uk-sticky="{top:15}" style="text-align: right;
+          <?php }  ?>
                      margin-top: -16px;
                      background: whitesmoke;
                      position: relative;
@@ -561,7 +565,14 @@ defined('_JEXEC') or die;
             include dirname(__FILE__) . "/snippets/settings-form.php";
             ?>
         </li> 
-        <li class="uk-active">Test!</li>
+        <li class="">
+                    <?php
+                    include dirname(__FILE__) . "/snippets/tools.php";
+                    ?>
+        </li>
+        <li class="">
+            Log section not yet available
+        </li>
     </ul>
 </div>
 

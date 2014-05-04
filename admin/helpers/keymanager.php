@@ -5,10 +5,195 @@ defined('_JEXEC') or die;
 $phpseclibPath = JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/";
 set_include_path(get_include_path() . PATH_SEPARATOR . $phpseclibPath);
 include_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/Crypt/RSA.php");
+include_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/Crypt/Hash.php");
 include_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/File/X509.php");
+include_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/Math/BigInteger.php");
+include_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/Crypt/AES.php"); //mcrypt is used
 include_once("sspconfmanager.php");
 
 class KeyManager {
+
+    private static function der2pem($der_data) {
+        $pem = chunk_split(base64_encode($der_data), 64, "\n");
+        $pem = "-----BEGIN CERTIFICATE-----\n" . $pem . "-----END CERTIFICATE-----\n";
+        return $pem;
+    }
+
+    private static function pem2der($pem_data) {
+        $begin = "CERTIFICATE-----";
+        $end = "-----END";
+        $pem_data = substr($pem_data, strpos($pem_data, $begin) + strlen($begin));
+        $pem_data = substr($pem_data, 0, strpos($pem_data, $end));
+        $der = base64_decode($pem_data);
+        return $der;
+    }
+
+    //converts PEM cert info to DER cert info
+    function pem2der_info($pem_data) {
+        $begin = "CERTIFICATE REQUEST-----";
+        $end = "-----END";
+        $pem_data = substr($pem_data, strpos($pem_data, $begin) + strlen($begin));
+        $pem_data = substr($pem_data, 0, strpos($pem_data, $end));
+        $der = base64_decode($pem_data);
+        return $der;
+    }
+
+// unpacks certificates from myproxy server response and
+// converts them to PEM format
+// Arg : -string containing the myproxy server response
+// Returns : -array of strings each containing a certificate
+    function der2pems($der_data) {
+        $pems = array();
+        $num_array = unpack('C', substr($der_data, 0, 1)); //C* converts to unsigned char
+        $num_certs = $num_array[1]; //why does unpack start at index 1? why!?!?!
+
+        $der_data = substr($der_data, 1); //trim off the number of certs from first byte
+        //now bytes 1 and 2 mark the beginning of the cert
+        for ($i = 0; $i < $num_certs; $i++) {
+            $pem = "";
+            $index = 0;
+            //bytes 3 and 4 tell how long the cert is
+            $l1 = ord(substr($der_data, $index + 2, $index + 3));
+            $l2 = ord(substr($der_data, $index + 3, $index + 4));
+            $len = (256 * $l1) + $l2;
+
+            $thisCertData = substr($der_data, $index, $index + $len + 4);
+            $pem = $pem . "-----BEGIN CERTIFICATE-----\n" . chunk_split(base64_encode($thisCertData), 64, "\n")
+                    . "-----END CERTIFICATE-----\n";
+            $der_data = substr($der_data, $index + $len + 4);
+            array_push($pems, $pem);
+        }
+        return $pems;
+    }
+
+    static function uploadKey($app, $publicKey, $privateKey, $format_pub = "pem", $format_priv = "pem") {
+        if (SAMLoginControllerAjax::aquireLock("nosimulate")) {
+            $SSPKeyPath = SSPConfManager::getCertDirPath();
+            $privBackup = file_get_contents($SSPKeyPath . "saml.key");
+            $pubBackup = file_get_contents($SSPKeyPath . "saml.crt");
+            $datetimestring = date('j_M_y_H_i_s', time());
+            $privkeybackupname = "saml.backup_until_$datetimestring.key";
+            file_put_contents($SSPKeyPath . $privkeybackupname, $privBackup);
+            $pubkeybackupname = "saml.backup_until_$datetimestring.crt";
+            file_put_contents($SSPKeyPath . $pubkeybackupname, $pubBackup);
+
+            $message = "ciao";
+            $rsa = new Crypt_RSA();
+            $rsa->loadKey($privateKey);
+
+
+            /* Sign message */
+            $rsa->setSignatureMode(CRYPT_RSA_SIGNATURE_PKCS1);
+            $rsa->setHash('sha1');
+            $signature = $rsa->sign($message);
+
+            /* not working
+            $rsa2 = new Crypt_RSA();
+            $x509 = new File_X509;
+            $x509->loadX509($publicKey);
+            $rsa2->loadKey($x509->getPublicKey());
+            $isVerified = $rsa2->verify($message, $signature);
+
+            if ($isVerified) {
+                SAMLoginControllerAjax::enqueueAjaxMessage("Signature test passed (php server side)", SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+            }
+            */
+            $isVerified=false;
+            $noOpenSSL=false;
+            if (function_exists("openssl_x509_export")){
+                openssl_x509_export($publicKey, $str_cert);
+                $res_pubkey = openssl_get_publickey($str_cert);
+                $isVerified = openssl_verify($message, $signature, $res_pubkey);
+            }else{
+                $isVerified = false;
+                $noOpenSSL = true;
+            }
+            // function doVerify() {
+
+            /* X509
+              //http://stackoverflow.com/questions/14757678/how-to-encrypt-decrypt-text-using-a-x509certificate-aes-256-algorithm
+
+              $aes = new Crypt_AES();
+              //    $x509->setPublicKey();
+              $plaintext = 'ciaociao';
+              $randomKey=$privateKey;
+
+              $aes = new Crypt_AES();
+
+              $aes->setKey($publicKey);
+              $cryptakey = $aes->encrypt($plaintext);
+              echo $chipertext."\n";
+              SAMLoginControllerAjax::enqueueAjaxMessage($chipertext, SAMLoginControllerAjax::$AJAX_MESSAGE_INFO);
+              $aes2 = new Crypt_AES();
+              $aes2->setKey($privateKey);
+              $aes2->setKeyLength(256);
+              $plaintext_back = $aes2->decrypt($chipertext);
+
+              echo "back;".$plaintext_back;
+              SAMLoginControllerAjax::enqueueAjaxMessage($plaintext_back, SAMLoginControllerAjax::$AJAX_MESSAGE_INFO);
+             * 
+             */
+
+
+            if ($isVerified || $noOpenSSL) {
+                if ($noOpenSSL===false){
+                    SAMLoginControllerAjax::enqueueAjaxMessage("Signature test passed (server side)", SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+                }else{
+                    SAMLoginControllerAjax::enqueueAjaxMessage("Warning: php-openssl bindings not available, cannot verify keypair server side, anyway we consider it valid", SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
+              
+                }
+                
+                if ($privBackup == $privateKey && $pubBackup == $publicKey) {
+                    SAMLoginControllerAjax::enqueueAjaxMessage("Already using this keypair. Operation aborted.", SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+                    SAMLoginControllerAjax::releaseLock("nosimulate");
+                    return false;
+                } else {
+                    file_put_contents($SSPKeyPath . "saml.key", $privateKey);
+                    file_put_contents($SSPKeyPath . "saml.crt", $publicKey);
+                    SAMLoginControllerAjax::enqueueAjaxMessage("Keypair written to file", SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+                }
+            } else {
+                SAMLoginControllerAjax::enqueueAjaxMessage("Signature test failed (server side). Operation skipped.", SAMLoginControllerAjax::$AJAX_MESSAGE_DANGER);
+                SAMLoginControllerAjax::releaseLock("nosimulate");
+                return false;
+            }
+
+            $config = SSPConfManager::getAuthsourcesConf();
+
+            $config["default-sp"]["new_privatekey"] = "saml.key";
+            $config["default-sp"]["new_certificate"] = "saml.crt";
+            $config["default-sp"]["privatekey"] = $privkeybackupname;
+            $config["default-sp"]["certificate"] = $pubkeybackupname;
+            SSPConfManager::saveAuthsourcesConf($config, $app, true);
+
+
+
+
+
+            if (strtolower($format_priv) == "der") {
+                $privateKey = self::der2pem($privateKey);
+            }
+
+            if (strtolower($format_pub) == "der") {
+                $publicKey = self::der2pem($publicKey);
+            }
+
+
+
+
+            file_put_contents($SSPKeyPath . "saml.key", $privateKey);
+            file_put_contents($SSPKeyPath . "saml.crt", $publicKey);
+
+            //   $app->enqueueMessage(JText::_('SAMLOGIN_GENKEY_OK'));
+            SAMLoginControllerAjax::enqueueAjaxMessage("A New X.509 certificate was uploaded for the XML encryption & signing", SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+
+            unlink($SSPKeyPath . "saml.key.tmp");
+            unlink($SSPKeyPath . "saml.crt.tmp");
+
+            SAMLoginControllerAjax::releaseLock("nosimulate");
+            return true;
+        }
+    }
 
     static function genkey($app) {
         if (SAMLoginControllerAjax::aquireLock("nosimulate")) {
@@ -56,12 +241,12 @@ class KeyManager {
             $subject = new File_X509();
             $subject->setPublicKey($pubKey);
             $subject->setDNProp('samlogin', 'SAMLogin Generated Cert');
-           // $subject->setDomain('nomatter.nomatter');
-            
-            $domain = JURI::getInstance()->getHost(); 
-                
+            // $subject->setDomain('nomatter.nomatter');
+
+            $domain = JURI::getInstance()->getHost();
+
             $subject->setDomain($domain);
-            
+
             SAMLoginControllerAjax::enqueueAjaxMessage("Notice: Using '$domain' as domain name in the CN of the XML Signing & Encryption certificate", SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
 
 
