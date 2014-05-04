@@ -281,6 +281,41 @@ class SAMLoginControllerAjax extends SAMLoginController {
         // Display the view
         parent::display($tpl);
     }
+    
+    
+        public function uploadkey() {
+
+        self::sendAjaxHeaders();
+
+        self::initAjaxBuffer();
+        $user = JFactory::getUser();
+        if ($user->authorise('core.admin', 'com_samlogin')) {
+            self::aquireLockTerminateOnFail("saveconf");
+
+            require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
+            if (SSPConfManager::setSaveConfMode(SSPConfManager::$SAVECONF_PRODUCTION)) {
+
+
+                $app = JFactory::getApplication();
+                require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/keymanager.php");
+                
+                $priv=$_REQUEST["priv"];
+                $pub=$_REQUEST["pub"];
+                
+               
+                KeyManager::uploadKey($app,$pub,$priv);
+
+                //   JRequest::setVar("layout", "closeme");
+                //   $this->display();
+                SSPConfManager::commitSaveConfModeLock(SSPConfManager::$SAVECONF_PRODUCTION);
+            } else {
+                self::enqueueAjaxMessage("Cannot aquire lock for production settings overriding, please retry later", self::$AJAX_MESSAGE_WARNING);
+            }
+            self::releaseLock("saveconf");
+        }
+
+        self::sendAjaxBuffer();
+    }
 
     public function genkey() {
 
