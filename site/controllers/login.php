@@ -77,7 +77,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
         //  if (!$auth->isAuthenticated()) {
         $auth->login(array(
             "isPassive" => FALSE,
-            "ErrorURL" => JRoute::_('index.php?option=com_samlogin&view=login&task=handleErr' . $extraReturnURLParams),
+            "ErrorURL" => JRoute::_('index.php?option=com_samlogin&view=login&task=handleErr' . $extraReturnURLParams,false),
             //"ReturnTo" => JRoute::_('index.php?option=com_samlogin&view=login&task=handleSuccess' . $extraReturnURLParams),
             "ReturnTo" => $returnTo,
             "KeepPost" => FALSE
@@ -128,7 +128,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
 
 
             if (is_null($rret) && isset($msg) && !empty($msg)) {
-                $errUrl = JRoute::_('index.php?option=com_samlogin&view=login&task=logoutAlert&msg=' . $msg);
+                $errUrl = JRoute::_('index.php?option=com_samlogin&view=login&task=logoutAlert&msg=' . $msg,false);
                 //  phpconsole("Errurl: ".$errUrl,"rastrano");
                 $app->redirect($errUrl);
             } else {
@@ -154,27 +154,34 @@ class SAMLoginControllerLogin extends SAMLoginController {
 
                 if (!is_null($rret)) {
                     $return = base64_decode($rret);
-                    //  die("redirecting to ".$return." with msg".$translatedmsg." type: ".$errtype);
+                 //    echo("redirecting to ".$return." with msg".$translatedmsg." type: ".$errtype);
                     //FIXME: not works: cookie unset by the joomla logout TODO: param to enforce handleMessage redirect
                     $sess->set("sloErrMsg", $translatedmsg);
                     $sess->set("sloErrType", $errtype);
                     //2 scopes: to persist the message and to prevent a redirect bug that doesn't show message
                     // $app->redirect($return,$translatedmsg,$errtype);
-                    $errUrl = JRoute::_('index.php?option=com_samlogin&view=login&task=logoutAlert&msg=' . $msg);
+                    $errUrl = JRoute::_('index.php?option=com_samlogin&view=login&task=logoutAlert&msg=' . $msg,false);
                     //  phpconsole("Errurl: ".$errUrl,"rastrano");
 
                     $useCustomSLO = $params->get("useCustomSLO", 0) == 1;
                     if ($useCustomSLO) {
                         $customSLOURL = $params->get("customSLOURL", ''); //TODO implement variable $idp in custom slo url
-                        $app->redirect($customSLOURL);
+                      //  die("@".__LINE__.$customSLOURL);
+                        if (!empty($customSLOURL)){
+                            $app->redirect($customSLOURL);
+                        }else{
+                             $app->redirect($return);
+                        }
                     }
 
 
 
                     $alwaysShowLogoutAlert = $params->get("alwayslogoutalert", 0) == 1;
                     if ($alwaysShowLogoutAlert) {
+                      //   die("@".__LINE__.$errUrl);
                         $app->redirect($errUrl);
                     } else {
+                       //  die("@".__LINE__.$return);
                         $app->redirect($return);
                     }
                 }
@@ -238,7 +245,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
         }
         $app->enqueueMessage($msg, $errtype);
         $errReturnUrl = JURI::root();
-        $errReturnUrl = JRoute::_('index.php?option=com_user&view=login&nocache=unauthz');
+        $errReturnUrl = JRoute::_('index.php?option=com_user&view=login&nocache=unauthz',false);
         $app->redirect($errReturnUrl);
         //    die($msg);
         $vName = 'message';
