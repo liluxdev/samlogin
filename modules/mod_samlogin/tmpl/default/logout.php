@@ -23,10 +23,13 @@ defined('_JEXEC') or die; ?>
 	<div  class="SAMLogut">
 		<form action="<?php echo JRoute::_('index.php?option=com_samlogin&view=login&task=initSLO', true, $params->get('usesecure')); ?>" method="get">
 			<div class="SAMLoginFormCont">
-				<button class="button uk-button" type="submit">
+				<button class="<?php echo $params->get("logoutButtonClasses",'btn btn-danger');?>" type="submit">
 					<span><?php echo $params->get('logoutButtonLabel','SSO Logout'); ?></span>
 				</button>	
 			</div>
+                    <input type="hidden" name="option" value="com_samlogin" />
+                    <input type="hidden" name="view" value="login" />
+                    <input type="hidden" name="task" value="initSLO" />
                         <input type="hidden" name="return" value="<?php echo $returnURL; ?>" />
 	  		<?php echo JHTML::_('form.token'); ?>
 		</form>
