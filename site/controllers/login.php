@@ -19,7 +19,8 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $params = JComponentHelper::getParams('com_samlogin');
 
         $extraReturnURLParams = "";
-        $return = JRequest::getVar('return', null, 'GET', 'BASE64');
+     //   $return = JRequest::getVar('return', null, 'GET', 'BASE64');
+         $return = JRequest::getString('return');
         if (!is_null($return)) {
             $extraReturnURLParams .= "&rret=" . $return;
         } else {
@@ -60,7 +61,8 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $params = JComponentHelper::getParams('com_samlogin');
 
         $extraReturnURLParams = "";
-        $return = JRequest::getVar('return', null, 'GET', 'BASE64');
+        //$return = JRequest::getVar('return', null, 'GET', 'BASE64');
+         $return = JRequest::getString('return');
         if (!is_null($return)) {
             $extraReturnURLParams .= "&rret=" . $return;
         }
@@ -95,16 +97,19 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $params = JComponentHelper::getParams('com_samlogin');
 
         $extraReturnURLParams = "";
-        $return = JRequest::getVar('return', null, 'GET', 'BASE64');
+      //  $return = JRequest::getVar('return', null, 'GET', 'BASE64');
+         $return = JRequest::getString('return');
         if (!is_null($return)) {
             $extraReturnURLParams .= "&rret=" . $return;
         }
-        $trySLO = $params->get("trysinglelogout", 0) == 1;
+        $trySLO = $params->get("trysinglelogout", 1) == 1;
         if ($trySLO) {
             $extraReturnURLParams .= "&trySLO=1";
         }
 
         $returnTo = JURI::root() . '/components/com_samlogin/loginReceiver.php?task=initSLO' . $extraReturnURLParams;
+        
+        $sess->set("SAMLoginIsAuthN", false);
         $app->redirect($returnTo);
         //   }
     }
@@ -121,7 +126,8 @@ class SAMLoginControllerLogin extends SAMLoginController {
             $this->handleError("Joomla LogOut Failed");
         } else {
 
-            $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
+           // $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
+             $rret = JRequest::getString('rret');
             $msg = JRequest::getVar('msg', null, 'GET', 'STRING');
 
 
@@ -200,7 +206,8 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $user = JFactory::getUser();
         //die("testing at line".print_r($user,true).__LINE__);
         if (!$user->guest) {
-            $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
+           // $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
+             $rret = JRequest::getString('rret');
             if (!is_null($rret)) {
                 $return = base64_decode($rret);
                 //  phpconsole("rret decoded is ".$return,"rastrano");
@@ -209,7 +216,9 @@ class SAMLoginControllerLogin extends SAMLoginController {
         } else {
             $sess = JFactory::getSession();
             $errcode = $sess->get("samloginFailErrcode", "GENERIC");
+            //todo show login errors e.g. user is not superadmin when try to assing groups
             $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
+            
         }
     }
 
