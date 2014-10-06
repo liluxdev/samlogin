@@ -1,0 +1,3910 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Math_BigInteger | samlogin-master</title>
+
+	<script type="text/javascript" src="resources/combined.js?4141401630"></script>
+	<script type="text/javascript" src="elementlist.js?1584808910"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-Crypt.html">Crypt<span></span></a>
+						<ul>
+				<li><a href="package-Crypt.AES.html">AES</a>
+						</li>
+				<li><a href="package-Crypt.Blowfish.html">Blowfish</a>
+						</li>
+				<li><a href="package-Crypt.DES.html">DES</a>
+						</li>
+				<li><a href="package-Crypt.Hash.html">Hash</a>
+						</li>
+				<li><a href="package-Crypt.Random.html">Random</a>
+						</li>
+				<li><a href="package-Crypt.RC4.html">RC4</a>
+						</li>
+				<li><a href="package-Crypt.Rijndael.html">Rijndael</a>
+						</li>
+				<li><a href="package-Crypt.RSA.html">RSA</a>
+						</li>
+				<li><a href="package-Crypt.TerraDES.html">TerraDES</a>
+						</li>
+				<li><a href="package-Crypt.Twofish.html">Twofish</a>
+						</li>
+							</ul></li>
+				<li><a href="package-File.html">File<span></span></a>
+						<ul>
+				<li><a href="package-File.ANSI.html">ANSI</a>
+						</li>
+				<li><a href="package-File.ASN1.html">ASN1</a>
+						</li>
+				<li><a href="package-File.X509.html">X509</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="package-Math.html">Math<span></span></a>
+						<ul>
+				<li class="active"><a href="package-Math.BigInteger.html">BigInteger</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Net.html">Net<span></span></a>
+						<ul>
+				<li><a href="package-Net.SCP.html">SCP</a>
+						</li>
+				<li><a href="package-Net.SFTP.html">SFTP<span></span></a>
+						<ul>
+				<li><a href="package-Net.SFTP.Stream.html">Stream</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Net.SSH1.html">SSH1</a>
+						</li>
+				<li><a href="package-Net.SSH2.html">SSH2</a>
+						</li>
+							</ul></li>
+				<li><a href="package-None.html">None</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Math_BigInteger.html">Math_BigInteger</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-Math.BigInteger.html" title="Summary of Math\BigInteger"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Math_BigInteger</h1>
+
+
+	<div class="description">
+	
+<p>Pure-PHP arbitrary precision integer arithmetic library. Supports base-2,
+base-10, base-16, and base-256 numbers.</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		<b>Package:</b> <a href="package-Math.html">Math</a>\<a href="package-Math.BigInteger.html">BigInteger</a><br />
+
+				<b>Copyright:</b>
+				MMVI Jim Wigginton<br />
+				<b>License:</b>
+				<a href="http://www.opensource.org/licenses/mit-license.html">MIT License</a><br />
+				<b>Author:</b>
+				Jim Wigginton &lt;<a
+href="mailto:terrafrost&#64;php.net">terrafrost&#64;<!---->php.net</a>&gt;<br />
+				<b>Version:</b>
+				1.0.0RC4<br />
+		<b>Located at</b> <a href="source-class-Math_BigInteger.html#173-3650" title="Go to source code">admin/libs/phpseclib/phpseclib0.3.5/Math/BigInteger.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="Math_BigInteger" id="_Math_BigInteger">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Math_BigInteger">#</a>
+		<code><a href="source-class-Math_BigInteger.html#237-480" title="Go to source code">Math_BigInteger</a>( <span>optional <var>$x</var> = <span class="php-num">0</span></span>, <span>optional <var>$base</var> = <span class="php-num">10</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Converts base-2, base-10, base-16, and binary strings (base-256) to
+BigIntegers.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts base-2, base-10, base-16, and binary strings (base-256) to
+BigIntegers.</p>
+
+<p>If the second parameter - $base - is negative, then it will be assumed that
+the number's are encoded using two's compliment. The sole exception to this is
+-10, which is treated the same as 10 is.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+&amp;lt;?php
+   <span class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'0x32'</span>, <span class="php-num">16</span>); <span
+class="php-comment">// 50 in base-16</span>
+
+   <span
+class="php-keyword1">echo</span> <span
+class="php-var">$a</span>-&gt;toString(); <span
+class="php-comment">// outputs 50</span>
+?&amp;gt;
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>optional</code><br>$x base-10 number or base-$base number if $base set.</dd>
+					<dt><var>$base</var></dt>
+					<dd><code>optional</code><br>integer $base</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toBytes" id="_toBytes">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toBytes">#</a>
+		<code><a href="source-class-Math_BigInteger.html#482-577" title="Go to source code">toBytes</a>( <span>Boolean <var>$twos_compliment</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Converts a BigInteger to a byte string (eg. base-256).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts a BigInteger to a byte string (eg. base-256).</p>
+
+<p>Negative numbers are saved as positive numbers, unless $twos_compliment is
+set to true, at which point, they're saved as two's compliment.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'65'</span>);
+
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$a</span>-&gt;toBytes(); <span
+class="php-comment">// outputs chr(65)</span>
+<span
+class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$twos_compliment</var></dt>
+					<dd><code>Boolean</code><br>$twos_compliment</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toHex" id="_toHex">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toHex">#</a>
+		<code><a href="source-class-Math_BigInteger.html#579-604" title="Go to source code">toHex</a>( <span>Boolean <var>$twos_compliment</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Converts a BigInteger to a hex string (eg. base-16)).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts a BigInteger to a hex string (eg. base-16)).</p>
+
+<p>Negative numbers are saved as positive numbers, unless $twos_compliment is
+set to true, at which point, they're saved as two's compliment.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'65'</span>);
+
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$a</span>-&gt;toHex(); <span
+class="php-comment">// outputs '41'</span>
+<span
+class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$twos_compliment</var></dt>
+					<dd><code>Boolean</code><br>$twos_compliment</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toBits" id="_toBits">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toBits">#</a>
+		<code><a href="source-class-Math_BigInteger.html#606-645" title="Go to source code">toBits</a>( <span>Boolean <var>$twos_compliment</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Converts a BigInteger to a bit string (eg. base-2).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts a BigInteger to a bit string (eg. base-2).</p>
+
+<p>Negative numbers are saved as positive numbers, unless $twos_compliment is
+set to true, at which point, they're saved as two's compliment.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'65'</span>);
+
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$a</span>-&gt;toBits(); <span
+class="php-comment">// outputs '1000001'</span>
+<span
+class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$twos_compliment</var></dt>
+					<dd><code>Boolean</code><br>$twos_compliment</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toString" id="_toString">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toString">#</a>
+		<code><a href="source-class-Math_BigInteger.html#647-702" title="Go to source code">toString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Converts a BigInteger to a base-10 number.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts a BigInteger to a base-10 number.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'50'</span>);
+
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$a</span>-&gt;toString(); <span
+class="php-comment">// outputs 50</span>
+<span class="xlang">?&gt;</span>
+</pre>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="copy" id="_copy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_copy">#</a>
+		<code><a href="source-class-Math_BigInteger.html#704-725" title="Go to source code">copy</a>( )</code>
+
+		<div class="description short">
+			
+<p>Copy an object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Copy an object</p>
+
+<p>PHP5 passes objects by reference while PHP4 passes by value. As such, we need
+a function to guarantee that all objects are passed by value, when appropriate.
+More information can be found here:</p>
+
+<p><a href="http://php.net/language.oop5.basic#51624">http://php.net/language.oop5.basic#51624</a></p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#___clone">Math_BigInteger::__clone()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___toString">#</a>
+		<code><a href="source-class-Math_BigInteger.html#727-739" title="Go to source code">__toString</a>( )</code>
+
+		<div class="description short">
+			
+<p>__toString() magic method</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>__toString() magic method</p>
+
+<p>Will be called, automatically, if you're supporting just PHP5. If you're
+supporting PHP4, you'll need to call toString().</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__clone" id="___clone">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___clone">#</a>
+		<code><a href="source-class-Math_BigInteger.html#741-756" title="Go to source code">__clone</a>( )</code>
+
+		<div class="description short">
+			
+<p>__clone() magic method</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>__clone() magic method</p>
+
+<p>Although you can call Math_BigInteger::__toString() directly in PHP5, you
+cannot call Math_BigInteger::__clone() directly in PHP5. You can in PHP4 since
+it's not a magic method, but in PHP5, you have to call it by using the PHP5 only
+syntax of $y = clone $x. As such, if you're trying to write an application that
+works on both PHP4 and PHP5, call Math_BigInteger::copy(), instead.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#_copy">Math_BigInteger::copy()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__sleep" id="___sleep">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___sleep">#</a>
+		<code><a href="source-class-Math_BigInteger.html#758-778" title="Go to source code">__sleep</a>( )</code>
+
+		<div class="description short">
+			
+<p>__sleep() magic method</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>__sleep() magic method</p>
+
+<p>Will be called, automatically, when serialize() is called on a
+Math_BigInteger object.</p>
+
+
+
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#___wakeup">Math_BigInteger::__wakeup()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__wakeup" id="___wakeup">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___wakeup">#</a>
+		<code><a href="source-class-Math_BigInteger.html#780-798" title="Go to source code">__wakeup</a>( )</code>
+
+		<div class="description short">
+			
+<p>__wakeup() magic method</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>__wakeup() magic method</p>
+
+<p>Will be called, automatically, when unserialize() is called on a
+Math_BigInteger object.</p>
+
+
+
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#___sleep">Math_BigInteger::__sleep()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="add" id="_add">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_add">#</a>
+		<code><a href="source-class-Math_BigInteger.html#800-844" title="Go to source code">add</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$y</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds two BigIntegers.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds two BigIntegers.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'10'</span>);
+   <span class="php-var">$b</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'20'</span>);
+
+   <span class="php-var">$c</span> = <span
+class="php-var">$a</span>-&gt;add(<span class="php-var">$b</span>);
+
+   <span
+class="php-keyword1">echo</span> <span
+class="php-var">$c</span>-&gt;toString(); <span
+class="php-comment">// outputs 30</span>
+<span class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$y</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$y</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_add" id="__add">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__add">#</a>
+		<code><a href="source-class-Math_BigInteger.html#846-929" title="Go to source code">_add</a>( <span>Array <var>$x_value</var></span>, <span>Boolean <var>$x_negative</var></span>, <span>Array <var>$y_value</var></span>, <span>Boolean <var>$y_negative</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs addition.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs addition.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x_value</var></dt>
+					<dd><code>Array</code><br>$x_value</dd>
+					<dt><var>$x_negative</var></dt>
+					<dd><code>Boolean</code><br>$x_negative</dd>
+					<dt><var>$y_value</var></dt>
+					<dd><code>Array</code><br>$y_value</dd>
+					<dt><var>$y_negative</var></dt>
+					<dd><code>Boolean</code><br>$y_negative</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="subtract" id="_subtract">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_subtract">#</a>
+		<code><a href="source-class-Math_BigInteger.html#931-975" title="Go to source code">subtract</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$y</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Subtracts two BigIntegers.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Subtracts two BigIntegers.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'10'</span>);
+   <span class="php-var">$b</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'20'</span>);
+
+   <span class="php-var">$c</span> = <span
+class="php-var">$a</span>-&gt;subtract(<span
+class="php-var">$b</span>);
+
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$c</span>-&gt;toString(); <span
+class="php-comment">// outputs -10</span>
+<span
+class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$y</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$y</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_subtract" id="__subtract">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__subtract">#</a>
+		<code><a href="source-class-Math_BigInteger.html#977-1065" title="Go to source code">_subtract</a>( <span>Array <var>$x_value</var></span>, <span>Boolean <var>$x_negative</var></span>, <span>Array <var>$y_value</var></span>, <span>Boolean <var>$y_negative</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs subtraction.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs subtraction.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x_value</var></dt>
+					<dd><code>Array</code><br>$x_value</dd>
+					<dt><var>$x_negative</var></dt>
+					<dd><code>Boolean</code><br>$x_negative</dd>
+					<dt><var>$y_value</var></dt>
+					<dd><code>Array</code><br>$y_value</dd>
+					<dt><var>$y_negative</var></dt>
+					<dd><code>Boolean</code><br>$y_negative</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="multiply" id="_multiply">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_multiply">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1067-1110" title="Go to source code">multiply</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$x</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Multiplies two BigIntegers</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Multiplies two BigIntegers</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'10'</span>);
+   <span class="php-var">$b</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'20'</span>);
+
+   <span class="php-var">$c</span> = <span
+class="php-var">$a</span>-&gt;multiply(<span
+class="php-var">$b</span>);
+
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$c</span>-&gt;toString(); <span
+class="php-comment">// outputs 200</span>
+<span
+class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$x</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_multiply" id="__multiply">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__multiply">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1112-1147" title="Go to source code">_multiply</a>( <span>Array <var>$x_value</var></span>, <span>Boolean <var>$x_negative</var></span>, <span>Array <var>$y_value</var></span>, <span>Boolean <var>$y_negative</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs multiplication.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs multiplication.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x_value</var></dt>
+					<dd><code>Array</code><br>$x_value</dd>
+					<dt><var>$x_negative</var></dt>
+					<dd><code>Boolean</code><br>$x_negative</dd>
+					<dt><var>$y_value</var></dt>
+					<dd><code>Array</code><br>$y_value</dd>
+					<dt><var>$y_negative</var></dt>
+					<dd><code>Boolean</code><br>$y_negative</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_regularMultiply" id="__regularMultiply">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__regularMultiply">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1149-1210" title="Go to source code">_regularMultiply</a>( <span>Array <var>$x_value</var></span>, <span>Array <var>$y_value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs long multiplication on two BigIntegers</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs long multiplication on two BigIntegers</p>
+
+<p>Modeled after 'multiply' in MutableBigInteger.java.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x_value</var></dt>
+					<dd><code>Array</code><br>$x_value</dd>
+					<dt><var>$y_value</var></dt>
+					<dd><code>Array</code><br>$y_value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_karatsuba" id="__karatsuba">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__karatsuba">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1212-1252" title="Go to source code">_karatsuba</a>( <span>Array <var>$x_value</var></span>, <span>Array <var>$y_value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs Karatsuba multiplication on two BigIntegers</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs Karatsuba multiplication on two BigIntegers</p>
+
+<p>See <a href="http://en.wikipedia.org/wiki/Karatsuba_algorithm">Karatsuba algorithm</a> and <a href="http://math.libtomcrypt.com/files/tommath.pdf#page=120">MPM 5.2.3</a>.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x_value</var></dt>
+					<dd><code>Array</code><br>$x_value</dd>
+					<dt><var>$y_value</var></dt>
+					<dd><code>Array</code><br>$y_value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_square" id="__square">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__square">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1254-1266" title="Go to source code">_square</a>( <span>Array <var>$x</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs squaring</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs squaring</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Array</code><br>$x</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_baseSquare" id="__baseSquare">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__baseSquare">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1268-1306" title="Go to source code">_baseSquare</a>( <span>Array <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs traditional squaring on two BigIntegers</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs traditional squaring on two BigIntegers</p>
+
+<p>Squaring can be done faster than multiplying a number by itself can be. See
+<a href="http://www.cacr.math.uwaterloo.ca/hac/about/chap14.pdf#page=7">HAC 14.2.4</a> / <a href="http://math.libtomcrypt.com/files/tommath.pdf#page=141">MPM 5.3</a> for more information.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>Array</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_karatsubaSquare" id="__karatsubaSquare">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__karatsubaSquare">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1308-1344" title="Go to source code">_karatsubaSquare</a>( <span>Array <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs Karatsuba "squaring" on two BigIntegers</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs Karatsuba "squaring" on two BigIntegers</p>
+
+<p>See <a href="http://en.wikipedia.org/wiki/Karatsuba_algorithm">Karatsuba algorithm</a> and <a href="http://math.libtomcrypt.com/files/tommath.pdf#page=151">MPM 5.3.4</a>.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>Array</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="divide" id="_divide">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_divide">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1346-1545" title="Go to source code">divide</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$y</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Divides two BigIntegers.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Divides two BigIntegers.</p>
+
+<p>Returns an array whose first element contains the quotient and whose second
+element contains the "common residue". If the remainder would be positive, the
+"common residue" and the remainder are the same. If the remainder would be
+negative, the "common residue" is equal to the sum of the remainder and the
+divisor (basically, the "common residue" is the first positive modulo).</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'10'</span>);
+   <span class="php-var">$b</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'20'</span>);
+
+   <span class="php-keyword1">list</span>(<span
+class="php-var">$quotient</span>, <span
+class="php-var">$remainder</span>) = <span
+class="php-var">$a</span>-&gt;divide(<span class="php-var">$b</span>);
+
+   <span
+class="php-keyword1">echo</span> <span
+class="php-var">$quotient</span>-&gt;toString(); <span
+class="php-comment">// outputs 0</span>
+   <span
+class="php-keyword1">echo</span> <span
+class="php-quote">&quot;\r\n&quot;</span>;
+   <span
+class="php-keyword1">echo</span> <span
+class="php-var">$remainder</span>-&gt;toString(); <span
+class="php-comment">// outputs 10</span>
+<span class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$y</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$y</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_divide_digit" id="__divide_digit">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__divide_digit">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1547-1569" title="Go to source code">_divide_digit</a>( <span>Array <var>$dividend</var></span>, <span>Array <var>$divisor</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Divides a BigInteger by a regular integer</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Divides a BigInteger by a regular integer</p>
+
+<p>abc / x = a00 / x + b0 / x + c / x</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dividend</var></dt>
+					<dd><code>Array</code><br>$dividend</dd>
+					<dt><var>$divisor</var></dt>
+					<dd><code>Array</code><br>$divisor</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="modPow" id="_modPow">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_modPow">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1571-1741" title="Go to source code">modPow</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$e</var></span>, <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$n</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs modular exponentiation.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs modular exponentiation.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'10'</span>);
+   <span class="php-var">$b</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'20'</span>);
+   <span class="php-var">$c</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-quote">'30'</span>);
+
+   <span class="php-var">$c</span> = <span
+class="php-var">$a</span>-&gt;modPow(<span class="php-var">$b</span>, <span
+class="php-var">$c</span>);
+
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$c</span>-&gt;toString(); <span
+class="php-comment">// outputs 10</span>
+<span class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$e</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$e</dd>
+					<dt><var>$n</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$n</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="powMod" id="_powMod">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_powMod">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1743-1756" title="Go to source code">powMod</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$e</var></span>, <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$n</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs modular exponentiation.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs modular exponentiation.</p>
+
+<p>Alias for Math_BigInteger::modPow()</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$e</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$e</dd>
+					<dt><var>$n</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$n</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_slidingWindow" id="__slidingWindow">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__slidingWindow">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1758-1833" title="Go to source code">_slidingWindow</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$e</var></span>, <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$n</var></span>, <span>Integer <var>$mode</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sliding Window k-ary Modular Exponentiation</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sliding Window k-ary Modular Exponentiation</p>
+
+<p>Based on <a href="http://www.cacr.math.uwaterloo.ca/hac/about/chap14.pdf#page=27">HAC 14.85</a> / <a href="http://math.libtomcrypt.com/files/tommath.pdf#page=210">MPM 7.7</a>. In a departure from those algorithims, however, this function performs
+a modular reduction after every multiplication and squaring operation. As such,
+this function has the same preconditions that the reductions being used do.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$e</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$e</dd>
+					<dt><var>$n</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$n</dd>
+					<dt><var>$mode</var></dt>
+					<dd><code>Integer</code><br>$mode</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_reduce" id="__reduce">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__reduce">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1835-1872" title="Go to source code">_reduce</a>( <span>Array <var>$x</var></span>, <span>Array <var>$n</var></span>, <span>Integer <var>$mode</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Modular reduction</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Modular reduction</p>
+
+<p>For most $modes this will return the remainder.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Array</code><br>$x</dd>
+					<dt><var>$n</var></dt>
+					<dd><code>Array</code><br>$n</dd>
+					<dt><var>$mode</var></dt>
+					<dd><code>Integer</code><br>$mode</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__slidingWindow">Math_BigInteger::_slidingWindow()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_prepareReduce" id="__prepareReduce">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__prepareReduce">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1874-1890" title="Go to source code">_prepareReduce</a>( <span>Array <var>$x</var></span>, <span>Array <var>$n</var></span>, <span>Integer <var>$mode</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Modular reduction preperation</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Modular reduction preperation</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Array</code><br>$x</dd>
+					<dt><var>$n</var></dt>
+					<dd><code>Array</code><br>$n</dd>
+					<dt><var>$mode</var></dt>
+					<dd><code>Integer</code><br>$mode</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__slidingWindow">Math_BigInteger::_slidingWindow()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_multiplyReduce" id="__multiplyReduce">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__multiplyReduce">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1892-1910" title="Go to source code">_multiplyReduce</a>( <span>Array <var>$x</var></span>, <span>Array <var>$y</var></span>, <span>Array <var>$n</var></span>, <span>Integer <var>$mode</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Modular multiply</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Modular multiply</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Array</code><br>$x</dd>
+					<dt><var>$y</var></dt>
+					<dd><code>Array</code><br>$y</dd>
+					<dt><var>$n</var></dt>
+					<dd><code>Array</code><br>$n</dd>
+					<dt><var>$mode</var></dt>
+					<dd><code>Integer</code><br>$mode</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__slidingWindow">Math_BigInteger::_slidingWindow()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_squareReduce" id="__squareReduce">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__squareReduce">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1912-1928" title="Go to source code">_squareReduce</a>( <span>Array <var>$x</var></span>, <span>Array <var>$n</var></span>, <span>Integer <var>$mode</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Modular square</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Modular square</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Array</code><br>$x</dd>
+					<dt><var>$n</var></dt>
+					<dd><code>Array</code><br>$n</dd>
+					<dt><var>$mode</var></dt>
+					<dd><code>Integer</code><br>$mode</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__slidingWindow">Math_BigInteger::_slidingWindow()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_mod2" id="__mod2">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__mod2">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1930-1946" title="Go to source code">_mod2</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$n</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Modulos for Powers of Two</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Modulos for Powers of Two</p>
+
+<p>Calculates $x%$n, where $n = 2**$e, for some $e. Since this is basically the
+same as doing $x &amp; ($n-1), we'll just use this function as a wrapper for
+doing that.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$n</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__slidingWindow">Math_BigInteger::_slidingWindow()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_barrett" id="__barrett">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__barrett">#</a>
+		<code><a href="source-class-Math_BigInteger.html#1948-2055" title="Go to source code">_barrett</a>( <span>Array <var>$n</var></span>, <span>Array <var>$m</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Barrett Modular Reduction</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Barrett Modular Reduction</p>
+
+<p>See <a href="http://www.cacr.math.uwaterloo.ca/hac/about/chap14.pdf#page=14">HAC 14.3.3</a> / <a href="http://math.libtomcrypt.com/files/tommath.pdf#page=165">MPM 6.2.5</a> for more information. Modified slightly, so as not to require
+negative numbers (initially, this script didn't support negative numbers).</p>
+
+<p>Employs "folding", as described at <a href="http://www.cosic.esat.kuleuven.be/publications/thesis-149.pdf#page=66">thesis-149.pdf#page=66</a>. To quote from it, "the idea [behind folding] is to find
+a value x' such that x (mod m) = x' (mod m), with x' being smaller than x."</p>
+
+<p>Unfortunately, the "Barrett Reduction with Folding" algorithm described in
+thesis-149.pdf is not, as written, all that usable on account of (1) its not
+using reasonable radix points as discussed in <a href="http://math.libtomcrypt.com/files/tommath.pdf#page=162">MPM 6.2.2</a> and (2) the fact that, even with reasonable radix points, it only
+works when there are an even number of digits in the denominator. The reason for
+(2) is that (x &gt;&gt; 1) + (x &gt;&gt; 1) != x / 2 + x / 2. If x is even,
+they're the same, but if x is odd, they're not. See the in-line comments for
+details.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$n</var></dt>
+					<dd><code>Array</code><br>$n</dd>
+					<dt><var>$m</var></dt>
+					<dd><code>Array</code><br>$m</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__slidingWindow">Math_BigInteger::_slidingWindow()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_regularBarrett" id="__regularBarrett">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__regularBarrett">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2057-2127" title="Go to source code">_regularBarrett</a>( <span>Array <var>$x</var></span>, <span>Array <var>$n</var></span> )</code>
+
+		<div class="description short">
+			
+<p>(Regular) Barrett Modular Reduction</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>(Regular) Barrett Modular Reduction</p>
+
+<p>For numbers with more than four digits Math_BigInteger::_barrett() is faster.
+The difference between that and this is that this function does not fold the
+denominator into a smaller form.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Array</code><br>$x</dd>
+					<dt><var>$n</var></dt>
+					<dd><code>Array</code><br>$n</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__slidingWindow">Math_BigInteger::_slidingWindow()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_multiplyLower" id="__multiplyLower">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__multiplyLower">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2129-2205" title="Go to source code">_multiplyLower</a>( <span>Array <var>$x_value</var></span>, <span>Boolean <var>$x_negative</var></span>, <span>Array <var>$y_value</var></span>, <span>Boolean <var>$y_negative</var></span>, <span>Integer <var>$stop</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Performs long multiplication up to $stop digits</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs long multiplication up to $stop digits</p>
+
+<p>If you're going to be doing array_slice($product-&gt;value, 0, $stop), some
+cycles can be saved.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x_value</var></dt>
+					<dd><code>Array</code><br>$x_value</dd>
+					<dt><var>$x_negative</var></dt>
+					<dd><code>Boolean</code><br>$x_negative</dd>
+					<dt><var>$y_value</var></dt>
+					<dd><code>Array</code><br>$y_value</dd>
+					<dt><var>$y_negative</var></dt>
+					<dd><code>Boolean</code><br>$y_negative</dd>
+					<dt><var>$stop</var></dt>
+					<dd><code>Integer</code><br>$stop</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__regularBarrett">Math_BigInteger::_regularBarrett()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_montgomery" id="__montgomery">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__montgomery">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2207-2254" title="Go to source code">_montgomery</a>( <span>Array <var>$x</var></span>, <span>Array <var>$n</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Montgomery Modular Reduction</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Montgomery Modular Reduction</p>
+
+<p>($x-&gt;_prepMontgomery($n))-&gt;_montgomery($n) yields $x % $n. <a href="http://math.libtomcrypt.com/files/tommath.pdf#page=170">MPM 6.3</a> provides insights on how this can be improved upon (basically, by using
+the comba method). gcd($n, 2) must be equal to one for this function to work
+correctly.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Array</code><br>$x</dd>
+					<dt><var>$n</var></dt>
+					<dd><code>Array</code><br>$n</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__prepMontgomery">Math_BigInteger::_prepMontgomery()</a></code></code><br />
+						<code><code><a href="class-Math_BigInteger.html#__slidingWindow">Math_BigInteger::_slidingWindow()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_montgomeryMultiply" id="__montgomeryMultiply">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__montgomeryMultiply">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2256-2304" title="Go to source code">_montgomeryMultiply</a>( <span>Array <var>$x</var></span>, <span>Array <var>$y</var></span>, <span>Array <var>$m</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Montgomery Multiply</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Montgomery Multiply</p>
+
+<p>Interleaves the montgomery reduction and long multiplication algorithms
+together as described in <a href="http://www.cacr.math.uwaterloo.ca/hac/about/chap14.pdf#page=13">HAC 14.36</a></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Array</code><br>$x</dd>
+					<dt><var>$y</var></dt>
+					<dd><code>Array</code><br>$y</dd>
+					<dt><var>$m</var></dt>
+					<dd><code>Array</code><br>$m</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__prepMontgomery">Math_BigInteger::_prepMontgomery()</a></code></code><br />
+						<code><code><a href="class-Math_BigInteger.html#__montgomery">Math_BigInteger::_montgomery()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_prepMontgomery" id="__prepMontgomery">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__prepMontgomery">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2306-2325" title="Go to source code">_prepMontgomery</a>( <span>Array <var>$x</var></span>, <span>Array <var>$n</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Prepare a number for use in Montgomery Modular Reductions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Prepare a number for use in Montgomery Modular Reductions</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Array</code><br>$x</dd>
+					<dt><var>$n</var></dt>
+					<dd><code>Array</code><br>$n</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__montgomery">Math_BigInteger::_montgomery()</a></code></code><br />
+						<code><code><a href="class-Math_BigInteger.html#__slidingWindow">Math_BigInteger::_slidingWindow()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_modInverse67108864" id="__modInverse67108864">
+
+		<td class="attributes"><code>
+			 public 
+			Integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__modInverse67108864">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2327-2362" title="Go to source code">_modInverse67108864</a>( <span>Array <var>$x</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Modular Inverse of a number mod 2**26 (eg. 67108864)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Modular Inverse of a number mod 2**26 (eg. 67108864)</p>
+
+<p>Based off of the bnpInvDigit function implemented and justified in the
+following URL:</p>
+
+<p><a href="http://www-cs-students.stanford.edu/~tjw/jsbn/jsbn.js">http://www-cs-students.stanford.edu/~tjw/jsbn/jsbn.js</a></p>
+
+<p>The following URL provides more info:</p>
+
+<p><a href="http://groups.google.com/group/sci.crypt/msg/7a137205c1be7d85">http://groups.google.com/group/sci.crypt/msg/7a137205c1be7d85</a></p>
+
+<p>As for why we do all the bitmasking... strange things can happen when
+converting from floats to ints. For instance, on some computers, var_dump((int)
+-4294967297) yields int(-1) and on others, it yields int(-2147483648). To avoid
+problems stemming from this, we use bitmasks to guarantee that ints aren't
+auto-converted to floats. The outermost bitmask is present because without it,
+there's no guarantee that the "residue" returned would be the so-called "common
+residue". We use fmod, in the last step, because the maximum possible $x is 26
+bits and the maximum $result is 16 bits. Thus, we have to be able to handle up
+to 40 bits, which only 64-bit floating points will support.</p>
+
+<p>Thanks to Pedro Gimeno Fortea for input!</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Array</code><br>$x</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Integer</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__montgomery">Math_BigInteger::_montgomery()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="modInverse" id="_modInverse">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_modInverse">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2364-2427" title="Go to source code">modInverse</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$n</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Calculates modular inverses.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Calculates modular inverses.</p>
+
+<p>Say you have (30 mod 17 * x mod 17) mod 17 == 1. x can be found using modular
+inverses.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-num">30</span>);
+   <span class="php-var">$b</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-num">17</span>);
+
+   <span class="php-var">$c</span> = <span
+class="php-var">$a</span>-&gt;modInverse(<span
+class="php-var">$b</span>);
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$c</span>-&gt;toString(); <span
+class="php-comment">// outputs 4</span>
+
+   <span
+class="php-keyword1">echo</span> <span
+class="php-quote">&quot;\r\n&quot;</span>;
+
+   <span
+class="php-var">$d</span> = <span class="php-var">$a</span>-&gt;multiply(<span
+class="php-var">$c</span>);
+   <span class="php-keyword1">list</span>(, <span
+class="php-var">$d</span>) = <span class="php-var">$d</span>-&gt;divide(<span
+class="php-var">$b</span>);
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$d</span>; <span
+class="php-comment">// outputs 1 (as per the definition of modular inverse)</span>
+<span
+class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$n</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$n</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>false, if no modular inverse exists, Math_BigInteger, otherwise.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="extendedGCD" id="_extendedGCD">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_extendedGCD">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2429-2565" title="Go to source code">extendedGCD</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$n</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Calculates the greatest common divisor and Bezout's identity.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Calculates the greatest common divisor and Bezout's identity.</p>
+
+<p>Say you have 693 and 609. The GCD is 21. Bezout's identity states that there
+exist integers x and y such that 693*x + 609*y == 21. In point of fact, there
+are actually an infinite number of x and y combinations and which combination is
+returned is dependant upon which mode is in use. See <a href="http://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity">Bezout&#039;s identity - Wikipedia</a> for more information.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-num">693</span>);
+   <span class="php-var">$b</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-num">609</span>);
+
+   <span class="php-keyword2">extract</span>(<span
+class="php-var">$a</span>-&gt;extendedGCD(<span
+class="php-var">$b</span>));
+
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$gcd</span>-&gt;toString() . <span
+class="php-quote">&quot;\r\n&quot;</span>; <span
+class="php-comment">// outputs 21</span>
+   <span
+class="php-keyword1">echo</span> <span
+class="php-var">$a</span>-&gt;toString() * <span
+class="php-var">$x</span>-&gt;toString() + <span
+class="php-var">$b</span>-&gt;toString() * <span
+class="php-var">$y</span>-&gt;toString(); <span
+class="php-comment">// outputs 21</span>
+<span class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$n</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$n</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="gcd" id="_gcd">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_gcd">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2567-2594" title="Go to source code">gcd</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$n</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Calculates the greatest common divisor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Calculates the greatest common divisor</p>
+
+<p>Say you have 693 and 609. The GCD is 21.</p>
+
+<p>Here's an example:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+   <span
+class="php-keyword1">include</span>(<span
+class="php-quote">'Math/BigInteger.php'</span>);
+
+   <span
+class="php-var">$a</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-num">693</span>);
+   <span class="php-var">$b</span> = <span
+class="php-keyword1">new</span> Math_BigInteger(<span
+class="php-num">609</span>);
+
+   <span
+class="php-var">$gcd</span> = a-&gt;extendedGCD(<span
+class="php-var">$b</span>);
+
+   <span class="php-keyword1">echo</span> <span
+class="php-var">$gcd</span>-&gt;toString() . <span
+class="php-quote">&quot;\r\n&quot;</span>; <span
+class="php-comment">// outputs 21</span>
+<span class="xlang">?&gt;</span>
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$n</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$n</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="abs" id="_abs">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_abs">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2596-2618" title="Go to source code">abs</a>( )</code>
+
+		<div class="description short">
+			
+<p>Absolute value.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Absolute value.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="compare" id="_compare">
+
+		<td class="attributes"><code>
+			 public 
+			Integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_compare">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2620-2648" title="Go to source code">compare</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$y</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Compares two numbers.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Compares two numbers.</p>
+
+<p>Although one might think !$x-&gt;compare($y) means $x != $y, it, in fact,
+means the opposite. The reason for this is demonstrated thusly:</p>
+
+<p>$x &gt; $y: $x-&gt;compare($y) &gt; 0 $x &lt; $y: $x-&gt;compare($y) &lt; 0
+$x == $y: $x-&gt;compare($y) == 0</p>
+
+<p>Note how the same comparison operator is used. If you want to test for
+equality, use $x-&gt;equals($y).</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$y</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$y</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Integer</code><br>&lt; 0 if $this is less than $y; &gt; 0 if $this is greater than $y, and 0 if
+they are equal.<br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#_equals">Math_BigInteger::equals()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_compare" id="__compare">
+
+		<td class="attributes"><code>
+			 public 
+			Integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__compare">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2650-2684" title="Go to source code">_compare</a>( <span>Array <var>$x_value</var></span>, <span>Boolean <var>$x_negative</var></span>, <span>Array <var>$y_value</var></span>, <span>Boolean <var>$y_negative</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Compares two numbers.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Compares two numbers.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x_value</var></dt>
+					<dd><code>Array</code><br>$x_value</dd>
+					<dt><var>$x_negative</var></dt>
+					<dd><code>Boolean</code><br>$x_negative</dd>
+					<dt><var>$y_value</var></dt>
+					<dd><code>Array</code><br>$y_value</dd>
+					<dt><var>$y_negative</var></dt>
+					<dd><code>Boolean</code><br>$y_negative</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Integer</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#_compare">Math_BigInteger::compare()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="equals" id="_equals">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_equals">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2686-2704" title="Go to source code">equals</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$x</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Tests the equality of two numbers.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Tests the equality of two numbers.</p>
+
+<p>If you need to see if one number is greater than or less than another number,
+use Math_BigInteger::compare()</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$x</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#_compare">Math_BigInteger::compare()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPrecision" id="_setPrecision">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setPrecision">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2706-2726" title="Go to source code">setPrecision</a>( <span>Integer <var>$bits</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set Precision</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set Precision</p>
+
+<p>Some bitwise operations give different results depending on the precision
+being used. Examples include left shift, not, and rotates.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bits</var></dt>
+					<dd><code>Integer</code><br>$bits</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bitwise_and" id="_bitwise_and">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bitwise_and">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2728-2767" title="Go to source code">bitwise_and</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$x</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical And</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical And</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$x</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bitwise_or" id="_bitwise_or">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bitwise_or">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2769-2807" title="Go to source code">bitwise_or</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$x</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical Or</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Or</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$x</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bitwise_xor" id="_bitwise_xor">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bitwise_xor">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2809-2847" title="Go to source code">bitwise_xor</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$x</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical Exclusive-Or</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Exclusive-Or</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br>$x</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bitwise_not" id="_bitwise_not">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bitwise_not">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2849-2883" title="Go to source code">bitwise_not</a>( )</code>
+
+		<div class="description short">
+			
+<p>Logical Not</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Not</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bitwise_rightShift" id="_bitwise_rightShift">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bitwise_rightShift">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2885-2921" title="Go to source code">bitwise_rightShift</a>( <span>Integer <var>$shift</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical Right Shift</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Right Shift</p>
+
+<p>Shifts BigInteger's by $shift bits, effectively dividing by 2**$shift.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$shift</var></dt>
+					<dd><code>Integer</code><br>$shift</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bitwise_leftShift" id="_bitwise_leftShift">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bitwise_leftShift">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2923-2959" title="Go to source code">bitwise_leftShift</a>( <span>Integer <var>$shift</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical Left Shift</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Left Shift</p>
+
+<p>Shifts BigInteger's by $shift bits, effectively multiplying by 2**$shift.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$shift</var></dt>
+					<dd><code>Integer</code><br>$shift</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bitwise_leftRotate" id="_bitwise_leftRotate">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bitwise_leftRotate">#</a>
+		<code><a href="source-class-Math_BigInteger.html#2961-3003" title="Go to source code">bitwise_leftRotate</a>( <span>Integer <var>$shift</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical Left Rotate</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Left Rotate</p>
+
+<p>Instead of the top x bits being dropped they're appended to the shifted bit
+string.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$shift</var></dt>
+					<dd><code>Integer</code><br>$shift</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bitwise_rightRotate" id="_bitwise_rightRotate">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bitwise_rightRotate">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3005-3017" title="Go to source code">bitwise_rightRotate</a>( <span>Integer <var>$shift</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical Right Rotate</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Right Rotate</p>
+
+<p>Instead of the bottom x bits being dropped they're prepended to the shifted
+bit string.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$shift</var></dt>
+					<dd><code>Integer</code><br>$shift</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setRandomGenerator" id="_setRandomGenerator">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setRandomGenerator">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3019-3029" title="Go to source code">setRandomGenerator</a>( <span>String <var>$generator</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set random number generator function</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set random number generator function</p>
+
+<p>This function is deprecated.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$generator</var></dt>
+					<dd><code>String</code><br>$generator</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="random" id="_random">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_random">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3031-3102" title="Go to source code">random</a>( <span>optional <var>$min</var> = <span class="php-keyword1">false</span></span>, <span>optional <var>$max</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Generate a random number</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Generate a random number</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$min</var></dt>
+					<dd><code>optional</code><br>Integer $min</dd>
+					<dt><var>$max</var></dt>
+					<dd><code>optional</code><br>Integer $max</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="randomPrime" id="_randomPrime">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_randomPrime">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3104-3202" title="Go to source code">randomPrime</a>( <span>optional <var>$min</var> = <span class="php-keyword1">false</span></span>, <span>optional <var>$max</var> = <span class="php-keyword1">false</span></span>, <span>optional <var>$timeout</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Generate a random prime number.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Generate a random prime number.</p>
+
+<p>If there's not a prime within the given range, false will be returned. If
+more than $timeout seconds have elapsed, give up and return false.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$min</var></dt>
+					<dd><code>optional</code><br>Integer $min</dd>
+					<dt><var>$max</var></dt>
+					<dd><code>optional</code><br>Integer $max</dd>
+					<dt><var>$timeout</var></dt>
+					<dd><code>optional</code><br>Integer $timeout</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_make_odd" id="__make_odd">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__make_odd">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3204-3226" title="Go to source code">_make_odd</a>( )</code>
+
+		<div class="description short">
+			
+<p>Make the current number odd</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Make the current number odd</p>
+
+<p>If the current number is odd it'll be unchanged. If it's even, one will be
+added to it.</p>
+
+
+
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#_randomPrime">Math_BigInteger::randomPrime()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPrime" id="_isPrime">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isPrime">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3228-3378" title="Go to source code">isPrime</a>( <span>optional <var>$t</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Checks a numer to see if it's prime</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks a numer to see if it's prime</p>
+
+<p>Assuming the $t parameter is not set, this function has an error rate of
+2**-80. The main motivation for the $t parameter is distributability.
+Math_BigInteger::randomPrime() can be distributed accross multiple pageloads on
+a website instead of just one.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$t</var></dt>
+					<dd><code>optional</code><br>Integer $t</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_lshift" id="__lshift">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__lshift">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3380-3413" title="Go to source code">_lshift</a>( <span>Integer <var>$shift</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical Left Shift</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Left Shift</p>
+
+<p>Shifts BigInteger's by $shift bits.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$shift</var></dt>
+					<dd><code>Integer</code><br>$shift</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_rshift" id="__rshift">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__rshift">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3415-3447" title="Go to source code">_rshift</a>( <span>Integer <var>$shift</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical Right Shift</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Right Shift</p>
+
+<p>Shifts BigInteger's by $shift bits.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$shift</var></dt>
+					<dd><code>Integer</code><br>$shift</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_normalize" id="__normalize">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__normalize">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3449-3497" title="Go to source code">_normalize</a>( <span><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code> <var>$result</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Normalize</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Normalize</p>
+
+<p>Removes leading zeros and truncates (if necessary) to maintain the
+appropriate precision</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$result</var></dt>
+					<dd><code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#__trim">Math_BigInteger::_trim()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_trim" id="__trim">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__trim">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3499-3518" title="Go to source code">_trim</a>( <span>Array <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Trim</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Trim</p>
+
+<p>Removes leading zeros</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>Array</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Math_BigInteger.html">Math_BigInteger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_array_repeat" id="__array_repeat">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__array_repeat">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3520-3531" title="Go to source code">_array_repeat</a>( <span>mixed <var>$input</var></span>, <span>mixed <var>$multiplier</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Array Repeat</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Array Repeat</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input Array</dd>
+					<dt><var>$multiplier</var></dt>
+					<dd><code>mixed</code><br>$multiplier mixed</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_base256_lshift" id="__base256_lshift">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__base256_lshift">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3533-3560" title="Go to source code">_base256_lshift</a>( <span>mixed <var>&amp; $x</var></span>, <span>mixed <var>$shift</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical Left Shift</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Left Shift</p>
+
+<p>Shifts binary strings $shift bits, essentially multiplying by 2**$shift.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>mixed</code><br>$x String</dd>
+					<dt><var>$shift</var></dt>
+					<dd><code>mixed</code><br>$shift Integer</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_base256_rshift" id="__base256_rshift">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__base256_rshift">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3562-3601" title="Go to source code">_base256_rshift</a>( <span>mixed <var>&amp; $x</var></span>, <span>mixed <var>$shift</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Logical Right Shift</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logical Right Shift</p>
+
+<p>Shifts binary strings $shift bits, essentially dividing by 2**$shift and
+returning the remainder.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>mixed</code><br>$x String</dd>
+					<dt><var>$shift</var></dt>
+					<dd><code>mixed</code><br>$shift Integer</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_int2bytes" id="__int2bytes">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__int2bytes">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3606-3616" title="Go to source code">_int2bytes</a>( <span>Integer <var>$x</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Converts 32-bit integers to bytes.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts 32-bit integers to bytes.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>Integer</code><br>$x</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_bytes2int" id="__bytes2int">
+
+		<td class="attributes"><code>
+			 public 
+			Integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__bytes2int">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3618-3629" title="Go to source code">_bytes2int</a>( <span>String <var>$x</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Converts bytes to 32-bit integers</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts bytes to 32-bit integers</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x</var></dt>
+					<dd><code>String</code><br>$x</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_encodeASN1Length" id="__encodeASN1Length">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__encodeASN1Length">#</a>
+		<code><a href="source-class-Math_BigInteger.html#3631-3649" title="Go to source code">_encodeASN1Length</a>( <span>Integer <var>$length</var></span> )</code>
+
+		<div class="description short">
+			
+<p>DER-encode an integer</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>DER-encode an integer</p>
+
+<p>The ability to DER-encode integers is needed to create RSA public keys for
+use with OpenSSL</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$length</var></dt>
+					<dd><code>Integer</code><br>$length</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Math_BigInteger.html#_modPow">Math_BigInteger::modPow()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="value" id="$value">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Math_BigInteger.html#183-189" title="Go to source code"><var>$value</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$value" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Holds the BigInteger's value.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Holds the BigInteger's value.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="is_negative" id="$is_negative">
+		<td class="attributes"><code>
+			public  
+			Boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Math_BigInteger.html#191-197" title="Go to source code"><var>$is_negative</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$is_negative" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Holds the BigInteger's magnitude.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Holds the BigInteger's magnitude.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="generator" id="$generator">
+		<td class="attributes"><code>
+			public  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Math_BigInteger.html#199-205" title="Go to source code"><var>$generator</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'mt_rand'</span></code></td>
+		<td class="description"><div>
+			<a href="#$generator" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Random number generator function</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Random number generator function</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Math_BigInteger.html#_setRandomGenerator">Math_BigInteger::setRandomGenerator()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="precision" id="$precision">
+		<td class="attributes"><code>
+			public  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Math_BigInteger.html#207-213" title="Go to source code"><var>$precision</var></a>
+		</td>
+		<td class="value"><code>-<span class="php-num">1</span></code></td>
+		<td class="description"><div>
+			<a href="#$precision" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Precision</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Precision</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Math_BigInteger.html#_setPrecision">Math_BigInteger::setPrecision()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="bitmask" id="$bitmask">
+		<td class="attributes"><code>
+			public  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Math_BigInteger.html#215-221" title="Go to source code"><var>$bitmask</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$bitmask" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Precision Bitmask</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Precision Bitmask</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Math_BigInteger.html#_setPrecision">Math_BigInteger::setPrecision()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="hex" id="$hex">
+		<td class="attributes"><code>
+			public  
+			String
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Math_BigInteger.html#223-235" title="Go to source code"><var>$hex</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$hex" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Mode independent value used for serialization.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Mode independent value used for serialization.</p>
+
+<p>If the bcmath or gmp extensions are installed $this-&gt;value will be a
+non-serializable resource, hence the need for a variable that'll be serializable
+regardless of whether or not extensions are being used. Unlike $this-&gt;value,
+however, $this-&gt;hex is only calculated when $this-&gt;__sleep() is
+called.</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Math_BigInteger.html#___sleep">Math_BigInteger::__sleep()</a></code></code><br />
+							<code><code><a href="class-Math_BigInteger.html#___wakeup">Math_BigInteger::__wakeup()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		samlogin-master API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

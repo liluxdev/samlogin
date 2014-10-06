@@ -293,7 +293,7 @@ if ($proto == "wsfed") {
             $t->show();
         } else {
             $logoutURL = $wsfedLogoutURL = '/' . $config->getBaseURL() . 'wsfed/sp/initSLO.php?'
-                    . 'RelayState=/' . SimpleSAML_Utilities::selfURL() . "?task=finishSLO"
+                    . 'RelayState=/' . SimpleSAML_Utilities::selfURL() . "&task=finishSLO"
                     . '&spentityid=' . $spWSEnt;
 
             $attributes = $session->getAuthData('wsfed', 'Attributes');
@@ -331,7 +331,7 @@ if ($proto == "wsfed") {
             $currentSession->set("SAMLoginNameId", json_encode(SAMLoginSessionBridge::$SAMLNameId));
             //     print_r($currentSession->get("SAMLoginAttrs")); die("123testing");
             /* this fixes issue 4 */ $currentSession->close(); //ensure session data storage session_write_close()
-            $currentSession = JFactory::getSession();
+          
 
             //print_r($currentSession->get("SAMLoginAttrs")); die("3testing");
             $redirectTo = JRoute::_("index.php?option=com_samlogin&view=login&task=handleSAMLResponse&rret=" . $_GET['rret'], false);
@@ -340,11 +340,16 @@ if ($proto == "wsfed") {
 
 
             if (isset($_REQUEST["dologout"])) {
+               //if ($_REQUEST["task"]==="finishSLO"){
+                $currentSession = JFactory::getSession();
+                $currentSession->set("SAMLoginPreventDoubleLogout", true);
+                $currentSession->close(); 
                 $app->logout();
-                //        die($logoutURL);
+               // die($wsfedLogoutURL);
                 $redirectTo = $wsfedLogoutURL;
             }
             $app->redirect($redirectTo);
+           // die($redirectTo);
 
             die(); //important to die here or session will be reset
         }

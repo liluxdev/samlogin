@@ -4,6 +4,7 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controlleradmin');
 //Import filesystem libraries.
 jimport('joomla.filesystem.file');
+error_reporting(0);
 
 class SAMLoginControllerAjax extends SAMLoginController {
 
@@ -452,11 +453,14 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 "1.11.n" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.11.n.zip",
                 "1.11.f" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.11.f.zip",
                 "1.12.n" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.12.n.zip",
+                "1.12.n1" => "https://raw.githubusercontent.com/creativeprogramming/simplesamlphp-samlogin/master/z-dist/ssp.1.12.n1.zip",
                 //alternate:
-                "1.11.legacy-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.zip",
-                "1.11.n-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.11.n.zip",
-                "1.11.f-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.11.f.zip",
-                "1.12.n-a" => "http://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.12.n.zip",
+                "1.11.legacy-a" => "https://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.zip",
+                "1.11.n-a" => "https://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.11.n.zip",
+                "1.11.f-a" => "https://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.11.f.zip",
+                "1.12.n-a" => "https://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.12.n.zip",
+                "1.12.n1-a" => "https://creativeprogramming.it/dev/dist/ssp-samlogin/ssp.1.12.n1.zip",
+          
             );
 
 
@@ -605,7 +609,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
             if ($res === TRUE) {
                 $zip->extractTo($extractDir);
                 $zip->close();
-                $toret['versionInfo'] = file_get_contents($extractDir . "/VERSION_INFO");
+                $toret['versionInfo'] = @file_get_contents($extractDir . "/VERSION_INFO");
                 if ($toret['versionInfo']) {
                     $toret['additionalMessages'][] = array("msg" => "SimpleSAMLphp installed (" . $toret['versionInfo'] . "),"
                         . " dashboard page will be refreshed soon.", "level" => "success");
@@ -677,12 +681,15 @@ class SAMLoginControllerAjax extends SAMLoginController {
 
             $user = JFactory::getUser();
             $params = JComponentHelper::getParams('com_samlogin');
+            
+            $customCheckBaseURL = $params->get("customCheckBaseURL",'');
+         
 
             $checks = array();
             $checks['additionalMessages'] = array(); //messae to toast
 
             $SSPCheckFile = JPATH_COMPONENT_SITE . "/simplesamlphp/VERSION_INFO";
-            $vinfo = file_get_contents($SSPCheckFile);
+            $vinfo = @file_get_contents($SSPCheckFile);
             if ($vinfo === FALSE) {
                 $checks['sspCheck'] = false;
             } else {
@@ -743,9 +750,9 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 $checks['adminpassChanged'] = $sspConf["auth.adminpassword"] != "1234" ? true : false;
                 //die ($checks['sspConf']["auth.adminpassword"].  $checks['adminpassChanged']);
 
-                $nonsslTestURL = str_ireplace("https://", "http://", JURI::root()) . "/components/com_samlogin/simplesamlphp/www/module.php/saml/sp/metadata.php/default-sp?output=xhtml";
-                $sslTestURL = str_ireplace("http://", "https://", JURI::root()) . "/components/com_samlogin/simplesamlphp/www/module.php/saml/sp/metadata.php/default-sp?output=xhtml";
-
+                $nonsslTestURL = str_ireplace("https://", "http://", (!empty($customCheckBaseURL) ? $customCheckBaseURL : JURI::root()) ) . "/components/com_samlogin/simplesamlphp/www/module.php/saml/sp/metadata.php/default-sp?output=xhtml";
+                $sslTestURL = str_ireplace("http://", "https://",  (!empty($customCheckBaseURL) ? $customCheckBaseURL : JURI::root()) ) . "/components/com_samlogin/simplesamlphp/www/module.php/saml/sp/metadata.php/default-sp?output=xhtml";
+        
 
                 $neededJoomlaBaseURLPath = JURI::root(true) . '/components/com_samlogin/simplesamlphp/www/';
                 while (self::_startsWith($neededJoomlaBaseURLPath, "/")) {
@@ -768,7 +775,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 if ($metadataSSLPageContent == FALSE) {
                     $checks['metadataPublished'] = FALSE;
                 } else {
-                    $checks['metadataPublished'] = stristr($metadataSSLPageContent, "simpleSAMLphp") ? TRUE : "No route to simpleSAMLphp, if you are using nginx add a proper location";
+                    $checks['metadataPublished'] = stristr($metadataSSLPageContent, "simpleSAMLphp") ? TRUE : "No route to simpleSAMLphp or server cannot reach itself via http from PHP, try to set the a custom checkbaseurl pointing at localhost, or if you are using nginx add a proper location";
                     if ($checks['metadataPublished'] === TRUE) {
                         $checks['metadataPublished'] = stristr($metadataSSLPageContent, "EntityDescriptor") ? TRUE : "Invalid metadata";
                     }
@@ -804,7 +811,8 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
                 $SSPKeyURLPath = SSPConfManager::getCertURLPath();
 
-                $privatekeyTestURL = str_ireplace("https://", "http://", JURI::root()) . $SSPKeyURLPath . "saml.key";
+                $privatekeyTestURL = str_ireplace("https://", "http://",  (!empty($customCheckBaseURL) ? $customCheckBaseURL : JURI::root()) ) . $SSPKeyURLPath . "saml.key";
+                
                 // echo $privatekeyTestURL;
                 $privatekeyTestURLContent = SamloginHelperDownloader::downloadAndReturn($privatekeyTestURL);
                 $checks['privatekey'] = $privatekeyTestURLContent === FALSE ? TRUE : $privatekeyTestURLContent;
@@ -830,7 +838,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
 
 
 
-                $privatekeySSLTestURL = str_ireplace("http://", "https://", JURI::root()) . $SSPKeyURLPath . "saml.key";
+                $privatekeySSLTestURL = str_ireplace("http://", "https://",  (!empty($customCheckBaseURL) ? $customCheckBaseURL : JURI::root()) ) . $SSPKeyURLPath . "saml.key";
                 //  die(print_r(get_headers($privatekeySSLTestURL),true));
                 $privatekeySSLTestURLContent = SamloginHelperDownloader::downloadAndReturn($privatekeySSLTestURL);
                 $checks['privatekeySSL'] = $privatekeySSLTestURLContent === FALSE ? TRUE : $privatekeySSLTestURLContent;
@@ -855,7 +863,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 }
 
 
-                $testURL = str_ireplace("https://", "http://", JURI::root()) . "/components/com_samlogin/simplesamlphp/log/_placeholder.php";
+                $testURL = str_ireplace("https://", "http://",  (!empty($customCheckBaseURL) ? $customCheckBaseURL : JURI::root()) ) . "/components/com_samlogin/simplesamlphp/log/_placeholder.php";
                 // die(print_r(get_headers($testURL),true));
                 $logUrlContent = SamloginHelperDownloader::downloadAndReturn($testURL);
                 $checks['logswww'] = $logUrlContent === FALSE ? TRUE : $logUrlContent;
@@ -881,7 +889,7 @@ class SAMLoginControllerAjax extends SAMLoginController {
 
 
 
-                $testURL = str_ireplace("http://", "https://", JURI::root()) . "/components/com_samlogin/simplesamlphp/log/_placeholder.php";
+                $testURL = str_ireplace("http://", "https://",  (!empty($customCheckBaseURL) ? $customCheckBaseURL : JURI::root()) ) . "/components/com_samlogin/simplesamlphp/log/_placeholder.php";
                 $logUrlContent = SamloginHelperDownloader::downloadAndReturn($testURL);
                 $checks['logswwws'] = $logUrlContent === FALSE ? TRUE : $logUrlContent;
                 if ($checks['logswwws'] !== FALSE) {
@@ -944,9 +952,12 @@ class SAMLoginControllerAjax extends SAMLoginController {
                     $orderingValues[$plugin->element] = $plugin->ordering;
                 }
                 $checks['userPlugin'] = "On and ordered as #" . $orderingValues['samlogin'];
-                if ($orderingValues['joomla'] > $orderingValues['samlogin']) {
-                    //     $application->enqueueMessage(JText::_('SAMLOGIN_USER_PLUGIN_ORDERING_NOTICE'), 'notice');
+             if ($orderingValues['joomla'] < $orderingValues['samlogin']) {
+                    //    $application->enqueueMessage(JText::_('SAMLOGIN_AUTH_PLUGIN_ORDERING_NOTICE'), 'notice');
+                    $checks['userPlugin'] = "<i class='uk-icon-warning'></i> On but bad order <a target='_blank' class='uk-button uk-button-mini uk-button-danger' href='" . JUri::base() . "?option=com_plugins&view=plugins'>go to plugin manager</a>";
                     $checks['additionalMessages'][] = array("msg" => "SAMLogin user plugin is ordered after the Joomla user plugin. Please go in the Plugin manager and order samlogin first ", "level" => "warning");
+                } else {
+                    $checks['userPlugin'] = "On and ordered correctly";
                 }
             }
             if ($checks['authPlugin']) {

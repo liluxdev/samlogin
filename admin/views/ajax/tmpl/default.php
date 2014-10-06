@@ -214,6 +214,13 @@ defined('_JEXEC') or die;
                 jQuery(".baseURLPath .statusOfCheck").html("<i class='uk-icon-times'></i>")
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
             }
+            
+               if (data.userPlugin !== false) {
+                jQuery(".userPlugin .statusOfCheck").html("<i class='uk-icon-check'></i> " + data.userPlugin).removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
+            } else {
+                jQuery(".userPlugin .statusOfCheck").html("<i class='uk-icon-times'></i>")
+                        .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
+            }
 
             if (data.authPlugin !== false) {
                 jQuery(".authPlugin .statusOfCheck").html("<i class='uk-icon-check'></i> " + data.authPlugin).removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
@@ -427,6 +434,11 @@ defined('_JEXEC') or die;
                                 </tr>
                                 <tr class='authPlugin'>
                                     <td class="samlogin-auth-plugin">Auth Plugin Enabled</td>
+                                    <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                    <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_AUTHPLUGIN_GUIDELINK'); ?></span></td>
+                                </tr>
+                                <tr class='userPlugin'>
+                                    <td class="samlogin-auth-plugin">User Plugin Enabled</td>
                                     <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
                                     <td class="   "><span class="guideLink"><?php echo JText::_('SAMLOGIN_AUTHPLUGIN_GUIDELINK'); ?></span></td>
                                 </tr>
@@ -731,7 +743,23 @@ defined('_JEXEC') or die;
                                         <div style="width: 100%; font-size: 90%;" class="uk-dropdown">
                                             <ul style="text-align: center;" class="uk-nav uk-nav-dropdown">
                                                 <li class="uk-nav-header">Select version and flavour</li>
-                                                <li><a href="#" onClick="samlogin_installSSP('1.12.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.12</b><i>.n (from our github repo)</i> 
+                                                  <li><a href="#" onClick="samlogin_installSSP('1.12.n1');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.12</b><i>.n1 (from our github repo)</i> 
+                                                        <span style="float: none; font-size: 70%;">
+                                                            <div class="uk-badge uk-badge-warning">samlogin</div>                                                      
+                                                            <div class="uk-badge uk-badge-warning">nginx</div>
+                                                            <div class="uk-badge uk-badge-success">suggested choice</div>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li><a href="#" onClick="samlogin_installSSP('1.12.n1', true);" in_tag="ul"><i class="uk-icon-cloud-download"></i> Migration from SimpleSAMLphp v.1.11 to <b>v.1.12</b><i>.n1 (from our github repo)</i> 
+                                                        <span style="float: none; font-size: 70%;">
+                                                            <div class="uk-badge uk-badge-warning">samlogin</div>
+                                                            <div class="uk-badge uk-badge-warning">nginx</div>
+                                                            <div class="uk-badge uk-badge-danger">migration mode (1.11 to 1.12)</div>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                              <!--  <li><a href="#" onClick="samlogin_installSSP('1.12.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.12</b><i>.n (from our github repo)</i> 
                                                         <span style="float: none; font-size: 70%;">
                                                             <div class="uk-badge uk-badge-warning">samlogin</div>
                                                             <div class="uk-badge uk-badge-warning">nginx</div>
@@ -747,7 +775,8 @@ defined('_JEXEC') or die;
                                                             <div class="uk-badge uk-badge-danger">migration mode - from 1.11, use this if you was on 1.11</div>
                                                         </span>
                                                     </a>
-                                                </li>
+                                                </li> 
+                                              -->
                                                 <li><a href="#" onClick="samlogin_installSSP('1.11.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.11</b><i>.n (from our github repo)</i> 
                                                         <span style="float: none; font-size: 70%;">
                                                             <div class="uk-badge uk-badge-warning">samlogin</div>
@@ -764,7 +793,7 @@ defined('_JEXEC') or die;
                                                     </a>
                                                 </li>
                                                 <li class="uk-nav-header">If the Github download fails try those alternative repos:</li>
-                                                <li><a href="#" onClick="samlogin_installSSP('1.12.n-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.12</b><i>.n (from alternate repo)</i> 
+                                                   <li><a href="#" onClick="samlogin_installSSP('1.12.n1-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.12</b><i>.n1 (from alternate repo)</i> 
                                                         <span style="float: none; font-size: 70%;">
                                                             <div class="uk-badge uk-badge-warning">samlogin</div>
                                                             <div class="uk-badge uk-badge-warning">nginx</div>
@@ -772,6 +801,14 @@ defined('_JEXEC') or die;
                                                         </span>
                                                     </a>
                                                 </li>
+                                              <!--  <li><a href="#" onClick="samlogin_installSSP('1.12.n-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.12</b><i>.n (from alternate repo)</i> 
+                                                        <span style="float: none; font-size: 70%;">
+                                                            <div class="uk-badge uk-badge-warning">samlogin</div>
+                                                            <div class="uk-badge uk-badge-warning">nginx</div>
+                                                            <div class="uk-badge uk-badge-success">alternative repo</div>
+                                                        </span>
+                                                    </a>
+                                                </li> -->
                                                 <li><a href="#" onClick="samlogin_installSSP('1.11.n-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.11</b><i>.n (from alternate repo)</i> 
                                                         <span style="float: none; font-size: 70%;">
                                                             <div class="uk-badge uk-badge-warning">samlogin</div>

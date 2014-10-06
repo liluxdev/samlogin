@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Net_SFTP_Stream | samlogin-master</title>
+
+	<script type="text/javascript" src="resources/combined.js?4141401630"></script>
+	<script type="text/javascript" src="elementlist.js?1584808910"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-Crypt.html">Crypt<span></span></a>
+						<ul>
+				<li><a href="package-Crypt.AES.html">AES</a>
+						</li>
+				<li><a href="package-Crypt.Blowfish.html">Blowfish</a>
+						</li>
+				<li><a href="package-Crypt.DES.html">DES</a>
+						</li>
+				<li><a href="package-Crypt.Hash.html">Hash</a>
+						</li>
+				<li><a href="package-Crypt.Random.html">Random</a>
+						</li>
+				<li><a href="package-Crypt.RC4.html">RC4</a>
+						</li>
+				<li><a href="package-Crypt.Rijndael.html">Rijndael</a>
+						</li>
+				<li><a href="package-Crypt.RSA.html">RSA</a>
+						</li>
+				<li><a href="package-Crypt.TerraDES.html">TerraDES</a>
+						</li>
+				<li><a href="package-Crypt.Twofish.html">Twofish</a>
+						</li>
+							</ul></li>
+				<li><a href="package-File.html">File<span></span></a>
+						<ul>
+				<li><a href="package-File.ANSI.html">ANSI</a>
+						</li>
+				<li><a href="package-File.ASN1.html">ASN1</a>
+						</li>
+				<li><a href="package-File.X509.html">X509</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Math.html">Math<span></span></a>
+						<ul>
+				<li><a href="package-Math.BigInteger.html">BigInteger</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="package-Net.html">Net<span></span></a>
+						<ul>
+				<li><a href="package-Net.SCP.html">SCP</a>
+						</li>
+				<li class="active"><a href="package-Net.SFTP.html">SFTP<span></span></a>
+						<ul>
+				<li class="active"><a href="package-Net.SFTP.Stream.html">Stream</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Net.SSH1.html">SSH1</a>
+						</li>
+				<li><a href="package-Net.SSH2.html">SSH2</a>
+						</li>
+							</ul></li>
+				<li><a href="package-None.html">None</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Net_SFTP_Stream.html">Net_SFTP_Stream</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-Net.SFTP.Stream.html" title="Summary of Net\SFTP\Stream"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Net_SFTP_Stream</h1>
+
+
+	<div class="description">
+	
+<p>SFTP Stream Wrapper</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		<b>Package:</b> <a href="package-Net.html">Net</a>\<a href="package-Net.SFTP.html">SFTP</a>\<a href="package-Net.SFTP.Stream.html">Stream</a><br />
+
+				<b>Copyright:</b>
+				MMXIII Jim Wigginton<br />
+				<b>License:</b>
+				<a href="http://www.opensource.org/licenses/mit-license.html">MIT License</a><br />
+				<b>Author:</b>
+				Jim Wigginton &lt;<a
+href="mailto:terrafrost&#64;php.net">terrafrost&#64;<!---->php.net</a>&gt;<br />
+				<b>Version:</b>
+				0.3.2<br />
+		<b>Located at</b> <a href="source-class-Net_SFTP_Stream.html#37-762" title="Go to source code">admin/libs/phpseclib/phpseclib0.3.5/Net/SFTP/Stream.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="Net_SFTP_Stream" id="_Net_SFTP_Stream">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Net_SFTP_Stream">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#130-140" title="Go to source code">Net_SFTP_Stream</a>( )</code>
+
+		<div class="description short">
+			
+<p>The Constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>The Constructor</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_parse_path" id="__parse_path">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__parse_path">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#142-232" title="Go to source code">_parse_path</a>( <span>String <var>$path</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Path Parser</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Path Parser</p>
+
+<p>Extract a path from a URI and actually connect to an SSH server if
+appropriate</p>
+
+<p>If "notification" is set as a context parameter the message code for
+successful login is NET_SSH2_MSG_USERAUTH_SUCCESS. For a failed login it's
+NET_SSH2_MSG_USERAUTH_FAILURE.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_open" id="__stream_open">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_open">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#234-273" title="Go to source code">_stream_open</a>( <span>String <var>$path</var></span>, <span>String <var>$mode</var></span>, <span>Integer <var>$options</var></span>, <span>String <var>&amp; $opened_path</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Opens file or URL</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Opens file or URL</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+					<dt><var>$mode</var></dt>
+					<dd><code>String</code><br>$mode</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>Integer</code><br>$options</dd>
+					<dt><var>$opened_path</var></dt>
+					<dd><code>String</code><br>$opened_path</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_read" id="__stream_read">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_read">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#275-315" title="Go to source code">_stream_read</a>( <span>Integer <var>$count</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Read from stream</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Read from stream</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$count</var></dt>
+					<dd><code>Integer</code><br>$count</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_write" id="__stream_write">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_write">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#317-350" title="Go to source code">_stream_write</a>( <span>String <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Write to stream</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Write to stream</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><code>String</code><br>$data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_tell" id="__stream_tell">
+
+		<td class="attributes"><code>
+			 public 
+			Integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_tell">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#352-361" title="Go to source code">_stream_tell</a>( )</code>
+
+		<div class="description short">
+			
+<p>Retrieve the current position of a stream</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve the current position of a stream</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_eof" id="__stream_eof">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_eof">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#363-379" title="Go to source code">_stream_eof</a>( )</code>
+
+		<div class="description short">
+			
+<p>Tests for end-of-file on a file pointer</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Tests for end-of-file on a file pointer</p>
+
+<p>In my testing there are four classes functions that normally effect the
+pointer: fseek, fputs / fwrite, fgets / fread and ftruncate.</p>
+
+<p>Only fgets / fread, however, results in feof() returning true. do fputs($fp,
+'aaa') on a blank file and feof() will return false. do fread($fp, 1) and feof()
+will then return true. do fseek($fp, 10) on ablank file and feof() will return
+false. do fread($fp, 1) and feof() will then return true.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_seek" id="__stream_seek">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_seek">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#381-407" title="Go to source code">_stream_seek</a>( <span>Integer <var>$offset</var></span>, <span>Integer <var>$whence</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Seeks to specific location in a stream</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Seeks to specific location in a stream</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>Integer</code><br>$offset</dd>
+					<dt><var>$whence</var></dt>
+					<dd><code>Integer</code><br>$whence</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_metadata" id="__stream_metadata">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_metadata">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#409-441" title="Go to source code">_stream_metadata</a>( <span>String <var>$path</var></span>, <span>Integer <var>$option</var></span>, <span>Mixed <var>$var</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Change stream options</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Change stream options</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+					<dt><var>$option</var></dt>
+					<dd><code>Integer</code><br>$option</dd>
+					<dt><var>$var</var></dt>
+					<dd><code>Mixed</code><br>$var</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_cast" id="__stream_cast">
+
+		<td class="attributes"><code>
+			 public 
+			Resource
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_cast">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#443-453" title="Go to source code">_stream_cast</a>( <span>Integer <var>$cast_as</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve the underlaying resource</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve the underlaying resource</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$cast_as</var></dt>
+					<dd><code>Integer</code><br>$cast_as</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Resource</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_lock" id="__stream_lock">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_lock">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#455-465" title="Go to source code">_stream_lock</a>( <span>Integer <var>$operation</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Advisory file locking</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Advisory file locking</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$operation</var></dt>
+					<dd><code>Integer</code><br>$operation</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_rename" id="__rename">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__rename">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#467-505" title="Go to source code">_rename</a>( <span>String <var>$path_from</var></span>, <span>String <var>$path_to</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Renames a file or directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Renames a file or directory</p>
+
+<p>Attempts to rename oldname to newname, moving it between directories if
+necessary. If newname exists, it will be overwritten. This is a departure from
+what Net_SFTP does.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path_from</var></dt>
+					<dd><code>String</code><br>$path_from</dd>
+					<dt><var>$path_to</var></dt>
+					<dd><code>String</code><br>$path_to</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_dir_opendir" id="__dir_opendir">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__dir_opendir">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#507-527" title="Go to source code">_dir_opendir</a>( <span>String <var>$path</var></span>, <span>Integer <var>$options</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Open directory handle</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Open directory handle</p>
+
+<p>The only $options is "whether or not to enforce safe_mode (0x04)". Since safe
+mode was deprecated in 5.3 and removed in 5.4 I'm just going to ignore it</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>Integer</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_dir_readdir" id="__dir_readdir">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__dir_readdir">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#529-541" title="Go to source code">_dir_readdir</a>( )</code>
+
+		<div class="description short">
+			
+<p>Read entry from directory handle</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Read entry from directory handle</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_dir_rewinddir" id="__dir_rewinddir">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__dir_rewinddir">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#543-553" title="Go to source code">_dir_rewinddir</a>( )</code>
+
+		<div class="description short">
+			
+<p>Rewind directory handle</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Rewind directory handle</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_dir_closedir" id="__dir_closedir">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__dir_closedir">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#555-564" title="Go to source code">_dir_closedir</a>( )</code>
+
+		<div class="description short">
+			
+<p>Close directory handle</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Close directory handle</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_mkdir" id="__mkdir">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__mkdir">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#566-585" title="Go to source code">_mkdir</a>( <span>String <var>$path</var></span>, <span>Integer <var>$mode</var></span>, <span>Integer <var>$options</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a directory</p>
+
+<p>Only valid $options is STREAM_MKDIR_RECURSIVE</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+					<dt><var>$mode</var></dt>
+					<dd><code>Integer</code><br>$mode</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>Integer</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_rmdir" id="__rmdir">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__rmdir">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#587-609" title="Go to source code">_rmdir</a>( <span>String <var>$path</var></span>, <span>Integer <var>$options</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Removes a directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Removes a directory</p>
+
+<p>Only valid $options is STREAM_MKDIR_RECURSIVE per &lt;<a
+href="http://php.net/streamwrapper.rmdir">http://php.net/streamwrapper.rmdir</a>&gt;,
+however, &lt;<a href="http://php.net/rmdir">http://php.net/rmdir</a>&gt; does
+not have a $recursive parameter as mkdir() does so I don't know how
+STREAM_MKDIR_RECURSIVE is supposed to be set. Also, when I try it out with
+rmdir() I get 8 as $options. What does 8 correspond to?</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>Integer</code><br>$mode</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_flush" id="__stream_flush">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_flush">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#611-622" title="Go to source code">_stream_flush</a>( )</code>
+
+		<div class="description short">
+			
+<p>Flushes the output</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Flushes the output</p>
+
+<p>See &lt;<a href="http://php.net/fflush">http://php.net/fflush</a>&gt;. Always
+returns true because Net_SFTP doesn't cache stuff before writing</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_stat" id="__stream_stat">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_stat">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#624-637" title="Go to source code">_stream_stat</a>( )</code>
+
+		<div class="description short">
+			
+<p>Retrieve information about a file resource</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve information about a file resource</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_unlink" id="__unlink">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__unlink">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#639-654" title="Go to source code">_unlink</a>( <span>String <var>$path</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Delete a file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Delete a file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_url_stat" id="__url_stat">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__url_stat">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#656-681" title="Go to source code">_url_stat</a>( <span>String <var>$path</var></span>, <span>Integer <var>$flags</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve information about a file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve information about a file</p>
+
+<p>Ignores the STREAM_URL_STAT_QUIET flag because the entirety of
+Net_SFTP_Stream is quiet by default might be worthwhile to reconstruct bits
+12-16 (ie. the file type) if mode doesn't have them but we'll cross that bridge
+when and if it's reached</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+					<dt><var>$flags</var></dt>
+					<dd><code>Integer</code><br>$flags</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_truncate" id="__stream_truncate">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_truncate">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#683-700" title="Go to source code">_stream_truncate</a>( <span>Integer <var>$new_size</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Truncate stream</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Truncate stream</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$new_size</var></dt>
+					<dd><code>Integer</code><br>$new_size</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_set_option" id="__stream_set_option">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_set_option">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#702-717" title="Go to source code">_stream_set_option</a>( <span>Integer <var>$option</var></span>, <span>Integer <var>$arg1</var></span>, <span>Integer <var>$arg2</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Change stream options</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Change stream options</p>
+
+<p>STREAM_OPTION_WRITE_BUFFER isn't supported for the same reason stream_flush
+isn't. The other two aren't supported because of limitations in Net_SFTP.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$option</var></dt>
+					<dd><code>Integer</code><br>$option</dd>
+					<dt><var>$arg1</var></dt>
+					<dd><code>Integer</code><br>$arg1</dd>
+					<dt><var>$arg2</var></dt>
+					<dd><code>Integer</code><br>$arg2</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stream_close" id="__stream_close">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stream_close">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#719-726" title="Go to source code">_stream_close</a>( )</code>
+
+		<div class="description short">
+			
+<p>Close an resource</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Close an resource</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__call" id="___call">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___call">#</a>
+		<code><a href="source-class-Net_SFTP_Stream.html#728-761" title="Go to source code">__call</a>( <span>String <var>$name</var></span>, <span>Array <var>$arguments</var></span> )</code>
+
+		<div class="description short">
+			
+<p>__call Magic Method</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>__call Magic Method</p>
+
+<p>When you're utilizing an SFTP stream you're not calling the methods in this
+class directly - PHP is calling them for you. Which kinda begs the question...
+what methods is PHP calling and what parameters is it passing to them? This
+function lets you figure that out.</p>
+
+<p>If NET_SFTP_STREAM_LOGGING is defined all calls will be output on the screen
+and then (regardless of whether or not NET_SFTP_STREAM_LOGGING is enabled) the
+parameters will be passed through to the appropriate method.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>String</code></dd>
+					<dt><var>$arguments</var></dt>
+					<dd><code>Array</code></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="instances" id="$instances">
+		<td class="attributes"><code>
+			public static 
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP_Stream.html#46-54" title="Go to source code"><var>$instances</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$instances" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>SFTP instances</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>SFTP instances</p>
+
+<p>Rather than re-create the connection we re-use instances if possible</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="sftp" id="$sftp">
+		<td class="attributes"><code>
+			public  
+			Object
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP_Stream.html#56-62" title="Go to source code"><var>$sftp</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$sftp" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>SFTP instance</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>SFTP instance</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="path" id="$path">
+		<td class="attributes"><code>
+			public  
+			String
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP_Stream.html#64-70" title="Go to source code"><var>$path</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$path" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Path</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Path</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="mode" id="$mode">
+		<td class="attributes"><code>
+			public  
+			String
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP_Stream.html#72-78" title="Go to source code"><var>$mode</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$mode" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Mode</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Mode</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="pos" id="$pos">
+		<td class="attributes"><code>
+			public  
+			Integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP_Stream.html#80-86" title="Go to source code"><var>$pos</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$pos" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Position</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Position</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="size" id="$size">
+		<td class="attributes"><code>
+			public  
+			Integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP_Stream.html#88-94" title="Go to source code"><var>$size</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$size" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Size</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Size</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="entries" id="$entries">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP_Stream.html#96-102" title="Go to source code"><var>$entries</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$entries" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Directory entries</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Directory entries</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="eof" id="$eof">
+		<td class="attributes"><code>
+			public  
+			Boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP_Stream.html#104-110" title="Go to source code"><var>$eof</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$eof" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>EOF flag</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>EOF flag</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="context" id="$context">
+		<td class="attributes"><code>
+			public  
+			Resource
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP_Stream.html#112-120" title="Go to source code"><var>$context</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$context" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Context resource</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Context resource</p>
+
+<p>Technically this needs to be publically accessible so PHP can set it
+directly</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="notification" id="$notification">
+		<td class="attributes"><code>
+			public  
+			Callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP_Stream.html#122-128" title="Go to source code"><var>$notification</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$notification" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Notification callback function</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Notification callback function</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		samlogin-master API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

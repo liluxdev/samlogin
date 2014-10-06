@@ -113,6 +113,11 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $app->redirect($returnTo);
         //   }
     }
+    
+    public function is_base64($str)
+{
+    return (bool)preg_match('`^[a-zA-Z0-9+/]+={0,2}$`', $str);
+}
 
     public function finishSLO() {
         $app = JFactory::getApplication();
@@ -159,7 +164,11 @@ class SAMLoginControllerLogin extends SAMLoginController {
                 //$app->enqueueMessage($translatedmsg, $errtype);
 
                 if (!is_null($rret)) {
-                    $return = base64_decode($rret);
+                    if ($this->is_base64($rret)){
+                      $return = base64_decode($rret);
+                    }else{
+                        $return=$rret;
+                    }
                  //    echo("redirecting to ".$return." with msg".$translatedmsg." type: ".$errtype);
                     //FIXME: not works: cookie unset by the joomla logout TODO: param to enforce handleMessage redirect
                     $sess->set("sloErrMsg", $translatedmsg);
@@ -209,16 +218,18 @@ class SAMLoginControllerLogin extends SAMLoginController {
            // $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
              $rret = JRequest::getString('rret');
             if (!is_null($rret)) {
-                $return = base64_decode($rret);
+                  if ($this->is_base64($rret)){
+                      $return = base64_decode($rret);
+                    }else{
+                        $return=$rret;
+                    }
                 //  phpconsole("rret decoded is ".$return,"rastrano");
                 $app->redirect($return);
             }
         } else {
             $sess = JFactory::getSession();
             $errcode = $sess->get("samloginFailErrcode", "GENERIC");
-            //todo show login errors e.g. user is not superadmin when try to assing groups
             $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
-            
         }
     }
 

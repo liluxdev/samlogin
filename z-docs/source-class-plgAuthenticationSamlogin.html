@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+	<meta name="robots" content="noindex" />
+
+	<title>File plugins/authentication/samlogin/samlogin.php | samlogin-master</title>
+
+	<script type="text/javascript" src="resources/combined.js?4141401630"></script>
+	<script type="text/javascript" src="elementlist.js?1584808910"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-Crypt.html">Crypt<span></span></a>
+						<ul>
+				<li><a href="package-Crypt.AES.html">AES</a>
+						</li>
+				<li><a href="package-Crypt.Blowfish.html">Blowfish</a>
+						</li>
+				<li><a href="package-Crypt.DES.html">DES</a>
+						</li>
+				<li><a href="package-Crypt.Hash.html">Hash</a>
+						</li>
+				<li><a href="package-Crypt.Random.html">Random</a>
+						</li>
+				<li><a href="package-Crypt.RC4.html">RC4</a>
+						</li>
+				<li><a href="package-Crypt.Rijndael.html">Rijndael</a>
+						</li>
+				<li><a href="package-Crypt.RSA.html">RSA</a>
+						</li>
+				<li><a href="package-Crypt.TerraDES.html">TerraDES</a>
+						</li>
+				<li><a href="package-Crypt.Twofish.html">Twofish</a>
+						</li>
+							</ul></li>
+				<li><a href="package-File.html">File<span></span></a>
+						<ul>
+				<li><a href="package-File.ANSI.html">ANSI</a>
+						</li>
+				<li><a href="package-File.ASN1.html">ASN1</a>
+						</li>
+				<li><a href="package-File.X509.html">X509</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Math.html">Math<span></span></a>
+						<ul>
+				<li><a href="package-Math.BigInteger.html">BigInteger</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Net.html">Net<span></span></a>
+						<ul>
+				<li><a href="package-Net.SCP.html">SCP</a>
+						</li>
+				<li><a href="package-Net.SFTP.html">SFTP<span></span></a>
+						<ul>
+				<li><a href="package-Net.SFTP.Stream.html">Stream</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Net.SSH1.html">SSH1</a>
+						</li>
+				<li><a href="package-Net.SSH2.html">SSH2</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="package-None.html">None</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Com_SamloginInstallerScript.html">Com_SamloginInstallerScript</a></li>
+				<li><a href="class-Diff.html">Diff</a></li>
+				<li><a href="class-JElementIdpEntity.html">JElementIdpEntity</a></li>
+				<li><a href="class-JElementStyle.html">JElementStyle</a></li>
+				<li><a href="class-JElementTemplate.html">JElementTemplate</a></li>
+				<li><a href="class-JFormFieldIdpEntity.html">JFormFieldIdpEntity</a></li>
+				<li><a href="class-JFormFieldStyle.html">JFormFieldStyle</a></li>
+				<li><a href="class-JFormFieldTemplate.html">JFormFieldTemplate</a></li>
+				<li><a href="class-KeyManager.html">KeyManager</a></li>
+				<li class="active"><a href="class-plgAuthenticationSamlogin.html">plgAuthenticationSamlogin</a></li>
+				<li><a href="class-plgSamlattributeauthorityExample.html">plgSamlattributeauthorityExample</a></li>
+				<li><a href="class-plgSystemSamlogin.html">plgSystemSamlogin</a></li>
+				<li><a href="class-SAMLoginController.html" class="invalid">SAMLoginController</a></li>
+				<li><a href="class-SAMLoginControllerAjax.html">SAMLoginControllerAjax</a></li>
+				<li><a href="class-SAMLoginControllerDiscojuice.html">SAMLoginControllerDiscojuice</a></li>
+				<li><a href="class-SAMLoginControllerLogin.html">SAMLoginControllerLogin</a></li>
+				<li><a href="class-SamloginField.html" class="invalid">SamloginField</a></li>
+				<li><a href="class-SamloginFieldIdpEntity.html">SamloginFieldIdpEntity</a></li>
+				<li><a href="class-SamloginFieldStyle.html">SamloginFieldStyle</a></li>
+				<li><a href="class-SamloginFieldTemplate.html">SamloginFieldTemplate</a></li>
+				<li><a href="class-SamloginHelper.html">SamloginHelper</a></li>
+				<li><a href="class-SAMLoginHelper.html">SAMLoginHelper</a></li>
+				<li><a href="class-SamloginHelperDownloader.html">SamloginHelperDownloader</a></li>
+				<li><a href="class-SAMLoginModel.html" class="invalid">SAMLoginModel</a></li>
+				<li><a href="class-SAMLoginModelSAMLogin.html">SAMLoginModelSAMLogin</a></li>
+				<li><a href="class-SAMLoginSessionBridge.html">SAMLoginSessionBridge</a></li>
+				<li><a href="class-SAMLoginTableSAMLogin.html">SAMLoginTableSAMLogin</a></li>
+				<li><a href="class-SAMLoginView.html" class="invalid">SAMLoginView</a></li>
+				<li><a href="class-SAMLoginViewAjax.html">SAMLoginViewAjax</a></li>
+				<li><a href="class-SamloginViewDiscojuice.html">SamloginViewDiscojuice</a></li>
+				<li><a href="class-SamloginViewLogin.html">SamloginViewLogin</a></li>
+				<li><a href="class-SamloginViewMessage.html">SamloginViewMessage</a></li>
+				<li><a href="class-SAMLoginViewSamlogin.html">SAMLoginViewSamlogin</a></li>
+				<li><a href="class-SAMLoginViewSettings.html">SAMLoginViewSettings</a></li>
+				<li><a href="class-SSPConfManager.html">SSPConfManager</a></li>
+			</ul>
+
+
+
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-_getJoomlaApp.html">_getJoomlaApp</a></li>
+				<li><a href="function-_getSimpleSAMLSessionFromJoomlaSessionBackup.html">_getSimpleSAMLSessionFromJoomlaSessionBackup</a></li>
+				<li><a href="function-array_smart_dump.html">array_smart_dump</a></li>
+				<li><a href="function-getSAMLoginReturnURL.html">getSAMLoginReturnURL</a></li>
+				<li><a href="function-kw_tidy_array.html">kw_tidy_array</a></li>
+				<li><a href="function-samlogin_recursive_ksort.html">samlogin_recursive_ksort</a></li>
+				<li><a href="function-SAMLoginBuildRoute.html">SAMLoginBuildRoute</a></li>
+				<li><a href="function-SAMLoginParseRoute.html">SAMLoginParseRoute</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-None.html" title="Summary of None"><span>Package</span></a>
+			</li>
+			<li>
+				<a href="class-plgAuthenticationSamlogin.html" title="Summary of plgAuthenticationSamlogin"><span>Class</span></a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<pre><code><span id="1" class="l"><a class="l" href="#1">  1: </a><span class="xlang">&lt;?php</span>
+</span><span id="2" class="l"><a class="l" href="#2">  2: </a>
+</span><span id="3" class="l"><a class="l" href="#3">  3: </a><span class="php-comment">// Check to ensure this file is included in Joomla!</span>
+</span><span id="4" class="l"><a class="l" href="#4">  4: </a><span class="php-keyword2">defined</span>(<span class="php-quote">'_JEXEC'</span>) <span class="php-keyword1">or</span> <span class="php-keyword1">die</span>;
+</span><span id="5" class="l"><a class="l" href="#5">  5: </a>
+</span><span id="6" class="l"><a class="l" href="#6">  6: </a>jimport(<span class="php-quote">'joomla.plugin.plugin'</span>);
+</span><span id="7" class="l"><a class="l" href="#7">  7: </a>
+</span><span id="8" class="l"><a class="l" href="#8">  8: </a><span class="php-keyword1">class</span> <a id="plgAuthenticationSamlogin" href="#plgAuthenticationSamlogin">plgAuthenticationSamlogin</a> <span class="php-keyword1">extends</span> JPlugin {
+</span><span id="9" class="l"><a class="l" href="#9">  9: </a>
+</span><span id="10" class="l"><a class="l" href="#10"> 10: </a>    <span class="php-keyword1">function</span> <a id="_plgAuthenticationSamlogin" href="#_plgAuthenticationSamlogin">plgAuthenticationSamlogin</a>(&amp;<span class="php-var">$subject</span>, <span class="php-var">$config</span>) {
+</span><span id="11" class="l"><a class="l" href="#11"> 11: </a>        parent::__construct(<span class="php-var">$subject</span>, <span class="php-var">$config</span>);
+</span><span id="12" class="l"><a class="l" href="#12"> 12: </a>    }
+</span><span id="13" class="l"><a class="l" href="#13"> 13: </a>
+</span><span id="14" class="l"><a class="l" href="#14"> 14: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_getUserIdByUsernameOrMail" href="#_getUserIdByUsernameOrMail">getUserIdByUsernameOrMail</a>(<span class="php-var">$usernameormail</span>) {
+</span><span id="15" class="l"><a class="l" href="#15"> 15: </a>        <span class="php-comment">// Initialise some variables</span>
+</span><span id="16" class="l"><a class="l" href="#16"> 16: </a>        <span class="php-var">$db</span> = JFactory::getDbo();
+</span><span id="17" class="l"><a class="l" href="#17"> 17: </a>        <span class="php-var">$query</span> = <span class="php-var">$db</span>-&gt;getQuery(<span class="php-keyword1">true</span>);
+</span><span id="18" class="l"><a class="l" href="#18"> 18: </a>        <span class="php-var">$query</span>-&gt;select(<span class="php-var">$db</span>-&gt;quoteName(<span class="php-quote">'id'</span>));
+</span><span id="19" class="l"><a class="l" href="#19"> 19: </a>        <span class="php-var">$query</span>-&gt;from(<span class="php-var">$db</span>-&gt;quoteName(<span class="php-quote">'#__users'</span>));
+</span><span id="20" class="l"><a class="l" href="#20"> 20: </a>        <span class="php-var">$query</span>-&gt;where(<span class="php-var">$db</span>-&gt;quoteName(<span class="php-quote">'username'</span>) . <span class="php-quote">' = '</span> . <span class="php-var">$db</span>-&gt;quote(<span class="php-var">$usernameormail</span>) . <span class="php-quote">' OR '</span> . <span class="php-var">$db</span>-&gt;quoteName(<span class="php-quote">'email'</span>) . <span class="php-quote">' = '</span> . <span class="php-var">$db</span>-&gt;quote(<span class="php-var">$usernameormail</span>));
+</span><span id="21" class="l"><a class="l" href="#21"> 21: </a>        <span class="php-var">$db</span>-&gt;setQuery(<span class="php-var">$query</span>, <span class="php-num">0</span>, <span class="php-num">1</span>);
+</span><span id="22" class="l"><a class="l" href="#22"> 22: </a>        <span class="php-comment">//   die($query);</span>
+</span><span id="23" class="l"><a class="l" href="#23"> 23: </a>        <span class="php-comment">// die(print_r($query-&gt;__toString(),true)); </span>
+</span><span id="24" class="l"><a class="l" href="#24"> 24: </a>        <span class="php-comment">//  //phpconsole(print_r($query-&gt;__toString(),true),&quot;rastrano&quot;);</span>
+</span><span id="25" class="l"><a class="l" href="#25"> 25: </a>        <span class="php-keyword1">return</span> <span class="php-var">$db</span>-&gt;loadResult();
+</span><span id="26" class="l"><a class="l" href="#26"> 26: </a>    }
+</span><span id="27" class="l"><a class="l" href="#27"> 27: </a>
+</span><span id="28" class="l"><a class="l" href="#28"> 28: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="__getSAMLAttributeFirstValue" href="#__getSAMLAttributeFirstValue">_getSAMLAttributeFirstValue</a>(<span class="php-var">$key</span>, <span class="php-var">$attributes</span>, <span class="php-var">$default</span> = <span class="php-keyword1">null</span>) {
+</span><span id="29" class="l"><a class="l" href="#29"> 29: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">array_key_exists</span>(<span class="php-var">$key</span>, <span class="php-var">$attributes</span>)) {
+</span><span id="30" class="l"><a class="l" href="#30"> 30: </a>            <span class="php-keyword1">return</span> <span class="php-var">$default</span>;
+</span><span id="31" class="l"><a class="l" href="#31"> 31: </a>        }
+</span><span id="32" class="l"><a class="l" href="#32"> 32: </a>        <span class="php-keyword1">return</span> <span class="php-var">$attributes</span>[<span class="php-var">$key</span>][<span class="php-num">0</span>];
+</span><span id="33" class="l"><a class="l" href="#33"> 33: </a>    }
+</span><span id="34" class="l"><a class="l" href="#34"> 34: </a>
+</span><span id="35" class="l"><a class="l" href="#35"> 35: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="__getSAMLAttributeValues" href="#__getSAMLAttributeValues">_getSAMLAttributeValues</a>(<span class="php-var">$key</span>, <span class="php-var">$attributes</span>, <span class="php-var">$default</span> = <span class="php-keyword1">null</span>) {
+</span><span id="36" class="l"><a class="l" href="#36"> 36: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">array_key_exists</span>(<span class="php-var">$key</span>, <span class="php-var">$attributes</span>)) {
+</span><span id="37" class="l"><a class="l" href="#37"> 37: </a>            <span class="php-keyword1">return</span> <span class="php-var">$default</span>;
+</span><span id="38" class="l"><a class="l" href="#38"> 38: </a>        }
+</span><span id="39" class="l"><a class="l" href="#39"> 39: </a>        <span class="php-keyword1">return</span> <span class="php-var">$attributes</span>[<span class="php-var">$key</span>];
+</span><span id="40" class="l"><a class="l" href="#40"> 40: </a>    }
+</span><span id="41" class="l"><a class="l" href="#41"> 41: </a>
+</span><span id="42" class="l"><a class="l" href="#42"> 42: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="__pregMatchSAMLAttributeValues" href="#__pregMatchSAMLAttributeValues">_pregMatchSAMLAttributeValues</a>(<span class="php-var">$attrname</span>, <span class="php-var">$regex</span>, <span class="php-var">$attributes</span>) {
+</span><span id="43" class="l"><a class="l" href="#43"> 43: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">array_key_exists</span>(<span class="php-var">$attrname</span>, <span class="php-var">$attributes</span>)) {
+</span><span id="44" class="l"><a class="l" href="#44"> 44: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">FALSE</span>;
+</span><span id="45" class="l"><a class="l" href="#45"> 45: </a>        }
+</span><span id="46" class="l"><a class="l" href="#46"> 46: </a>        <span class="php-var">$attrvals</span> = <span class="php-var">$attributes</span>[<span class="php-var">$attrname</span>];
+</span><span id="47" class="l"><a class="l" href="#47"> 47: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$attrvals</span> <span class="php-keyword1">as</span> <span class="php-var">$val</span>) {
+</span><span id="48" class="l"><a class="l" href="#48"> 48: </a>            <span class="php-comment">//phpconsole(&quot;does &quot;.$val.&quot; matches &quot;.$regex,&quot;rastrano&quot;);</span>
+</span><span id="49" class="l"><a class="l" href="#49"> 49: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">&quot;/&quot;</span> . <span class="php-var">$regex</span> . <span class="php-quote">&quot;/&quot;</span>, <span class="php-var">$val</span>)) {
+</span><span id="50" class="l"><a class="l" href="#50"> 50: </a>                <span class="php-comment">//phpconsole(&quot;YES,  &quot;.$val.&quot; matches &quot;.$regex,&quot;rastrano&quot;);</span>
+</span><span id="51" class="l"><a class="l" href="#51"> 51: </a>                <span class="php-keyword1">return</span> <span class="php-var">$val</span>;
+</span><span id="52" class="l"><a class="l" href="#52"> 52: </a>            }
+</span><span id="53" class="l"><a class="l" href="#53"> 53: </a>        }
+</span><span id="54" class="l"><a class="l" href="#54"> 54: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">FALSE</span>;
+</span><span id="55" class="l"><a class="l" href="#55"> 55: </a>    }
+</span><span id="56" class="l"><a class="l" href="#56"> 56: </a>
+</span><span id="57" class="l"><a class="l" href="#57"> 57: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="__checkAuthZRules" href="#__checkAuthZRules">_checkAuthZRules</a>(<span class="php-var">$user</span>, <span class="php-var">$response</span>, <span class="php-var">$samlresponse</span>, <span class="php-var">$samloginParams</span>) {
+</span><span id="58" class="l"><a class="l" href="#58"> 58: </a>        <span class="php-var">$rulesConf</span> = <span class="php-var">$samloginParams</span>-&gt;toArray();
+</span><span id="59" class="l"><a class="l" href="#59"> 59: </a>        <span class="php-comment">//phpconsole($rulesConf, &quot;rastrano&quot;);</span>
+</span><span id="60" class="l"><a class="l" href="#60"> 60: </a>        <span class="php-comment">//phpconsole($user-&gt;get(&quot;groups&quot;), &quot;rastrano&quot;);</span>
+</span><span id="61" class="l"><a class="l" href="#61"> 61: </a>        <span class="php-var">$oldusergroups</span> = <span class="php-var">$user</span>-&gt;get(<span class="php-quote">&quot;groups&quot;</span>);
+</span><span id="62" class="l"><a class="l" href="#62"> 62: </a>
+</span><span id="63" class="l"><a class="l" href="#63"> 63: </a>        <span class="php-var">$defaultRegistered</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;defaultRegistered&quot;</span>, <span class="php-keyword1">true</span>);
+</span><span id="64" class="l"><a class="l" href="#64"> 64: </a>        <span class="php-var">$newusergroups</span> = <span class="php-keyword1">array</span>();
+</span><span id="65" class="l"><a class="l" href="#65"> 65: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$defaultRegistered</span>) {
+</span><span id="66" class="l"><a class="l" href="#66"> 66: </a>            <span class="php-var">$registeredGroupId</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;registeredGroupId&quot;</span>, <span class="php-num">2</span>);
+</span><span id="67" class="l"><a class="l" href="#67"> 67: </a>            <span class="php-var">$newusergroups</span> = <span class="php-keyword1">array</span>(<span class="php-var">$registeredGroupId</span>); <span class="php-comment">//2 is registered</span>
+</span><span id="68" class="l"><a class="l" href="#68"> 68: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="69" class="l"><a class="l" href="#69"> 69: </a>            
+</span><span id="70" class="l"><a class="l" href="#70"> 70: </a>        }
+</span><span id="71" class="l"><a class="l" href="#71"> 71: </a>
+</span><span id="72" class="l"><a class="l" href="#72"> 72: </a>
+</span><span id="73" class="l"><a class="l" href="#73"> 73: </a>
+</span><span id="74" class="l"><a class="l" href="#74"> 74: </a>        <span class="php-comment">//phpconsole(&quot;New  groups:&quot;.print_r($newusergroups,true),&quot;rastrano&quot;);</span>
+</span><span id="75" class="l"><a class="l" href="#75"> 75: </a>        <span class="php-var">$newusergroupsForHist</span>[] = <span class="php-keyword1">array</span>();
+</span><span id="76" class="l"><a class="l" href="#76"> 76: </a>        <span class="php-var">$authorized</span> = <span class="php-keyword1">false</span>;
+</span><span id="77" class="l"><a class="l" href="#77"> 77: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$rulesConf</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$val</span>) {
+</span><span id="78" class="l"><a class="l" href="#78"> 78: </a>
+</span><span id="79" class="l"><a class="l" href="#79"> 79: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$key</span>, <span class="php-quote">'rule_'</span>) === <span class="php-num">0</span>) {
+</span><span id="80" class="l"><a class="l" href="#80"> 80: </a>                <span class="php-keyword1">if</span> (<span class="php-keyword2">stristr</span>(<span class="php-var">$key</span>, <span class="php-quote">&quot;_attr&quot;</span>)) {
+</span><span id="81" class="l"><a class="l" href="#81"> 81: </a>                    <span class="php-var">$ruleno</span> = <span class="php-keyword2">str_replace</span>(<span class="php-quote">&quot;rule_&quot;</span>, <span class="php-quote">&quot;&quot;</span>, <span class="php-var">$key</span>);
+</span><span id="82" class="l"><a class="l" href="#82"> 82: </a>                    <span class="php-var">$ruleno</span> = <span class="php-keyword2">str_replace</span>(<span class="php-quote">&quot;_attr&quot;</span>, <span class="php-quote">&quot;&quot;</span>, <span class="php-var">$ruleno</span>);
+</span><span id="83" class="l"><a class="l" href="#83"> 83: </a>
+</span><span id="84" class="l"><a class="l" href="#84"> 84: </a>                    <span class="php-var">$ruleattr</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;rule_&quot;</span> . <span class="php-var">$ruleno</span> . <span class="php-quote">&quot;_attr&quot;</span>, <span class="php-quote">&quot;&quot;</span>);
+</span><span id="85" class="l"><a class="l" href="#85"> 85: </a>                    <span class="php-keyword1">if</span> (<span class="php-var">$ruleattr</span>) {
+</span><span id="86" class="l"><a class="l" href="#86"> 86: </a>                        <span class="php-var">$ruleassigngroup</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;rule_&quot;</span> . <span class="php-var">$ruleno</span> . <span class="php-quote">&quot;_assigngroup&quot;</span>, <span class="php-quote">&quot;&quot;</span>);
+</span><span id="87" class="l"><a class="l" href="#87"> 87: </a>                        <span class="php-var">$ruleRegexp</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;rule_&quot;</span> . <span class="php-var">$ruleno</span> . <span class="php-quote">&quot;_regex&quot;</span>, <span class="php-quote">&quot;&quot;</span>);
+</span><span id="88" class="l"><a class="l" href="#88"> 88: </a>
+</span><span id="89" class="l"><a class="l" href="#89"> 89: </a>                        <span class="php-var">$sqlMatch</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;rule_&quot;</span> . <span class="php-var">$ruleno</span> . <span class="php-quote">&quot;_sql&quot;</span>, <span class="php-quote">&quot;&quot;</span>);
+</span><span id="90" class="l"><a class="l" href="#90"> 90: </a>                        <span class="php-var">$sqlMatchOrig</span> = <span class="php-var">$sqlMatch</span>;
+</span><span id="91" class="l"><a class="l" href="#91"> 91: </a>                        <span class="php-comment">// echo $sqlMatch;</span>
+</span><span id="92" class="l"><a class="l" href="#92"> 92: </a>
+</span><span id="93" class="l"><a class="l" href="#93"> 93: </a>                        <span class="php-var">$ruleType</span> = <span class="php-quote">&quot;&quot;</span>;
+</span><span id="94" class="l"><a class="l" href="#94"> 94: </a>                        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$sqlMatch</span>)) {
+</span><span id="95" class="l"><a class="l" href="#95"> 95: </a>                            <span class="php-var">$db</span> = JFactory::getDbo();
+</span><span id="96" class="l"><a class="l" href="#96"> 96: </a>                            <span class="php-var">$matches</span> = <span class="php-keyword1">array</span>();
+</span><span id="97" class="l"><a class="l" href="#97"> 97: </a>                            <span class="php-keyword2">preg_match_all</span>(<span class="php-quote">&quot;/::([a-zA-Z0-9\.:]{1,99})::/&quot;</span>, <span class="php-var">$sqlMatch</span>, <span class="php-var">$matches</span>);
+</span><span id="98" class="l"><a class="l" href="#98"> 98: </a>                            <span class="php-var">$matchcount</span> = -<span class="php-num">1</span>;
+</span><span id="99" class="l"><a class="l" href="#99"> 99: </a>                            <span class="php-keyword1">foreach</span> (<span class="php-var">$matches</span> <span class="php-keyword1">as</span> <span class="php-var">$matcharrelm</span>) {
+</span><span id="100" class="l"><a class="l" href="#100">100: </a>                                <span class="php-var">$match</span> = <span class="php-var">$matcharrelm</span>[<span class="php-num">0</span>];
+</span><span id="101" class="l"><a class="l" href="#101">101: </a>                                <span class="php-var">$matchcount</span>++;
+</span><span id="102" class="l"><a class="l" href="#102">102: </a>                                <span class="php-keyword1">if</span> (<span class="php-var">$matchcount</span> == <span class="php-num">0</span>) {
+</span><span id="103" class="l"><a class="l" href="#103">103: </a>                                    <span class="php-keyword1">continue</span>;
+</span><span id="104" class="l"><a class="l" href="#104">104: </a>                                }
+</span><span id="105" class="l"><a class="l" href="#105">105: </a>
+</span><span id="106" class="l"><a class="l" href="#106">106: </a>                                <span class="php-keyword1">if</span> (<span class="php-var">$match</span> != <span class="php-quote">&quot;NAMEID&quot;</span>) {
+</span><span id="107" class="l"><a class="l" href="#107">107: </a>                                    <span class="php-var">$attrValues</span> = <span class="php-var">$this</span>-&gt;_getSAMLAttributeValues(<span class="php-var">$match</span>, <span class="php-var">$samlresponse</span>, <span class="php-keyword1">null</span>);
+</span><span id="108" class="l"><a class="l" href="#108">108: </a>                                } <span class="php-keyword1">else</span> {
+</span><span id="109" class="l"><a class="l" href="#109">109: </a>                                    <span class="php-var">$currentSession</span> = JFactory::getSession();
+</span><span id="110" class="l"><a class="l" href="#110">110: </a>                                    <span class="php-var">$SAMLoginnameId</span> = <span class="php-var">$currentSession</span>-&gt;get(<span class="php-quote">&quot;SAMLoginNameId&quot;</span>, <span class="php-quote">''</span>);
+</span><span id="111" class="l"><a class="l" href="#111">111: </a>                                    <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$SAMLoginnameId</span>)) {
+</span><span id="112" class="l"><a class="l" href="#112">112: </a>                                        <span class="php-keyword1">die</span>(<span class="php-quote">&quot;Empty NameID array&quot;</span>);
+</span><span id="113" class="l"><a class="l" href="#113">113: </a>                                    } <span class="php-keyword1">else</span> {
+</span><span id="114" class="l"><a class="l" href="#114">114: </a>                                        <span class="php-var">$SAMLoginnameId</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$SAMLoginnameId</span>, <span class="php-keyword1">true</span>);
+</span><span id="115" class="l"><a class="l" href="#115">115: </a>                                        <span class="php-var">$SAMLoginnameId</span> = <span class="php-var">$SAMLoginnameId</span>[<span class="php-quote">&quot;Value&quot;</span>];
+</span><span id="116" class="l"><a class="l" href="#116">116: </a>                                        <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$SAMLoginnameId</span>)) {
+</span><span id="117" class="l"><a class="l" href="#117">117: </a>                                            <span class="php-keyword1">die</span>(<span class="php-quote">&quot;Empty NameID&quot;</span>);
+</span><span id="118" class="l"><a class="l" href="#118">118: </a>                                        }
+</span><span id="119" class="l"><a class="l" href="#119">119: </a>                                        <span class="php-var">$attrValues</span> = <span class="php-keyword1">array</span>();
+</span><span id="120" class="l"><a class="l" href="#120">120: </a>                                        <span class="php-var">$attrValues</span>[] = <span class="php-var">$SAMLoginnameId</span>;
+</span><span id="121" class="l"><a class="l" href="#121">121: </a>                                    }
+</span><span id="122" class="l"><a class="l" href="#122">122: </a>                                }
+</span><span id="123" class="l"><a class="l" href="#123">123: </a>
+</span><span id="124" class="l"><a class="l" href="#124">124: </a>                                <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_null</span>(<span class="php-var">$attrValues</span>)) {
+</span><span id="125" class="l"><a class="l" href="#125">125: </a>                                    <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$attrValues</span>) &gt; <span class="php-num">1</span>) {
+</span><span id="126" class="l"><a class="l" href="#126">126: </a>                                        <span class="php-comment">//SQL Match can only used on single valued attributes for now and for security contraint</span>
+</span><span id="127" class="l"><a class="l" href="#127">127: </a>                                    } <span class="php-keyword1">else</span> {
+</span><span id="128" class="l"><a class="l" href="#128">128: </a>                                        <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$attrValues</span>) == <span class="php-num">1</span>) {
+</span><span id="129" class="l"><a class="l" href="#129">129: </a>                                            <span class="php-var">$value</span> = <span class="php-var">$attrValues</span>[<span class="php-num">0</span>];
+</span><span id="130" class="l"><a class="l" href="#130">130: </a>                                            <span class="php-var">$antiSQLiValue</span> = <span class="php-quote">&quot;'&quot;</span> . <span class="php-keyword2">addslashes</span>(<span class="php-keyword2">trim</span>(<span class="php-var">$value</span>)) . <span class="php-quote">&quot;'&quot;</span>;
+</span><span id="131" class="l"><a class="l" href="#131">131: </a>                                            <span class="php-var">$sqlMatch</span> = <span class="php-keyword2">strtr</span>(<span class="php-var">$sqlMatch</span>, <span class="php-keyword1">array</span>(
+</span><span id="132" class="l"><a class="l" href="#132">132: </a>                                                <span class="php-quote">&quot;::&quot;</span> . <span class="php-var">$match</span> . <span class="php-quote">&quot;::&quot;</span> =&gt; <span class="php-var">$antiSQLiValue</span>
+</span><span id="133" class="l"><a class="l" href="#133">133: </a>                                                    )
+</span><span id="134" class="l"><a class="l" href="#134">134: </a>                                            );
+</span><span id="135" class="l"><a class="l" href="#135">135: </a>                                        }
+</span><span id="136" class="l"><a class="l" href="#136">136: </a>                                    }
+</span><span id="137" class="l"><a class="l" href="#137">137: </a>                                }
+</span><span id="138" class="l"><a class="l" href="#138">138: </a>                            }
+</span><span id="139" class="l"><a class="l" href="#139">139: </a>                            <span class="php-comment">/*  $sqlMatch=preg_replace_callback(
+</span></span><span id="140" class="l"><a class="l" href="#140">140: </a><span class="php-comment">                              '|&lt;p&gt;\s*\w|',
+</span></span><span id="141" class="l"><a class="l" href="#141">141: </a><span class="php-comment">                              create_function(
+</span></span><span id="142" class="l"><a class="l" href="#142">142: </a><span class="php-comment">                              // l'apice singolo è essenziale qui,
+</span></span><span id="143" class="l"><a class="l" href="#143">143: </a><span class="php-comment">                              // o in alternativa occorre usare la sequenza di escape \$
+</span></span><span id="144" class="l"><a class="l" href="#144">144: </a><span class="php-comment">                              // per tutte le occorrenze di $
+</span></span><span id="145" class="l"><a class="l" href="#145">145: </a><span class="php-comment">                              '$matches',
+</span></span><span id="146" class="l"><a class="l" href="#146">146: </a><span class="php-comment">                              'return strtolower($matches[0]);'
+</span></span><span id="147" class="l"><a class="l" href="#147">147: </a><span class="php-comment">                              ),
+</span></span><span id="148" class="l"><a class="l" href="#148">148: </a><span class="php-comment">                              $sqlMatch
+</span></span><span id="149" class="l"><a class="l" href="#149">149: </a><span class="php-comment">                              ); */</span>
+</span><span id="150" class="l"><a class="l" href="#150">150: </a>                            <span class="php-keyword1">if</span> (<span class="php-var">$sqlMatch</span> != <span class="php-var">$sqlMatchOrig</span>) { <span class="php-comment">//check if strtr replaced the placeholders</span>
+</span><span id="151" class="l"><a class="l" href="#151">151: </a>                                <span class="php-var">$db</span>-&gt;setQuery(<span class="php-var">$sqlMatch</span>);
+</span><span id="152" class="l"><a class="l" href="#152">152: </a>                                <span class="php-comment">//    echo &quot;&lt;br/&gt;query is:&quot;.$sqlMatch;</span>
+</span><span id="153" class="l"><a class="l" href="#153">153: </a>                                <span class="php-var">$matchingArr</span> = <span class="php-var">$db</span>-&gt;loadAssocList();
+</span><span id="154" class="l"><a class="l" href="#154">154: </a>                                <span class="php-comment">//  echo &quot;&lt;br/&gt;result is:&quot;.print_r($matchingArr,true);</span>
+</span><span id="155" class="l"><a class="l" href="#155">155: </a>                                <span class="php-var">$matching</span> = <span class="php-keyword2">count</span>(<span class="php-var">$matchingArr</span>) &gt; <span class="php-num">0</span>;
+</span><span id="156" class="l"><a class="l" href="#156">156: </a>                            } <span class="php-keyword1">else</span> {
+</span><span id="157" class="l"><a class="l" href="#157">157: </a>                                <span class="php-var">$matching</span> = <span class="php-keyword1">FALSE</span>;
+</span><span id="158" class="l"><a class="l" href="#158">158: </a>                            }
+</span><span id="159" class="l"><a class="l" href="#159">159: </a>                            <span class="php-var">$ruleType</span> = <span class="php-quote">&quot;sql&quot;</span>;
+</span><span id="160" class="l"><a class="l" href="#160">160: </a>                        }
+</span><span id="161" class="l"><a class="l" href="#161">161: </a>
+</span><span id="162" class="l"><a class="l" href="#162">162: </a>
+</span><span id="163" class="l"><a class="l" href="#163">163: </a>                        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$ruleRegexp</span>)) {
+</span><span id="164" class="l"><a class="l" href="#164">164: </a>                            <span class="php-var">$ruleType</span> = <span class="php-quote">&quot;regex&quot;</span>;
+</span><span id="165" class="l"><a class="l" href="#165">165: </a>                            <span class="php-comment">//phpconsole($ruleattr.&quot; matches &quot;.$ruleRegexp,&quot;rastrano&quot;);</span>
+</span><span id="166" class="l"><a class="l" href="#166">166: </a>                            <span class="php-var">$matching</span> = <span class="php-var">$this</span>-&gt;_pregMatchSAMLAttributeValues(<span class="php-var">$ruleattr</span>, <span class="php-var">$ruleRegexp</span>, <span class="php-var">$samlresponse</span>);
+</span><span id="167" class="l"><a class="l" href="#167">167: </a>                        }
+</span><span id="168" class="l"><a class="l" href="#168">168: </a>
+</span><span id="169" class="l"><a class="l" href="#169">169: </a>                        <span class="php-comment">////phpconsole($ruleno.&quot; matches? &quot;.$ruleRegexp.&quot;??? &quot;.print_r($samlresponse,true),&quot;rastrano&quot;);</span>
+</span><span id="170" class="l"><a class="l" href="#170">170: </a>                        <span class="php-keyword1">if</span> (<span class="php-var">$matching</span> !== <span class="php-keyword1">FALSE</span>) {
+</span><span id="171" class="l"><a class="l" href="#171">171: </a>                            <span class="php-var">$authorized</span> = <span class="php-keyword1">true</span>;
+</span><span id="172" class="l"><a class="l" href="#172">172: </a>                            <span class="php-comment">//phpconsole($ruleno.&quot; matches &quot;.$ruleRegexp,&quot;rastrano&quot;);</span>
+</span><span id="173" class="l"><a class="l" href="#173">173: </a>                            <span class="php-var">$newusergroups</span>[] = <span class="php-var">$ruleassigngroup</span>;
+</span><span id="174" class="l"><a class="l" href="#174">174: </a>                            <span class="php-var">$currentSession</span> = JFactory::getSession();
+</span><span id="175" class="l"><a class="l" href="#175">175: </a>                            <span class="php-var">$SAMLoginIdP</span> = <span class="php-var">$currentSession</span>-&gt;get(<span class="php-quote">&quot;SAMLoginIdP&quot;</span>, <span class="php-quote">''</span>);
+</span><span id="176" class="l"><a class="l" href="#176">176: </a>                            <span class="php-var">$keytomem</span> = <span class="php-quote">&quot;rule_&quot;</span> . <span class="php-var">$ruleno</span> .
+</span><span id="177" class="l"><a class="l" href="#177">177: </a>                                    <span class="php-quote">&quot; v:&quot;</span> . <span class="php-var">$matching</span> . <span class="php-quote">&quot; t:&quot;</span> . <span class="php-var">$ruleType</span>
+</span><span id="178" class="l"><a class="l" href="#178">178: </a>                                    . <span class="php-quote">&quot; idp:&quot;</span> . <span class="php-var">$SAMLoginIdP</span>;
+</span><span id="179" class="l"><a class="l" href="#179">179: </a>                            <span class="php-var">$newusergroupsForHist</span>[<span class="php-var">$keytomem</span>] = <span class="php-var">$ruleassigngroup</span>;
+</span><span id="180" class="l"><a class="l" href="#180">180: </a>                        }
+</span><span id="181" class="l"><a class="l" href="#181">181: </a>                    }
+</span><span id="182" class="l"><a class="l" href="#182">182: </a>                }
+</span><span id="183" class="l"><a class="l" href="#183">183: </a>            }
+</span><span id="184" class="l"><a class="l" href="#184">184: </a>        }
+</span><span id="185" class="l"><a class="l" href="#185">185: </a>
+</span><span id="186" class="l"><a class="l" href="#186">186: </a><span class="php-comment">//die(&quot;testing&quot;);</span>
+</span><span id="187" class="l"><a class="l" href="#187">187: </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$authorized</span>) {
+</span><span id="188" class="l"><a class="l" href="#188">188: </a>            <span class="php-var">$defaultDeny</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;defaultDeny&quot;</span>, <span class="php-keyword1">false</span>);
+</span><span id="189" class="l"><a class="l" href="#189">189: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$defaultDeny</span>) {
+</span><span id="190" class="l"><a class="l" href="#190">190: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span id="191" class="l"><a class="l" href="#191">191: </a>            }
+</span><span id="192" class="l"><a class="l" href="#192">192: </a>        }
+</span><span id="193" class="l"><a class="l" href="#193">193: </a>        <span class="php-var">$timeid</span> = <span class="php-keyword2">time</span>();
+</span><span id="194" class="l"><a class="l" href="#194">194: </a>
+</span><span id="195" class="l"><a class="l" href="#195">195: </a>        <span class="php-comment">//   //phpconsole(print_r($latestSamloginAssignedGroups,true),&quot;rastrano&quot;);</span>
+</span><span id="196" class="l"><a class="l" href="#196">196: </a>
+</span><span id="197" class="l"><a class="l" href="#197">197: </a>
+</span><span id="198" class="l"><a class="l" href="#198">198: </a>        <span class="php-var">$preserveManualUserGroup</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;preserveManualUserGroup&quot;</span>, <span class="php-keyword1">true</span>);
+</span><span id="199" class="l"><a class="l" href="#199">199: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$preserveManualUserGroup</span>) {
+</span><span id="200" class="l"><a class="l" href="#200">200: </a>            <span class="php-var">$latestSamloginAssignedGroups</span> = <span class="php-var">$this</span>-&gt;_getLastestGroupAssigned(<span class="php-var">$user</span>);
+</span><span id="201" class="l"><a class="l" href="#201">201: </a>
+</span><span id="202" class="l"><a class="l" href="#202">202: </a>            <span class="php-var">$manualOldUsergroups</span> = <span class="php-keyword2">array_diff</span>(<span class="php-var">$oldusergroups</span>, <span class="php-var">$latestSamloginAssignedGroups</span>);
+</span><span id="203" class="l"><a class="l" href="#203">203: </a>
+</span><span id="204" class="l"><a class="l" href="#204">204: </a>            <span class="php-comment">//merge only the old groups NON-samlogin assigned groups</span>
+</span><span id="205" class="l"><a class="l" href="#205">205: </a>            <span class="php-var">$newusergroups</span> = <span class="php-keyword2">array_merge</span>(<span class="php-var">$newusergroups</span>, <span class="php-var">$manualOldUsergroups</span>);
+</span><span id="206" class="l"><a class="l" href="#206">206: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$newusergroupsForHist</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$hitem</span>) {
+</span><span id="207" class="l"><a class="l" href="#207">207: </a>                <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$hitem</span>, <span class="php-var">$manualOldUsergroups</span>)) {
+</span><span id="208" class="l"><a class="l" href="#208">208: </a>                    <span class="php-comment">//don't storicize as saml added a manually added usergroup</span>
+</span><span id="209" class="l"><a class="l" href="#209">209: </a>                    <span class="php-keyword1">unset</span>(<span class="php-var">$newusergroupsForHist</span>[<span class="php-var">$key</span>]);
+</span><span id="210" class="l"><a class="l" href="#210">210: </a>                    <span class="php-var">$newusergroupsForHist</span>[<span class="php-quote">&quot;manual&quot;</span>] = <span class="php-var">$hitem</span>; <span class="php-comment">//bust storicize it as a manual! (to track/log access time authz)</span>
+</span><span id="211" class="l"><a class="l" href="#211">211: </a>                }
+</span><span id="212" class="l"><a class="l" href="#212">212: </a>            }
+</span><span id="213" class="l"><a class="l" href="#213">213: </a>        }
+</span><span id="214" class="l"><a class="l" href="#214">214: </a>
+</span><span id="215" class="l"><a class="l" href="#215">215: </a>        <span class="php-var">$this</span>-&gt;_saveAddedGroupHist(<span class="php-var">$newusergroupsForHist</span>, <span class="php-var">$user</span>, <span class="php-var">$timeid</span>); <span class="php-comment">//don't save the modified newusergroups array here: only the saml added one</span>
+</span><span id="216" class="l"><a class="l" href="#216">216: </a>        <span class="php-var">$user</span>-&gt;set(<span class="php-quote">&quot;groups&quot;</span>, <span class="php-var">$newusergroups</span>);
+</span><span id="217" class="l"><a class="l" href="#217">217: </a>        <span class="php-comment">//     $user-&gt;name = $response-&gt;fullname; //bug: different field naming in joomla table, check will fail</span>
+</span><span id="218" class="l"><a class="l" href="#218">218: </a>
+</span><span id="219" class="l"><a class="l" href="#219">219: </a>        <span class="php-var">$saved</span> = <span class="php-var">$user</span>-&gt;save();
+</span><span id="220" class="l"><a class="l" href="#220">220: </a>
+</span><span id="221" class="l"><a class="l" href="#221">221: </a>        <span class="php-comment">//Reflection: TODO maintain protected __authGroups in user.php JUser</span>
+</span><span id="222" class="l"><a class="l" href="#222">222: </a>        <span class="php-var">$refObject</span> = <span class="php-keyword1">new</span> ReflectionObject(<span class="php-var">$user</span>);
+</span><span id="223" class="l"><a class="l" href="#223">223: </a>        <span class="php-var">$refProperty</span> = <span class="php-var">$refObject</span>-&gt;getProperty(<span class="php-quote">'_authGroups'</span>);
+</span><span id="224" class="l"><a class="l" href="#224">224: </a>        <span class="php-var">$refProperty</span>-&gt;setAccessible(<span class="php-keyword1">true</span>);
+</span><span id="225" class="l"><a class="l" href="#225">225: </a>        <span class="php-var">$refProperty</span>-&gt;setValue(<span class="php-var">$user</span>, <span class="php-var">$newusergroups</span>); <span class="php-comment">//schedure a re fetch of auth group for the in-memory session user object</span>
+</span><span id="226" class="l"><a class="l" href="#226">226: </a>        <span class="php-comment">//</span>
+</span><span id="227" class="l"><a class="l" href="#227">227: </a>        <span class="php-comment">//also JAccess has a group cache</span>
+</span><span id="228" class="l"><a class="l" href="#228">228: </a>        <span class="php-comment">//</span>
+</span><span id="229" class="l"><a class="l" href="#229">229: </a>        JAccess::clearStatics(); <span class="php-comment">//this clears things up $groupByUser cahced array!</span>
+</span><span id="230" class="l"><a class="l" href="#230">230: </a>        <span class="php-comment">//</span>
+</span><span id="231" class="l"><a class="l" href="#231">231: </a>        <span class="php-comment">//see user.php getAuthorisedGroups() method</span>
+</span><span id="232" class="l"><a class="l" href="#232">232: </a>        @<span class="php-var">$user</span>-&gt;getAuthorisedGroups(); <span class="php-comment">//ensure the re-fetch of auth groups for the in-memory session user object</span>
+</span><span id="233" class="l"><a class="l" href="#233">233: </a>
+</span><span id="234" class="l"><a class="l" href="#234">234: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
+</span><span id="235" class="l"><a class="l" href="#235">235: </a>    }
+</span><span id="236" class="l"><a class="l" href="#236">236: </a>
+</span><span id="237" class="l"><a class="l" href="#237">237: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="__getLastestGroupAssigned" href="#__getLastestGroupAssigned">_getLastestGroupAssigned</a>(<span class="php-var">$user</span>, <span class="php-var">$excludeInitiator</span> = <span class="php-quote">&quot;manual&quot;</span>) {
+</span><span id="238" class="l"><a class="l" href="#238">238: </a>        <span class="php-var">$toret</span> = <span class="php-keyword1">array</span>();
+</span><span id="239" class="l"><a class="l" href="#239">239: </a>        <span class="php-var">$isJoomla3</span> = ((float) JVERSION) &gt;= <span class="php-num">3.0</span>;
+</span><span id="240" class="l"><a class="l" href="#240">240: </a>        <span class="php-var">$db</span> = JFactory::getDbo();
+</span><span id="241" class="l"><a class="l" href="#241">241: </a>        <span class="php-var">$query</span> = <span class="php-var">$db</span>-&gt;getQuery(<span class="php-keyword1">true</span>);
+</span><span id="242" class="l"><a class="l" href="#242">242: </a>        <span class="php-var">$query</span>-&gt;select(<span class="php-quote">&quot;username,MAX(timeid) AS timeid&quot;</span>)
+</span><span id="243" class="l"><a class="l" href="#243">243: </a>                -&gt;from(<span class="php-quote">'#__samlogin_authz_hist'</span>)
+</span><span id="244" class="l"><a class="l" href="#244">244: </a>                -&gt;where(<span class="php-quote">&quot;username = &quot;</span> . <span class="php-var">$db</span>-&gt;quote(<span class="php-var">$user</span>-&gt;get(<span class="php-quote">&quot;username&quot;</span>)))
+</span><span id="245" class="l"><a class="l" href="#245">245: </a>                -&gt;group(<span class="php-quote">&quot;username&quot;</span>);
+</span><span id="246" class="l"><a class="l" href="#246">246: </a>        <span class="php-var">$db</span>-&gt;setQuery(<span class="php-var">$query</span>, <span class="php-num">0</span>, <span class="php-num">1</span>); <span class="php-comment">//limit is here</span>
+</span><span id="247" class="l"><a class="l" href="#247">247: </a>
+</span><span id="248" class="l"><a class="l" href="#248">248: </a>
+</span><span id="249" class="l"><a class="l" href="#249">249: </a>        <span class="php-var">$maxTidRow</span> = <span class="php-var">$db</span>-&gt;loadAssoc();
+</span><span id="250" class="l"><a class="l" href="#250">250: </a>        <span class="php-var">$lastTimeId</span> = <span class="php-var">$maxTidRow</span>[<span class="php-quote">&quot;timeid&quot;</span>];
+</span><span id="251" class="l"><a class="l" href="#251">251: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$lastTimeId</span> == <span class="php-keyword1">null</span>) {
+</span><span id="252" class="l"><a class="l" href="#252">252: </a>            <span class="php-var">$lastTimeId</span> = <span class="php-num">0</span>;
+</span><span id="253" class="l"><a class="l" href="#253">253: </a>        }
+</span><span id="254" class="l"><a class="l" href="#254">254: </a>        <span class="php-var">$query</span> = <span class="php-keyword1">null</span>;
+</span><span id="255" class="l"><a class="l" href="#255">255: </a>        <span class="php-var">$query</span> = <span class="php-var">$db</span>-&gt;getQuery(<span class="php-keyword1">true</span>);
+</span><span id="256" class="l"><a class="l" href="#256">256: </a>        <span class="php-var">$query</span>-&gt;select(<span class="php-quote">&quot;username,&quot;</span> . <span class="php-var">$db</span>-&gt;quoteName(<span class="php-quote">&quot;group&quot;</span>) . <span class="php-quote">&quot; AS grpid,initiator&quot;</span>)
+</span><span id="257" class="l"><a class="l" href="#257">257: </a>                -&gt;from(<span class="php-quote">'#__samlogin_authz_hist'</span>)
+</span><span id="258" class="l"><a class="l" href="#258">258: </a>                -&gt;where(<span class="php-keyword1">array</span>(
+</span><span id="259" class="l"><a class="l" href="#259">259: </a>                    <span class="php-quote">&quot;timeid = &quot;</span> . <span class="php-var">$lastTimeId</span>,
+</span><span id="260" class="l"><a class="l" href="#260">260: </a>                    <span class="php-quote">&quot;username = &quot;</span> . <span class="php-var">$db</span>-&gt;quote(<span class="php-var">$user</span>-&gt;get(<span class="php-quote">&quot;username&quot;</span>))
+</span><span id="261" class="l"><a class="l" href="#261">261: </a>                        ), <span class="php-quote">&quot;AND&quot;</span>);
+</span><span id="262" class="l"><a class="l" href="#262">262: </a>        <span class="php-var">$db</span>-&gt;setQuery(<span class="php-var">$query</span>);
+</span><span id="263" class="l"><a class="l" href="#263">263: </a><span class="php-comment">//die(print_r($query-&gt;__toString(),true));</span>
+</span><span id="264" class="l"><a class="l" href="#264">264: </a>
+</span><span id="265" class="l"><a class="l" href="#265">265: </a>        <span class="php-var">$lastGroupsRow</span> = <span class="php-var">$db</span>-&gt;loadAssocList();
+</span><span id="266" class="l"><a class="l" href="#266">266: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$lastGroupsRow</span>)) {
+</span><span id="267" class="l"><a class="l" href="#267">267: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$lastGroupsRow</span> <span class="php-keyword1">as</span> <span class="php-var">$row</span>) {
+</span><span id="268" class="l"><a class="l" href="#268">268: </a>                <span class="php-var">$initiator</span> = <span class="php-var">$row</span>[<span class="php-quote">&quot;initiator&quot;</span>];
+</span><span id="269" class="l"><a class="l" href="#269">269: </a>                <span class="php-keyword1">if</span> (<span class="php-var">$initiator</span> != <span class="php-var">$excludeInitiator</span>) {
+</span><span id="270" class="l"><a class="l" href="#270">270: </a>                    <span class="php-var">$toret</span>[] = <span class="php-var">$row</span>[<span class="php-quote">&quot;grpid&quot;</span>];
+</span><span id="271" class="l"><a class="l" href="#271">271: </a>                }
+</span><span id="272" class="l"><a class="l" href="#272">272: </a>            }
+</span><span id="273" class="l"><a class="l" href="#273">273: </a>        }
+</span><span id="274" class="l"><a class="l" href="#274">274: </a>        <span class="php-keyword1">return</span> <span class="php-var">$toret</span>;
+</span><span id="275" class="l"><a class="l" href="#275">275: </a>    }
+</span><span id="276" class="l"><a class="l" href="#276">276: </a>
+</span><span id="277" class="l"><a class="l" href="#277">277: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="__saveAddedGroupHist" href="#__saveAddedGroupHist">_saveAddedGroupHist</a>(<span class="php-var">$groups</span>, <span class="php-var">$user</span>, <span class="php-var">$timeid</span>) {
+</span><span id="278" class="l"><a class="l" href="#278">278: </a>
+</span><span id="279" class="l"><a class="l" href="#279">279: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$groups</span> <span class="php-keyword1">as</span> <span class="php-var">$initiator</span> =&gt; <span class="php-var">$thisgroup</span>) {
+</span><span id="280" class="l"><a class="l" href="#280">280: </a>            <span class="php-var">$db</span> = JFactory::getDbo();
+</span><span id="281" class="l"><a class="l" href="#281">281: </a>            <span class="php-var">$query</span> = <span class="php-var">$db</span>-&gt;getQuery(<span class="php-keyword1">true</span>);
+</span><span id="282" class="l"><a class="l" href="#282">282: </a>            <span class="php-comment">// Insert columns.</span>
+</span><span id="283" class="l"><a class="l" href="#283">283: </a>            <span class="php-var">$columns</span> = <span class="php-keyword1">array</span>(<span class="php-quote">'username'</span>, <span class="php-quote">'group'</span>, <span class="php-quote">'email'</span>, <span class="php-quote">'initiator'</span>, <span class="php-quote">'timeid'</span>);
+</span><span id="284" class="l"><a class="l" href="#284">284: </a>            <span class="php-comment">// Insert values.</span>
+</span><span id="285" class="l"><a class="l" href="#285">285: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$thisgroup</span>)) {
+</span><span id="286" class="l"><a class="l" href="#286">286: </a>                <span class="php-var">$thisgroup</span> = -<span class="php-num">1</span>;
+</span><span id="287" class="l"><a class="l" href="#287">287: </a>            }
+</span><span id="288" class="l"><a class="l" href="#288">288: </a>            <span class="php-var">$values</span> = <span class="php-keyword1">array</span>(
+</span><span id="289" class="l"><a class="l" href="#289">289: </a>                <span class="php-var">$db</span>-&gt;quote(<span class="php-var">$user</span>-&gt;get(<span class="php-quote">&quot;username&quot;</span>))
+</span><span id="290" class="l"><a class="l" href="#290">290: </a>                , <span class="php-var">$thisgroup</span>
+</span><span id="291" class="l"><a class="l" href="#291">291: </a>                , <span class="php-var">$db</span>-&gt;quote(<span class="php-var">$user</span>-&gt;get(<span class="php-quote">&quot;email&quot;</span>))
+</span><span id="292" class="l"><a class="l" href="#292">292: </a>                , <span class="php-var">$db</span>-&gt;quote(<span class="php-var">$initiator</span>)
+</span><span id="293" class="l"><a class="l" href="#293">293: </a>                , <span class="php-var">$timeid</span>);
+</span><span id="294" class="l"><a class="l" href="#294">294: </a>
+</span><span id="295" class="l"><a class="l" href="#295">295: </a>            <span class="php-var">$query</span>-&gt;insert(<span class="php-var">$db</span>-&gt;quoteName(<span class="php-quote">'#__samlogin_authz_hist'</span>))
+</span><span id="296" class="l"><a class="l" href="#296">296: </a>                    -&gt;columns(<span class="php-var">$db</span>-&gt;quoteName(<span class="php-var">$columns</span>))
+</span><span id="297" class="l"><a class="l" href="#297">297: </a>                    -&gt;values(<span class="php-keyword2">implode</span>(<span class="php-quote">&quot;,&quot;</span>, <span class="php-var">$values</span>));
+</span><span id="298" class="l"><a class="l" href="#298">298: </a>
+</span><span id="299" class="l"><a class="l" href="#299">299: </a>
+</span><span id="300" class="l"><a class="l" href="#300">300: </a>            <span class="php-var">$db</span>-&gt;setQuery(<span class="php-var">$query</span>);
+</span><span id="301" class="l"><a class="l" href="#301">301: </a>
+</span><span id="302" class="l"><a class="l" href="#302">302: </a>            <span class="php-var">$isJoomla3</span> = ((float) JVERSION) &gt;= <span class="php-num">3.0</span>;
+</span><span id="303" class="l"><a class="l" href="#303">303: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$isJoomla3</span>) {
+</span><span id="304" class="l"><a class="l" href="#304">304: </a>                <span class="php-var">$db</span>-&gt;execute();
+</span><span id="305" class="l"><a class="l" href="#305">305: </a>            } <span class="php-keyword1">else</span> {
+</span><span id="306" class="l"><a class="l" href="#306">306: </a>                <span class="php-var">$db</span>-&gt;query();
+</span><span id="307" class="l"><a class="l" href="#307">307: </a>            }
+</span><span id="308" class="l"><a class="l" href="#308">308: </a>        }
+</span><span id="309" class="l"><a class="l" href="#309">309: </a>    }
+</span><span id="310" class="l"><a class="l" href="#310">310: </a>
+</span><span id="311" class="l"><a class="l" href="#311">311: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="__mapAttributes" href="#__mapAttributes">_mapAttributes</a>(&amp;<span class="php-var">$response</span>, <span class="php-var">$samlresponse</span>, <span class="php-var">$samloginParams</span>) {
+</span><span id="312" class="l"><a class="l" href="#312">312: </a>        <span class="php-var">$mappingConf</span> = <span class="php-var">$samloginParams</span>-&gt;toArray();
+</span><span id="313" class="l"><a class="l" href="#313">313: </a>        <span class="php-comment">//   //phpconsole($mappingConf, &quot;rastrano&quot;);</span>
+</span><span id="314" class="l"><a class="l" href="#314">314: </a>        <span class="php-var">$mappingConfExtra</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;extramapping&quot;</span>, <span class="php-quote">''</span>);
+</span><span id="315" class="l"><a class="l" href="#315">315: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$mappingConfExtra</span>)) {
+</span><span id="316" class="l"><a class="l" href="#316">316: </a>            <span class="php-var">$arr</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$mappingConfExtra</span>, <span class="php-keyword1">true</span>);
+</span><span id="317" class="l"><a class="l" href="#317">317: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$arr</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$val</span>) {
+</span><span id="318" class="l"><a class="l" href="#318">318: </a>                <span class="php-var">$mappingConf</span>[<span class="php-quote">&quot;mapping_extra::&quot;</span> . <span class="php-var">$key</span>] = <span class="php-var">$val</span>;
+</span><span id="319" class="l"><a class="l" href="#319">319: </a>            }
+</span><span id="320" class="l"><a class="l" href="#320">320: </a>        }
+</span><span id="321" class="l"><a class="l" href="#321">321: </a>
+</span><span id="322" class="l"><a class="l" href="#322">322: </a>
+</span><span id="323" class="l"><a class="l" href="#323">323: </a>        <span class="php-var">$extraFields</span> = <span class="php-keyword1">array</span>();
+</span><span id="324" class="l"><a class="l" href="#324">324: </a>
+</span><span id="325" class="l"><a class="l" href="#325">325: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$mappingConf</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$val</span>) {
+</span><span id="326" class="l"><a class="l" href="#326">326: </a>            <span class="php-comment">// mapping parameters prefix</span>
+</span><span id="327" class="l"><a class="l" href="#327">327: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$key</span>, <span class="php-quote">'mapping_'</span>) === <span class="php-num">0</span>) {
+</span><span id="328" class="l"><a class="l" href="#328">328: </a>                <span class="php-var">$joomlaKey</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$key</span>, <span class="php-keyword2">strlen</span>(<span class="php-quote">&quot;mapping_&quot;</span>));
+</span><span id="329" class="l"><a class="l" href="#329">329: </a>                <span class="php-var">$isExtraField</span> = <span class="php-keyword1">false</span>;
+</span><span id="330" class="l"><a class="l" href="#330">330: </a>                <span class="php-var">$extraFieldGroup</span> = <span class="php-quote">&quot;&quot;</span>;
+</span><span id="331" class="l"><a class="l" href="#331">331: </a>                <span class="php-keyword1">if</span> (<span class="php-keyword2">strstr</span>(<span class="php-var">$joomlaKey</span>, <span class="php-quote">&quot;::&quot;</span>)) {
+</span><span id="332" class="l"><a class="l" href="#332">332: </a>                    <span class="php-var">$tmp</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;::&quot;</span>, <span class="php-var">$joomlaKey</span>);
+</span><span id="333" class="l"><a class="l" href="#333">333: </a>                    <span class="php-var">$isExtraField</span> = <span class="php-keyword1">true</span>;
+</span><span id="334" class="l"><a class="l" href="#334">334: </a>                    <span class="php-var">$joomlaKey</span> = <span class="php-var">$tmp</span>[<span class="php-num">2</span>];
+</span><span id="335" class="l"><a class="l" href="#335">335: </a>                    <span class="php-var">$extraFieldGroup</span> = <span class="php-var">$tmp</span>[<span class="php-num">1</span>];
+</span><span id="336" class="l"><a class="l" href="#336">336: </a>                }
+</span><span id="337" class="l"><a class="l" href="#337">337: </a>                <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$val</span>)) {
+</span><span id="338" class="l"><a class="l" href="#338">338: </a>                    <span class="php-var">$attrNameAlternatives</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;|&quot;</span>, <span class="php-var">$val</span>) ? <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;|&quot;</span>, <span class="php-var">$val</span>) : <span class="php-keyword1">array</span>(<span class="php-var">$val</span>);
+</span><span id="339" class="l"><a class="l" href="#339">339: </a>                    <span class="php-keyword1">if</span> (<span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;debug_auth&quot;</span>, <span class="php-num">0</span>)) {
+</span><span id="340" class="l"><a class="l" href="#340">340: </a>                        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;&lt;br/&gt;Mappings alternatives: &lt;pre&gt;&quot;</span> . <span class="php-keyword2">print_r</span>(<span class="php-var">$attrNameAlternatives</span>, <span class="php-keyword1">true</span>) . <span class="php-quote">&quot;&lt;/pre&gt;&quot;</span>;
+</span><span id="341" class="l"><a class="l" href="#341">341: </a>                    }
+</span><span id="342" class="l"><a class="l" href="#342">342: </a>                    <span class="php-comment">//  //phpconsole($attrNameAlternatives,&quot;rastrano&quot;);</span>
+</span><span id="343" class="l"><a class="l" href="#343">343: </a>                    <span class="php-comment">//  print_r($attrNameAlternatives);</span>
+</span><span id="344" class="l"><a class="l" href="#344">344: </a>                    <span class="php-var">$attrFound</span> = <span class="php-keyword1">false</span>;
+</span><span id="345" class="l"><a class="l" href="#345">345: </a>                    <span class="php-keyword1">foreach</span> (<span class="php-var">$attrNameAlternatives</span> <span class="php-keyword1">as</span> <span class="php-var">$attrNameSyntax</span>) {
+</span><span id="346" class="l"><a class="l" href="#346">346: </a>                        <span class="php-keyword1">if</span> (<span class="php-var">$attrFound</span>) {
+</span><span id="347" class="l"><a class="l" href="#347">347: </a>                            <span class="php-keyword1">break</span>;
+</span><span id="348" class="l"><a class="l" href="#348">348: </a>                        }
+</span><span id="349" class="l"><a class="l" href="#349">349: </a>                        <span class="php-var">$attrConcat</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;+&quot;</span>, <span class="php-var">$attrNameSyntax</span>) ? <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;+&quot;</span>, <span class="php-var">$attrNameSyntax</span>) : <span class="php-keyword1">array</span>(<span class="php-var">$attrNameSyntax</span>);
+</span><span id="350" class="l"><a class="l" href="#350">350: </a>                        <span class="php-var">$firstAttrOfConcat</span> = <span class="php-keyword1">true</span>;
+</span><span id="351" class="l"><a class="l" href="#351">351: </a>                        <span class="php-keyword1">foreach</span> (<span class="php-var">$attrConcat</span> <span class="php-keyword1">as</span> <span class="php-var">$attrName</span>) {
+</span><span id="352" class="l"><a class="l" href="#352">352: </a>                            <span class="php-keyword1">if</span> (<span class="php-var">$firstAttrOfConcat</span>) {
+</span><span id="353" class="l"><a class="l" href="#353">353: </a>                                <span class="php-keyword1">if</span> (!<span class="php-var">$isExtraField</span>) {
+</span><span id="354" class="l"><a class="l" href="#354">354: </a>                                    <span class="php-var">$response</span>-&gt;<span class="php-var">$joomlaKey</span> = <span class="php-var">$this</span>-&gt;_getSAMLAttributeFirstValue(<span class="php-var">$attrName</span>, <span class="php-var">$samlresponse</span>);
+</span><span id="355" class="l"><a class="l" href="#355">355: </a>                                } <span class="php-keyword1">else</span> {
+</span><span id="356" class="l"><a class="l" href="#356">356: </a>                                    <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_array</span>(<span class="php-var">$extraFields</span>[<span class="php-var">$extraFieldGroup</span>])) {
+</span><span id="357" class="l"><a class="l" href="#357">357: </a>                                        <span class="php-var">$extraFields</span>[<span class="php-var">$extraFieldGroup</span>] = <span class="php-keyword1">array</span>();
+</span><span id="358" class="l"><a class="l" href="#358">358: </a>                                    }
+</span><span id="359" class="l"><a class="l" href="#359">359: </a>                                    <span class="php-var">$extraFields</span>[<span class="php-var">$extraFieldGroup</span>][<span class="php-var">$joomlaKey</span>] = <span class="php-var">$this</span>-&gt;_getSAMLAttributeFirstValue(<span class="php-var">$attrName</span>, <span class="php-var">$samlresponse</span>);
+</span><span id="360" class="l"><a class="l" href="#360">360: </a>                                }
+</span><span id="361" class="l"><a class="l" href="#361">361: </a>                                <span class="php-var">$firstAttrOfConcat</span> = <span class="php-keyword1">false</span>;
+</span><span id="362" class="l"><a class="l" href="#362">362: </a>                            } <span class="php-keyword1">else</span> {
+</span><span id="363" class="l"><a class="l" href="#363">363: </a>                                <span class="php-keyword1">if</span> (!<span class="php-var">$isExtraField</span>) {
+</span><span id="364" class="l"><a class="l" href="#364">364: </a>                                    <span class="php-var">$response</span>-&gt;<span class="php-var">$joomlaKey</span> .= <span class="php-quote">&quot; &quot;</span> . <span class="php-var">$this</span>-&gt;_getSAMLAttributeFirstValue(<span class="php-var">$attrName</span>, <span class="php-var">$samlresponse</span>, <span class="php-quote">&quot;&quot;</span>);
+</span><span id="365" class="l"><a class="l" href="#365">365: </a>                                } <span class="php-keyword1">else</span> {
+</span><span id="366" class="l"><a class="l" href="#366">366: </a>
+</span><span id="367" class="l"><a class="l" href="#367">367: </a>                                    <span class="php-var">$extraFields</span>[<span class="php-var">$extraFieldGroup</span>][<span class="php-var">$joomlaKey</span>] = <span class="php-var">$extraFields</span>[<span class="php-var">$extraFieldGroup</span>][<span class="php-var">$joomlaKey</span>] . <span class="php-quote">&quot; &quot;</span> . <span class="php-var">$this</span>-&gt;_getSAMLAttributeFirstValue(<span class="php-var">$attrName</span>, <span class="php-var">$samlresponse</span>);
+</span><span id="368" class="l"><a class="l" href="#368">368: </a>                                }
+</span><span id="369" class="l"><a class="l" href="#369">369: </a>                            }
+</span><span id="370" class="l"><a class="l" href="#370">370: </a>                            <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_null</span>(<span class="php-var">$response</span>-&gt;<span class="php-var">$joomlaKey</span>) &amp;&amp; !<span class="php-keyword1">empty</span>(<span class="php-var">$response</span>-&gt;<span class="php-var">$joomlaKey</span>)) {
+</span><span id="371" class="l"><a class="l" href="#371">371: </a>                                <span class="php-var">$response</span>-&gt;<span class="php-var">$joomlaKey</span> = <span class="php-keyword2">trim</span>(<span class="php-var">$response</span>-&gt;<span class="php-var">$joomlaKey</span>); <span class="php-comment">//avoid one space values</span>
+</span><span id="372" class="l"><a class="l" href="#372">372: </a>                            }
+</span><span id="373" class="l"><a class="l" href="#373">373: </a>                            <span class="php-keyword1">if</span> (
+</span><span id="374" class="l"><a class="l" href="#374">374: </a>                                    (
+</span><span id="375" class="l"><a class="l" href="#375">375: </a>                                    !<span class="php-keyword2">is_null</span>(<span class="php-var">$response</span>-&gt;<span class="php-var">$joomlaKey</span>) &amp;&amp; !<span class="php-keyword1">empty</span>(<span class="php-var">$response</span>-&gt;<span class="php-var">$joomlaKey</span>)
+</span><span id="376" class="l"><a class="l" href="#376">376: </a>                                    ) ||
+</span><span id="377" class="l"><a class="l" href="#377">377: </a>                                    (
+</span><span id="378" class="l"><a class="l" href="#378">378: </a>                                    <span class="php-keyword2">defined</span>(<span class="php-var">$extraFieldGroup</span>) &amp;&amp; <span class="php-keyword2">defined</span>(<span class="php-var">$extraFields</span>[<span class="php-var">$extraFieldGroup</span>]) &amp;&amp; <span class="php-keyword2">is_array</span>(<span class="php-var">$extraFields</span>[<span class="php-var">$extraFieldGroup</span>]) &amp;&amp; !<span class="php-keyword1">empty</span>(<span class="php-var">$extraFields</span>[<span class="php-var">$extraFieldGroup</span>][<span class="php-var">$joomlaKey</span>])
+</span><span id="379" class="l"><a class="l" href="#379">379: </a>                                    )
+</span><span id="380" class="l"><a class="l" href="#380">380: </a>                            ) {
+</span><span id="381" class="l"><a class="l" href="#381">381: </a>
+</span><span id="382" class="l"><a class="l" href="#382">382: </a>                                <span class="php-keyword1">if</span> (<span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;debug_auth&quot;</span>, <span class="php-num">0</span>)) {
+</span><span id="383" class="l"><a class="l" href="#383">383: </a>                                    <span class="php-keyword1">print</span> <span class="php-quote">&quot;&lt;hr/&gt;Found </span><span class="php-var">$joomlaKey</span><span class="php-quote"> : using &quot;</span> . <span class="php-keyword2">print_r</span>(<span class="php-var">$attrName</span>, <span class="php-keyword1">true</span>) . <span class="php-quote">&quot; with value&quot;</span> . <span class="php-var">$response</span>-&gt;<span class="php-var">$joomlaKey</span> . <span class="php-quote">&quot;&lt;hr/&gt;&quot;</span>;
+</span><span id="384" class="l"><a class="l" href="#384">384: </a>                                }
+</span><span id="385" class="l"><a class="l" href="#385">385: </a>                                <span class="php-comment">//</span>
+</span><span id="386" class="l"><a class="l" href="#386">386: </a>                                <span class="php-comment">//       print &quot;&lt;hr/&gt;Found $joomlaKey : using &quot;.print_r($attrName,true).&quot; with value&quot;.$response-&gt;$joomlaKey.&quot;&lt;hr/&gt;&quot;;</span>
+</span><span id="387" class="l"><a class="l" href="#387">387: </a>                                <span class="php-var">$attrFound</span> = <span class="php-keyword1">true</span>;
+</span><span id="388" class="l"><a class="l" href="#388">388: </a>                            }
+</span><span id="389" class="l"><a class="l" href="#389">389: </a>                        }
+</span><span id="390" class="l"><a class="l" href="#390">390: </a>                    }
+</span><span id="391" class="l"><a class="l" href="#391">391: </a>                }
+</span><span id="392" class="l"><a class="l" href="#392">392: </a>            }
+</span><span id="393" class="l"><a class="l" href="#393">393: </a>        }
+</span><span id="394" class="l"><a class="l" href="#394">394: </a>
+</span><span id="395" class="l"><a class="l" href="#395">395: </a>        <span class="php-var">$extraFieldsTmp</span> = <span class="php-keyword1">array</span>();
+</span><span id="396" class="l"><a class="l" href="#396">396: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$extraFields</span> <span class="php-keyword1">as</span> <span class="php-var">$extraFieldGroup</span> =&gt; <span class="php-var">$objArr</span>) {
+</span><span id="397" class="l"><a class="l" href="#397">397: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$extraFieldGroup</span> == <span class="php-quote">&quot;flat_user_table_field&quot;</span>) {
+</span><span id="398" class="l"><a class="l" href="#398">398: </a>                <span class="php-var">$extraFieldsTmp</span> = <span class="php-keyword2">array_merge</span>(<span class="php-var">$extraFieldsTmp</span>, <span class="php-var">$objArr</span>);
+</span><span id="399" class="l"><a class="l" href="#399">399: </a>            } <span class="php-keyword1">else</span> {
+</span><span id="400" class="l"><a class="l" href="#400">400: </a>                <span class="php-var">$extraFieldsTmp</span>[<span class="php-var">$extraFieldGroup</span>] = <span class="php-var">$objArr</span>;
+</span><span id="401" class="l"><a class="l" href="#401">401: </a>            }
+</span><span id="402" class="l"><a class="l" href="#402">402: </a>        }
+</span><span id="403" class="l"><a class="l" href="#403">403: </a>        <span class="php-comment">//    die(print_r($extraFieldsTmp,true));</span>
+</span><span id="404" class="l"><a class="l" href="#404">404: </a>
+</span><span id="405" class="l"><a class="l" href="#405">405: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$response</span>-&gt;email)) {
+</span><span id="406" class="l"><a class="l" href="#406">406: </a>            <span class="php-var">$useDummyEmails</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;useDummyEmails&quot;</span>, <span class="php-keyword1">false</span>);
+</span><span id="407" class="l"><a class="l" href="#407">407: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$useDummyEmails</span>) {
+</span><span id="408" class="l"><a class="l" href="#408">408: </a>                <span class="php-var">$response</span>-&gt;email = <span class="php-var">$response</span>-&gt;username . <span class="php-quote">&quot;@&quot;</span> . <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;dummyEmailDomain&quot;</span>, <span class="php-keyword2">strtr</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_HOST'</span>], <span class="php-keyword1">array</span>(<span class="php-quote">&quot;www.&quot;</span> =&gt; <span class="php-quote">&quot;&quot;</span>)));
+</span><span id="409" class="l"><a class="l" href="#409">409: </a>            }
+</span><span id="410" class="l"><a class="l" href="#410">410: </a>        }
+</span><span id="411" class="l"><a class="l" href="#411">411: </a>
+</span><span id="412" class="l"><a class="l" href="#412">412: </a>
+</span><span id="413" class="l"><a class="l" href="#413">413: </a>        <span class="php-var">$useNameID</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;useNameId&quot;</span>, <span class="php-keyword1">false</span>);
+</span><span id="414" class="l"><a class="l" href="#414">414: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$useNameID</span>) {
+</span><span id="415" class="l"><a class="l" href="#415">415: </a>            <span class="php-var">$currentSession</span> = JFactory::getSession();
+</span><span id="416" class="l"><a class="l" href="#416">416: </a>            <span class="php-var">$SAMLoginnameId</span> = <span class="php-var">$currentSession</span>-&gt;get(<span class="php-quote">&quot;SAMLoginNameId&quot;</span>, <span class="php-quote">''</span>);
+</span><span id="417" class="l"><a class="l" href="#417">417: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$SAMLoginnameId</span>)) {
+</span><span id="418" class="l"><a class="l" href="#418">418: </a>                <span class="php-keyword1">die</span>(<span class="php-quote">&quot;Empty NameID array&quot;</span>);
+</span><span id="419" class="l"><a class="l" href="#419">419: </a>            } <span class="php-keyword1">else</span> {
+</span><span id="420" class="l"><a class="l" href="#420">420: </a>                <span class="php-var">$SAMLoginnameId</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$SAMLoginnameId</span>, <span class="php-keyword1">true</span>);
+</span><span id="421" class="l"><a class="l" href="#421">421: </a>                <span class="php-var">$SAMLoginnameId</span> = <span class="php-var">$SAMLoginnameId</span>[<span class="php-quote">&quot;Value&quot;</span>];
+</span><span id="422" class="l"><a class="l" href="#422">422: </a>                <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$SAMLoginnameId</span>)) {
+</span><span id="423" class="l"><a class="l" href="#423">423: </a>                    <span class="php-keyword1">die</span>(<span class="php-quote">&quot;Empty NameID&quot;</span>);
+</span><span id="424" class="l"><a class="l" href="#424">424: </a>                }
+</span><span id="425" class="l"><a class="l" href="#425">425: </a>            }
+</span><span id="426" class="l"><a class="l" href="#426">426: </a>
+</span><span id="427" class="l"><a class="l" href="#427">427: </a>            <span class="php-var">$response</span>-&gt;username = <span class="php-var">$SAMLoginnameId</span>;
+</span><span id="428" class="l"><a class="l" href="#428">428: </a>        }
+</span><span id="429" class="l"><a class="l" href="#429">429: </a>
+</span><span id="430" class="l"><a class="l" href="#430">430: </a>
+</span><span id="431" class="l"><a class="l" href="#431">431: </a>        <span class="php-var">$response</span>-&gt;type = <span class="php-quote">'SAMLogin'</span>;
+</span><span id="432" class="l"><a class="l" href="#432">432: </a>
+</span><span id="433" class="l"><a class="l" href="#433">433: </a>
+</span><span id="434" class="l"><a class="l" href="#434">434: </a>        <span class="php-comment">// //phpconsole($response, &quot;rastrano&quot;);</span>
+</span><span id="435" class="l"><a class="l" href="#435">435: </a>
+</span><span id="436" class="l"><a class="l" href="#436">436: </a>        <span class="php-var">$userid</span> = <span class="php-var">$this</span>-&gt;getUserIdByUsernameOrMail(<span class="php-var">$response</span>-&gt;username);
+</span><span id="437" class="l"><a class="l" href="#437">437: </a>        <span class="php-var">$updateUsernameIfMailOverlap</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;updateUsernameIfMailOverlap&quot;</span>, <span class="php-keyword1">false</span>);
+</span><span id="438" class="l"><a class="l" href="#438">438: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$updateUsernameIfMailOverlap</span> &amp;&amp; <span class="php-keyword1">empty</span>(<span class="php-var">$userid</span>)) {
+</span><span id="439" class="l"><a class="l" href="#439">439: </a>            <span class="php-var">$userid</span> = <span class="php-var">$this</span>-&gt;getUserIdByUsernameOrMail(<span class="php-var">$response</span>-&gt;email);
+</span><span id="440" class="l"><a class="l" href="#440">440: </a>        }
+</span><span id="441" class="l"><a class="l" href="#441">441: </a>
+</span><span id="442" class="l"><a class="l" href="#442">442: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$userid</span>) {
+</span><span id="443" class="l"><a class="l" href="#443">443: </a>            <span class="php-var">$user</span> = JFactory::getUser(<span class="php-var">$userid</span>);
+</span><span id="444" class="l"><a class="l" href="#444">444: </a>
+</span><span id="445" class="l"><a class="l" href="#445">445: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$updateUsernameIfMailOverlap</span> &amp;&amp; <span class="php-var">$response</span>-&gt;username != <span class="php-var">$user</span>-&gt;username) {
+</span><span id="446" class="l"><a class="l" href="#446">446: </a>                <span class="php-comment">//  $user-&gt;username = $response-&gt;username;</span>
+</span><span id="447" class="l"><a class="l" href="#447">447: </a>                <span class="php-comment">//  $saved = $user-&gt;save(true); //this overrides current response values!!</span>
+</span><span id="448" class="l"><a class="l" href="#448">448: </a>                <span class="php-var">$db</span> = JFactory::getDbo();
+</span><span id="449" class="l"><a class="l" href="#449">449: </a>                <span class="php-var">$query</span> = <span class="php-var">$db</span>-&gt;getQuery(<span class="php-keyword1">true</span>);
+</span><span id="450" class="l"><a class="l" href="#450">450: </a>                <span class="php-var">$query</span>-&gt;update(<span class="php-quote">'#__users'</span>)
+</span><span id="451" class="l"><a class="l" href="#451">451: </a>                        -&gt;set(<span class="php-quote">'username = '</span> . <span class="php-var">$db</span>-&gt;Quote(<span class="php-var">$response</span>-&gt;username))
+</span><span id="452" class="l"><a class="l" href="#452">452: </a>                        -&gt;where(<span class="php-quote">&quot;username = &quot;</span> . <span class="php-var">$db</span>-&gt;Quote(<span class="php-var">$user</span>-&gt;username) . <span class="php-quote">&quot; AND id=&quot;</span> . <span class="php-var">$userid</span>);
+</span><span id="453" class="l"><a class="l" href="#453">453: </a>                <span class="php-var">$db</span>-&gt;setQuery(<span class="php-var">$query</span>);
+</span><span id="454" class="l"><a class="l" href="#454">454: </a>                <span class="php-var">$db</span>-&gt;execute();
+</span><span id="455" class="l"><a class="l" href="#455">455: </a>                <span class="php-comment">//   //phpconsole(&quot;username updated $saved&quot;,&quot;rastrano&quot;);</span>
+</span><span id="456" class="l"><a class="l" href="#456">456: </a>            }
+</span><span id="457" class="l"><a class="l" href="#457">457: </a>            <span class="php-comment">//print_r($user-&gt;get('username'));</span>
+</span><span id="458" class="l"><a class="l" href="#458">458: </a>
+</span><span id="459" class="l"><a class="l" href="#459">459: </a>            <span class="php-var">$db</span> = JFactory::getDbo();
+</span><span id="460" class="l"><a class="l" href="#460">460: </a>            <span class="php-var">$query</span> = <span class="php-var">$db</span>-&gt;getQuery(<span class="php-keyword1">true</span>);
+</span><span id="461" class="l"><a class="l" href="#461">461: </a>            <span class="php-var">$query</span>-&gt;select(<span class="php-quote">'id, password'</span>);
+</span><span id="462" class="l"><a class="l" href="#462">462: </a>            <span class="php-var">$query</span>-&gt;from(<span class="php-quote">'#__users'</span>);
+</span><span id="463" class="l"><a class="l" href="#463">463: </a>            <span class="php-var">$query</span>-&gt;where(<span class="php-quote">'username='</span> . <span class="php-var">$db</span>-&gt;Quote(<span class="php-var">$response</span>-&gt;username));
+</span><span id="464" class="l"><a class="l" href="#464">464: </a>            <span class="php-comment">//.&quot; OR email= &quot;.$db-&gt;Quote($response-&gt;email));</span>
+</span><span id="465" class="l"><a class="l" href="#465">465: </a>            <span class="php-var">$db</span>-&gt;setQuery(<span class="php-var">$query</span>);
+</span><span id="466" class="l"><a class="l" href="#466">466: </a>            <span class="php-var">$result</span> = <span class="php-var">$db</span>-&gt;loadObject();
+</span><span id="467" class="l"><a class="l" href="#467">467: </a>
+</span><span id="468" class="l"><a class="l" href="#468">468: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$result</span>) { <span class="php-comment">//if user exists</span>
+</span><span id="469" class="l"><a class="l" href="#469">469: </a>                <span class="php-keyword1">if</span> (<span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;preserveLocalPassword&quot;</span>, <span class="php-keyword1">false</span>)) {
+</span><span id="470" class="l"><a class="l" href="#470">470: </a>                    <span class="php-var">$parts</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">':'</span>, <span class="php-var">$result</span>-&gt;password);
+</span><span id="471" class="l"><a class="l" href="#471">471: </a>                    <span class="php-var">$crypt</span> = <span class="php-var">$parts</span>[<span class="php-num">0</span>];
+</span><span id="472" class="l"><a class="l" href="#472">472: </a>                    <span class="php-var">$salt</span> = @<span class="php-var">$parts</span>[<span class="php-num">1</span>];
+</span><span id="473" class="l"><a class="l" href="#473">473: </a>                    <span class="php-var">$password</span> = <span class="php-var">$crypt</span> . <span class="php-quote">':'</span> . <span class="php-var">$salt</span>;
+</span><span id="474" class="l"><a class="l" href="#474">474: </a>
+</span><span id="475" class="l"><a class="l" href="#475">475: </a>                    <span class="php-var">$response</span>-&gt;password = <span class="php-var">$password</span>;
+</span><span id="476" class="l"><a class="l" href="#476">476: </a>                    <span class="php-var">$response</span>-&gt;password_clear = <span class="php-var">$password</span>;
+</span><span id="477" class="l"><a class="l" href="#477">477: </a>                } <span class="php-keyword1">else</span> {
+</span><span id="478" class="l"><a class="l" href="#478">478: </a>                    <span class="php-var">$response</span>-&gt;password = <span class="php-quote">''</span>;
+</span><span id="479" class="l"><a class="l" href="#479">479: </a>                    <span class="php-var">$response</span>-&gt;password_clear = <span class="php-quote">''</span>;
+</span><span id="480" class="l"><a class="l" href="#480">480: </a>                }
+</span><span id="481" class="l"><a class="l" href="#481">481: </a>            } <span class="php-keyword1">else</span> { <span class="php-comment">//if user doesn't exist yet</span>
+</span><span id="482" class="l"><a class="l" href="#482">482: </a>                <span class="php-keyword1">if</span> (<span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;generateRandomLocalPassword&quot;</span>, <span class="php-keyword1">false</span>)) {
+</span><span id="483" class="l"><a class="l" href="#483">483: </a>                    <span class="php-var">$salt</span> = JUserHelper::genRandomPassword(<span class="php-num">32</span>);
+</span><span id="484" class="l"><a class="l" href="#484">484: </a>                    <span class="php-var">$rndpwdLength</span> = <span class="php-num">12</span>;
+</span><span id="485" class="l"><a class="l" href="#485">485: </a>                    <span class="php-var">$passwd</span> = <span class="php-var">$this</span>-&gt;randomPassword(<span class="php-var">$rndpwdLength</span>);
+</span><span id="486" class="l"><a class="l" href="#486">486: </a>                    <span class="php-var">$crypt</span> = JUserHelper::getCryptedPassword(<span class="php-var">$passwd</span>, <span class="php-var">$salt</span>);
+</span><span id="487" class="l"><a class="l" href="#487">487: </a>                    <span class="php-var">$password</span> = <span class="php-var">$crypt</span> . <span class="php-quote">':'</span> . <span class="php-var">$salt</span>;
+</span><span id="488" class="l"><a class="l" href="#488">488: </a>                    <span class="php-var">$response</span>-&gt;password = <span class="php-var">$password</span>;
+</span><span id="489" class="l"><a class="l" href="#489">489: </a>                    <span class="php-var">$response</span>-&gt;password_clear = <span class="php-var">$password</span>;
+</span><span id="490" class="l"><a class="l" href="#490">490: </a>                } <span class="php-keyword1">else</span> {
+</span><span id="491" class="l"><a class="l" href="#491">491: </a>                    <span class="php-var">$response</span>-&gt;password = <span class="php-quote">''</span>;
+</span><span id="492" class="l"><a class="l" href="#492">492: </a>                    <span class="php-var">$response</span>-&gt;password_clear = <span class="php-quote">''</span>;
+</span><span id="493" class="l"><a class="l" href="#493">493: </a>                }
+</span><span id="494" class="l"><a class="l" href="#494">494: </a>            }
+</span><span id="495" class="l"><a class="l" href="#495">495: </a>        }
+</span><span id="496" class="l"><a class="l" href="#496">496: </a>
+</span><span id="497" class="l"><a class="l" href="#497">497: </a>        <span class="php-keyword1">return</span> <span class="php-var">$extraFieldsTmp</span>;
+</span><span id="498" class="l"><a class="l" href="#498">498: </a>    }
+</span><span id="499" class="l"><a class="l" href="#499">499: </a>
+</span><span id="500" class="l"><a class="l" href="#500">500: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="__updateAndGetUser" href="#__updateAndGetUser">_updateAndGetUser</a>(<span class="php-var">$response</span>, <span class="php-var">$samloginParams</span>, <span class="php-var">$extraFields</span>) {
+</span><span id="501" class="l"><a class="l" href="#501">501: </a>        <span class="php-comment">// Establish userid of authenticated user, or 0 when user does not exist</span>
+</span><span id="502" class="l"><a class="l" href="#502">502: </a>        <span class="php-var">$user</span> = <span class="php-keyword1">null</span>;
+</span><span id="503" class="l"><a class="l" href="#503">503: </a>        <span class="php-var">$userid</span> = JUserHelper::getUserId(<span class="php-var">$response</span>-&gt;username);
+</span><span id="504" class="l"><a class="l" href="#504">504: </a>
+</span><span id="505" class="l"><a class="l" href="#505">505: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$userid</span>) {
+</span><span id="506" class="l"><a class="l" href="#506">506: </a>            <span class="php-var">$user</span> = JFactory::getUser(<span class="php-var">$userid</span>);
+</span><span id="507" class="l"><a class="l" href="#507">507: </a>
+</span><span id="508" class="l"><a class="l" href="#508">508: </a>            <span class="php-comment">//print_r($user-&gt;get('username'));</span>
+</span><span id="509" class="l"><a class="l" href="#509">509: </a>            <span class="php-comment">// Detect changes, and update if required</span>
+</span><span id="510" class="l"><a class="l" href="#510">510: </a>            <span class="php-var">$changed</span> = <span class="php-keyword1">true</span>;
+</span><span id="511" class="l"><a class="l" href="#511">511: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$changed</span>) {
+</span><span id="512" class="l"><a class="l" href="#512">512: </a>                <span class="php-var">$getusrprop</span> = <span class="php-keyword2">version_compare</span>(JVERSION, <span class="php-quote">'3.2'</span>, <span class="php-quote">'l'</span>) ?
+</span><span id="513" class="l"><a class="l" href="#513">513: </a>                        <span class="php-var">$response</span>-&gt;getProperties() : (<span class="php-keyword1">array</span>) <span class="php-var">$response</span>;
+</span><span id="514" class="l"><a class="l" href="#514">514: </a>                <span class="php-comment">//          print(&quot;new user props: &quot;.print_r($getusrprop,true));</span>
+</span><span id="515" class="l"><a class="l" href="#515">515: </a>                <span class="php-var">$getusrprop</span>[<span class="php-quote">&quot;name&quot;</span>] = <span class="php-var">$getusrprop</span>[<span class="php-quote">&quot;fullname&quot;</span>];  <span class="php-comment">//the JUser object has different naming for that prop</span>
+</span><span id="516" class="l"><a class="l" href="#516">516: </a>                <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$extraFields</span>)) {
+</span><span id="517" class="l"><a class="l" href="#517">517: </a>                    <span class="php-var">$getusrprop</span> = <span class="php-keyword2">array_merge</span>(<span class="php-var">$getusrprop</span>, <span class="php-var">$extraFields</span>);
+</span><span id="518" class="l"><a class="l" href="#518">518: </a>                }
+</span><span id="519" class="l"><a class="l" href="#519">519: </a>                <span class="php-comment">//    die(&quot;binding user props:&quot; . print_r($getusrprop, true));</span>
+</span><span id="520" class="l"><a class="l" href="#520">520: </a>                <span class="php-var">$user</span>-&gt;bind(<span class="php-var">$getusrprop</span>);
+</span><span id="521" class="l"><a class="l" href="#521">521: </a>                <span class="php-var">$user</span>-&gt;save(<span class="php-keyword1">true</span>); <span class="php-comment">// true means: updateOnly</span>
+</span><span id="522" class="l"><a class="l" href="#522">522: </a>                <span class="php-comment">//     die(&quot;new user obj: &quot;.print_r($user,true));</span>
+</span><span id="523" class="l"><a class="l" href="#523">523: </a>            } <span class="php-keyword1">else</span> {
+</span><span id="524" class="l"><a class="l" href="#524">524: </a>                <span class="php-var">$getusrprop</span> = <span class="php-keyword2">version_compare</span>(JVERSION, <span class="php-quote">'3.2'</span>, <span class="php-quote">'l'</span>) ?
+</span><span id="525" class="l"><a class="l" href="#525">525: </a>                        <span class="php-var">$response</span>-&gt;getProperties() : (<span class="php-keyword1">array</span>) <span class="php-var">$response</span>;
+</span><span id="526" class="l"><a class="l" href="#526">526: </a>                <span class="php-var">$getusrprop</span>[<span class="php-quote">&quot;name&quot;</span>] = <span class="php-var">$getusrprop</span>[<span class="php-quote">&quot;fullname&quot;</span>]; <span class="php-comment">//the JUser object has different naming f</span>
+</span><span id="527" class="l"><a class="l" href="#527">527: </a>                <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$extraFields</span>)) {
+</span><span id="528" class="l"><a class="l" href="#528">528: </a>                    <span class="php-var">$getusrprop</span> = <span class="php-keyword2">array_merge</span>(<span class="php-var">$extraFields</span>, <span class="php-var">$getusrprop</span>);
+</span><span id="529" class="l"><a class="l" href="#529">529: </a>                }
+</span><span id="530" class="l"><a class="l" href="#530">530: </a>                <span class="php-comment">//   die(&quot;binding user props:&quot; . print_r($getusrprop, true));</span>
+</span><span id="531" class="l"><a class="l" href="#531">531: </a>
+</span><span id="532" class="l"><a class="l" href="#532">532: </a>                <span class="php-var">$user</span>-&gt;bind(<span class="php-var">$getusrprop</span>);
+</span><span id="533" class="l"><a class="l" href="#533">533: </a>            }
+</span><span id="534" class="l"><a class="l" href="#534">534: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="535" class="l"><a class="l" href="#535">535: </a>            <span class="php-comment">// Store as new user</span>
+</span><span id="536" class="l"><a class="l" href="#536">536: </a>
+</span><span id="537" class="l"><a class="l" href="#537">537: </a>            <span class="php-var">$user</span> = <span class="php-keyword1">new</span> JUser();
+</span><span id="538" class="l"><a class="l" href="#538">538: </a>            <span class="php-var">$user</span>-&gt;username = <span class="php-var">$userid</span>;
+</span><span id="539" class="l"><a class="l" href="#539">539: </a>            <span class="php-var">$user</span>-&gt;usertype = <span class="php-quote">'SAMLogin'</span>;
+</span><span id="540" class="l"><a class="l" href="#540">540: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;requireApproval&quot;</span>, <span class="php-keyword1">false</span>)) {
+</span><span id="541" class="l"><a class="l" href="#541">541: </a>                <span class="php-var">$user</span>-&gt;block = <span class="php-num">1</span>;
+</span><span id="542" class="l"><a class="l" href="#542">542: </a>                <span class="php-var">$user</span>-&gt;activation = <span class="php-num">0</span>;
+</span><span id="543" class="l"><a class="l" href="#543">543: </a>            } <span class="php-keyword1">else</span> {
+</span><span id="544" class="l"><a class="l" href="#544">544: </a>                <span class="php-var">$user</span>-&gt;block = <span class="php-num">0</span>;
+</span><span id="545" class="l"><a class="l" href="#545">545: </a>                <span class="php-var">$user</span>-&gt;activation = <span class="php-num">0</span>;
+</span><span id="546" class="l"><a class="l" href="#546">546: </a>            }
+</span><span id="547" class="l"><a class="l" href="#547">547: </a>            <span class="php-var">$user</span>-&gt;sendEmail = <span class="php-num">1</span>;
+</span><span id="548" class="l"><a class="l" href="#548">548: </a>            <span class="php-comment">//$user-&gt;registerDate='0000-00-00 00:00:00';</span>
+</span><span id="549" class="l"><a class="l" href="#549">549: </a>            <span class="php-comment">//$user-&gt;lastvisitDate='0000-00-00 00:00:00';</span>
+</span><span id="550" class="l"><a class="l" href="#550">550: </a>            <span class="php-var">$user</span>-&gt;params = <span class="php-quote">''</span>;
+</span><span id="551" class="l"><a class="l" href="#551">551: </a>            <span class="php-var">$user</span>-&gt;lastResetTime = <span class="php-quote">'0000-00-00 00:00:00'</span>;
+</span><span id="552" class="l"><a class="l" href="#552">552: </a>            <span class="php-var">$user</span>-&gt;resetCount = <span class="php-num">0</span>;
+</span><span id="553" class="l"><a class="l" href="#553">553: </a>
+</span><span id="554" class="l"><a class="l" href="#554">554: </a>            <span class="php-var">$user</span>-&gt;name = <span class="php-var">$response</span>-&gt;fullname; <span class="php-comment">//different field naming in joomla table</span>
+</span><span id="555" class="l"><a class="l" href="#555">555: </a>
+</span><span id="556" class="l"><a class="l" href="#556">556: </a>            <span class="php-var">$getusrprop</span> = <span class="php-keyword2">version_compare</span>(JVERSION, <span class="php-quote">'3.2'</span>, <span class="php-quote">'l'</span>) ?
+</span><span id="557" class="l"><a class="l" href="#557">557: </a>                    <span class="php-var">$response</span>-&gt;getProperties() : (<span class="php-keyword1">array</span>) <span class="php-var">$response</span>;
+</span><span id="558" class="l"><a class="l" href="#558">558: </a>            <span class="php-var">$user</span>-&gt;bind(<span class="php-var">$getusrprop</span>);
+</span><span id="559" class="l"><a class="l" href="#559">559: </a>
+</span><span id="560" class="l"><a class="l" href="#560">560: </a>            <span class="php-var">$saved</span> = <span class="php-var">$user</span>-&gt;save();
+</span><span id="561" class="l"><a class="l" href="#561">561: </a>            <span class="php-comment">//  $user = JFactory::getUser($userid); //sync needed</span>
+</span><span id="562" class="l"><a class="l" href="#562">562: </a>        }
+</span><span id="563" class="l"><a class="l" href="#563">563: </a>
+</span><span id="564" class="l"><a class="l" href="#564">564: </a>
+</span><span id="565" class="l"><a class="l" href="#565">565: </a>        <span class="php-keyword1">return</span> <span class="php-var">$user</span>;
+</span><span id="566" class="l"><a class="l" href="#566">566: </a>    }
+</span><span id="567" class="l"><a class="l" href="#567">567: </a>
+</span><span id="568" class="l"><a class="l" href="#568">568: </a>    <span class="php-keyword1">function</span> <a id="_onUserAuthenticate" href="#_onUserAuthenticate">onUserAuthenticate</a>(<span class="php-var">$credentials</span>, <span class="php-var">$options</span>, &amp;<span class="php-var">$response</span>) {
+</span><span id="569" class="l"><a class="l" href="#569">569: </a>        <span class="php-var">$this</span>-&gt;onAuthenticate(<span class="php-var">$credentials</span>, <span class="php-var">$options</span>, <span class="php-var">$response</span>);
+</span><span id="570" class="l"><a class="l" href="#570">570: </a>    }
+</span><span id="571" class="l"><a class="l" href="#571">571: </a>
+</span><span id="572" class="l"><a class="l" href="#572">572: </a>    <span class="php-keyword1">function</span> <a id="_onAuthenticate" href="#_onAuthenticate">onAuthenticate</a>(<span class="php-var">$credentials</span>, <span class="php-var">$options</span>, &amp;<span class="php-var">$response</span>) {
+</span><span id="573" class="l"><a class="l" href="#573">573: </a>
+</span><span id="574" class="l"><a class="l" href="#574">574: </a>        <span class="php-var">$response</span>-&gt;status = <span class="php-keyword2">version_compare</span>(JVERSION, <span class="php-quote">'3.0'</span>, <span class="php-quote">'ge'</span>) ? JAuthentication::STATUS_FAILURE : JAUTHENTICATE_STATUS_FAILURE;
+</span><span id="575" class="l"><a class="l" href="#575">575: </a>
+</span><span id="576" class="l"><a class="l" href="#576">576: </a>        jimport(<span class="php-quote">'joomla.application.component.helper'</span>);
+</span><span id="577" class="l"><a class="l" href="#577">577: </a>        <span class="php-var">$samloginParams</span> = JComponentHelper::getParams(<span class="php-quote">'com_samlogin'</span>);
+</span><span id="578" class="l"><a class="l" href="#578">578: </a>        <span class="php-comment">//    //phpconsole(&quot;params are: &quot; . print_r($samloginParams-&gt;toArray(), true), &quot;rastrano&quot;);</span>
+</span><span id="579" class="l"><a class="l" href="#579">579: </a>        <span class="php-comment">// Include the externally configured SimpleSAMLphp instance </span>
+</span><span id="580" class="l"><a class="l" href="#580">580: </a>        <span class="php-var">$currentSession</span> = JFactory::getSession();
+</span><span id="581" class="l"><a class="l" href="#581">581: </a>
+</span><span id="582" class="l"><a class="l" href="#582">582: </a>        <span class="php-var">$SAMLoginIsAuthN</span> = <span class="php-var">$currentSession</span>-&gt;get(<span class="php-quote">&quot;SAMLoginIsAuthN&quot;</span>, <span class="php-keyword1">false</span>);
+</span><span id="583" class="l"><a class="l" href="#583">583: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$SAMLoginIsAuthN</span> === <span class="php-keyword1">true</span>) {
+</span><span id="584" class="l"><a class="l" href="#584">584: </a>
+</span><span id="585" class="l"><a class="l" href="#585">585: </a>
+</span><span id="586" class="l"><a class="l" href="#586">586: </a>
+</span><span id="587" class="l"><a class="l" href="#587">587: </a>            <span class="php-var">$SAMLoginSession</span> = <span class="php-var">$currentSession</span>-&gt;get(<span class="php-quote">&quot;SAMLoginSession&quot;</span>, <span class="php-quote">''</span>);
+</span><span id="588" class="l"><a class="l" href="#588">588: </a>            <span class="php-var">$SAMLoginAttrs</span> = <span class="php-var">$currentSession</span>-&gt;get(<span class="php-quote">&quot;SAMLoginAttrs&quot;</span>, <span class="php-quote">''</span>);
+</span><span id="589" class="l"><a class="l" href="#589">589: </a>            <span class="php-var">$SAMLoginIdP</span> = <span class="php-var">$currentSession</span>-&gt;get(<span class="php-quote">&quot;SAMLoginIdP&quot;</span>, <span class="php-quote">''</span>);
+</span><span id="590" class="l"><a class="l" href="#590">590: </a>            <span class="php-var">$SAMLoginSP</span> = <span class="php-var">$currentSession</span>-&gt;get(<span class="php-quote">&quot;SAMLoginSP&quot;</span>, <span class="php-quote">''</span>);
+</span><span id="591" class="l"><a class="l" href="#591">591: </a>            <span class="php-var">$SAMLoginnameId</span> = <span class="php-var">$currentSession</span>-&gt;get(<span class="php-quote">&quot;SAMLoginNameId&quot;</span>, <span class="php-quote">''</span>);
+</span><span id="592" class="l"><a class="l" href="#592">592: </a>            
+</span><span id="593" class="l"><a class="l" href="#593">593: </a>            
+</span><span id="594" class="l"><a class="l" href="#594">594: </a>            
+</span><span id="595" class="l"><a class="l" href="#595">595: </a>        JPluginHelper::importPlugin(<span class="php-quote">'samlattributeauthority'</span>);
+</span><span id="596" class="l"><a class="l" href="#596">596: </a>        <span class="php-var">$dispatcher</span> = JEventDispatcher::getInstance();
+</span><span id="597" class="l"><a class="l" href="#597">597: </a>        <span class="php-comment">//getting nameid for the AA plugins</span>
+</span><span id="598" class="l"><a class="l" href="#598">598: </a>            <span class="php-comment">//$currentSession = JFactory::getSession();</span>
+</span><span id="599" class="l"><a class="l" href="#599">599: </a>            <span class="php-var">$SAMLoginnameIdValue</span> = <span class="php-var">$currentSession</span>-&gt;get(<span class="php-quote">&quot;SAMLoginNameId&quot;</span>, <span class="php-quote">''</span>);
+</span><span id="600" class="l"><a class="l" href="#600">600: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$SAMLoginnameIdValue</span>)) {
+</span><span id="601" class="l"><a class="l" href="#601">601: </a>                <span class="php-var">$SAMLoginnameIdValue</span> = <span class="php-quote">&quot;&quot;</span>;
+</span><span id="602" class="l"><a class="l" href="#602">602: </a>            } <span class="php-keyword1">else</span> {
+</span><span id="603" class="l"><a class="l" href="#603">603: </a>                <span class="php-var">$SAMLoginnameIdValue</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$SAMLoginnameIdValue</span>, <span class="php-keyword1">true</span>);
+</span><span id="604" class="l"><a class="l" href="#604">604: </a>                <span class="php-var">$SAMLoginnameIdValue</span> = <span class="php-var">$SAMLoginnameIdValue</span>[<span class="php-quote">&quot;Value&quot;</span>];
+</span><span id="605" class="l"><a class="l" href="#605">605: </a>                <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$SAMLoginnameIdValue</span>)) {
+</span><span id="606" class="l"><a class="l" href="#606">606: </a>                    <span class="php-var">$SAMLoginnameIdValue</span> = <span class="php-quote">&quot;&quot;</span>;
+</span><span id="607" class="l"><a class="l" href="#607">607: </a>                }
+</span><span id="608" class="l"><a class="l" href="#608">608: </a>            }
+</span><span id="609" class="l"><a class="l" href="#609">609: </a>        <span class="php-var">$results</span> = <span class="php-var">$dispatcher</span>-&gt;trigger(<span class="php-quote">'onBeforeSAMLoginAttributeMappings'</span>, <span class="php-keyword1">array</span>(&amp;<span class="php-var">$SAMLoginAttrs</span>,<span class="php-var">$SAMLoginnameIdValue</span>,<span class="php-var">$samloginParams</span>));
+</span><span id="610" class="l"><a class="l" href="#610">610: </a>
+</span><span id="611" class="l"><a class="l" href="#611">611: </a>            <span class="php-comment">/*  $component = JTable::getInstance('component');
+</span></span><span id="612" class="l"><a class="l" href="#612">612: </a><span class="php-comment">              $component-&gt;loadByOption('com_samlogin');
+</span></span><span id="613" class="l"><a class="l" href="#613">613: </a><span class="php-comment">              $instance = new JParameter($component-&gt;params, JPATH_ADMINISTRATOR.'/components/com_samlogin/config.xml');
+</span></span><span id="614" class="l"><a class="l" href="#614">614: </a><span class="php-comment">              echo(print_r($instance,true)); */</span>
+</span><span id="615" class="l"><a class="l" href="#615">615: </a>            <span class="php-comment">//    //phpconsole(&quot;attributes are: &quot; . print_r($SAMLoginAttrs, true), &quot;rastrano&quot;);</span>
+</span><span id="616" class="l"><a class="l" href="#616">616: </a>            <span class="php-comment">//  die(print_r($SAMLoginAttrs,true));</span>
+</span><span id="617" class="l"><a class="l" href="#617">617: </a>            <span class="php-comment">// Check for access token</span>
+</span><span id="618" class="l"><a class="l" href="#618">618: </a>            <span class="php-comment">//phpconsole(print_r($SAMLoginAttrs,true),&quot;rastrano&quot;);</span>
+</span><span id="619" class="l"><a class="l" href="#619">619: </a>
+</span><span id="620" class="l"><a class="l" href="#620">620: </a>
+</span><span id="621" class="l"><a class="l" href="#621">621: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;debug_auth&quot;</span>, <span class="php-num">0</span>)) {
+</span><span id="622" class="l"><a class="l" href="#622">622: </a>                <span class="php-keyword1">echo</span> <span class="php-quote">&quot;&lt;b&gt;Warning: SAMLogin debug mode is on, this will only produce a dump, interrupting the login process&lt;/b&gt;&quot;</span>
+</span><span id="623" class="l"><a class="l" href="#623">623: </a>                . <span class="php-quote">&quot;&lt;br/&gt;SAML Attributes are: &lt;pre&gt;&quot;</span> . <span class="php-keyword2">print_r</span>(<span class="php-var">$SAMLoginAttrs</span>, <span class="php-keyword1">true</span>) . <span class="php-quote">&quot;&lt;/pre&gt;&quot;</span>;
+</span><span id="624" class="l"><a class="l" href="#624">624: </a>            }
+</span><span id="625" class="l"><a class="l" href="#625">625: </a>
+</span><span id="626" class="l"><a class="l" href="#626">626: </a>            <span class="php-var">$response</span>-&gt;status = <span class="php-keyword2">version_compare</span>(JVERSION, <span class="php-quote">'3.0'</span>, <span class="php-quote">'ge'</span>) ? JAuthentication::STATUS_SUCCESS : JAUTHENTICATE_STATUS_SUCCESS;
+</span><span id="627" class="l"><a class="l" href="#627">627: </a>            <span class="php-var">$response</span>-&gt;type = <span class="php-quote">'SAMLogin'</span>;
+</span><span id="628" class="l"><a class="l" href="#628">628: </a>            <span class="php-var">$response</span>-&gt;error_message = <span class="php-quote">''</span>;
+</span><span id="629" class="l"><a class="l" href="#629">629: </a>
+</span><span id="630" class="l"><a class="l" href="#630">630: </a>            <span class="php-var">$extraFields</span> = <span class="php-var">$this</span>-&gt;_mapAttributes(<span class="php-var">$response</span>, <span class="php-var">$SAMLoginAttrs</span>, <span class="php-var">$samloginParams</span>);
+</span><span id="631" class="l"><a class="l" href="#631">631: </a>
+</span><span id="632" class="l"><a class="l" href="#632">632: </a>            <span class="php-var">$allowOnlyExistingUsernames</span> = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;allowOnlyExistingUsernames&quot;</span>, <span class="php-keyword1">false</span>);
+</span><span id="633" class="l"><a class="l" href="#633">633: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$allowOnlyExistingUsernames</span>) {
+</span><span id="634" class="l"><a class="l" href="#634">634: </a>                <span class="php-var">$userid</span> = JUserHelper::getUserId(<span class="php-var">$response</span>-&gt;username);
+</span><span id="635" class="l"><a class="l" href="#635">635: </a>                <span class="php-comment">//    print(&quot;userid: &quot;.$userid);</span>
+</span><span id="636" class="l"><a class="l" href="#636">636: </a>                <span class="php-keyword1">if</span> (<span class="php-var">$userid</span> == <span class="php-num">0</span>) { <span class="php-comment">//getUserId returns 0 if user is not found</span>
+</span><span id="637" class="l"><a class="l" href="#637">637: </a>                    <span class="php-var">$response</span>-&gt;status = <span class="php-keyword2">version_compare</span>(JVERSION, <span class="php-quote">'3.0'</span>, <span class="php-quote">'ge'</span>) ? JAuthentication::STATUS_FAILURE : JAUTHENTICATE_STATUS_FAILURE;
+</span><span id="638" class="l"><a class="l" href="#638">638: </a>                    <span class="php-var">$response</span>-&gt;error_message = JText::_(<span class="php-quote">'SAMLOGIN_NON_EXISTING_ACCOUNT'</span>);
+</span><span id="639" class="l"><a class="l" href="#639">639: </a>                    <span class="php-var">$currentSession</span>-&gt;set(<span class="php-quote">&quot;samloginFailErrcode&quot;</span>, <span class="php-quote">'SAMLOGIN_NON_EXISTING_ACCOUNT'</span>);
+</span><span id="640" class="l"><a class="l" href="#640">640: </a>                    <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span id="641" class="l"><a class="l" href="#641">641: </a>                }
+</span><span id="642" class="l"><a class="l" href="#642">642: </a>            }
+</span><span id="643" class="l"><a class="l" href="#643">643: </a>            <span class="php-comment">//  print_r($response);</span>
+</span><span id="644" class="l"><a class="l" href="#644">644: </a>            <span class="php-comment">//    print_r($response-&gt;getErrors());</span>
+</span><span id="645" class="l"><a class="l" href="#645">645: </a>            <span class="php-comment">//  die(&quot;testing&quot;);</span>
+</span><span id="646" class="l"><a class="l" href="#646">646: </a>
+</span><span id="647" class="l"><a class="l" href="#647">647: </a>
+</span><span id="648" class="l"><a class="l" href="#648">648: </a>
+</span><span id="649" class="l"><a class="l" href="#649">649: </a>            <span class="php-var">$user</span> = <span class="php-var">$this</span>-&gt;_updateAndGetUser(<span class="php-var">$response</span>, <span class="php-var">$samloginParams</span>, <span class="php-var">$extraFields</span>);
+</span><span id="650" class="l"><a class="l" href="#650">650: </a>
+</span><span id="651" class="l"><a class="l" href="#651">651: </a>            <span class="php-var">$allowed</span> = <span class="php-var">$this</span>-&gt;_checkAuthZRules(<span class="php-var">$user</span>, <span class="php-var">$response</span>, <span class="php-var">$SAMLoginAttrs</span>, <span class="php-var">$samloginParams</span>);
+</span><span id="652" class="l"><a class="l" href="#652">652: </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$allowed</span>) {
+</span><span id="653" class="l"><a class="l" href="#653">653: </a>                <span class="php-var">$response</span>-&gt;error_message = <span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;defaultDenyMsg&quot;</span>, JText::_(<span class="php-quote">'SAMLOGIN_NOT_AUTHZ'</span>));
+</span><span id="654" class="l"><a class="l" href="#654">654: </a>                <span class="php-var">$response</span>-&gt;status = <span class="php-keyword2">version_compare</span>(JVERSION, <span class="php-quote">'3.0'</span>, <span class="php-quote">'ge'</span>) ? JAuthentication::STATUS_FAILURE : JAUTHENTICATE_STATUS_FAILURE;
+</span><span id="655" class="l"><a class="l" href="#655">655: </a>                <span class="php-var">$currentSession</span>-&gt;set(<span class="php-quote">&quot;samloginUnauthzMessage&quot;</span>, <span class="php-var">$response</span>-&gt;error_message);
+</span><span id="656" class="l"><a class="l" href="#656">656: </a>                <span class="php-var">$errUrl</span> = JRoute::_(<span class="php-quote">'index.php?option=com_samlogin&amp;view=login&amp;task=unauthzAlert&amp;msg=session'</span>);
+</span><span id="657" class="l"><a class="l" href="#657">657: </a>                <span class="php-keyword1">try</span> {  <span class="php-comment">//TODO: if session.storage not sql, destroy the session</span>
+</span><span id="658" class="l"><a class="l" href="#658">658: </a>                    <span class="php-comment">/**
+</span></span><span id="659" class="l"><a class="l" href="#659">659: </a><span class="php-comment">                     * The _include script registers a autoloader for the simpleSAMLphp libraries. It also
+</span></span><span id="660" class="l"><a class="l" href="#660">660: </a><span class="php-comment">                     * initializes the simpleSAMLphp config class with the correct path.
+</span></span><span id="661" class="l"><a class="l" href="#661">661: </a><span class="php-comment">                     */</span>
+</span><span id="662" class="l"><a class="l" href="#662">662: </a>                    <span class="php-keyword1">require_once</span>(JPATH_BASE . <span class="php-quote">'/components/com_samlogin/simplesamlphp/lib/_autoload.php'</span>);
+</span><span id="663" class="l"><a class="l" href="#663">663: </a>                    <span class="php-comment">/*
+</span></span><span id="664" class="l"><a class="l" href="#664">664: </a><span class="php-comment">                     * Explisit instruct consent page to send no-cache header to browsers
+</span></span><span id="665" class="l"><a class="l" href="#665">665: </a><span class="php-comment">                     * to make sure user attribute information is not store on client disk.
+</span></span><span id="666" class="l"><a class="l" href="#666">666: </a><span class="php-comment">                     *
+</span></span><span id="667" class="l"><a class="l" href="#667">667: </a><span class="php-comment">                     * In an vanilla apache-php installation is the php variables set to:
+</span></span><span id="668" class="l"><a class="l" href="#668">668: </a><span class="php-comment">                     * session.cache_limiter = nocache
+</span></span><span id="669" class="l"><a class="l" href="#669">669: </a><span class="php-comment">                     * so this is just to make sure.
+</span></span><span id="670" class="l"><a class="l" href="#670">670: </a><span class="php-comment">                     */</span>
+</span><span id="671" class="l"><a class="l" href="#671">671: </a>
+</span><span id="672" class="l"><a class="l" href="#672">672: </a>
+</span><span id="673" class="l"><a class="l" href="#673">673: </a>                    <span class="php-comment">/* Load simpleSAMLphp, configuration and metadata */</span>
+</span><span id="674" class="l"><a class="l" href="#674">674: </a>                    <span class="php-var">$config</span> = SimpleSAML_Configuration::getInstance();
+</span><span id="675" class="l"><a class="l" href="#675">675: </a>                    <span class="php-var">$session</span> = SimpleSAML_Session::getInstance();
+</span><span id="676" class="l"><a class="l" href="#676">676: </a>                    <span class="php-var">$selfUrl</span> = SimpleSAML_Utilities::selfURL();
+</span><span id="677" class="l"><a class="l" href="#677">677: </a>
+</span><span id="678" class="l"><a class="l" href="#678">678: </a><span class="php-comment">//new sp api</span>
+</span><span id="679" class="l"><a class="l" href="#679">679: </a>                    <span class="php-var">$as</span> = <span class="php-keyword1">new</span> SimpleSAML_Auth_Simple(<span class="php-quote">'default-sp'</span>); <span class="php-comment">//new sp api</span>
+</span><span id="680" class="l"><a class="l" href="#680">680: </a>
+</span><span id="681" class="l"><a class="l" href="#681">681: </a>                    <span class="php-var">$as</span>-&gt;logout(<span class="php-keyword1">array</span>(
+</span><span id="682" class="l"><a class="l" href="#682">682: </a>                        <span class="php-quote">&quot;ReturnStateParam&quot;</span> =&gt; <span class="php-quote">&quot;SAMLLoginSLOState&quot;</span>,
+</span><span id="683" class="l"><a class="l" href="#683">683: </a>                        <span class="php-quote">&quot;ReturnStateStage&quot;</span> =&gt; <span class="php-quote">&quot;SAMLLoginSLOStage&quot;</span>,
+</span><span id="684" class="l"><a class="l" href="#684">684: </a>                        <span class="php-comment">//    &quot;ErrorURL&quot; =&gt; JRoute::_('index.php?option=com_samlogin&amp;view=login&amp;task=handleErr' . $extraReturnURLParams),</span>
+</span><span id="685" class="l"><a class="l" href="#685">685: </a>                        <span class="php-comment">//&quot;ReturnTo&quot; =&gt; JRoute::_('index.php?option=com_samlogin&amp;view=login&amp;task=handleSuccess' . $extraReturnURLParams),</span>
+</span><span id="686" class="l"><a class="l" href="#686">686: </a>                        <span class="php-quote">&quot;ReturnTo&quot;</span> =&gt; <span class="php-var">$errUrl</span>
+</span><span id="687" class="l"><a class="l" href="#687">687: </a>                            <span class="php-comment">//  &quot;KeepPost&quot; =&gt; FALSE</span>
+</span><span id="688" class="l"><a class="l" href="#688">688: </a>                    ));
+</span><span id="689" class="l"><a class="l" href="#689">689: </a>                    <span class="php-comment">//$errUrl = JRoute::_('index.php?option=com_samlogin&amp;view=login&amp;task=logoutAlert&amp;msg=session');</span>
+</span><span id="690" class="l"><a class="l" href="#690">690: </a>                    <span class="php-comment">// $app-&gt;redirect($errUrl);      </span>
+</span><span id="691" class="l"><a class="l" href="#691">691: </a>                } <span class="php-keyword1">catch</span> (Exception <span class="php-var">$e</span>) {
+</span><span id="692" class="l"><a class="l" href="#692">692: </a>
+</span><span id="693" class="l"><a class="l" href="#693">693: </a>                    JFactory::getApplication()-&gt;redirect(<span class="php-var">$errUrl</span>);
+</span><span id="694" class="l"><a class="l" href="#694">694: </a>                }
+</span><span id="695" class="l"><a class="l" href="#695">695: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span id="696" class="l"><a class="l" href="#696">696: </a>            }
+</span><span id="697" class="l"><a class="l" href="#697">697: </a>            <span class="php-var">$user</span> = <span class="php-var">$this</span>-&gt;_updateAndGetUser(<span class="php-var">$response</span>, <span class="php-var">$samloginParams</span>, <span class="php-var">$extraFields</span>);  <span class="php-comment">//final to sync group changes in session</span>
+</span><span id="698" class="l"><a class="l" href="#698">698: </a>            <span class="php-var">$results</span> = <span class="php-var">$dispatcher</span>-&gt;trigger(<span class="php-quote">'onAfterSAMLoginLoggedIn'</span>, <span class="php-keyword1">array</span>(&amp;<span class="php-var">$user</span>,<span class="php-var">$SAMLoginAttrs</span>,<span class="php-var">$SAMLoginnameIdValue</span>,<span class="php-var">$samloginParams</span>));
+</span><span id="699" class="l"><a class="l" href="#699">699: </a>
+</span><span id="700" class="l"><a class="l" href="#700">700: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$samloginParams</span>-&gt;get(<span class="php-quote">&quot;debug_auth&quot;</span>, <span class="php-num">0</span>)) {
+</span><span id="701" class="l"><a class="l" href="#701">701: </a>                <span class="php-keyword1">echo</span> <span class="php-quote">&quot;&lt;br/&gt;Login response: &lt;pre&gt;&quot;</span> . <span class="php-keyword2">print_r</span>(<span class="php-var">$response</span>, <span class="php-keyword1">true</span>) . <span class="php-quote">&quot;&lt;/pre&gt;&quot;</span>;
+</span><span id="702" class="l"><a class="l" href="#702">702: </a>                <span class="php-keyword1">echo</span> <span class="php-quote">&quot;&lt;br/&gt;User object &lt;pre&gt;&quot;</span> . <span class="php-keyword2">print_r</span>(<span class="php-var">$user</span>, <span class="php-keyword1">true</span>) . <span class="php-quote">&quot;&lt;/pre&gt;&quot;</span>;
+</span><span id="703" class="l"><a class="l" href="#703">703: </a>                <span class="php-keyword1">die</span>(<span class="php-quote">&quot;Debug-auth mode is on.&quot;</span>);
+</span><span id="704" class="l"><a class="l" href="#704">704: </a>            }
+</span><span id="705" class="l"><a class="l" href="#705">705: </a>
+</span><span id="706" class="l"><a class="l" href="#706">706: </a><span class="php-comment">//print_r($response);</span>
+</span><span id="707" class="l"><a class="l" href="#707">707: </a>            <span class="php-comment">//         die(print_r($user,true).&quot;debbuging  at line: &quot;.__LINE__);</span>
+</span><span id="708" class="l"><a class="l" href="#708">708: </a>            <span class="php-var">$response</span>-&gt;error_message = <span class="php-quote">''</span>;
+</span><span id="709" class="l"><a class="l" href="#709">709: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="710" class="l"><a class="l" href="#710">710: </a>            <span class="php-var">$response</span>-&gt;status = <span class="php-keyword2">version_compare</span>(JVERSION, <span class="php-quote">'3.0'</span>, <span class="php-quote">'ge'</span>) ? JAuthentication::STATUS_FAILURE : JAUTHENTICATE_STATUS_FAILURE;
+</span><span id="711" class="l"><a class="l" href="#711">711: </a>        }
+</span><span id="712" class="l"><a class="l" href="#712">712: </a>    }
+</span><span id="713" class="l"><a class="l" href="#713">713: </a>
+</span><span id="714" class="l"><a class="l" href="#714">714: </a>}
+</span><span id="715" class="l"><a class="l" href="#715">715: </a></span></code></pre>
+
+	<div id="footer">
+		samlogin-master API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

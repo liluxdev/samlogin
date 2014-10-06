@@ -1,5 +1,4 @@
 <?php
-
 defined('_JEXEC') or die;
 ?>
 
@@ -8,18 +7,20 @@ defined('_JEXEC') or die;
 
         <div class="samloginUserInfo">
             <div class="samloginClearFix">
-                <?php if ($this->user->samloginImage): ?>
+                <?php if ($this->params->get('showgravatar', 1) == 1 && $this->user->samloginImage): ?>
                     <img class="samloginAvatar" title="Image provided by GrAvatar.com" src="<?php echo $this->user->samloginImage; ?>" alt="<?php echo $this->user->name; ?>" />
                 <?php endif; ?>
-                <span class="samloginGreeting"><?php echo JText::_('SAMLOGIN_WELCOME'); ?></span>
+                <?php if ($this->params->get('showgreeting', 1) == 1) { ?>
+                    <span class="samloginGreeting"><?php echo JText::_('SAMLOGIN_WELCOME'); ?></span>
+                <?php } ?>
                 <span class="samloginUsername"><?php echo $this->user->name; ?></span>
                 <br/>
               <!--  <a class="samloginAccountLink" href="<?php echo $this->accountLink; ?>"><?php echo JText::_('SAMLOGIN_MY_ACCOUNT'); ?></a>-->
             </div>
-            <?php if ($this->user->samloginIdP) { ?>
-            <div id="SAMLoginIdp"><i><?php echo JText::_('SAMLOGIN_AUTH_BY');?>:</i>  <?php echo($this->user->samloginIdP) ?></div>
+            <?php if ($this->params->get('showauthvia', 1) == 1 && $this->user->samloginIdPName && !empty($this->user->samloginIdPName)) { ?>
+                <div id="SAMLoginIdp"><i><?php echo JText::_('SAMLOGIN_AUTH_BY'); ?>:</i>  <?php echo($this->user->samloginIdPName) ?></div>
                 <div class="SAMLogut">
-                    <form action="<?php echo JRoute::_('index.php?option=com_samlogin&view=login&task=initSLO', true); ?>" method="get">
+                    <form action="<?php echo JRoute::_('index.php?option=com_samlogin&view=login&task=initSLO', true, $this->params->get('usesecure')); ?>" method="get">
                         <div class="SAMLoginFormCont">
                             <button class="button uk-button" type="submit">
                                 <span>SSO LogOut</span>
@@ -30,15 +31,19 @@ defined('_JEXEC') or die;
                     </form>
                 </div>
             <?php } else { ?>
+                <?php
+                $enforceSSL = $this->params->get('usesecure', 0) == 1 ? 1 : 0; //it should be 1
+                $formActionURL = JRoute::_('index.php', true, $enforceSSL);
+                ?>	
 
-                <form action="<?php echo JRoute::_('index.php'); ?>" method="post" class="samloginSignoutClassic">
+                <form action="<?php echo $formActionURL; ?>" method="post" class="samloginSignoutClassic">
                     <input type="hidden" name="option" value="<?php echo $this->option; ?>" />
                     <input type="hidden" name="task" value="<?php echo $this->task; ?>" />
                     <input type="hidden" name="return" value="<?php echo $this->returnURL; ?>" />
                     <?php echo JHTML::_('form.token'); ?>
-                    <button type="submit" class="<?php echo $this->params->get('logoutButtonClasses',"samloginButton btn uk-btn");?>">
+                    <button type="submit" class="<?php echo $this->params->get('logoutButtonClasses', "samloginButton btn uk-btn"); ?>">
                         <i></i>
-                        <span><?php echo $this->params->get('loginButtonLabel',JText::_('SAMLOGIN_SIGNOUT_CLASSIC'));?></span>
+                        <span><?php echo $this->params->get('logoutButtonLabel', JText::_('SAMLOGIN_SIGNOUT_CLASSIC')); ?></span>
                     </button>
                 </form>
             <?php } ?>
@@ -50,8 +55,10 @@ defined('_JEXEC') or die;
         <?php if (count($this->menu)): ?>
             <ul class="samloginUserMenu">
                 <?php if (count($this->menu)): ?>
-                    <?php $level = 1;
-                    foreach ($this->menu as $key => $link): $level++; ?>
+                    <?php
+                    $level = 1;
+                    foreach ($this->menu as $key => $link): $level++;
+                        ?>
                         <li class="<?php echo $link->class; ?>">
                             <?php if ($link->type == 'url' && $link->browserNav == 0): ?>
                                 <a href="<?php echo $link->href; ?>"><?php echo $link->title; ?></a>

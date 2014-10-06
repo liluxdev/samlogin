@@ -1,0 +1,2652 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Net_SFTP | samlogin-master</title>
+
+	<script type="text/javascript" src="resources/combined.js?4141401630"></script>
+	<script type="text/javascript" src="elementlist.js?1584808910"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-Crypt.html">Crypt<span></span></a>
+						<ul>
+				<li><a href="package-Crypt.AES.html">AES</a>
+						</li>
+				<li><a href="package-Crypt.Blowfish.html">Blowfish</a>
+						</li>
+				<li><a href="package-Crypt.DES.html">DES</a>
+						</li>
+				<li><a href="package-Crypt.Hash.html">Hash</a>
+						</li>
+				<li><a href="package-Crypt.Random.html">Random</a>
+						</li>
+				<li><a href="package-Crypt.RC4.html">RC4</a>
+						</li>
+				<li><a href="package-Crypt.Rijndael.html">Rijndael</a>
+						</li>
+				<li><a href="package-Crypt.RSA.html">RSA</a>
+						</li>
+				<li><a href="package-Crypt.TerraDES.html">TerraDES</a>
+						</li>
+				<li><a href="package-Crypt.Twofish.html">Twofish</a>
+						</li>
+							</ul></li>
+				<li><a href="package-File.html">File<span></span></a>
+						<ul>
+				<li><a href="package-File.ANSI.html">ANSI</a>
+						</li>
+				<li><a href="package-File.ASN1.html">ASN1</a>
+						</li>
+				<li><a href="package-File.X509.html">X509</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Math.html">Math<span></span></a>
+						<ul>
+				<li><a href="package-Math.BigInteger.html">BigInteger</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="package-Net.html">Net<span></span></a>
+						<ul>
+				<li><a href="package-Net.SCP.html">SCP</a>
+						</li>
+				<li class="active"><a href="package-Net.SFTP.html">SFTP<span></span></a>
+						<ul>
+				<li><a href="package-Net.SFTP.Stream.html">Stream</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Net.SSH1.html">SSH1</a>
+						</li>
+				<li><a href="package-Net.SSH2.html">SSH2</a>
+						</li>
+							</ul></li>
+				<li><a href="package-None.html">None</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Net_SFTP.html">Net_SFTP</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-Net.SFTP.html" title="Summary of Net\SFTP"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Net_SFTP</h1>
+
+
+	<div class="description">
+	
+<p>Pure-PHP implementations of SFTP.</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Net_SSH2.html"><span>Net_SSH2</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Net_SFTP</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		<b>Package:</b> <a href="package-Net.html">Net</a>\<a href="package-Net.SFTP.html">SFTP</a><br />
+
+				<b>Copyright:</b>
+				MMIX Jim Wigginton<br />
+				<b>License:</b>
+				<a href="http://www.opensource.org/licenses/mit-license.html">MIT License</a><br />
+				<b>Author:</b>
+				Jim Wigginton &lt;<a
+href="mailto:terrafrost&#64;php.net">terrafrost&#64;<!---->php.net</a>&gt;<br />
+				<b>Version:</b>
+				0.1.0<br />
+		<b>Located at</b> <a href="source-class-Net_SFTP.html#112-2223" title="Go to source code">admin/libs/phpseclib/phpseclib0.3.5/Net/SFTP.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="Net_SFTP" id="_Net_SFTP">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Net_SFTP.html">Net_SFTP</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Net_SFTP">#</a>
+		<code><a href="source-class-Net_SFTP.html#242-371" title="Go to source code">Net_SFTP</a>( <span>String <var>$host</var></span>, <span>optional <var>$port</var> = <span class="php-num">22</span></span>, <span>optional <var>$timeout</var> = <span class="php-num">10</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Default Constructor.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Default Constructor.</p>
+
+<p>Connects to an SFTP server</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$host</var></dt>
+					<dd><code>String</code><br>$host</dd>
+					<dt><var>$port</var></dt>
+					<dd><code>optional</code><br>Integer $port</dd>
+					<dt><var>$timeout</var></dt>
+					<dd><code>optional</code><br>Integer $timeout</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Net_SFTP.html">Net_SFTP</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="login" id="_login">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_login">#</a>
+		<code><a href="source-class-Net_SFTP.html#373-508" title="Go to source code">login</a>( <span>String <var>$username</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Login</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Login</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$username</var></dt>
+					<dd><code>String</code><br>$username</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Net_SSH2.html#_login">Net_SSH2::login()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pwd" id="_pwd">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pwd">#</a>
+		<code><a href="source-class-Net_SFTP.html#510-519" title="Go to source code">pwd</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the current directory name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the current directory name</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_logError" id="__logError">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__logError">#</a>
+		<code><a href="source-class-Net_SFTP.html#521-542" title="Go to source code">_logError</a>( <span>String <var>$response</var></span>, <span>optional <var>$status</var> = -<span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Logs errors</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logs errors</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$response</var></dt>
+					<dd><code>String</code><br>$response</dd>
+					<dt><var>$status</var></dt>
+					<dd><code>optional</code><br>Integer $status</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_realpath" id="__realpath">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__realpath">#</a>
+		<code><a href="source-class-Net_SFTP.html#544-602" title="Go to source code">_realpath</a>( <span>String <var>$path</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Canonicalize the Server-Side Path Name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Canonicalize the Server-Side Path Name</p>
+
+<p>SFTP doesn't provide a mechanism by which the current working directory can
+be changed, so we'll emulate it. Returns the absolute (canonicalized) path.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Net_SFTP.html#_chdir">Net_SFTP::chdir()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="chdir" id="_chdir">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_chdir">#</a>
+		<code><a href="source-class-Net_SFTP.html#604-672" title="Go to source code">chdir</a>( <span>String <var>$dir</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Changes the current directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Changes the current directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>String</code><br>$dir</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="nlist" id="_nlist">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_nlist">#</a>
+		<code><a href="source-class-Net_SFTP.html#674-684" title="Go to source code">nlist</a>( <span>optional <var>$dir</var> = <span class="php-quote">'.'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a list of files in the given directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a list of files in the given directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>optional</code><br>String $dir</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rawlist" id="_rawlist">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_rawlist">#</a>
+		<code><a href="source-class-Net_SFTP.html#686-696" title="Go to source code">rawlist</a>( <span>optional <var>$dir</var> = <span class="php-quote">'.'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a detailed list of files in the given directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a detailed list of files in the given directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>optional</code><br>String $dir</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_list" id="__list">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__list">#</a>
+		<code><a href="source-class-Net_SFTP.html#698-815" title="Go to source code">_list</a>( <span>String <var>$dir</var></span>, <span>optional <var>$raw</var> = <span class="php-keyword1">true</span></span>, <span>optional <var>$realpath</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Reads a list, be it detailed or not, of files in the given directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Reads a list, be it detailed or not, of files in the given directory</p>
+
+<p>$realpath exists because, in the case of the recursive deletes and recursive
+chmod's $realpath has already been calculated.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>String</code><br>$dir</dd>
+					<dt><var>$raw</var></dt>
+					<dd><code>optional</code><br>Boolean $raw</dd>
+					<dt><var>$realpath</var></dt>
+					<dd><code>optional</code><br>Boolean $realpath</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="size" id="_size">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_size">#</a>
+		<code><a href="source-class-Net_SFTP.html#817-838" title="Go to source code">size</a>( <span>String <var>$filename</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the file size, in bytes, or false, on failure</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the file size, in bytes, or false, on failure</p>
+
+<p>Files larger than 4GB will show up as being exactly 4GB.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_save_dir" id="__save_dir">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__save_dir">#</a>
+		<code><a href="source-class-Net_SFTP.html#840-858" title="Go to source code">_save_dir</a>( <span>String <var>$dir</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Save directories to cache</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Save directories to cache</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>String</code><br>$dir</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_remove_dir" id="__remove_dir">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__remove_dir">#</a>
+		<code><a href="source-class-Net_SFTP.html#860-881" title="Go to source code">_remove_dir</a>( <span>String <var>$dir</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove directories from cache</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove directories from cache</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>String</code><br>$dir</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_is_dir" id="__is_dir">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__is_dir">#</a>
+		<code><a href="source-class-Net_SFTP.html#883-904" title="Go to source code">_is_dir</a>( <span>String <var>$dir</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Checks cache for directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks cache for directory</p>
+
+<p>Mainly used by chdir, which is, in turn, also used for determining whether or
+not an individual file is a directory or not by stat() and lstat()</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>String</code><br>$dir</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="stat" id="_stat">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_stat">#</a>
+		<code><a href="source-class-Net_SFTP.html#906-941" title="Go to source code">stat</a>( <span>String <var>$filename</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns general information about a file.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns general information about a file.</p>
+
+<p>Returns an array on success and false otherwise.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="lstat" id="_lstat">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_lstat">#</a>
+		<code><a href="source-class-Net_SFTP.html#943-984" title="Go to source code">lstat</a>( <span>String <var>$filename</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns general information about a file or symbolic link.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns general information about a file or symbolic link.</p>
+
+<p>Returns an array on success and false otherwise.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_stat" id="__stat">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__stat">#</a>
+		<code><a href="source-class-Net_SFTP.html#986-1016" title="Go to source code">_stat</a>( <span>String <var>$filename</var></span>, <span>Integer <var>$type</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns general information about a file or symbolic link</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns general information about a file or symbolic link</p>
+
+<p>Determines information without calling Net_SFTP::_realpath(). The second
+parameter can be either NET_SFTP_STAT or NET_SFTP_LSTAT.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+					<dt><var>$type</var></dt>
+					<dd><code>Integer</code><br>$type</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_size" id="__size">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__size">#</a>
+		<code><a href="source-class-Net_SFTP.html#1018-1034" title="Go to source code">_size</a>( <span>String <var>$filename</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the file size, in bytes, or false, on failure</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the file size, in bytes, or false, on failure</p>
+
+<p>Determines the size without calling Net_SFTP::_realpath()</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="truncate" id="_truncate">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_truncate">#</a>
+		<code><a href="source-class-Net_SFTP.html#1036-1049" title="Go to source code">truncate</a>( <span>String <var>$filename</var></span>, <span>Integer <var>$new_size</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Truncates a file to a given length</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Truncates a file to a given length</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+					<dt><var>$new_size</var></dt>
+					<dd><code>Integer</code><br>$new_size</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="touch" id="_touch">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_touch">#</a>
+		<code><a href="source-class-Net_SFTP.html#1051-1118" title="Go to source code">touch</a>( <span>String <var>$filename</var></span>, <span>optional <var>$time</var> = <span class="php-keyword1">NULL</span></span>, <span>optional <var>$atime</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets access and modification time of file.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets access and modification time of file.</p>
+
+<p>If the file does not exist, it will be created.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+					<dt><var>$time</var></dt>
+					<dd><code>optional</code><br>Integer $time</dd>
+					<dt><var>$atime</var></dt>
+					<dd><code>optional</code><br>Integer $atime</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="chown" id="_chown">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_chown">#</a>
+		<code><a href="source-class-Net_SFTP.html#1120-1138" title="Go to source code">chown</a>( <span>String <var>$filename</var></span>, <span>Integer <var>$uid</var></span>, <span>optional <var>$recursive</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Changes file or directory owner</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Changes file or directory owner</p>
+
+<p>Returns TRUE on success or FALSE on error.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+					<dt><var>$uid</var></dt>
+					<dd><code>Integer</code><br>$uid</dd>
+					<dt><var>$recursive</var></dt>
+					<dd><code>optional</code><br>Boolean $recursive</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="chgrp" id="_chgrp">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_chgrp">#</a>
+		<code><a href="source-class-Net_SFTP.html#1140-1156" title="Go to source code">chgrp</a>( <span>String <var>$filename</var></span>, <span>Integer <var>$gid</var></span>, <span>optional <var>$recursive</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Changes file or directory group</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Changes file or directory group</p>
+
+<p>Returns TRUE on success or FALSE on error.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+					<dt><var>$gid</var></dt>
+					<dd><code>Integer</code><br>$gid</dd>
+					<dt><var>$recursive</var></dt>
+					<dd><code>optional</code><br>Boolean $recursive</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="chmod" id="_chmod">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_chmod">#</a>
+		<code><a href="source-class-Net_SFTP.html#1158-1206" title="Go to source code">chmod</a>( <span>Integer <var>$mode</var></span>, <span>String <var>$filename</var></span>, <span>optional <var>$recursive</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set permissions on a file.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set permissions on a file.</p>
+
+<p>Returns the new file permissions on success or FALSE on error. If $recursive
+is true than this just returns TRUE or FALSE.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$mode</var></dt>
+					<dd><code>Integer</code><br>$mode</dd>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+					<dt><var>$recursive</var></dt>
+					<dd><code>optional</code><br>Boolean $recursive</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_setstat" id="__setstat">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__setstat">#</a>
+		<code><a href="source-class-Net_SFTP.html#1208-1261" title="Go to source code">_setstat</a>( <span>String <var>$filename</var></span>, <span>String <var>$attr</var></span>, <span>Boolean <var>$recursive</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets information about a file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets information about a file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>String</code><br>$filename</dd>
+					<dt><var>$attr</var></dt>
+					<dd><code>String</code><br>$attr</dd>
+					<dt><var>$recursive</var></dt>
+					<dd><code>Boolean</code><br>$recursive</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_setstat_recursive" id="__setstat_recursive">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__setstat_recursive">#</a>
+		<code><a href="source-class-Net_SFTP.html#1263-1336" title="Go to source code">_setstat_recursive</a>( <span>String <var>$path</var></span>, <span>String <var>$attr</var></span>, <span>Integer <var>&amp; $i</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Recursively sets information on directories on the SFTP server</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Recursively sets information on directories on the SFTP server</p>
+
+<p>Minimizes directory lookups and SSH_FXP_STATUS requests for speed.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+					<dt><var>$attr</var></dt>
+					<dd><code>String</code><br>$attr</dd>
+					<dt><var>$i</var></dt>
+					<dd><code>Integer</code><br>$i</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mkdir" id="_mkdir">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mkdir">#</a>
+		<code><a href="source-class-Net_SFTP.html#1338-1371" title="Go to source code">mkdir</a>( <span>String <var>$dir</var></span>, <span>mixed <var>$mode</var> = -<span class="php-num">1</span></span>, <span>mixed <var>$recursive</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Creates a directory.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Creates a directory.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>String</code><br>$dir</dd>
+					<dt><var>$mode</var></dt>
+					<dd></dd>
+					<dt><var>$recursive</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_mkdir_helper" id="__mkdir_helper">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__mkdir_helper">#</a>
+		<code><a href="source-class-Net_SFTP.html#1373-1401" title="Go to source code">_mkdir_helper</a>( <span>String <var>$dir</var></span>, <span>mixed <var>$attr</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Helper function for directory creation</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Helper function for directory creation</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>String</code><br>$dir</dd>
+					<dt><var>$attr</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rmdir" id="_rmdir">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_rmdir">#</a>
+		<code><a href="source-class-Net_SFTP.html#1403-1441" title="Go to source code">rmdir</a>( <span>String <var>$dir</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Removes a directory.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Removes a directory.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>String</code><br>$dir</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="put" id="_put">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_put">#</a>
+		<code><a href="source-class-Net_SFTP.html#1443-1585" title="Go to source code">put</a>( <span>String <var>$remote_file</var></span>, <span>String <var>$data</var></span>, <span>optional <var>$mode</var> = NET_SFTP_STRING</span>, <span>optional <var>$start</var> = -<span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Uploads a file to the SFTP server.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Uploads a file to the SFTP server.</p>
+
+<p>By default, Net_SFTP::put() does not read from the local filesystem. $data is
+dumped directly into $remote_file. So, for example, if you set $data to
+'filename.ext' and then do Net_SFTP::get(), you will get a file, twelve bytes
+long, containing 'filename.ext' as its contents.</p>
+
+<p>Setting $mode to NET_SFTP_LOCAL_FILE will change the above behavior. With
+NET_SFTP_LOCAL_FILE, $remote_file will contain as many bytes as filename.ext
+does on your local filesystem. If your filename.ext is 1MB then that is how
+large $remote_file will be, as well.</p>
+
+<p>Currently, only binary mode is supported. As such, if the line endings need
+to be adjusted, you will need to take care of that, yourself.</p>
+
+<p>As for $start... if it's negative (which it is by default) a new file will be
+created or an existing file truncated depending on $mode | NET_SFTP_RESUME. If
+it's zero or positive it'll be updated at that spot.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$remote_file</var></dt>
+					<dd><code>String</code><br>$remote_file</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>String</code><br>$data</dd>
+					<dt><var>$mode</var></dt>
+					<dd><code>optional</code><br>Integer $mode</dd>
+					<dt><var>$start</var></dt>
+					<dd><code>optional</code><br>Integer $start</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_read_put_responses" id="__read_put_responses">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__read_put_responses">#</a>
+		<code><a href="source-class-Net_SFTP.html#1587-1614" title="Go to source code">_read_put_responses</a>( <span>Integer <var>$i</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Reads multiple successive SSH_FXP_WRITE responses</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Reads multiple successive SSH_FXP_WRITE responses</p>
+
+<p>Sending an SSH_FXP_WRITE packet and immediately reading its response isn't as
+efficient as blindly sending out $i SSH_FXP_WRITEs, in succession, and then
+reading $i responses.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$i</var></dt>
+					<dd><code>Integer</code><br>$i</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Net_SFTP.html#1616-1742" title="Go to source code">get</a>( <span>String <var>$remote_file</var></span>, <span>optional <var>$local_file</var> = <span class="php-keyword1">false</span></span>, <span>optional <var>$offset</var> = <span class="php-num">0</span></span>, <span>optional <var>$length</var> = -<span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Downloads a file from the SFTP server.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Downloads a file from the SFTP server.</p>
+
+<p>Returns a string containing the contents of $remote_file if $local_file is
+left undefined or a boolean false if the operation was unsuccessful. If
+$local_file is defined, returns true or false depending on the success of the
+operation.</p>
+
+<p>$offset and $length can be used to download files in chunks.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$remote_file</var></dt>
+					<dd><code>String</code><br>$remote_file</dd>
+					<dt><var>$local_file</var></dt>
+					<dd><code>optional</code><br>String $local_file</dd>
+					<dt><var>$offset</var></dt>
+					<dd><code>optional</code><br>Integer $offset</dd>
+					<dt><var>$length</var></dt>
+					<dd><code>optional</code><br>Integer $length</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-Net_SFTP.html#1744-1788" title="Go to source code">delete</a>( <span>String <var>$path</var></span>, <span>Boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Deletes a file on the SFTP server.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Deletes a file on the SFTP server.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+					<dt><var>$recursive</var></dt>
+					<dd><code>Boolean</code><br>$recursive</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_delete_recursive" id="__delete_recursive">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__delete_recursive">#</a>
+		<code><a href="source-class-Net_SFTP.html#1790-1859" title="Go to source code">_delete_recursive</a>( <span>String <var>$path</var></span>, <span>Integer <var>&amp; $i</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Recursively deletes directories on the SFTP server</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Recursively deletes directories on the SFTP server</p>
+
+<p>Minimizes directory lookups and SSH_FXP_STATUS requests for speed.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>String</code><br>$path</dd>
+					<dt><var>$i</var></dt>
+					<dd><code>Integer</code><br>$i</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rename" id="_rename">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_rename">#</a>
+		<code><a href="source-class-Net_SFTP.html#1861-1901" title="Go to source code">rename</a>( <span>String <var>$oldname</var></span>, <span>String <var>$newname</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Renames a file or a directory on the SFTP server</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Renames a file or a directory on the SFTP server</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$oldname</var></dt>
+					<dd><code>String</code><br>$oldname</dd>
+					<dt><var>$newname</var></dt>
+					<dd><code>String</code><br>$newname</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_parseAttributes" id="__parseAttributes">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__parseAttributes">#</a>
+		<code><a href="source-class-Net_SFTP.html#1903-1956" title="Go to source code">_parseAttributes</a>( <span>String <var>&amp; $response</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parse Attributes</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse Attributes</p>
+
+<p>See '7. File Attributes' of draft-ietf-secsh-filexfer-13 for more info.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$response</var></dt>
+					<dd><code>String</code><br>$response</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_parseMode" id="__parseMode">
+
+		<td class="attributes"><code>
+			 public 
+			Integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__parseMode">#</a>
+		<code><a href="source-class-Net_SFTP.html#1958-1997" title="Go to source code">_parseMode</a>( <span>Integer <var>$mode</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attempt to identify the file type</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attempt to identify the file type</p>
+
+<p>Quoting the SFTP RFC, "Implementations MUST NOT send bits that are not
+defined" but they seem to anyway</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$mode</var></dt>
+					<dd><code>Integer</code><br>$mode</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_parseLongname" id="__parseLongname">
+
+		<td class="attributes"><code>
+			 public 
+			Mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__parseLongname">#</a>
+		<code><a href="source-class-Net_SFTP.html#1999-2032" title="Go to source code">_parseLongname</a>( <span>String <var>$longname</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parse Longname</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse Longname</p>
+
+<p>SFTPv3 doesn't provide any easy way of identifying a file type. You could try
+to open a file as a directory and see if an error is returned or you could try
+to parse the SFTPv3-specific longname field of the SSH_FXP_NAME packet. That's
+what this function does. The result is returned using the <a href="http://tools.ietf.org/html/draft-ietf-secsh-filexfer-04#section-5.2">SFTPv4 type constants</a>.</p>
+
+<p>If the longname is in an unrecognized format bool(false) is returned.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$longname</var></dt>
+					<dd><code>String</code><br>$longname</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_send_sftp_packet" id="__send_sftp_packet">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__send_sftp_packet">#</a>
+		<code><a href="source-class-Net_SFTP.html#2034-2072" title="Go to source code">_send_sftp_packet</a>( <span>Integer <var>$type</var></span>, <span>String <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sends SFTP Packets</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sends SFTP Packets</p>
+
+<p>See '6. General Packet Format' of draft-ietf-secsh-filexfer-13 for more
+info.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$type</var></dt>
+					<dd><code>Integer</code><br>$type</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>String</code><br>$data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Net_SFTP.html#__get_sftp_packet">Net_SFTP::_get_sftp_packet()</a></code></code><br />
+						<code><code><a href="class-Net_SSH2.html#__send_channel_packet">Net_SSH2::_send_channel_packet()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_get_sftp_packet" id="__get_sftp_packet">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__get_sftp_packet">#</a>
+		<code><a href="source-class-Net_SFTP.html#2074-2148" title="Go to source code">_get_sftp_packet</a>( )</code>
+
+		<div class="description short">
+			
+<p>Receives SFTP Packets</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Receives SFTP Packets</p>
+
+<p>See '6. General Packet Format' of draft-ietf-secsh-filexfer-13 for more
+info.</p>
+
+<p>Incidentally, the number of SSH_MSG_CHANNEL_DATA messages has no bearing on
+the number of SFTP packets present. There can be one SSH_MSG_CHANNEL_DATA
+messages containing two SFTP packets or there can be two SSH_MSG_CHANNEL_DATA
+messages containing one SFTP packet.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Net_SFTP.html#__send_sftp_packet">Net_SFTP::_send_sftp_packet()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSFTPLog" id="_getSFTPLog">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSFTPLog">#</a>
+		<code><a href="source-class-Net_SFTP.html#2150-2172" title="Go to source code">getSFTPLog</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns a log of the packets that have been sent and received.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a log of the packets that have been sent and received.</p>
+
+<p>Returns a string if NET_SFTP_LOGGING == NET_SFTP_LOG_COMPLEX, an array if
+NET_SFTP_LOGGING == NET_SFTP_LOG_SIMPLE and false if
+!defined('NET_SFTP_LOGGING')</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br>or Array<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSFTPErrors" id="_getSFTPErrors">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSFTPErrors">#</a>
+		<code><a href="source-class-Net_SFTP.html#2174-2183" title="Go to source code">getSFTPErrors</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns all errors</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns all errors</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getLastSFTPError" id="_getLastSFTPError">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getLastSFTPError">#</a>
+		<code><a href="source-class-Net_SFTP.html#2185-2194" title="Go to source code">getLastSFTPError</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the last error</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the last error</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSupportedVersions" id="_getSupportedVersions">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSupportedVersions">#</a>
+		<code><a href="source-class-Net_SFTP.html#2196-2209" title="Go to source code">getSupportedVersions</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get supported SFTP versions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get supported SFTP versions</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_disconnect" id="__disconnect">
+
+		<td class="attributes"><code>
+			 public 
+			Boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__disconnect">#</a>
+		<code><a href="source-class-Net_SFTP.html#2211-2222" title="Go to source code">_disconnect</a>( <span>Integer <var>$reason</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Disconnect</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Disconnect</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$reason</var></dt>
+					<dd><code>Integer</code><br>$reason</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Boolean</code><br />
+				</div>
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Net_SSH2.html#__disconnect">Net_SSH2::_disconnect()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Net_SSH2.html#methods">Net_SSH2</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Net_SSH2.html#_Net_SSH2">Net_SSH2()</a>, 
+			<a href="class-Net_SSH2.html#___destruct">__destruct()</a>, 
+			<a href="class-Net_SSH2.html#__append_log">_append_log()</a>, 
+			<a href="class-Net_SSH2.html#__close_channel">_close_channel()</a>, 
+			<a href="class-Net_SSH2.html#__define_array">_define_array()</a>, 
+			<a href="class-Net_SSH2.html#__filter">_filter()</a>, 
+			<a href="class-Net_SSH2.html#__format_log">_format_log()</a>, 
+			<a href="class-Net_SSH2.html#__get_binary_packet">_get_binary_packet()</a>, 
+			<a href="class-Net_SSH2.html#__get_channel_packet">_get_channel_packet()</a>, 
+			<a href="class-Net_SSH2.html#__initShell">_initShell()</a>, 
+			<a href="class-Net_SSH2.html#__key_exchange">_key_exchange()</a>, 
+			<a href="class-Net_SSH2.html#__keyboard_interactive_login">_keyboard_interactive_login()</a>, 
+			<a href="class-Net_SSH2.html#__keyboard_interactive_process">_keyboard_interactive_process()</a>, 
+			<a href="class-Net_SSH2.html#__login_helper">_login_helper()</a>, 
+			<a href="class-Net_SSH2.html#__privatekey_login">_privatekey_login()</a>, 
+			<a href="class-Net_SSH2.html#__send_binary_packet">_send_binary_packet()</a>, 
+			<a href="class-Net_SSH2.html#__send_channel_packet">_send_channel_packet()</a>, 
+			<a href="class-Net_SSH2.html#__string_shift">_string_shift()</a>, 
+			<a href="class-Net_SSH2.html#_disablePTY">disablePTY()</a>, 
+			<a href="class-Net_SSH2.html#_disableQuietMode">disableQuietMode()</a>, 
+			<a href="class-Net_SSH2.html#_disconnect">disconnect()</a>, 
+			<a href="class-Net_SSH2.html#_enablePTY">enablePTY()</a>, 
+			<a href="class-Net_SSH2.html#_enableQuietMode">enableQuietMode()</a>, 
+			<a href="class-Net_SSH2.html#_exec">exec()</a>, 
+			<a href="class-Net_SSH2.html#_getBannerMessage">getBannerMessage()</a>, 
+			<a href="class-Net_SSH2.html#_getCompressionAlgorithmsClient2Server">getCompressionAlgorithmsClient2Server()</a>, 
+			<a href="class-Net_SSH2.html#_getCompressionAlgorithmsServer2Client">getCompressionAlgorithmsServer2Client()</a>, 
+			<a href="class-Net_SSH2.html#_getEncryptionAlgorithmsClient2Server">getEncryptionAlgorithmsClient2Server()</a>, 
+			<a href="class-Net_SSH2.html#_getEncryptionAlgorithmsServer2Client">getEncryptionAlgorithmsServer2Client()</a>, 
+			<a href="class-Net_SSH2.html#_getErrors">getErrors()</a>, 
+			<a href="class-Net_SSH2.html#_getExitStatus">getExitStatus()</a>, 
+			<a href="class-Net_SSH2.html#_getKexAlgorithms">getKexAlgorithms()</a>, 
+			<a href="class-Net_SSH2.html#_getLanguagesClient2Server">getLanguagesClient2Server()</a>, 
+			<a href="class-Net_SSH2.html#_getLanguagesServer2Client">getLanguagesServer2Client()</a>, 
+			<a href="class-Net_SSH2.html#_getLastError">getLastError()</a>, 
+			<a href="class-Net_SSH2.html#_getLog">getLog()</a>, 
+			<a href="class-Net_SSH2.html#_getMACAlgorithmsClient2Server">getMACAlgorithmsClient2Server()</a>, 
+			<a href="class-Net_SSH2.html#_getMACAlgorithmsServer2Client">getMACAlgorithmsServer2Client()</a>, 
+			<a href="class-Net_SSH2.html#_getServerHostKeyAlgorithms">getServerHostKeyAlgorithms()</a>, 
+			<a href="class-Net_SSH2.html#_getServerIdentification">getServerIdentification()</a>, 
+			<a href="class-Net_SSH2.html#_getServerPublicHostKey">getServerPublicHostKey()</a>, 
+			<a href="class-Net_SSH2.html#_getStdError">getStdError()</a>, 
+			<a href="class-Net_SSH2.html#_isConnected">isConnected()</a>, 
+			<a href="class-Net_SSH2.html#_isTimeout">isTimeout()</a>, 
+			<a href="class-Net_SSH2.html#_read">read()</a>, 
+			<a href="class-Net_SSH2.html#_reset">reset()</a>, 
+			<a href="class-Net_SSH2.html#_setTimeout">setTimeout()</a>, 
+			<a href="class-Net_SSH2.html#_write">write()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="packet_types" id="$packet_types">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#121-128" title="Go to source code"><var>$packet_types</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$packet_types" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Packet Types</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Packet Types</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Net_SFTP.html#_Net_SFTP">Net_SFTP::Net_SFTP()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="status_codes" id="$status_codes">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#130-137" title="Go to source code"><var>$status_codes</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$status_codes" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Status Codes</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Status Codes</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Net_SFTP.html#_Net_SFTP">Net_SFTP::Net_SFTP()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="request_id" id="$request_id">
+		<td class="attributes"><code>
+			public  
+			Integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#139-149" title="Go to source code"><var>$request_id</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$request_id" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The Request ID</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The Request ID</p>
+
+<p>The request ID exists in the off chance that a packet is sent out-of-order.
+Of course, this library doesn't support concurrent actions, so it's somewhat
+academic, here.</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Net_SFTP.html#__send_sftp_packet">Net_SFTP::_send_sftp_packet()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="packet_type" id="$packet_type">
+		<td class="attributes"><code>
+			public  
+			Integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#151-161" title="Go to source code"><var>$packet_type</var></a>
+		</td>
+		<td class="value"><code>-<span class="php-num">1</span></code></td>
+		<td class="description"><div>
+			<a href="#$packet_type" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The Packet Type</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The Packet Type</p>
+
+<p>The request ID exists in the off chance that a packet is sent out-of-order.
+Of course, this library doesn't support concurrent actions, so it's somewhat
+academic, here.</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Net_SFTP.html#__get_sftp_packet">Net_SFTP::_get_sftp_packet()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="packet_buffer" id="$packet_buffer">
+		<td class="attributes"><code>
+			public  
+			String
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#163-170" title="Go to source code"><var>$packet_buffer</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">''</span></code></td>
+		<td class="description"><div>
+			<a href="#$packet_buffer" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Packet Buffer</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Packet Buffer</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Net_SFTP.html#__get_sftp_packet">Net_SFTP::_get_sftp_packet()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="extensions" id="$extensions">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#172-179" title="Go to source code"><var>$extensions</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$extensions" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Extensions supported by the server</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Extensions supported by the server</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							Net_SFTP::_initChannel()<br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="version" id="$version">
+		<td class="attributes"><code>
+			public  
+			Integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#181-188" title="Go to source code"><var>$version</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$version" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Server SFTP version</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Server SFTP version</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							Net_SFTP::_initChannel()<br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="pwd" id="$pwd">
+		<td class="attributes"><code>
+			public  
+			String
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#190-198" title="Go to source code"><var>$pwd</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$pwd" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Current working directory</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Current working directory</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Net_SFTP.html#__realpath">Net_SFTP::_realpath()</a></code></code><br />
+							<code><code><a href="class-Net_SFTP.html#_chdir">Net_SFTP::chdir()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="packet_type_log" id="$packet_type_log">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#200-207" title="Go to source code"><var>$packet_type_log</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$packet_type_log" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Packet Type Log</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Packet Type Log</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Net_SSH2.html#_getLog">Net_SSH2::getLog()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="packet_log" id="$packet_log">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#209-216" title="Go to source code"><var>$packet_log</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$packet_log" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Packet Log</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Packet Log</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Net_SSH2.html#_getLog">Net_SSH2::getLog()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="sftp_errors" id="$sftp_errors">
+		<td class="attributes"><code>
+			public  
+			String
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#218-226" title="Go to source code"><var>$sftp_errors</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$sftp_errors" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Error information</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Error information</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Net_SFTP.html#_getSFTPErrors">Net_SFTP::getSFTPErrors()</a></code></code><br />
+							<code><code><a href="class-Net_SFTP.html#_getLastSFTPError">Net_SFTP::getLastSFTPError()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dirs" id="$dirs">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Net_SFTP.html#228-240" title="Go to source code"><var>$dirs</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$dirs" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Directory Cache</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Directory Cache</p>
+
+<p>Rather than always having to open a directory and close it immediately there
+after to see if a file is a directory or rather than always</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Net_SFTP.html#__save_dir">Net_SFTP::_save_dir()</a></code></code><br />
+							<code><code><a href="class-Net_SFTP.html#__remove_dir">Net_SFTP::_remove_dir()</a></code></code><br />
+							<code><code><a href="class-Net_SFTP.html#__is_dir">Net_SFTP::_is_dir()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Net_SSH2.html#properties">Net_SSH2</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Net_SSH2.html#$banner_message"><var>$banner_message</var></a>, 
+			<a href="class-Net_SSH2.html#$bitmap"><var>$bitmap</var></a>, 
+			<a href="class-Net_SSH2.html#$channel_buffers"><var>$channel_buffers</var></a>, 
+			<a href="class-Net_SSH2.html#$channel_extended_data_type_codes"><var>$channel_extended_data_type_codes</var></a>, 
+			<a href="class-Net_SSH2.html#$channel_open_failure_reasons"><var>$channel_open_failure_reasons</var></a>, 
+			<a href="class-Net_SSH2.html#$channel_status"><var>$channel_status</var></a>, 
+			<a href="class-Net_SSH2.html#$compression_algorithms_client_to_server"><var>$compression_algorithms_client_to_server</var></a>, 
+			<a href="class-Net_SSH2.html#$compression_algorithms_server_to_client"><var>$compression_algorithms_server_to_client</var></a>, 
+			<a href="class-Net_SSH2.html#$curTimeout"><var>$curTimeout</var></a>, 
+			<a href="class-Net_SSH2.html#$decrypt"><var>$decrypt</var></a>, 
+			<a href="class-Net_SSH2.html#$decrypt_block_size"><var>$decrypt_block_size</var></a>, 
+			<a href="class-Net_SSH2.html#$disconnect_reasons"><var>$disconnect_reasons</var></a>, 
+			<a href="class-Net_SSH2.html#$encrypt"><var>$encrypt</var></a>, 
+			<a href="class-Net_SSH2.html#$encrypt_block_size"><var>$encrypt_block_size</var></a>, 
+			<a href="class-Net_SSH2.html#$encryption_algorithms_client_to_server"><var>$encryption_algorithms_client_to_server</var></a>, 
+			<a href="class-Net_SSH2.html#$encryption_algorithms_server_to_client"><var>$encryption_algorithms_server_to_client</var></a>, 
+			<a href="class-Net_SSH2.html#$errors"><var>$errors</var></a>, 
+			<a href="class-Net_SSH2.html#$exchange_hash"><var>$exchange_hash</var></a>, 
+			<a href="class-Net_SSH2.html#$exit_status"><var>$exit_status</var></a>, 
+			<a href="class-Net_SSH2.html#$fsock"><var>$fsock</var></a>, 
+			<a href="class-Net_SSH2.html#$get_seq_no"><var>$get_seq_no</var></a>, 
+			<a href="class-Net_SSH2.html#$hmac_check"><var>$hmac_check</var></a>, 
+			<a href="class-Net_SSH2.html#$hmac_create"><var>$hmac_create</var></a>, 
+			<a href="class-Net_SSH2.html#$hmac_size"><var>$hmac_size</var></a>, 
+			<a href="class-Net_SSH2.html#$identifier"><var>$identifier</var></a>, 
+			<a href="class-Net_SSH2.html#$in_request_pty_exec"><var>$in_request_pty_exec</var></a>, 
+			<a href="class-Net_SSH2.html#$interactiveBuffer"><var>$interactiveBuffer</var></a>, 
+			<a href="class-Net_SSH2.html#$is_timeout"><var>$is_timeout</var></a>, 
+			<a href="class-Net_SSH2.html#$kex_algorithms"><var>$kex_algorithms</var></a>, 
+			<a href="class-Net_SSH2.html#$keyboard_requests_responses"><var>$keyboard_requests_responses</var></a>, 
+			<a href="class-Net_SSH2.html#$languages_client_to_server"><var>$languages_client_to_server</var></a>, 
+			<a href="class-Net_SSH2.html#$languages_server_to_client"><var>$languages_server_to_client</var></a>, 
+			<a href="class-Net_SSH2.html#$last_interactive_response"><var>$last_interactive_response</var></a>, 
+			<a href="class-Net_SSH2.html#$last_packet"><var>$last_packet</var></a>, 
+			<a href="class-Net_SSH2.html#$log_size"><var>$log_size</var></a>, 
+			<a href="class-Net_SSH2.html#$mac_algorithms_client_to_server"><var>$mac_algorithms_client_to_server</var></a>, 
+			<a href="class-Net_SSH2.html#$mac_algorithms_server_to_client"><var>$mac_algorithms_server_to_client</var></a>, 
+			<a href="class-Net_SSH2.html#$message_log"><var>$message_log</var></a>, 
+			<a href="class-Net_SSH2.html#$message_number_log"><var>$message_number_log</var></a>, 
+			<a href="class-Net_SSH2.html#$message_numbers"><var>$message_numbers</var></a>, 
+			<a href="class-Net_SSH2.html#$packet_size_client_to_server"><var>$packet_size_client_to_server</var></a>, 
+			<a href="class-Net_SSH2.html#$quiet_mode"><var>$quiet_mode</var></a>, 
+			<a href="class-Net_SSH2.html#$realtime_log_file"><var>$realtime_log_file</var></a>, 
+			<a href="class-Net_SSH2.html#$realtime_log_size"><var>$realtime_log_size</var></a>, 
+			<a href="class-Net_SSH2.html#$realtime_log_wrap"><var>$realtime_log_wrap</var></a>, 
+			<a href="class-Net_SSH2.html#$request_pty"><var>$request_pty</var></a>, 
+			<a href="class-Net_SSH2.html#$send_seq_no"><var>$send_seq_no</var></a>, 
+			<a href="class-Net_SSH2.html#$server_channels"><var>$server_channels</var></a>, 
+			<a href="class-Net_SSH2.html#$server_host_key_algorithms"><var>$server_host_key_algorithms</var></a>, 
+			<a href="class-Net_SSH2.html#$server_identifier"><var>$server_identifier</var></a>, 
+			<a href="class-Net_SSH2.html#$server_public_host_key"><var>$server_public_host_key</var></a>, 
+			<a href="class-Net_SSH2.html#$session_id"><var>$session_id</var></a>, 
+			<a href="class-Net_SSH2.html#$signature"><var>$signature</var></a>, 
+			<a href="class-Net_SSH2.html#$signature_format"><var>$signature_format</var></a>, 
+			<a href="class-Net_SSH2.html#$signature_validated"><var>$signature_validated</var></a>, 
+			<a href="class-Net_SSH2.html#$stdErrorLog"><var>$stdErrorLog</var></a>, 
+			<a href="class-Net_SSH2.html#$terminal_modes"><var>$terminal_modes</var></a>, 
+			<a href="class-Net_SSH2.html#$timeout"><var>$timeout</var></a>, 
+			<a href="class-Net_SSH2.html#$window_size"><var>$window_size</var></a>, 
+			<a href="class-Net_SSH2.html#$window_size_server_to_client"><var>$window_size_server_to_client</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		samlogin-master API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

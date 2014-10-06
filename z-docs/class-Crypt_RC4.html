@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Crypt_RC4 | samlogin-master</title>
+
+	<script type="text/javascript" src="resources/combined.js?4141401630"></script>
+	<script type="text/javascript" src="elementlist.js?1584808910"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li class="active"><a href="package-Crypt.html">Crypt<span></span></a>
+						<ul>
+				<li><a href="package-Crypt.AES.html">AES</a>
+						</li>
+				<li><a href="package-Crypt.Blowfish.html">Blowfish</a>
+						</li>
+				<li><a href="package-Crypt.DES.html">DES</a>
+						</li>
+				<li><a href="package-Crypt.Hash.html">Hash</a>
+						</li>
+				<li><a href="package-Crypt.Random.html">Random</a>
+						</li>
+				<li class="active"><a href="package-Crypt.RC4.html">RC4</a>
+						</li>
+				<li><a href="package-Crypt.Rijndael.html">Rijndael</a>
+						</li>
+				<li><a href="package-Crypt.RSA.html">RSA</a>
+						</li>
+				<li><a href="package-Crypt.TerraDES.html">TerraDES</a>
+						</li>
+				<li><a href="package-Crypt.Twofish.html">Twofish</a>
+						</li>
+							</ul></li>
+				<li><a href="package-File.html">File<span></span></a>
+						<ul>
+				<li><a href="package-File.ANSI.html">ANSI</a>
+						</li>
+				<li><a href="package-File.ASN1.html">ASN1</a>
+						</li>
+				<li><a href="package-File.X509.html">X509</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Math.html">Math<span></span></a>
+						<ul>
+				<li><a href="package-Math.BigInteger.html">BigInteger</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Net.html">Net<span></span></a>
+						<ul>
+				<li><a href="package-Net.SCP.html">SCP</a>
+						</li>
+				<li><a href="package-Net.SFTP.html">SFTP<span></span></a>
+						<ul>
+				<li><a href="package-Net.SFTP.Stream.html">Stream</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Net.SSH1.html">SSH1</a>
+						</li>
+				<li><a href="package-Net.SSH2.html">SSH2</a>
+						</li>
+							</ul></li>
+				<li><a href="package-None.html">None</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Crypt_RC4.html">Crypt_RC4</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-Crypt.RC4.html" title="Summary of Crypt\RC4"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Crypt_RC4</h1>
+
+
+	<div class="description">
+	
+<p>Pure-PHP implementation of RC4.</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		<b>Package:</b> <a href="package-Crypt.html">Crypt</a>\<a href="package-Crypt.RC4.html">RC4</a><br />
+
+				<b>Copyright:</b>
+				MMVII Jim Wigginton<br />
+				<b>License:</b>
+				<a href="http://www.opensource.org/licenses/mit-license.html">MIT License</a><br />
+				<b>Author:</b>
+				Jim Wigginton &lt;<a
+href="mailto:terrafrost&#64;php.net">terrafrost&#64;<!---->php.net</a>&gt;<br />
+				<b>Version:</b>
+				0.1.0<br />
+		<b>Located at</b> <a href="source-class-Crypt_RC4.html#86-489" title="Go to source code">admin/libs/phpseclib/phpseclib0.3.5/Crypt/RC4.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="Crypt_RC4" id="_Crypt_RC4">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Crypt_RC4.html">Crypt_RC4</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Crypt_RC4">#</a>
+		<code><a href="source-class-Crypt_RC4.html#164-197" title="Go to source code">Crypt_RC4</a>( )</code>
+
+		<div class="description short">
+			
+<p>Default Constructor.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Default Constructor.</p>
+
+<p>Determines whether or not the mcrypt extension should be used.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Crypt_RC4.html">Crypt_RC4</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setKey" id="_setKey">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setKey">#</a>
+		<code><a href="source-class-Crypt_RC4.html#199-233" title="Go to source code">setKey</a>( <span>String <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the key.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the key.</p>
+
+<p>Keys can be between 1 and 256 bytes long. If they are longer then 256 bytes,
+the first 256 bytes will be used. If no key is explicitly set, it'll be assumed
+to be a single null byte.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>String</code><br>$key</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPassword" id="_setPassword">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setPassword">#</a>
+		<code><a href="source-class-Crypt_RC4.html#235-289" title="Go to source code">setPassword</a>( <span>String <var>$password</var></span>, <span>optional <var>$method</var> = <span class="php-quote">'pbkdf2'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the password.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the password.</p>
+
+<p>Depending on what $method is set to, setPassword()'s (optional) parameters
+are as follows: <a href="http://en.wikipedia.org/wiki/PBKDF2">pbkdf2</a>: $hash, $salt, $count, $dkLen</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$password</var></dt>
+					<dd><code>String</code><br>$password</dd>
+					<dt><var>$method</var></dt>
+					<dd><code>optional</code><br>String $method</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setIV" id="_setIV">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setIV">#</a>
+		<code><a href="source-class-Crypt_RC4.html#291-312" title="Go to source code">setIV</a>( <span>String <var>$iv</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Dummy function.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Dummy function.</p>
+
+<p>Some protocols, such as WEP, prepend an "initialization vector" to the key,
+effectively creating a new key [1]. If you need to use an initialization vector
+in this manner, feel free to prepend it to the key, yourself, before calling
+setKey().</p>
+
+<p>[1] WEP's initialization vectors (IV's) are used in a somewhat insecure way.
+Since, in that protocol, the IV's are relatively easy to predict, an attack
+described by <a href="http://www.drizzle.com/~aboba/IEEE/rc4_ksaproc.pdf">Scott Fluhrer, Itsik Mantin, and Adi Shamir</a> can be used to quickly guess at the
+rest of the key. The following links elaborate:</p>
+
+<p><a href="http://www.rsa.com/rsalabs/node.asp?id=2009">http://www.rsa.com/rsalabs/node.asp?id=2009</a>
+<a href="http://en.wikipedia.org/wiki/Related_key_attack">http://en.wikipedia.org/wiki/Related_key_attack</a></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$iv</var></dt>
+					<dd><code>String</code><br>$iv</dd>
+				</dl></div>
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Crypt_RC4.html#_setKey">Crypt_RC4::setKey()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="encrypt" id="_encrypt">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_encrypt">#</a>
+		<code><a href="source-class-Crypt_RC4.html#314-324" title="Go to source code">encrypt</a>( <span>String <var>$plaintext</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Encrypts a message.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Encrypts a message.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$plaintext</var></dt>
+					<dd><code>String</code><br>$plaintext</dd>
+				</dl></div>
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Crypt_RC4.html#__crypt">Crypt_RC4::_crypt()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="decrypt" id="_decrypt">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_decrypt">#</a>
+		<code><a href="source-class-Crypt_RC4.html#326-339" title="Go to source code">decrypt</a>( <span>String <var>$ciphertext</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Decrypts a message.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Decrypts a message.</p>
+
+<p>$this-&gt;decrypt($this-&gt;encrypt($plaintext)) ==
+$this-&gt;encrypt($this-&gt;encrypt($plaintext)). Atleast if the continuous
+buffer is disabled.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$ciphertext</var></dt>
+					<dd><code>String</code><br>$ciphertext</dd>
+				</dl></div>
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Crypt_RC4.html#__crypt">Crypt_RC4::_crypt()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_crypt" id="__crypt">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__crypt">#</a>
+		<code><a href="source-class-Crypt_RC4.html#341-400" title="Go to source code">_crypt</a>( <span>String <var>$text</var></span>, <span>Integer <var>$mode</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Encrypts or decrypts a message.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Encrypts or decrypts a message.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$text</var></dt>
+					<dd><code>String</code><br>$text</dd>
+					<dt><var>$mode</var></dt>
+					<dd><code>Integer</code><br>$mode</dd>
+				</dl></div>
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Crypt_RC4.html#_encrypt">Crypt_RC4::encrypt()</a></code></code><br />
+						<code><code><a href="class-Crypt_RC4.html#_decrypt">Crypt_RC4::decrypt()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="enableContinuousBuffer" id="_enableContinuousBuffer">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_enableContinuousBuffer">#</a>
+		<code><a href="source-class-Crypt_RC4.html#402-447" title="Go to source code">enableContinuousBuffer</a>( )</code>
+
+		<div class="description short">
+			
+<p>Treat consecutive "packets" as if they are a continuous buffer.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Treat consecutive "packets" as if they are a continuous buffer.</p>
+
+<p>Say you have a 16-byte plaintext $plaintext. Using the default behavior, the
+two following code snippets will yield different outputs:</p>
+
+<pre>
+<span class="php-keyword1">echo</span> <span
+class="php-var">$rc4</span>-&gt;encrypt(<span
+class="php-keyword2">substr</span>(<span
+class="php-var">$plaintext</span>, <span class="php-num">0</span>, <span
+class="php-num">8</span>));
+<span class="php-keyword1">echo</span> <span
+class="php-var">$rc4</span>-&gt;encrypt(<span
+class="php-keyword2">substr</span>(<span
+class="php-var">$plaintext</span>, <span class="php-num">8</span>, <span
+class="php-num">8</span>));
+</pre>
+
+<pre>
+<span class="php-keyword1">echo</span> <span
+class="php-var">$rc4</span>-&gt;encrypt(<span
+class="php-var">$plaintext</span>);
+</pre>
+
+<p>The solution is to enable the continuous buffer. Although this will resolve
+the above discrepancy, it creates another, as demonstrated with the
+following:</p>
+
+<pre>
+<span class="php-var">$rc4</span>-&gt;encrypt(<span
+class="php-keyword2">substr</span>(<span
+class="php-var">$plaintext</span>, <span class="php-num">0</span>, <span
+class="php-num">8</span>));
+<span class="php-keyword1">echo</span> <span
+class="php-var">$rc4</span>-&gt;decrypt(<span
+class="php-var">$des</span>-&gt;encrypt(<span
+class="php-keyword2">substr</span>(<span
+class="php-var">$plaintext</span>, <span class="php-num">8</span>, <span
+class="php-num">8</span>)));
+</pre>
+
+<pre>
+<span class="php-keyword1">echo</span> <span
+class="php-var">$rc4</span>-&gt;decrypt(<span
+class="php-var">$des</span>-&gt;encrypt(<span
+class="php-keyword2">substr</span>(<span
+class="php-var">$plaintext</span>, <span class="php-num">8</span>, <span
+class="php-num">8</span>)));
+</pre>
+
+<p>With the continuous buffer disabled, these would yield the same output. With
+it enabled, they yield different outputs. The reason is due to the fact that the
+initialization vector's change after every encryption / decryption round when
+the continuous buffer is enabled. When it's disabled, they remain constant.</p>
+
+<p>Put another way, when the continuous buffer is enabled, the state of the
+Crypt_DES() object changes after each encryption / decryption round, whereas
+otherwise, it'd remain constant. For this reason, it's recommended that
+continuous buffers not be used. They do offer better security and are, in fact,
+sometimes required (SSH uses them), however, they are also less intuitive and
+more likely to cause you problems.</p>
+
+
+
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Crypt_RC4.html#_disableContinuousBuffer">Crypt_RC4::disableContinuousBuffer()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="disableContinuousBuffer" id="_disableContinuousBuffer">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_disableContinuousBuffer">#</a>
+		<code><a href="source-class-Crypt_RC4.html#449-465" title="Go to source code">disableContinuousBuffer</a>( )</code>
+
+		<div class="description short">
+			
+<p>Treat consecutive packets as if they are a discontinuous buffer.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Treat consecutive packets as if they are a discontinuous buffer.</p>
+
+<p>The default behavior.</p>
+
+
+
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Crypt_RC4.html#_enableContinuousBuffer">Crypt_RC4::enableContinuousBuffer()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="enablePadding" id="_enablePadding">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_enablePadding">#</a>
+		<code><a href="source-class-Crypt_RC4.html#467-478" title="Go to source code">enablePadding</a>( )</code>
+
+		<div class="description short">
+			
+<p>Dummy function.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Dummy function.</p>
+
+<p>Since RC4 is a stream cipher and not a block cipher, no padding is necessary.
+The only reason this function is included is so that you can switch between a
+block cipher and a stream cipher transparently.</p>
+
+
+
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Crypt_RC4.html#_disablePadding">Crypt_RC4::disablePadding()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="disablePadding" id="_disablePadding">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_disablePadding">#</a>
+		<code><a href="source-class-Crypt_RC4.html#480-488" title="Go to source code">disablePadding</a>( )</code>
+
+		<div class="description short">
+			
+<p>Dummy function.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Dummy function.</p>
+
+
+
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Crypt_RC4.html#_enablePadding">Crypt_RC4::enablePadding()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="key" id="$key">
+		<td class="attributes"><code>
+			public  
+			String
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Crypt_RC4.html#95-102" title="Go to source code"><var>$key</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">&quot;\0&quot;</span></code></td>
+		<td class="description"><div>
+			<a href="#$key" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The Key</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The Key</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Crypt_RC4.html#_setKey">Crypt_RC4::setKey()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="encryptStream" id="$encryptStream">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Crypt_RC4.html#104-113" title="Go to source code"><var>$encryptStream</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$encryptStream" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The Key Stream for encryption</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The Key Stream for encryption</p>
+
+<p>If CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT, this will be equal to the mcrypt
+object</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Crypt_RC4.html#_setKey">Crypt_RC4::setKey()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="decryptStream" id="$decryptStream">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Crypt_RC4.html#115-124" title="Go to source code"><var>$decryptStream</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$decryptStream" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The Key Stream for decryption</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The Key Stream for decryption</p>
+
+<p>If CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT, this will be equal to the mcrypt
+object</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Crypt_RC4.html#_setKey">Crypt_RC4::setKey()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="encryptIndex" id="$encryptIndex">
+		<td class="attributes"><code>
+			public  
+			Integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Crypt_RC4.html#126-133" title="Go to source code"><var>$encryptIndex</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">0</span></code></td>
+		<td class="description"><div>
+			<a href="#$encryptIndex" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The $i and $j indexes for encryption</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The $i and $j indexes for encryption</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Crypt_RC4.html#__crypt">Crypt_RC4::_crypt()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="decryptIndex" id="$decryptIndex">
+		<td class="attributes"><code>
+			public  
+			Integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Crypt_RC4.html#135-142" title="Go to source code"><var>$decryptIndex</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">0</span></code></td>
+		<td class="description"><div>
+			<a href="#$decryptIndex" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The $i and $j indexes for decryption</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The $i and $j indexes for decryption</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Crypt_RC4.html#__crypt">Crypt_RC4::_crypt()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="mode" id="$mode">
+		<td class="attributes"><code>
+			public  
+			Integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Crypt_RC4.html#144-153" title="Go to source code"><var>$mode</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$mode" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The Encryption Algorithm</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The Encryption Algorithm</p>
+
+<p>Only used if CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT. Only possible values
+are MCRYPT_RC4 or MCRYPT_ARCFOUR.</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Crypt_RC4.html#_Crypt_RC4">Crypt_RC4::Crypt_RC4()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="continuousBuffer" id="$continuousBuffer">
+		<td class="attributes"><code>
+			public  
+			Boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Crypt_RC4.html#155-162" title="Go to source code"><var>$continuousBuffer</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$continuousBuffer" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Continuous Buffer status</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Continuous Buffer status</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-Crypt_RC4.html#_enableContinuousBuffer">Crypt_RC4::enableContinuousBuffer()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		samlogin-master API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

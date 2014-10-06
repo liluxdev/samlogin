@@ -29,11 +29,12 @@ class plgUserSamlogin extends JPlugin {
         $samloginParams = JComponentHelper::getParams('com_samlogin');
         //    //phpconsole("params are: " . print_r($samloginParams->toArray(), true), "rastrano");
         // Include the externally configured SimpleSAMLphp instance 
-        $currentSession = JFactory::getSession();
 
         $SAMLoginIsAuthN = $session->get("SAMLoginIsAuthN", false);
-        if ($SAMLoginIsAuthN) {
-            $session->set("SAMLoginIsAuthN", false);
+        $SAMLoginPreventDoubleLogout = $session->get("SAMLoginPreventDoubleLogout", false);
+        //die("debugging".print_r($SAMLoginPreventDoubleLogout,true));
+        $session->set("SAMLoginPreventDoubleLogout", false); //for avoiding deadlocks
+        if ($SAMLoginIsAuthN && !$SAMLoginPreventDoubleLogout) {
             $relayState = JRequest::getString("return");
             $rediSLO = JRoute::_('index.php?option=com_samlogin&view=login&task=initSLO&return=' . $relayState, true);
             $app->redirect($rediSLO);

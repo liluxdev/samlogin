@@ -9,7 +9,7 @@ class SAMLoginViewAjax extends SAMLoginView
 
 	function display($tpl = null)
 	{
-            
+			
                 $doc=JFactory::getDocument();
                 
                 $xml = simplexml_load_string(file_get_contents(JPATH_COMPONENT_ADMINISTRATOR."/samlogin.xml"));
@@ -106,7 +106,7 @@ class SAMLoginViewAjax extends SAMLoginView
 		$checks = array();
                 
                 $SSPCheckFile= JPATH_COMPONENT_SITE."/simplesamlphp/VERSION_INFO";
-                $vinfo=  file_get_contents($SSPCheckFile);
+                $vinfo=  @file_get_contents($SSPCheckFile);
                 if ($vinfo===FALSE){
                        $checks['sspCheck']=false; 
                 }else{
@@ -155,68 +155,7 @@ class SAMLoginViewAjax extends SAMLoginView
                     "# Run cron: [hourly]\n".
                     "01 * * * * /usr/bin/curl -k -A \"Mozilla/5.0\" --silent \"". $checks["cronLink"]."\" > /dev/null 2>&1".
                     "";
-                      //  die($sslTestURL);
-                    $httpHeaders=get_headers($sslTestURL);
-                    if ($httpHeaders==FALSE){
-                          $checks['sslEnabled']=FALSE;
-                    }else{ 
-                        $checks['sslEnabled'] = stristr($httpHeaders[0],"200 OK");
-                    }
-                    require_once(JPATH_COMPONENT_ADMINISTRATOR . "/helpers/sspconfmanager.php");
-                    $SSPKeyURLPath=  SSPConfManager::getCertURLPath();
-
-                    $privatekeyTestURL=str_ireplace("https://","http://",JURI::root()).$SSPKeyURLPath."saml.key";
-                   // echo $privatekeyTestURL;
-                    $httpHeaders=get_headers($privatekeyTestURL);    
-                    if ($httpHeaders==FALSE){
-                        $checks['privatekey'] = "<b style='color:orange;'>CAN'T CHECK, please click this <a href='$privatekeyTestURL'>link</a> and ensure it is not showing/downloading a certificate: it must be blank.</b>";
-                    }else{ 
-                           $checks['privatekey'] = (stristr($httpHeaders[0],"200")!=FALSE) ? 
-                                                "<a style='color:red;' href='$privatekeyTestURL'>FAIL</a>" :
-                                                 "<a style='color:green;'  href='$privatekeyTestURL'>PASSED</a>";
-                    }
-                    $privatekeySSLTestURL=str_ireplace("http://","https://",JURI::root()).$SSPKeyURLPath."saml.key";
-                  //  die(print_r(get_headers($privatekeySSLTestURL),true));
-                    $httpHeaders=get_headers($privatekeySSLTestURL);
-                    if ($httpHeaders==FALSE){
-                        $checks['privatekeySSL'] = "<b style='color:orange;'>CAN'T CHECK, please click this <a href='$privatekeySSLTestURL'>link</a> and ensure it is not showing/downloading a certificate: it must be blank.</b>";
-                    }else{ 
-                        $checks['privatekeySSL'] = (stristr($httpHeaders[0],"200")!=FALSE) ? 
-                                                "<a style='color:red;' href='$privatekeySSLTestURL'>FAIL</a>" :
-                                                 "<a style='color:green;' href='$privatekeySSLTestURL'>PASSED</a>";
-                            //FALSE;//"<a href='$privatekeySSLTestURL'>FAIL</a>";
-                    }
-
-
-                    $testURL=str_ireplace("https://","http://",JURI::root())."/components/com_samlogin/simplesamlphp/log/_placeholder.php";
-                   // die(print_r(get_headers($testURL),true));
-                    $httpHeaders=get_headers($testURL);
-                    if ($httpHeaders==FALSE){
-                        $checks['logswww'] = "<b style='color:orange;'>CAN'T CHECK, please click this <a href='$testURL'>link</a> and ensure it is not showing/downloading a certificate: it must be blank.</b>";
-                    }else{ 
-                        $checks['logswww'] = stristr($httpHeaders[0],"200")==FALSE;
-                    }
-
-                       $testURL=str_ireplace("http://","https://",JURI::root())."/components/com_samlogin/simplesamlphp/log/_placeholder.php";
-                  //  die(print_r(get_headers($privatekeySSLTestURL),true));
-                    $httpHeaders=get_headers($testURL);
-                    if ($httpHeaders==FALSE){
-                        $checks['logswwws'] = "<b style='color:orange;'>CAN'T CHECK, please click this <a href='$testURL'>link</a> and ensure it is not showing/downloading a certificate: it must be blank.</b>";
-                    }else{ 
-                        $checks['logswwws'] = stristr($httpHeaders[0],"200")==FALSE;
-                    }
-
-                $privKeyFile=SSPConfManager::getCertDirPath()."/saml.key";
-                    $privKey= file_get_contents($privKeyFile);
-                $privKeyDefFile=JPATH_SITE."/components/com_samlogin/simplesamlphp/cert/saml.default.key";
-                    $privKeyDef= file_get_contents($privKeyDefFile);
-
-                    if ($privKey==$privKeyDef){
-                            $checks['privKeyChanged'] = false;
-                    }else{
-                          $checks['privKeyChanged'] = true;
-                    }
-
+                   
 
                     $checks['authPlugin'] = JPluginHelper::isEnabled('authentication', 'samlogin');
                     $checks['userPlugin'] = JPluginHelper::isEnabled('user', 'samlogin');
@@ -238,60 +177,7 @@ class SAMLoginViewAjax extends SAMLoginView
                // die(print_r($params->toArray(),true));
                         $this->assignRef('fields', $this->getForm());
             
-		if ($checks['userPlugin'])
-		{
-			$application = JFactory::getApplication();
-			$db = JFactory::getDBO();
-			if (version_compare(JVERSION, '2.5', 'ge'))
-			{
-				$db->setQuery("SELECT element, ordering FROM #__extensions WHERE type = 'plugin' AND folder = 'user' AND (element = 'joomla' OR element = 'samlogin')");
-			}
-			else
-			{
-				$db->setQuery("SELECT element, ordering FROM #__plugins WHERE folder = 'user' AND (element = 'joomla' OR element = 'samlogin')");
-			}
-			$plugins = $db->loadObjectList();
-			$orderingValues = array();
-			foreach ($plugins as $plugin)
-			{
-				$orderingValues[$plugin->element] = $plugin->ordering;
-			}
-			if ($orderingValues['joomla'] > $orderingValues['samlogin'])
-			{
-				$application->enqueueMessage(JText::_('SAMLOGIN_USER_PLUGIN_ORDERING_NOTICE'), 'notice');
-			}
-                        
-                        
-                        if (version_compare(JVERSION, '2.5', 'ge'))
-			{
-				$db->setQuery("SELECT element, ordering FROM #__extensions WHERE type = 'plugin' AND folder = 'authentication' AND (element = 'joomla' OR element = 'samlogin')");
-			}
-			else
-			{
-				$db->setQuery("SELECT element, ordering FROM #__plugins WHERE folder = 'authentication' AND (element = 'joomla' OR element = 'samlogin')");
-			}
-			$plugins = $db->loadObjectList();
-			$orderingValues = array();
-			foreach ($plugins as $plugin)
-			{
-				$orderingValues[$plugin->element] = $plugin->ordering;
-			}
-			if ($orderingValues['joomla'] > $orderingValues['samlogin'])
-			{
-				$application->enqueueMessage(JText::_('SAMLOGIN_AUTH_PLUGIN_ORDERING_NOTICE'), 'notice');
-			}
-                        
-                        
-			if (JFile::exists(JPATH_ADMINISTRATOR.'/components/com_k2/k2.php'))
-			{
-				$db->setQuery("SELECT COUNT(*) FROM #__k2_user_groups");
-				$result = $db->loadResult();
-				if (!$result)
-				{
-					$application->enqueueMessage(JText::_('SAMLOGIN_K2USERGROUN_UNSET_NOTICE'), 'notice');
-				}
-			}
-		}
+
 		parent::display($tpl);
 	}
         

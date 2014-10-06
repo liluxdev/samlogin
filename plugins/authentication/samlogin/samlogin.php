@@ -39,14 +39,21 @@ class plgAuthenticationSamlogin extends JPlugin {
         return $attributes[$key];
     }
 
-    private function _pregMatchSAMLAttributeValues($attrname, $regex, $attributes) {
+    private function _pregMatchSAMLAttributeValues($attrname, $regex, $attributes,$samloginParams) {
         if (!array_key_exists($attrname, $attributes)) {
             return FALSE;
         }
         $attrvals = $attributes[$attrname];
         foreach ($attrvals as $val) {
             //phpconsole("does ".$val." matches ".$regex,"rastrano");
+            if ($samloginParams->get("debug_auth", 0)) {
+                echo "<br/>Checking preg match: $regex on $val";
+            }
             if (preg_match("/" . $regex . "/", $val)) {
+                if ($samloginParams->get("debug_auth", 0)) {
+                    echo "<br/>Matched! preg match: $regex on $val";
+                }
+
                 //phpconsole("YES,  ".$val." matches ".$regex,"rastrano");
                 return $val;
             }
@@ -58,7 +65,14 @@ class plgAuthenticationSamlogin extends JPlugin {
         $rulesConf = $samloginParams->toArray();
         //phpconsole($rulesConf, "rastrano");
         //phpconsole($user->get("groups"), "rastrano");
+
+
+
         $oldusergroups = $user->get("groups");
+
+        if ($samloginParams->get("debug_auth", 0)) {
+            echo "<br/>Groups before authz check: <pre>" . print_r($oldusergroups, true) . "</pre>";
+        }
 
         $defaultRegistered = $samloginParams->get("defaultRegistered", true);
         $newusergroups = array();
@@ -69,7 +83,9 @@ class plgAuthenticationSamlogin extends JPlugin {
             
         }
 
-
+        if ($samloginParams->get("debug_auth", 0)) {
+            echo "<br/>Default registered group: <pre>" . print_r($newusergroups, true) . "</pre>";
+        }
 
         //phpconsole("New  groups:".print_r($newusergroups,true),"rastrano");
         $newusergroupsForHist[] = array();
@@ -82,16 +98,33 @@ class plgAuthenticationSamlogin extends JPlugin {
                     $ruleno = str_replace("_attr", "", $ruleno);
 
                     $ruleattr = $samloginParams->get("rule_" . $ruleno . "_attr", "");
+
+
+
+
                     if ($ruleattr) {
+
+                        if ($samloginParams->get("debug_auth", 0)) {
+                            echo "<br/>Processing authz rule n." . $ruleno . " on attribute $ruleattr";
+                        }
+
                         $ruleassigngroup = $samloginParams->get("rule_" . $ruleno . "_assigngroup", "");
                         $ruleRegexp = $samloginParams->get("rule_" . $ruleno . "_regex", "");
 
                         $sqlMatch = $samloginParams->get("rule_" . $ruleno . "_sql", "");
                         $sqlMatchOrig = $sqlMatch;
+
+
+
+
                         // echo $sqlMatch;
 
                         $ruleType = "";
                         if (!empty($sqlMatch)) {
+
+                            if ($samloginParams->get("debug_auth", 0)) {
+                                echo "<br/>Processing authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch;
+                            }
                             $db = JFactory::getDbo();
                             $matches = array();
                             preg_match_all("/::([a-zA-Z0-9\.:]{1,99})::/", $sqlMatch, $matches);
@@ -123,7 +156,10 @@ class plgAuthenticationSamlogin extends JPlugin {
 
                                 if (!is_null($attrValues)) {
                                     if (count($attrValues) > 1) {
-                                        //SQL Match can only used on single valued attributes for now and for security contraint
+                                        //SQL Match can only used on single valued attributes for now and for security constraint
+                                        if ($samloginParams->get("debug_auth", 0)) {
+                                            echo "<br/><b>Skipped for multiple value attribute (no supported yet)</b>: Processing authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch;
+                                        }
                                     } else {
                                         if (count($attrValues) == 1) {
                                             $value = $attrValues[0];
@@ -153,7 +189,13 @@ class plgAuthenticationSamlogin extends JPlugin {
                                 $matchingArr = $db->loadAssocList();
                                 //  echo "<br/>result is:".print_r($matchingArr,true);
                                 $matching = count($matchingArr) > 0;
+                                if ($samloginParams->get("debug_auth", 0)) {
+                                    echo "<br/>Processed authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch . " <b>result is " . ($matching ? "true" : "false") ."</b>";
+                                }
                             } else {
+                                if ($samloginParams->get("debug_auth", 0)) {
+                                    echo "<br/><b>Skipped (no placeholder replacement)</b>: authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch . " result is " .  ($matching ? "true" : "false");
+                                }
                                 $matching = FALSE;
                             }
                             $ruleType = "sql";
@@ -163,7 +205,11 @@ class plgAuthenticationSamlogin extends JPlugin {
                         if (!empty($ruleRegexp)) {
                             $ruleType = "regex";
                             //phpconsole($ruleattr." matches ".$ruleRegexp,"rastrano");
-                            $matching = $this->_pregMatchSAMLAttributeValues($ruleattr, $ruleRegexp, $samlresponse);
+                            $matching = $this->_pregMatchSAMLAttributeValues($ruleattr, $ruleRegexp, $samlresponse,$samloginParams);
+
+                            if ($samloginParams->get("debug_auth", 0)) {
+                                echo "<br/>Processed authz rule n." . $ruleno . " on attribute $ruleattr regexp is: " . $ruleRegexp . "<b> result is " . ($matching ? "true" : "false")."</b>";
+                            }
                         }
 
                         ////phpconsole($ruleno." matches? ".$ruleRegexp."??? ".print_r($samlresponse,true),"rastrano");
@@ -185,8 +231,15 @@ class plgAuthenticationSamlogin extends JPlugin {
 
 //die("testing");
         if (!$authorized) {
+            if ($samloginParams->get("debug_auth", 0)) {
+                echo "<br/><b>Processed authz rules and found no matching rule</b> ";
+            }
             $defaultDeny = $samloginParams->get("defaultDeny", false);
             if ($defaultDeny) {
+                if ($samloginParams->get("debug_auth", 0)) {
+                    echo "<br/><b>Processed authz rules and found no matching rule and deny mode is on: aborting login!</b> ";
+                    die();
+                }
                 return false;
             }
         }
@@ -200,7 +253,9 @@ class plgAuthenticationSamlogin extends JPlugin {
             $latestSamloginAssignedGroups = $this->_getLastestGroupAssigned($user);
 
             $manualOldUsergroups = array_diff($oldusergroups, $latestSamloginAssignedGroups);
-
+            if ($samloginParams->get("debug_auth", 0)) {
+                echo "<br/>Autz rules, newusergroups are: <pre>" . print_r($newusergroups, true) . "</pre> manual old usergroups are:  <pre>" . print_r($manualOldUsergroups, true) . "</pre>";
+            }
             //merge only the old groups NON-samlogin assigned groups
             $newusergroups = array_merge($newusergroups, $manualOldUsergroups);
             foreach ($newusergroupsForHist as $key => $hitem) {
@@ -214,6 +269,9 @@ class plgAuthenticationSamlogin extends JPlugin {
 
         $this->_saveAddedGroupHist($newusergroupsForHist, $user, $timeid); //don't save the modified newusergroups array here: only the saml added one
         $user->set("groups", $newusergroups);
+        if ($samloginParams->get("debug_auth", 0)) {
+            echo "<br/>Autz rules, merged newusergroups are: <pre>" . print_r($newusergroups, true) . "</pre>";
+        }
         //     $user->name = $response->fullname; //bug: different field naming in joomla table, check will fail
 
         $saved = $user->save();
@@ -308,6 +366,18 @@ class plgAuthenticationSamlogin extends JPlugin {
         }
     }
 
+    
+    private function generateRandomPassword($pwlen=20)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+        $pw = '';
+        $bytes = openssl_random_pseudo_bytes($pwlen);
+        for ($i = 0; $i < $pwlen; $i++) {
+        $pw .= $chars[ord($bytes[$i]) % strlen($chars)];
+        }
+        return $pw;
+    }
+    
     private function _mapAttributes(&$response, $samlresponse, $samloginParams) {
         $mappingConf = $samloginParams->toArray();
         //   //phpconsole($mappingConf, "rastrano");
@@ -318,6 +388,7 @@ class plgAuthenticationSamlogin extends JPlugin {
                 $mappingConf["mapping_extra::" . $key] = $val;
             }
         }
+
 
         $extraFields = array();
 
@@ -335,6 +406,9 @@ class plgAuthenticationSamlogin extends JPlugin {
                 }
                 if (!empty($val)) {
                     $attrNameAlternatives = explode("|", $val) ? explode("|", $val) : array($val);
+                    if ($samloginParams->get("debug_auth", 0)) {
+                        echo "<br/>Mappings alternatives: <pre>" . print_r($attrNameAlternatives, true) . "</pre>";
+                    }
                     //  //phpconsole($attrNameAlternatives,"rastrano");
                     //  print_r($attrNameAlternatives);
                     $attrFound = false;
@@ -374,6 +448,10 @@ class plgAuthenticationSamlogin extends JPlugin {
                                     defined($extraFieldGroup) && defined($extraFields[$extraFieldGroup]) && is_array($extraFields[$extraFieldGroup]) && !empty($extraFields[$extraFieldGroup][$joomlaKey])
                                     )
                             ) {
+
+                                if ($samloginParams->get("debug_auth", 0)) {
+                                    print "<hr/>Found $joomlaKey : using " . print_r($attrName, true) . " with value" . $response->$joomlaKey . "<hr/>";
+                                }
                                 //
                                 //       print "<hr/>Found $joomlaKey : using ".print_r($attrName,true)." with value".$response->$joomlaKey."<hr/>";
                                 $attrFound = true;
@@ -394,12 +472,7 @@ class plgAuthenticationSamlogin extends JPlugin {
         }
         //    die(print_r($extraFieldsTmp,true));
 
-        if (empty($response->email)) {
-            $useDummyEmails = $samloginParams->get("useDummyEmails", false);
-            if ($useDummyEmails) {
-                $response->email = $response->username . "@" . $samloginParams->get("dummyEmailDomain", strtr($_SERVER['HTTP_HOST'], array("www." => "")));
-            }
-        }
+    
 
 
         $useNameID = $samloginParams->get("useNameId", false);
@@ -419,6 +492,22 @@ class plgAuthenticationSamlogin extends JPlugin {
             $response->username = $SAMLoginnameId;
         }
 
+        if (empty($response->email)) {
+            $useDummyEmails = $samloginParams->get("useDummyEmails", false);
+            if ($useDummyEmails) {
+                $regexMail = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
+                if (preg_match($regexMail, $response->username)) {
+                    $response->email = $response->username;
+                }else{
+                    $response->email = $response->username . "@" . $samloginParams->get("dummyEmailDomain", strtr($_SERVER['HTTP_HOST'], array("www." => "")));
+                }
+                
+            }
+        }
+        
+        if (empty($response->fullname)){
+            $response->fullname = $response->username;
+        }
 
         $response->type = 'SAMLogin';
 
@@ -427,10 +516,10 @@ class plgAuthenticationSamlogin extends JPlugin {
 
         $userid = $this->getUserIdByUsernameOrMail($response->username);
         $updateUsernameIfMailOverlap = $samloginParams->get("updateUsernameIfMailOverlap", false);
-        if ($updateUsernameIfMailOverlap && empty($userid)){
-             $userid = $this->getUserIdByUsernameOrMail($response->email);
+        if ($updateUsernameIfMailOverlap && empty($userid)) {
+            $userid = $this->getUserIdByUsernameOrMail($response->email);
         }
-        
+
         if ($userid) {
             $user = JFactory::getUser($userid);
 
@@ -441,7 +530,7 @@ class plgAuthenticationSamlogin extends JPlugin {
                 $query = $db->getQuery(true);
                 $query->update('#__users')
                         ->set('username = ' . $db->Quote($response->username))
-                        ->where("username = ". $db->Quote($user->username). " AND id=".$userid);
+                        ->where("username = " . $db->Quote($user->username) . " AND id=" . $userid);
                 $db->setQuery($query);
                 $db->execute();
                 //   //phpconsole("username updated $saved","rastrano");
@@ -458,7 +547,7 @@ class plgAuthenticationSamlogin extends JPlugin {
             $result = $db->loadObject();
 
             if ($result) { //if user exists
-                if ($samloginParams->get("preserveLocalPassword", false)) {
+                if ($samloginParams->get("preserveLocalPassword", false)) { //TODO: make this param avail and test if behavior is working fine
                     $parts = explode(':', $result->password);
                     $crypt = $parts[0];
                     $salt = @$parts[1];
@@ -471,16 +560,16 @@ class plgAuthenticationSamlogin extends JPlugin {
                     $response->password_clear = '';
                 }
             } else { //if user doesn't exist yet
-                if ($samloginParams->get("generateRandomLocalPassword", false)) {
+                if ($samloginParams->get("generateRandomLocalPassword", false)) { //TODO: make this param avail
                     $salt = JUserHelper::genRandomPassword(32);
-                    $rndpwdLength = 12;
-                    $passwd = $this->randomPassword($rndpwdLength);
+                    $rndpwdLength = 20;
+                    $passwd = $this->generateRandomPassword($rndpwdLength);
                     $crypt = JUserHelper::getCryptedPassword($passwd, $salt);
                     $password = $crypt . ':' . $salt;
                     $response->password = $password;
                     $response->password_clear = $password;
                 } else {
-                    $response->password = '';
+                    $response->password = ''; //if empty joomla provides a random one
                     $response->password_clear = '';
                 }
             }
@@ -582,6 +671,29 @@ class plgAuthenticationSamlogin extends JPlugin {
             $SAMLoginSP = $currentSession->get("SAMLoginSP", '');
             $SAMLoginnameId = $currentSession->get("SAMLoginNameId", '');
 
+
+
+            JPluginHelper::importPlugin('samlattributeauthority');
+            $isJoomla3 = ((float) JVERSION) >= 3.0;
+            if ($isJoomla3) {
+                $dispatcher = JEventDispatcher::getInstance();
+            } else {
+                $dispatcher = JDispatcher::getInstance();
+            }
+            //getting nameid for the AA plugins
+            //$currentSession = JFactory::getSession();
+            $SAMLoginnameIdValue = $currentSession->get("SAMLoginNameId", '');
+            if (empty($SAMLoginnameIdValue)) {
+                $SAMLoginnameIdValue = "";
+            } else {
+                $SAMLoginnameIdValue = json_decode($SAMLoginnameIdValue, true);
+                $SAMLoginnameIdValue = $SAMLoginnameIdValue["Value"];
+                if (empty($SAMLoginnameIdValue)) {
+                    $SAMLoginnameIdValue = "";
+                }
+            }
+            $results = $dispatcher->trigger('onBeforeSAMLoginAttributeMappings', array(&$SAMLoginAttrs, $SAMLoginnameIdValue, $samloginParams));
+
             /*  $component = JTable::getInstance('component');
               $component->loadByOption('com_samlogin');
               $instance = new JParameter($component->params, JPATH_ADMINISTRATOR.'/components/com_samlogin/config.xml');
@@ -590,6 +702,12 @@ class plgAuthenticationSamlogin extends JPlugin {
             //  die(print_r($SAMLoginAttrs,true));
             // Check for access token
             //phpconsole(print_r($SAMLoginAttrs,true),"rastrano");
+
+
+            if ($samloginParams->get("debug_auth", 0)) {
+                echo "<b>Warning: SAMLogin debug mode is on, this will only produce a dump, interrupting the login process</b>"
+                . "<br/>SAML Attributes are: <pre>" . print_r($SAMLoginAttrs, true) . "</pre>";
+            }
 
             $response->status = version_compare(JVERSION, '3.0', 'ge') ? JAuthentication::STATUS_SUCCESS : JAUTHENTICATE_STATUS_SUCCESS;
             $response->type = 'SAMLogin';
@@ -663,8 +781,16 @@ class plgAuthenticationSamlogin extends JPlugin {
                 return false;
             }
             $user = $this->_updateAndGetUser($response, $samloginParams, $extraFields);  //final to sync group changes in session
-    //print_r($response);
-   //         die(print_r($user,true)."debbuging at line: ".__LINE__);
+            $results = $dispatcher->trigger('onAfterSAMLoginLoggedIn', array(&$user, $SAMLoginAttrs, $SAMLoginnameIdValue, $samloginParams));
+
+            if ($samloginParams->get("debug_auth", 0)) {
+                echo "<br/>Login response: <pre>" . print_r($response, true) . "</pre>";
+                echo "<br/>User object <pre>" . print_r($user, true) . "</pre>";
+                die("Debug-auth mode is on.");
+            }
+
+//print_r($response);
+            //         die(print_r($user,true)."debbuging  at line: ".__LINE__);
             $response->error_message = '';
         } else {
             $response->status = version_compare(JVERSION, '3.0', 'ge') ? JAuthentication::STATUS_FAILURE : JAUTHENTICATE_STATUS_FAILURE;

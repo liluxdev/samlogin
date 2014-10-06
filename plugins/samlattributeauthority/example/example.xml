@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="samlattributeauthority" method="upgrade">
+	<name>SAMLogin Attribute Authority - Example attribute fetcher</name>
+	<author>creativeprogramming.it</author>
+	<creationDate>Mar 2014</creationDate>
+	<copyright>Copyright (c) 2014 creativeprogramming.it. All rights reserved.</copyright>
+	<license>http://creativeprogramming.it</license>
+	<authorEmail>info@creativeprogramming.it</authorEmail>
+	<authorUrl>www.creativeprogramming.it</authorUrl>
+	<version>0.9.7</version>
+	<description>SAMLogin Example Attribute Authority Fetcher Plugin</description>
+	<files>
+		<filename plugin="example">example.php</filename>
+	</files>
+</extension>

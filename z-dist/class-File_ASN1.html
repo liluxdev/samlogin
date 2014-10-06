@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class File_ASN1 | samlogin-master</title>
+
+	<script type="text/javascript" src="resources/combined.js?4141401630"></script>
+	<script type="text/javascript" src="elementlist.js?1584808910"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-Crypt.html">Crypt<span></span></a>
+						<ul>
+				<li><a href="package-Crypt.AES.html">AES</a>
+						</li>
+				<li><a href="package-Crypt.Blowfish.html">Blowfish</a>
+						</li>
+				<li><a href="package-Crypt.DES.html">DES</a>
+						</li>
+				<li><a href="package-Crypt.Hash.html">Hash</a>
+						</li>
+				<li><a href="package-Crypt.Random.html">Random</a>
+						</li>
+				<li><a href="package-Crypt.RC4.html">RC4</a>
+						</li>
+				<li><a href="package-Crypt.Rijndael.html">Rijndael</a>
+						</li>
+				<li><a href="package-Crypt.RSA.html">RSA</a>
+						</li>
+				<li><a href="package-Crypt.TerraDES.html">TerraDES</a>
+						</li>
+				<li><a href="package-Crypt.Twofish.html">Twofish</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="package-File.html">File<span></span></a>
+						<ul>
+				<li><a href="package-File.ANSI.html">ANSI</a>
+						</li>
+				<li class="active"><a href="package-File.ASN1.html">ASN1</a>
+						</li>
+				<li><a href="package-File.X509.html">X509</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Math.html">Math<span></span></a>
+						<ul>
+				<li><a href="package-Math.BigInteger.html">BigInteger</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Net.html">Net<span></span></a>
+						<ul>
+				<li><a href="package-Net.SCP.html">SCP</a>
+						</li>
+				<li><a href="package-Net.SFTP.html">SFTP<span></span></a>
+						<ul>
+				<li><a href="package-Net.SFTP.Stream.html">Stream</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Net.SSH1.html">SSH1</a>
+						</li>
+				<li><a href="package-Net.SSH2.html">SSH2</a>
+						</li>
+							</ul></li>
+				<li><a href="package-None.html">None</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-File_ASN1.html">File_ASN1</a></li>
+				<li><a href="class-File_ASN1_Element.html">File_ASN1_Element</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-File.ASN1.html" title="Summary of File\ASN1"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class File_ASN1</h1>
+
+
+	<div class="description">
+	
+<p>Pure-PHP ASN.1 Parser</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		<b>Package:</b> <a href="package-File.html">File</a>\<a href="package-File.ASN1.html">ASN1</a><br />
+
+				<b>Copyright:</b>
+				MMXII Jim Wigginton<br />
+				<b>License:</b>
+				<a href="http://www.opensource.org/licenses/mit-license.html">MIT License</a><br />
+				<b>Author:</b>
+				Jim Wigginton &lt;<a
+href="mailto:terrafrost&#64;php.net">terrafrost&#64;<!---->php.net</a>&gt;<br />
+				<b>Version:</b>
+				0.3.0<br />
+		<b>Located at</b> <a href="source-class-File_ASN1.html#141-1293" title="Go to source code">admin/libs/phpseclib/phpseclib0.3.5/File/ASN1.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="File_ASN1" id="_File_ASN1">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_File_ASN1">#</a>
+		<code><a href="source-class-File_ASN1.html#244-258" title="Go to source code">File_ASN1</a>( )</code>
+
+		<div class="description short">
+			
+<p>Default Constructor.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Default Constructor.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="decodeBER" id="_decodeBER">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_decodeBER">#</a>
+		<code><a href="source-class-File_ASN1.html#260-277" title="Go to source code">decodeBER</a>( <span>String <var>$encoded</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parse BER-encoding</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse BER-encoding</p>
+
+<p>Serves a similar purpose to openssl's asn1parse</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$encoded</var></dt>
+					<dd><code>String</code><br>$encoded</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_decode_ber" id="__decode_ber">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__decode_ber">#</a>
+		<code><a href="source-class-File_ASN1.html#279-496" title="Go to source code">_decode_ber</a>( <span>String <var>&amp; $encoded</var></span>, <span>Integer <var>$start</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Parse BER-encoding (Helper function)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse BER-encoding (Helper function)</p>
+
+<p>Sometimes we want to get the BER encoding of a particular tag. $start lets us
+do that without having to reencode. $encoded is passed by reference for the
+recursive calls done for FILE_ASN1_TYPE_BIT_STRING and
+FILE_ASN1_TYPE_OCTET_STRING. In those cases, the indefinite length is used.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$encoded</var></dt>
+					<dd><code>String</code><br>$encoded</dd>
+					<dt><var>$start</var></dt>
+					<dd><code>Integer</code><br>$start</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="asn1map" id="_asn1map">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_asn1map">#</a>
+		<code><a href="source-class-File_ASN1.html#498-769" title="Go to source code">asn1map</a>( <span>Array <var>$decoded</var></span>, <span>Array <var>$mapping</var></span> )</code>
+
+		<div class="description short">
+			
+<p>ASN.1 Decode</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>ASN.1 Decode</p>
+
+<p>Provides an ASN.1 semantic mapping ($mapping) from a parsed BER-encoding to a
+human readable format.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$decoded</var></dt>
+					<dd><code>Array</code><br>$decoded</dd>
+					<dt><var>$mapping</var></dt>
+					<dd><code>Array</code><br>$mapping</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="encodeDER" id="_encodeDER">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_encodeDER">#</a>
+		<code><a href="source-class-File_ASN1.html#771-787" title="Go to source code">encodeDER</a>( <span>String <var>$source</var></span>, <span>String <var>$mapping</var></span> )</code>
+
+		<div class="description short">
+			
+<p>ASN.1 Encode</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>ASN.1 Encode</p>
+
+<p>DER-encodes an ASN.1 semantic mapping ($mapping). Some libraries would
+probably call this function an ASN.1 compiler.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$source</var></dt>
+					<dd><code>String</code><br>$source</dd>
+					<dt><var>$mapping</var></dt>
+					<dd><code>String</code><br>$mapping</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_encode_der" id="__encode_der">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__encode_der">#</a>
+		<code><a href="source-class-File_ASN1.html#789-1068" title="Go to source code">_encode_der</a>( <span>String <var>$source</var></span>, <span>String <var>$mapping</var></span>, <span>Integer <var>$idx</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>ASN.1 Encode (Helper function)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>ASN.1 Encode (Helper function)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$source</var></dt>
+					<dd><code>String</code><br>$source</dd>
+					<dt><var>$mapping</var></dt>
+					<dd><code>String</code><br>$mapping</dd>
+					<dt><var>$idx</var></dt>
+					<dd><code>Integer</code><br>$idx</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_encodeLength" id="__encodeLength">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__encodeLength">#</a>
+		<code><a href="source-class-File_ASN1.html#1070-1088" title="Go to source code">_encodeLength</a>( <span>Integer <var>$length</var></span> )</code>
+
+		<div class="description short">
+			
+<p>DER-encode the length</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>DER-encode the length</p>
+
+<p>DER supports lengths up to (2<strong>8)</strong>127, however, we'll only
+support lengths up to (2<strong>8)</strong>4. See <a href="http://itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf#p=13">X.690 paragraph 8.1.3</a> for more information.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$length</var></dt>
+					<dd><code>Integer</code><br>$length</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_decodeTime" id="__decodeTime">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__decodeTime">#</a>
+		<code><a href="source-class-File_ASN1.html#1090-1137" title="Go to source code">_decodeTime</a>( <span>String <var>$content</var></span>, <span>Integer <var>$tag</var></span> )</code>
+
+		<div class="description short">
+			
+<p>BER-decode the time</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>BER-decode the time</p>
+
+<p>Called by _decode_ber() and in the case of implicit tags asn1map().</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>String</code><br>$content</dd>
+					<dt><var>$tag</var></dt>
+					<dd><code>Integer</code><br>$tag</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setTimeFormat" id="_setTimeFormat">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setTimeFormat">#</a>
+		<code><a href="source-class-File_ASN1.html#1139-1150" title="Go to source code">setTimeFormat</a>( <span>String <var>$format</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the time format</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the time format</p>
+
+<p>Sets the time / date format for asn1map().</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$format</var></dt>
+					<dd><code>String</code><br>$format</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="loadOIDs" id="_loadOIDs">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loadOIDs">#</a>
+		<code><a href="source-class-File_ASN1.html#1152-1163" title="Go to source code">loadOIDs</a>( <span>Array <var>$oids</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Load OIDs</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Load OIDs</p>
+
+<p>Load the relevant OIDs for a particular ASN.1 semantic mapping.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$oids</var></dt>
+					<dd><code>Array</code><br>$oids</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="loadFilters" id="_loadFilters">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loadFilters">#</a>
+		<code><a href="source-class-File_ASN1.html#1165-1176" title="Go to source code">loadFilters</a>( <span>Array <var>$filters</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Load filters</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Load filters</p>
+
+<p>See File_X509, etc, for an example.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filters</var></dt>
+					<dd><code>Array</code><br>$filters</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_string_shift" id="__string_shift">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__string_shift">#</a>
+		<code><a href="source-class-File_ASN1.html#1178-1193" title="Go to source code">_string_shift</a>( <span>String <var>&amp; $string</var></span>, <span>optional <var>$index</var> = <span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			
+<p>String Shift</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>String Shift</p>
+
+<p>Inspired by array_shift</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$string</var></dt>
+					<dd><code>String</code><br>$string</dd>
+					<dt><var>$index</var></dt>
+					<dd><code>optional</code><br>Integer $index</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="convert" id="_convert">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_convert">#</a>
+		<code><a href="source-class-File_ASN1.html#1195-1292" title="Go to source code">convert</a>( <span>String <var>$in</var></span>, <span>optional <var>$from</var> = FILE_ASN1_TYPE_UTF8_STRING</span>, <span>optional <var>$to</var> = FILE_ASN1_TYPE_UTF8_STRING</span> )</code>
+
+		<div class="description short">
+			
+<p>String type conversion</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>String type conversion</p>
+
+<p>This is a lazy conversion, dealing only with character size. No real
+conversion table is used.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$in</var></dt>
+					<dd><code>String</code><br>$in</dd>
+					<dt><var>$from</var></dt>
+					<dd><code>optional</code><br>Integer $from</dd>
+					<dt><var>$to</var></dt>
+					<dd><code>optional</code><br>Integer $to</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="oids" id="$oids">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-File_ASN1.html#150-157" title="Go to source code"><var>$oids</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$oids" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>ASN.1 object identifier</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>ASN.1 object identifier</p>
+
+
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://en.wikipedia.org/wiki/Object_identifier">http://en.wikipedia.org/wiki/Object_identifier</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="format" id="$format">
+		<td class="attributes"><code>
+			public  
+			String
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-File_ASN1.html#159-166" title="Go to source code"><var>$format</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'D, d M y H:i:s O'</span></code></td>
+		<td class="description"><div>
+			<a href="#$format" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Default date format</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Default date format</p>
+
+
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://php.net/class.datetime">http://php.net/class.datetime</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="encoded" id="$encoded">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-File_ASN1.html#168-177" title="Go to source code"><var>$encoded</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$encoded" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Default date format</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Default date format</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-File_ASN1.html#_setTimeFormat">File_ASN1::setTimeFormat()</a></code></code><br />
+							<code><code><a href="class-File_ASN1.html#_asn1map">File_ASN1::asn1map()</a></code></code><br />
+					</div>
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://php.net/class.datetime">http://php.net/class.datetime</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="filters" id="$filters">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-File_ASN1.html#179-188" title="Go to source code"><var>$filters</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$filters" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Filters</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Filters</p>
+
+<p>If the mapping type is FILE_ASN1_TYPE_ANY what do we actually encode it
+as?</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<code><code><a href="class-File_ASN1.html#__encode_der">File_ASN1::_encode_der()</a></code></code><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ANYmap" id="$ANYmap">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-File_ASN1.html#190-223" title="Go to source code"><var>$ANYmap</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    FILE_ASN1_TYPE_BOOLEAN              =&gt; <span class="php-keyword1">true</span>,
+    FILE_ASN1_TYPE_INTEGER              =&gt; <span class="php-keyword1">true</span>,
+    FILE_ASN1_TYPE_BIT_STRING           =&gt; <span class="php-quote">'bitString'</span>,
+    FILE_ASN1_TYPE_OCTET_STRING         =&gt; <span class="php-quote">'octetString'</span>,
+    FILE_ASN1_TYPE_NULL                 =&gt; <span class="php-quote">'null'</span>,
+    FILE_ASN1_TYPE_OBJECT_IDENTIFIER    =&gt; <span class="php-quote">'objectIdentifier'</span>,
+    FILE_ASN1_TYPE_REAL                 =&gt; <span class="php-keyword1">true</span>,
+    FILE_ASN1_TYPE_ENUMERATED           =&gt; <span class="php-quote">'enumerated'</span>,
+    FILE_ASN1_TYPE_UTF8_STRING          =&gt; <span class="php-quote">'utf8String'</span>,
+    FILE_ASN1_TYPE_NUMERIC_STRING       =&gt; <span class="php-quote">'numericString'</span>,
+    FILE_ASN1_TYPE_PRINTABLE_STRING     =&gt; <span class="php-quote">'printableString'</span>,
+    FILE_ASN1_TYPE_TELETEX_STRING       =&gt; <span class="php-quote">'teletexString'</span>,
+    FILE_ASN1_TYPE_VIDEOTEX_STRING      =&gt; <span class="php-quote">'videotexString'</span>,
+    FILE_ASN1_TYPE_IA5_STRING           =&gt; <span class="php-quote">'ia5String'</span>,
+    FILE_ASN1_TYPE_UTC_TIME             =&gt; <span class="php-quote">'utcTime'</span>,
+    FILE_ASN1_TYPE_GENERALIZED_TIME     =&gt; <span class="php-quote">'generalTime'</span>,
+    FILE_ASN1_TYPE_GRAPHIC_STRING       =&gt; <span class="php-quote">'graphicString'</span>,
+    FILE_ASN1_TYPE_VISIBLE_STRING       =&gt; <span class="php-quote">'visibleString'</span>,
+    FILE_ASN1_TYPE_GENERAL_STRING       =&gt; <span class="php-quote">'generalString'</span>,
+    FILE_ASN1_TYPE_UNIVERSAL_STRING     =&gt; <span class="php-quote">'universalString'</span>,
+    <span class="php-comment">//FILE_ASN1_TYPE_CHARACTER_STRING     =&gt; 'characterString',</span>
+    FILE_ASN1_TYPE_BMP_STRING           =&gt; <span class="php-quote">'bmpString'</span>
+)</code></td>
+		<td class="description"><div>
+			<a href="#$ANYmap" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Type mapping table for the ANY type.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Type mapping table for the ANY type.</p>
+
+<p>Structured or unknown types are mapped to a FILE_ASN1_Element. Unambiguous
+types get the direct mapping (int/real/bool). Others are mapped as a choice,
+with an extra indexing level.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="stringTypeSize" id="$stringTypeSize">
+		<td class="attributes"><code>
+			public  
+			Array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-File_ASN1.html#225-242" title="Go to source code"><var>$stringTypeSize</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    FILE_ASN1_TYPE_UTF8_STRING      =&gt; <span class="php-num">0</span>,
+    FILE_ASN1_TYPE_BMP_STRING       =&gt; <span class="php-num">2</span>,
+    FILE_ASN1_TYPE_UNIVERSAL_STRING =&gt; <span class="php-num">4</span>,
+    FILE_ASN1_TYPE_PRINTABLE_STRING =&gt; <span class="php-num">1</span>,
+    FILE_ASN1_TYPE_TELETEX_STRING   =&gt; <span class="php-num">1</span>,
+    FILE_ASN1_TYPE_IA5_STRING       =&gt; <span class="php-num">1</span>,
+    FILE_ASN1_TYPE_VISIBLE_STRING   =&gt; <span class="php-num">1</span>,
+)</code></td>
+		<td class="description"><div>
+			<a href="#$stringTypeSize" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>String type to character size mapping table.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>String type to character size mapping table.</p>
+
+<p>Non-convertable types are absent from this table. size == 0 indicates
+variable length encoding.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		samlogin-master API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

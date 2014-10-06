@@ -200,7 +200,11 @@ class KeyManager {
             // create private key for CA cert
             // (you should probably print it out if you want to reuse it)
             $CAPrivKey = new Crypt_RSA();
-            extract($CAPrivKey->createKey());
+            define('CRYPT_RSA_EXPONENT', 65537); 
+            $bits=1024;
+            $bits=2048;
+            SAMLoginControllerAjax::enqueueAjaxMessage("Notice: Using '$bits' bits for the random CSR",SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
+            extract($CAPrivKey->createKey($bits));
             $CAPrivKey->loadKey($privatekey);
 
             $pubKey = new Crypt_RSA();
@@ -244,6 +248,9 @@ class KeyManager {
             // $subject->setDomain('nomatter.nomatter');
 
             $domain = JURI::getInstance()->getHost();
+            if (preg_match("/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/", $domain)){
+                $domain="foobar.org";
+            }
 
             $subject->setDomain($domain);
 
@@ -373,7 +380,7 @@ class KeyManager {
         //$rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);    
         //define('CRYPT_RSA_EXPONENT', 65537);
         //define('CRYPT_RSA_SMALLEST_PRIME', 64); // makes it so multi-prime RSA is used
-
+        define('CRYPT_RSA_EXPONENT', 65537); 
         extract($rsa->createKey(2048)); // == $rsa->createKey(1024) where 1024 is the key size
         $SSPKeyPath = SSPConfManager::getCertDirPath();
 

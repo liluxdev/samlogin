@@ -16,8 +16,8 @@ defined('_JEXEC') or die;
                 <br/>
          <!--       <a class="samloginAccountLink" href="<?php echo $this->accountLink; ?>"><?php echo JText::_('SAMLOGIN_MY_ACCOUNT'); ?></a> -->
             </div>
-            <?php if ($this->user->samloginIdP) { ?>
-            <div id="SAMLoginIdp"><i><?php echo JText::_('SAMLOGIN_AUTH_BY');?>:</i>  <?php echo($this->user->samloginIdP) ?></div>
+            <?php if ($this->user->samloginIdPName) { ?>
+            <div id="SAMLoginIdp"><i><?php echo JText::_('SAMLOGIN_AUTH_BY');?>:</i>  <?php echo($this->user->samloginIdPName) ?></div>
                 <div class="SAMLogut">
                     <form action="<?php echo JRoute::_('index.php?option=com_samlogin&view=login&task=initSLO', true); ?>" method="get">
                         <div class="SAMLoginFormCont">

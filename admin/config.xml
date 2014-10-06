@@ -377,12 +377,17 @@
             description="COM_SAMLOGIN_DISCOTYPE"
         >
             <option value="-1">No Discovery service (one IdP only)</option>
+          
             <option value="0">External</option>
             <option value="null">Embedded siimple (obsolete)</option>
             <option value="discopower">Discopower (embedded)</option>
             <option value="discojuice_standalone">DiscoJuice embedded page (Advanced UX, *only for supported federations)</option>
             <option value="discojuice_embedded">DiscoJuice embedded javascript (Advanced UX, *only for supported federations)</option>
-            <option value="discojuice_global">DiscoJuice global (Advanced UX, *only for supported federations) </option>       
+            <option value="discojuice_global">DiscoJuice global (Advanced UX, *only for supported federations) </option>    
+            
+            <option value="nonsaml">Non AuthN Request Custom Redirect URL to unsolecited/IdP initiated requests</option>
+            <option value="nonsaml-enforced">Automatic/Enforced - Non AuthN Request Custom Redirect URL to unsolecited/IdP initiated requests)</option>
+               
         </field>
          
   
@@ -392,6 +397,15 @@
            default="" 
            label="COM_SAMLOGIN_IDPONLYURL" 
            description="COM_SAMLOGIN_IDPONLYURL"/>
+        
+                
+        <field 
+            name="sspas_discocustomnonauthnurl"
+            type="text"
+            size="70"
+            default=""
+            label="Non AuthN Request Custom Redirect URL"
+        />    
          
         <field 
             name="sspas_discourl"
@@ -400,6 +414,7 @@
             default="https://discovery.renater.fr/test"
             label="COM_SAMLOGIN_DISCOURL"
         />    
+        
          
         <field 
             name="sspas_discojuice_feeds"
@@ -739,7 +754,210 @@
             description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
             name="rule_5_assigngroup">
         </field>     
+        
+        
+         <field 
+            name="rulespacer_6" 
+            type="spacer" 
+            label="COM_SAMLOGIN_AUTHZRULE_6"/>
+
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_ATTR_6" 
+            description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
+            name="rule_6_attr"/>
             
+           
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_REGEX_6" 
+            description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
+            name="rule_6_regex"/>
+            
+            
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_6" 
+            description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+            name="rule_6_sql"/>
+     
+     
+        <field 
+            default="1" 
+            type="usergroup" 
+            label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_6" 
+            description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
+            name="rule_6_assigngroup">
+        </field>     
+        
+         <field 
+            name="rulespacer_7" 
+            type="spacer" 
+            label="COM_SAMLOGIN_AUTHZRULE_7"/>
+
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_ATTR_7" 
+            description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
+            name="rule_7_attr"/>
+            
+           
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_REGEX_7" 
+            description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
+            name="rule_7_regex"/>
+            
+            
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_7" 
+            description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+            name="rule_7_sql"/>
+     
+     
+        <field 
+            default="1" 
+            type="usergroup" 
+            label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_7" 
+            description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
+            name="rule_7_assigngroup">
+        </field>     
+            
+            
+            
+             <field 
+            name="rulespacer_8" 
+            type="spacer" 
+            label="COM_SAMLOGIN_AUTHZRULE_8"/>
+
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_ATTR_8" 
+            description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
+            name="rule_8_attr"/>
+            
+           
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_REGEX_8" 
+            description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
+            name="rule_8_regex"/>
+            
+            
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_8" 
+            description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+            name="rule_8_sql"/>
+     
+     
+        <field 
+            default="1" 
+            type="usergroup" 
+            label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_8" 
+            description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
+            name="rule_8_assigngroup">
+        </field>     
+        
+        
+         <field 
+            name="rulespacer_9" 
+            type="spacer" 
+            label="COM_SAMLOGIN_AUTHZRULE_9"/>
+
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_ATTR_9" 
+            description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
+            name="rule_9_attr"/>
+            
+           
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_REGEX_9" 
+            description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
+            name="rule_9_regex"/>
+            
+            
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_9" 
+            description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+            name="rule_9_sql"/>
+     
+     
+        <field 
+            default="1" 
+            type="usergroup" 
+            label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_9" 
+            description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
+            name="rule_9_assigngroup">
+        </field>    
+        
+          <field 
+            name="rulespacer_10" 
+            type="spacer" 
+            label="COM_SAMLOGIN_AUTHZRULE_10"/>
+
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_ATTR_10" 
+            description="COM_SAMLOGIN_AUTHZRULE_ATTR_DESC" 
+            name="rule_10_attr"/>
+            
+           
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_REGEX_10" 
+            description="COM_SAMLOGIN_AUTHZRULE_REGEX_DESC" 
+            name="rule_10_regex"/>
+            
+            
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_10" 
+            description="COM_SAMLOGIN_AUTHZRULE_SQLMATCH_DESC" 
+            name="rule_10_sql"/>
+     
+     
+        <field 
+            default="1" 
+            type="usergroup" 
+            label="COM_SAMLOGIN_AUTHZRULE_ASSIGN_10" 
+            description="COM_SAMLOGIN_AUTHZRULE_ASSIGN_DESC" 
+            name="rule_10_assigngroup">
+        </field>      
             
             
     </fieldset>
@@ -799,7 +1017,7 @@
                 
         <field
             name="overrideJoomlaLoginPage"
-            type="menuitem"
+            type="radio"
             label="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN"
             description="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN"
             default="1"
@@ -811,6 +1029,32 @@
         <field name="loginPage" type="menuitem" default="0" disable="separator" label="COM_SAMLOGIN_OVERRIDE_JOOMLA_LOGIN_MENU_ITEM" description="" state="1">
             <option value="0">SAMLOGIN_AUTO</option>
         </field>
+        
+        
+        <field name="samlErrorRedirect" type="menuitem" default="0" disable="separator" label="SAML Error redirection" description="" state="1">
+            <option value="0">SAMLOGIN_AUTO</option>
+        </field>
+        
+        <field 
+            default="" 
+            type="text" 
+            size="60"
+            label="Base URL override for checklist checks" 
+            description="Use it only if you experience problems with the checklist, keep empty elsewhere" 
+            name="customCheckBaseURL"/>
+        
+        <field
+            name="debug_auth"
+            type="radio" class="btn-group"
+            label="Debug authplugin"
+            description="Only if you are experiencing issues"
+            default="0"
+        >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </field>
+        
+        
 			
                 
                 
@@ -822,7 +1066,7 @@
             type="radio" class="btn-group"
             label="COM_SAMLOGIN_SAMLOGIN_TRYSLO"
             description="COM_SAMLOGIN_SAMLOGIN_TRYSLO_DESC"
-            default="0"
+            default="1"
         >
             <option value="0">No</option>
             <option value="1">Yes</option>
@@ -861,7 +1105,7 @@
                 
         <field
             name="logout_customhtmlmessage"
-            type="editor"
+            type="textarea"
             filter='safehtml' 
             label="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT_CUSTOMMSG"
             description="COM_SAMLOGIN_SAMLOGIN_LOGOUT_ALERT_CUSTOMMSG"

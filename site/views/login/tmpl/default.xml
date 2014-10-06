@@ -17,9 +17,9 @@
             </param>
             
             <param name="ssoLoginTitle" 
-                    type="text" default="Federated Login" 
-                    label="SSO Login section title" 
-                    description="SSO Login section title"/>
+                   type="text" default="Federated Login" 
+                   label="SSO Login section title" 
+                   description="SSO Login section title"/>
                                 
                                   
               
@@ -29,10 +29,10 @@
                    description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
                                 
             <param name="loginButtonClasses" 
-                                           type="text" 
-                                           label="Login button CSS classes" 
-                                           default="btn btn-primary uk-button uk-button-primary" 
-                                           description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
+                   type="text" 
+                   label="Login button CSS classes" 
+                   default="btn btn-primary uk-button uk-button-primary" 
+                   description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
                          
             <param name="customIntroductionMessage" type="textarea" rows="5" cols="30" default="" label="COM_SAMLOGIN_CUSTOM_INTRO_MSG" description="COM_SAMLOGIN_CUSTOM_INTRO_MSG_DESC"/>
             <param name="registrationMessage" type="list" default="0" label="Custom registration message" description="COM_SAMLOGIN_REGISTRATION_MSG_DESC">
@@ -50,22 +50,48 @@
           
             
             <param name="logoutButtonLabel" 
-                          type="text" default="SAMLOGIN_SIGNOUT_CLASSIC" 
-                          label="SAMLOGIN_LOGIN_BUTTON_LABEL" 
-                          description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
+                   type="text" default="SAMLOGIN_SIGNOUT_CLASSIC" 
+                   label="SAMLOGIN_LOGOUT_BUTTON_LABEL" 
+                   description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
            
             <param name="logoutButtonClasses" 
-                            type="text" default="samloginButton btn uk-btn" 
-                            label="Logout button CSS classes" 
-                            description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
+                   type="text" default="samloginButton btn uk-btn" 
+                   label="Logout button CSS classes" 
+                   description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
             
             <param name="customSignInMessage" type="textarea" rows="5" cols="30" default="" label="COM_SAMLOGIN_CUSTOM_LOGIN_MSG" description="COM_SAMLOGIN_CUSTOM_LOGIN_MSG_DESC"/>
+          
+
+
             <param name="login" type="menuitem" default="" disable="separator" label="COM_SAMLOGIN_LOGIN_REDIRECTION_URL" description="" state="1"/>
             
             
             
+            <param name="showgreeting" type="radio" default="1" label="Show greeting" description="">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </param>
+            
+            <param name="showauthvia" type="radio" default="0" label="Show IdP Name" description="">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </param>
+            
+               <param name="showgravatar" type="radio" default="0" label="Show gravatar" description="">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </param>
             
             <param name="logout" type="menuitem" default="" disable="separator" label="COM_SAMLOGIN_LOGOUT_REDIRECTION_URL" description="" state="1"/>
+            
+            
+            <param name="systemreturngotpriority" type="radio" default="1" label="System return parameter should have priority" description="System return parameter should have priority">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </param>
+            
+         
+            
             <param name="usesecure" type="radio" default="0" label="Enforce https for login" description="COM_SAMLOGIN_ENCRYPT_LOGIN_FORM_DESC">
                 <option value="0">No</option>
                 <option value="1">Yes</option>
@@ -80,74 +106,96 @@
         </params>
         <fields name="params" addfieldpath="/administrator/components/com_samlogin/elements">
             <fieldset name="basic">
-                     <field name="template" type="template" default="default" extension="com_samlogin" label="Template" description=""/>
-            <field name="introductionMessage" type="list" default="0" label="COM_SAMLOGIN_INTRO_MESSAGE" description="COM_SAMLOGIN_INTRO_MESSAGE_DESC">
-                <option value="">COM_SAMLOGIN_NONE</option>
-                <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
-                <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
-            </field>
+                <field name="template" type="template" default="default" extension="com_samlogin" label="Template" description=""/>
+                <field name="introductionMessage" type="list" default="0" label="COM_SAMLOGIN_INTRO_MESSAGE" description="COM_SAMLOGIN_INTRO_MESSAGE_DESC">
+                    <option value="">COM_SAMLOGIN_NONE</option>
+                    <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
+                    <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
+                </field>
             
-            <field name="ssoLoginTitle" 
-                    type="text" default="Federated Login" 
-                    label="SSO Login section title" 
-                    description="SSO Login section title"/>
+                <field name="ssoLoginTitle" 
+                   type="text" default="Federated Login" 
+                   label="SSO Login section title" 
+                   description="SSO Login section title"/>
                                 
                                   
               
-            <field name="loginButtonLabel" 
+                <field name="loginButtonLabel" 
                    type="text" default="SAMLOGIN_SSO" 
                    label="SAMLOGIN_LOGIN_BUTTON_LABEL" 
                    description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
                                 
-            <field name="loginButtonClasses" 
-                                           type="text" 
-                                           label="Login button CSS classes" 
-                                           default="btn btn-primary uk-button uk-button-primary" 
-                                           description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
+                <field name="loginButtonClasses" 
+                   type="text" 
+                   label="Login button CSS classes" 
+                   default="btn btn-primary uk-button uk-button-primary" 
+                   description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
                          
-            <field name="customIntroductionMessage" type="textarea" rows="5" cols="30" default="" label="COM_SAMLOGIN_CUSTOM_INTRO_MSG" description="COM_SAMLOGIN_CUSTOM_INTRO_MSG_DESC"/>
-            <field name="registrationMessage" type="list" default="0" label="COM_SAMLOGIN_REGISTRATION_MSG" description="COM_SAMLOGIN_REGISTRATION_MSG_DESC">
-                <option value="">COM_SAMLOGIN_NONE</option>
-                <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
-                <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
-            </field>
-            <field name="customRegistrationMessage" type="textarea" rows="5" cols="30" default="" label="Custom message in registration block" description="SAMLOGIN_LOGINVIEW_FORM_CUSTOM_REGISTRATION_MESSSAGE_DESC"/>
-            <field name="signInMessage" type="list" default="0" label="COM_SAMLOGIN_LOGIN_MSG" description="COM_SAMLOGIN_LOGIN_MSG_DESC">
-                <option value="">COM_SAMLOGIN_NONE</option>
-                <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
-                <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
-            </field>
+                <field name="customIntroductionMessage" type="textarea" rows="5" cols="30" default="" label="COM_SAMLOGIN_CUSTOM_INTRO_MSG" description="COM_SAMLOGIN_CUSTOM_INTRO_MSG_DESC"/>
+                <field name="registrationMessage" type="list" default="0" label="COM_SAMLOGIN_REGISTRATION_MSG" description="COM_SAMLOGIN_REGISTRATION_MSG_DESC">
+                    <option value="">COM_SAMLOGIN_NONE</option>
+                    <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
+                    <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
+                </field>
+                <field name="customRegistrationMessage" type="textarea" rows="5" cols="30" default="" label="Custom message in registration block" description="SAMLOGIN_LOGINVIEW_FORM_CUSTOM_REGISTRATION_MESSSAGE_DESC"/>
+                <field name="signInMessage" type="list" default="0" label="COM_SAMLOGIN_LOGIN_MSG" description="COM_SAMLOGIN_LOGIN_MSG_DESC">
+                    <option value="">COM_SAMLOGIN_NONE</option>
+                    <option value="default">COM_SAMLOGIN_USE_DEFAULT</option>
+                    <option value="custom">COM_SAMLOGIN_USE_CUSTOM</option>
+                </field>
             
           
             
-            <field name="logoutButtonLabel" 
-                          type="text" default="SAMLOGIN_SIGNOUT_CLASSIC" 
-                          label="SAMLOGIN_LOGIN_BUTTON_LABEL" 
-                          description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
+                <field name="logoutButtonLabel" 
+                   type="text" default="SAMLOGIN_SIGNOUT_CLASSIC" 
+                   label="SAMLOGIN_LOGIN_BUTTON_LABEL" 
+                   description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
            
-            <field name="logoutButtonClasses" 
-                            type="text" default="samloginButton btn uk-btn" 
-                            label="Logout button CSS classes" 
-                            description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
+                <field name="logoutButtonClasses" 
+                   type="text" default="samloginButton btn uk-btn" 
+                   label="Logout button CSS classes" 
+                   description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
             
-            <field name="customSignInMessage" type="textarea" rows="5" cols="30" default="" label="Custom message after login block" description="COM_SAMLOGIN_CUSTOM_LOGIN_MSG_DESC"/>
-            <field name="login" type="menuitem" default="" disable="separator" label="COM_SAMLOGIN_LOGIN_REDIRECTION_URL" description="" state="1"/>
-            
-            
+                <field name="customSignInMessage" type="textarea" rows="5" cols="30" default="" label="Custom message after login block" description="COM_SAMLOGIN_CUSTOM_LOGIN_MSG_DESC"/>
+                <field name="login" type="menuitem" default="" disable="separator" label="COM_SAMLOGIN_LOGIN_REDIRECTION_URL" description="" state="1"/>
             
             
-            <field name="logout" type="menuitem" default="" disable="separator" label="COM_SAMLOGIN_LOGOUT_REDIRECTION_URL" description="" state="1"/>
-            <field name="usesecure" type="radio" default="0" label="Enforce https for login" description="COM_SAMLOGIN_ENCRYPT_LOGIN_FORM_DESC">
+            
+            
+                <field name="logout" type="menuitem" default="" disable="separator" label="COM_SAMLOGIN_LOGOUT_REDIRECTION_URL" description="" state="1"/>
+            
+               <field name="showgreeting" type="radio" default="1" label="Show greeting" description="">
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </field>
             
-            <field name="showClassic" type="radio" default="1" label="Show also local login" description="">
+            <field name="showauthvia" type="radio" default="1" label="Show IdP Name" description="">
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </field>
-            <field name="menutype" type="menu" default="" label="Render a menu in user page" description="COM_SAMLOGIN_RENDER_MENU_DESC" />
-            <field name="style" type="style" />
+            
+               <field name="showgravatar" type="radio" default="1" label="Show gravatar" description="">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </field>
+                
+                <field name="systemreturngotpriority" type="radio" default="1" label="System return parameter should have priority"
+                                       description="System return parameter should have priority">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+            
+                <field name="usesecure" type="radio" default="0" label="Enforce https for login" description="COM_SAMLOGIN_ENCRYPT_LOGIN_FORM_DESC">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+            
+                <field name="showClassic" type="radio" default="1" label="Show also local login" description="">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="menutype" type="menu" default="" label="Render a menu in user page" description="COM_SAMLOGIN_RENDER_MENU_DESC" />
+                <field name="style" type="style" />
             </fieldset>
         </fields>
     </state>
