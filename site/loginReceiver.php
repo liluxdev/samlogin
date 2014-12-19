@@ -96,8 +96,21 @@ if (isset($_REQUEST["wresult"])) {
 }
 if ($proto == "wsfed") {
 
-    $idpWSEnt = "http://hu-idp.myagworks.com/test/";
-    $spWSEnt = "https://landing.myagworks.com/";
+    $idpWSEnt = $_REQUEST["wsfedidp"];
+    $spWSEnt = $_REQUEST["wsfedsp"];
+
+    if (!empty($_GET['wa']) and ($_GET['wa'] == 'wsignoutcleanup1.0')) {
+	if (isset($session) && $session->isValid('wsfed')) {
+            $app= JFactory::getApplication();
+                $currentSession = JFactory::getSession();
+                $currentSession->set("SAMLoginPreventDoubleLogout", true);
+                $currentSession->close(); 
+		$session->doLogout('wsfed');
+                $app->logout(); 
+     }
+    }
+    
+    $session = SimpleSAML_Session::getInstance();
     if (!$session->isValid('wsfed') && !isset($_REQUEST["wresult"])) {
         SimpleSAML_Utilities::redirectTrustedURL(
                 '/' . $config->getBaseURL() . 'wsfed/sp/initSSO.php', array('RelayState' => SimpleSAML_Utilities::selfURL(),
@@ -120,7 +133,7 @@ if ($proto == "wsfed") {
          * @version $Id$
          */
         $config = SimpleSAML_Configuration::getInstance();
-        $session = SimpleSAML_Session::getInstance();
+       // $session = SimpleSAML_Session::getInstance();
         $metadata = SimpleSAML_Metadata_MetaDataStorageHandler::getMetadataHandler();
 
 
@@ -168,17 +181,26 @@ if ($proto == "wsfed") {
 
 //echo "wsresult xml is: <textarea><![CDATA[".$wresult."]]></textarea>"; 
 //echo "<hr/>parses xml is: ".print_r($dom,true)."";
+//error_reporting(E_ALL);
             $xpath = new DOMXpath($dom);
             $xpath->registerNamespace('wst', 'http://schemas.xmlsoap.org/ws/2005/02/trust');
             $xpath->registerNamespace('saml', 'urn:oasis:names:tc:SAML:1.0:assertion');
-
+         //   $xpath->registerNamespace('saml2','urn:oasis:names:tc:SAML:2.0:assertion');
 
             /* Find the saml:Assertion element in the response. */
             $assertions = $xpath->query('//saml:Assertion');
-            //echo "<hr/>";      print_r($assertions);
-            // die("test at ".__LINE__); 
-            if ($assertions->length === 0) {
-                throw new Exception('Received a response without an assertion on the WS-Fed PRP handler.');
+            //echo "<hr/> Ass:";      print_r($assertions);
+            $tokenType="saml11";
+        //   die("test at ".__LINE__); 
+            if (!isset($assertions) || empty($assertions) || $assertions->length === 0) {
+         //   die("test at ".__LINE__); 
+                $assertions = $xpath->query('//*[local-name()="Assertion"]');
+                 //echo "<hr/>The assertions";      print_r($assertions);
+                if ($assertions->length === 0) {
+                    throw new Exception('SAMLOGIN is not able to find a SAML assertion in the WSFED response, please check your token type.');
+                }else{
+                  $tokenType="saml20";
+                }
             }
             if ($assertions->length > 1) {
                 throw new Exception('The WS-Fed PRP handler currently only supports a single assertion in a response.');
@@ -186,40 +208,73 @@ if ($proto == "wsfed") {
             $assertion = $assertions->item(0);
 
             /* Find the entity id of the issuer. */
+            if ($tokenType=="saml11"){
             $idpEntityId = $assertion->getAttribute('Issuer');
-
+	    }
+	    if ($tokenType=="saml20"){
+	     $idpEntityId =  $xpath->query('//*[local-name()="Issuer"]/text()')->item(0)->nodeValue;
+	    // die(print_r($idpEntityId,true));
+	    }
             //die("test at ".__LINE__); 
             /* Load the IdP metadata. */
             $idpMetadata = $metadata->getMetaData($idpEntityId, 'wsfed-idp-remote');
-
+     //  die(print_r($idpMetadata,true));
             /* Find the certificate used by the IdP. */
             if (array_key_exists('certificate', $idpMetadata)) {
+     
                 $certFile = SimpleSAML_Utilities::resolveCert($idpMetadata['certificate']);
             } else {
-                throw new Exception('Missing \'certificate\' metadata option in the \'wsfed-idp-remote\' metadata' .
-                ' for the IdP \'' . $idpEntityId . '\'.');
+                     if (array_key_exists('certFingerprint', $idpMetadata)) {
+                       $certFingerprint = strtolower($idpMetadata['certFingerprint']);
+                        $certFile="fingerprint";
+                     }else{
+                       die("No certificate or fingerprint found in wsfed-remote metadata for the current IdP");
+                     }
             }
 
             //echo($certFile);
             try {
                 /* Load the certificate. */
-                $certData = file_get_contents($certFile);
-                //  die($certData);
-                if ($certData === FALSE) {
-                    die("Error loading IdP public key");
-                    throw new Exception('Unable to load certificate file \'' . $certFile . '\' for wsfed-idp \'' .
-                    $idpEntityId . '\'.');
-                }
-
-
-
-                /* Verify that the assertion is signed by the issuer. */
-                $validator = new SimpleSAML_XML_Validator($assertion, 'AssertionID', $certData);
-                if (!$validator->isNodeValidated($assertion)) {
-                    throw new Exception('The assertion was not correctly signed by the WS-Fed IdP \'' .
-                    $idpEntityId . '\'.');
+                if ($certFile=="fingerprint"){
+                     /* Verify that the assertion is signed by the issuer. */
+                        if ($tokenType=="saml11"){
+	                $validator = new SimpleSAML_XML_Validator($assertion, 'AssertionID', array("certFingerprint"=>array($certFingerprint)));
+	                }
+	                    if ($tokenType=="saml20"){
+	                    $validator = new SimpleSAML_XML_Validator($assertion, "ID", array("certFingerprint"=>array($certFingerprint)));
+	            
+	                    }
+	                if (!$validator->isNodeValidated($assertion)) {
+	                    throw new Exception('The assertion was not correctly signed by the WS-Fed IdP (fingerprint validation mode) \'' .
+	                    $idpEntityId . '\'.');
+	                }
+                }else{
+	                $certData = file_get_contents($certFile);
+	                //  die($certData);
+	                if ($certData === FALSE) {
+	                    die("Error loading IdP public key");
+	                    throw new Exception('Unable to load certificate file \'' . $certFile . '\' for wsfed-idp \'' .
+	                    $idpEntityId . '\'.');
+	                }
+	
+	
+	
+	                /* Verify that the assertion is signed by the issuer. */
+	                  if ($tokenType=="saml11"){
+	                $validator = new SimpleSAML_XML_Validator($assertion, 'AssertionID', $certData);
+	                }
+	                if ($tokenType=="saml20"){
+	                    $validator = new SimpleSAML_XML_Validator($assertion, "ID", $certData);
+	            
+	                }
+	                
+	                if (!$validator->isNodeValidated($assertion)) {
+	                    throw new Exception('The assertion was not correctly signed by the WS-Fed IdP \'' .
+	                    $idpEntityId . '\'.');
+	                }
                 }
             } catch (Exception $securityEx) {
+               // print_r($securityEx->getTrace());
                 die("Error validating wsfed message signature: " . $securityEx->getMessage());
             }
 
@@ -235,8 +290,16 @@ if ($proto == "wsfed") {
 
 
             /* Extract the name identifier from the response. */
-            $nameid = $xpath->query('./saml:AuthenticationStatement/saml:Subject/saml:NameIdentifier', $assertion);
-            if ($nameid->length === 0) {
+             if ($tokenType=="saml11"){
+	                 $nameid = $xpath->query('./saml:AuthenticationStatement/saml:Subject/saml:NameIdentifier', $assertion);
+         
+	                }
+	                if ($tokenType=="saml20"){
+	                    $nameid = $xpath->query('//*[local-name()="NameID"]', $assertion);
+        
+	            
+	                }
+             if ($nameid->length === 0) {
                 throw new Exception('Could not find the name identifier in the response from the WS-Fed IdP \'' .
                 $idpEntityId . '\'.');
             }
@@ -248,6 +311,7 @@ if ($proto == "wsfed") {
 
             /* Extract the attributes from the response. */
             $attributes = array();
+                  if ($tokenType=="saml11"){
             $attributeValues = $xpath->query('./saml:AttributeStatement/saml:Attribute/saml:AttributeValue', $assertion);
             foreach ($attributeValues as $attribute) {
                 $name = $attribute->parentNode->getAttribute('AttributeName');
@@ -257,8 +321,20 @@ if ($proto == "wsfed") {
                 }
                 $attributes[$name][] = $value;
             }
+            }
+                  if ($tokenType=="saml20"){
+                   $attributeValues = $xpath->query('//*[local-name()="AttributeValue"]', $assertion);
+            foreach ($attributeValues as $attribute) {
+                $name = $attribute->parentNode->getAttribute('Name');
+                $value = $attribute->textContent;
+                if (!array_key_exists($name, $attributes)) {
+                    $attributes[$name] = array();
+                }
+                $attributes[$name][] = $value;
+            }
+                  }
 
-//        die(print_r($attributes,true));
+     //  die(print_r($attributes,true));
 
             /* Mark the user as logged in. */
             $authData = array(
@@ -271,7 +347,7 @@ if ($proto == "wsfed") {
             /* Redirect the user back to the page which requested the login. */
             SimpleSAML_Utilities::redirectUntrustedURL($wctx);
         } catch (Exception $exception) {
-            die("err");
+            die("Error: ".$exception->getMessage());
             throw new SimpleSAML_Error_Error('PROCESSASSERTION', $exception);
         }
     }
@@ -329,6 +405,7 @@ if ($proto == "wsfed") {
             $currentSession->set("SAMLoginIdP", SAMLoginSessionBridge::$SAMLIdP);
             $currentSession->set("SAMLoginSP", SAMLoginSessionBridge::$SAMLSP);
             $currentSession->set("SAMLoginNameId", json_encode(SAMLoginSessionBridge::$SAMLNameId));
+                $currentSession->set("SAMLoginIsWSFEDSession", true);
             //     print_r($currentSession->get("SAMLoginAttrs")); die("123testing");
             /* this fixes issue 4 */ $currentSession->close(); //ensure session data storage session_write_close()
           
