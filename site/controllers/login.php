@@ -21,10 +21,10 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $extraReturnURLParams = "";
         //   $return = JRequest::getVar('return', null, 'GET', 'BASE64');
         $return = JRequest::getString('return');
-        JFactory::getSession()->set("rret",$return);
-         
-       // JFactory::getSession()->close(true);
-        $returnAfterFacebook = JURI::root().'index.php?option=com_samlogin&view=login&task=finishFacebookSSO'; /* ,$params->get('usesecure', false) */;
+        JFactory::getSession()->set("rret", $return);
+
+        // JFactory::getSession()->close(true);
+        $returnAfterFacebook = JURI::root() . 'index.php?option=com_samlogin&view=login&task=finishFacebookSSO'; /* ,$params->get('usesecure', false) */;
 //die($returnAfterFacebook);
         Facebook\FacebookSession::setDefaultApplication($params->get("fb_appid", ""), $params->get("fb_appsecret", ""));
         // die($returnAfterFacebook);
@@ -43,12 +43,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
 
         $extraReturnURLParams = "";
         //   $return = JRequest::getVar('return', null, 'GET', 'BASE64');
-        $return = JRequest::getString('return');
-        if (!is_null($return)) {
-            $extraReturnURLParams .= "&rret=" . $return;
-        } else {
-            $extraReturnURLParams .= "&rret=" . base64_encode(JURI::root(true));  //default to homepage
-        }
+
 
         $idp = JRequest::getVar('idp', null, 'GET', 'STRING');
         $discotype = $params->get("sspas_discotype", "0");
@@ -65,10 +60,17 @@ class SAMLoginControllerLogin extends SAMLoginController {
         }
 
         if ($discotype == "wsfed" || $discotype == "wsfed-enforced") {
-            $wsfedsp = $params->get("wsfed_idp_realm_1",JURI::root());
-        //    die($wsfedsp);
+            $wsfedsp = $params->get("wsfed_idp_realm_1", JURI::root());
+            //    die($wsfedsp);
             $wsfedidp = $params->get("wsfed_idp_issuer_1", "please check you wsfed config");
             $extraReturnURLParams = "&proto=wsfed&wsfedidp=" . urlencode($wsfedidp) . "&wsfedsp=" . urlencode($wsfedsp);
+        }
+
+        $return = JRequest::getString('return');
+        if (!is_null($return)) {
+            $extraReturnURLParams .= "&rret=" . $return;
+        } else {
+            $extraReturnURLParams .= "&rret=" . base64_encode(JURI::root(true));  //default to homepage
         }
 
         $returnTo = JURI::root() . '/components/com_samlogin/loginReceiver.php?task=initSSO' . $extraReturnURLParams;
@@ -115,6 +117,92 @@ class SAMLoginControllerLogin extends SAMLoginController {
         //   }
     }
 
+    public function initFacebookSLO() {
+
+        $app = JFactory::getApplication();
+
+
+        $sess = JFactory::getSession();
+        $user = JFactory::getUser();
+        $params = JComponentHelper::getParams('com_samlogin');
+
+
+        $extraReturnURLParams = "";
+        //  $return = JRequest::getVar('return', null, 'GET', 'BASE64');
+        $return = JRequest::getString('return');
+        if (!is_null($return)) {
+            $extraReturnURLParams .= "&rret=" . $return;
+        }
+
+
+        $sess->set("SAMLoginIsAuthN", false);
+        require JPATH_COMPONENT_SITE . '/libs/facebook-sdk/autoload.php';
+
+        $app = JFactory::getApplication();
+        $params = JComponentHelper::getParams('com_samlogin');
+
+        $extraReturnURLParams = "";
+        //   $return = JRequest::getVar('return', null, 'GET', 'BASE64');
+        $return = JRequest::getString('return');
+        if ($this->is_base64($return)) {
+            $return = base64_decode($return);
+        }
+        JFactory::getSession()->set("rret", $return);
+        if ($params->get("fb_fulllogout", 0)) {
+            // JFactory::getSession()->close(true);
+            $returnAfterFacebook = JURI::root() . 'index.php?option=com_samlogin&view=login&task=finishFacebookSSO'; /* ,$params->get('usesecure', false) */;
+//die($returnAfterFacebook);
+            Facebook\FacebookSession::setDefaultApplication($params->get("fb_appid", ""), $params->get("fb_appsecret", ""));
+            // die($returnAfterFacebook);
+            $fbsess = new Facebook\FacebookSession($sess->get("FacebookAccessToken"));
+            $helper = new Facebook\SamloginFacebookRedirectLoginHelper($returnAfterFacebookRebuilded);
+            $logoutUrl = $helper->getLogoutUrl($fbsess, $return);
+            $app->logout();
+            die($logoutUrl);
+            $app->redirect($logoutUrl);
+        } else { //NOrmal SSO case
+            //Destroy only local fb session
+            self::cleanSessionViaCookie();
+            $app->redirect($return);
+        }
+
+        //   }
+    }
+
+    
+     public static function cleanSessionViaCookie(){
+         if (isset($_SERVER['HTTP_COOKIE'])) {
+                            $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+                            $frontendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('site')));
+                            $backendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('administrator')));
+                            //print "<hr/>front: ".$frontendSessId;
+                            // print "<hr/>back: ".$backendSessId;
+                            //print "<hr/>sessname: ".$sessname;
+                            $sessionCookieValueToRemove = array(
+                                $frontendSessId,
+                                $backendSessId
+                            );
+
+                            $sessionCookieNameToRemove = array(
+                                "SAMLoginCookieAuthToken",
+                                "SAMLoginSimpleSAMLSessionID"
+                            );
+                            // die(print_r($cookies,true));
+
+                            foreach ($cookies as $cookie) {
+
+                                $parts = explode('=', $cookie);
+                                $name = trim($parts[0]);
+                                $value = trim($parts[1]);
+                                if (in_array($value, $sessionCookieValueToRemove) || in_array($name, $sessionCookieNameToRemove)) {
+                                    setcookie($name, '', 1);
+                                    setcookie($name, '', 1, '/');
+                                }
+                            }
+        }
+    }
+
+    
     public function initSLO() {
 
         $app = JFactory::getApplication();
@@ -130,15 +218,15 @@ class SAMLoginControllerLogin extends SAMLoginController {
         if (!is_null($return)) {
             $extraReturnURLParams .= "&rret=" . $return;
         }
-      
+
         $trySLO = $params->get("trysinglelogout", 1) == 1;
         if ($trySLO) {
             $extraReturnURLParams .= "&trySLO=1";
         }
         $isWSFED = $sess->get("SAMLoginIsWSFEDSession", false);
         if ($isWSFED) {
-             $wsfedsp = $params->get("wsfed_idp_realm_1",JURI::root());
-           //  die($wsfedsp);
+            $wsfedsp = $params->get("wsfed_idp_realm_1", JURI::root());
+            //  die($wsfedsp);
             $wsfedidp = $params->get("wsfed_idp_issuer_1", "please check you wsfed config");
             $extraReturnURLParams = "&proto=wsfed&wsfedidp=" . urlencode($wsfedidp) . "&wsfedsp=" . urlencode($wsfedsp) . "&dologout=1";
         }
@@ -240,110 +328,21 @@ class SAMLoginControllerLogin extends SAMLoginController {
 
     public function finishFacebookSSO() {
         $user = JFactory::getUser();
-            //die("testing at line".print_r($user,true).__LINE__);
-            if (true || $user->guest) {
-        $app = JFactory::getApplication();
-        $sess = JFactory::getSession();
-        $user = JFactory::getUser();
-        $params = JComponentHelper::getParams('com_samlogin');
-        // die("test");
+        //die("testing at line".print_r($user,true).__LINE__);
+        if (true || $user->guest) {
+            $app = JFactory::getApplication();
+            $sess = JFactory::getSession();
+            $user = JFactory::getUser();
+            $params = JComponentHelper::getParams('com_samlogin');
+            // die("test");
 
-       
 
-        $returnAfterFacebookRebuilded = JURI::root().'index.php?option=com_samlogin&view=login&task=finishFacebookSSO'; /* ,$params->get('usesecure', false) */;
+
+            $returnAfterFacebookRebuilded = JURI::root() . 'index.php?option=com_samlogin&view=login&task=finishFacebookSSO'; /* ,$params->get('usesecure', false) */;
 //die($returnAfterFacebookRebuilded);
-        $rret=JFactory::getSession()->get("rret",JURI::root());
-     
-        
-        if (!is_null($rret)) {
-            if ($this->is_base64($rret)) {
-                $return = base64_decode($rret);
-            } else {
-                $return = $rret;
-            }
-        }
-       
-        require JPATH_COMPONENT_SITE . '/libs/facebook-sdk/autoload.php';
-        Facebook\FacebookSession::setDefaultApplication($params->get("fb_appid", ""), $params->get("fb_appsecret", ""));
+            $rret = JFactory::getSession()->get("rret", JURI::root());
 
-        $helper = new Facebook\SamloginFacebookRedirectLoginHelper($returnAfterFacebookRebuilded);
-        try {
 
-            $session = $helper->getSessionFromRedirect();
-             //die("test2");
-            if ($session) {
-                $fbrequest = (new Facebook\FacebookRequest($session, 'GET', '/me'));
-              //  $me= new Facebook\GraphUser();
-                $me = $fbrequest->execute()->getGraphObject(Facebook\GraphUser::className());
-              
-            } else {
-              
-                $errcode = "FACEBOOK_CONNECT_NOSESS";
-                $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
-              return;
-            }
-        //    die(print_r($me, true));
-        } catch (FacebookRequestException $ex) {
-            // When Facebook returns an error
-            $errcode = "FACEBOOK_CONNECT_REQFAIL";
-            $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
-             return;
-        } catch (Exception $ex) {
-            // When validation fails or other local issues
-            $errcode =  "FACEBOOK_CONNECT_ERROR " . $ex->getMessage();
-            $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
-             return;
-        }
-        if ($session) {
-            $currentSession = JFactory::getSession();
-
-            $currentSession->set("SAMLoginIsAuthN", true);
-
-            $currentSession->set("SAMLoginSession", null);
-            $currentSession->set("SAMLoginAttrs", array(
-                "givenName"=>array($me->getFirstName()),
-                "sn"=> array($me->getMiddleName()."".$me->getLastName()),
-                "fbid"=>array($me->getId()),
-                "mail"=>array($me->getEmail()),
-                "gender"=>array($me->getGender()),
-                "fbURL"=>array($me->getLink()),
-                "locale"=>array($me->getProperty("locale")),
-                "cn"=>array($me->getName()),
-                "timezone"=>array($me->getProperty("timezone")),
-                "fbVerified"=>array($me->getProperty("verified")),
-                //"username"=>$me->getProperty("username"),seems not avail anymore
-                
-            ));
-            $currentSession->set("SAMLoginIdP", "Facebook");
-            $currentSession->set("SAMLoginSP", "FacebookSDK");
-            $currentSession->set("SAMLoginNameId", $me->getId());
-            $currentSession->set("SAMLoginIsFacebookSession", true);
-            //     print_r($currentSession->get("SAMLoginAttrs")); die("123testing");
-            /* this fixes issue 4 */ $currentSession->close();
-
-         
-                // $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
-                //  phpconsole("rret decoded is ".$return,"rastrano");
-               // die($return);
-              //  die(print_r($user,true));
-         
-                   $returnAfterFacebookFixSessionIssue = JRoute::_(
-                           JURI::root().'index.php?option=com_samlogin&view=login&task=handleSAMLResponse&rret='.base64_encode($return)); /* ,$params->get('usesecure', false) */;
-
-                $app->redirect($returnAfterFacebookFixSessionIssue);
-            
-        }
-            }else{
-                $sess = JFactory::getSession();
-                $errcode = $sess->get("samloginFailErrcode", "ALREADY_LOGGED");
-                $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
-                return;
-            }
-               
-    }
-
-    public function handleSAMLResponse() {
-         $rret = JRequest::getString('rret');
             if (!is_null($rret)) {
                 if ($this->is_base64($rret)) {
                     $return = base64_decode($rret);
@@ -351,15 +350,102 @@ class SAMLoginControllerLogin extends SAMLoginController {
                     $return = $rret;
                 }
             }
-                if (stristr($return,"administrator/")){
-                           $app = JFactory::getApplication(); //not admin or it will auto authorise
-                    // $app = JFactory::getApplication("administrator");
-                    // $app = JApplicationAdministrator::getInstance("administrator");
-                    // $app->loadSession();
-                     //die("xxxa".print_r($app,true));
-                }else{
-        $app = JFactory::getApplication();
+
+            require JPATH_COMPONENT_SITE . '/libs/facebook-sdk/autoload.php';
+            Facebook\FacebookSession::setDefaultApplication($params->get("fb_appid", ""), $params->get("fb_appsecret", ""));
+
+            $helper = new Facebook\SamloginFacebookRedirectLoginHelper($returnAfterFacebookRebuilded);
+            try {
+
+                $session = $helper->getSessionFromRedirect();
+                //die("test2");
+                if ($session) {
+
+                    $fbrequest = (new Facebook\FacebookRequest($session, 'GET', '/me'));
+                    //  $me= new Facebook\GraphUser();
+                    $me = $fbrequest->execute()->getGraphObject(Facebook\GraphUser::className());
+                } else {
+
+                    $errcode = "FACEBOOK_CONNECT_NOSESS";
+                    $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
+                    return;
                 }
+                //    die(print_r($me, true));
+            } catch (FacebookRequestException $ex) {
+                // When Facebook returns an error
+                $errcode = "FACEBOOK_CONNECT_REQFAIL";
+                $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
+                return;
+            } catch (Exception $ex) {
+                // When validation fails or other local issues
+                $errcode = "FACEBOOK_CONNECT_ERROR " . $ex->getMessage();
+                $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
+                return;
+            }
+            if ($session) {
+                $currentSession = JFactory::getSession();
+                $currentSession->set("FacebookAccessToken", $session->getToken());
+                $currentSession->set("FacebookExchangeAccessToken", $session->getExchangeToken());
+                $currentSession->set("SAMLoginIsAuthN", true);
+
+                $currentSession->set("SAMLoginSession", null);
+                $currentSession->set("SAMLoginAttrs", array(
+                    "givenName" => array($me->getFirstName()),
+                    "sn" => array($me->getMiddleName() . "" . $me->getLastName()),
+                    "fbid" => array($me->getId()),
+                    "mail" => array($me->getEmail()),
+                    "gender" => array($me->getGender()),
+                    "fbURL" => array($me->getLink()),
+                    "locale" => array($me->getProperty("locale")),
+                    "cn" => array($me->getName()),
+                    "timezone" => array($me->getProperty("timezone")),
+                    "fbVerified" => array($me->getProperty("verified")),
+                        //"username"=>$me->getProperty("username"),seems not avail anymore
+                ));
+                $currentSession->set("SAMLoginIdP", "Facebook");
+                $currentSession->set("SAMLoginSP", "FacebookSDK");
+                $currentSession->set("SAMLoginNameId", $me->getId());
+                $currentSession->set("SAMLoginIsFacebookSession", true);
+                //     print_r($currentSession->get("SAMLoginAttrs")); die("123testing");
+                /* this fixes issue 4 */ $currentSession->close();
+
+
+                // $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
+                //  phpconsole("rret decoded is ".$return,"rastrano");
+                // die($return);
+                //  die(print_r($user,true));
+
+                $returnAfterFacebookFixSessionIssue = JRoute::_(
+                                JURI::root() . 'index.php?option=com_samlogin&view=login&task=handleSAMLResponse&rret=' . base64_encode($return)); /* ,$params->get('usesecure', false) */;
+
+                $app->redirect($returnAfterFacebookFixSessionIssue);
+            }
+        } else {
+            $sess = JFactory::getSession();
+            $errcode = $sess->get("samloginFailErrcode", "ALREADY_LOGGED");
+            $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
+            return;
+        }
+    }
+
+    public function handleSAMLResponse() {
+        $rret = JRequest::getString('rret');
+        if (!is_null($rret)) {
+            if ($this->is_base64($rret)) {
+                $return = base64_decode($rret);
+            } else {
+                $return = $rret;
+            }
+        }
+        if (stristr($return, "administrator/")) {
+            $app = JFactory::getApplication(); //not admin or it will auto authorise
+            // $app = JFactory::getApplication("administrator");
+            // $app = JApplicationAdministrator::getInstance("administrator");
+            // $app->loadSession();
+            //die("xxxa".print_r($app,true));
+        } else {
+            $app = JFactory::getApplication();
+        }
         $sess = JFactory::getSession();
         $user = JFactory::getUser();
         $params = JComponentHelper::getParams('com_samlogin');
@@ -370,10 +456,8 @@ class SAMLoginControllerLogin extends SAMLoginController {
         //die("testing at line".print_r($user,true).__LINE__);
         if (!$user->guest) {
             // $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
-           
-                //  phpconsole("rret decoded is ".$return,"rastrano");
-                $app->redirect($return);
-            
+            //  phpconsole("rret decoded is ".$return,"rastrano");
+            $app->redirect($return);
         } else {
             $sess = JFactory::getSession();
             $errcode = $sess->get("samloginFailErrcode", "GENERIC");
@@ -382,7 +466,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
     }
 
     public function handleError($msg = "") {
-       
+
         if ($msg == "") {
             $msg = JRequest::getVar('msg', "", 'GET', 'STRING');
         }
@@ -396,7 +480,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
             $errtype = "error";
         }
         $app->enqueueMessage(JText::_("SAMLOGIN_ERROR_ALERT_$msg"), $errtype);
-       // $app->redirect(JURI::root());
+        // $app->redirect(JURI::root());
     }
 
     public function unauthzAlert($msg = "") {
