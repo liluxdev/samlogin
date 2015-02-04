@@ -81,6 +81,13 @@ class SamloginHelper {
         $variables['footerMessage'] = ($params->get('footerMessage') == 'custom') ? $params->get('customFooterMessage') : JText::_('SAMLOGIN__LOGIN_FOOTER_MESSAGE_VALUE');
         $variables['rememberMe'] = JPluginHelper::isEnabled('system', 'remember');
 
+        $variables['facebookSSOLink'] = JRoute::_('index.php?option=com_samlogin&view=login&task=initFacebookSSO&return=' . $variables['returnURL'], false, $params->get('usesecure', false));
+        if ($params->get('usesecure', false)) {
+            $variables['facebookSSOLink'] = strtr($variables['facebookSSOLink'], array("http://" => "https://"));
+        }
+        
+        
+        
         $variables['ssoLink'] = JRoute::_('index.php?option=com_samlogin&view=login&task=initSSO&return=' . $variables['returnURL'], false, $params->get('usesecure', false));
         if ($params->get('usesecure', false)) {
             $variables['ssoLink'] = strtr($variables['ssoLink'], array("http://" => "https://"));
@@ -153,6 +160,35 @@ class SamloginHelper {
             $session->set('samloginReturnURL', $returl);
             $url = base64_decode($returl);
         }
+       
+              try { //			die($url);
+            $returnStateCheck = JFactory::getApplication()->getUserState('users.login.form.data');
+            $returnStateCheck = $returnStateCheck["return"];
+            //echo($returnStateCheck);
+            if (!empty($returnStateCheck) && $returnStateCheck != "index.php?option=com_users&view=profile") {
+                $b64url = base64_encode($returnStateCheck);
+                $get = JRequest::getVar('return', null, 'GET', 'BASE64');
+              
+				//echo($b64url);
+                if (isset($get) && !empty($get) && $get != $b64url) {
+				    //echo($get); 
+                    $url = $returnStateCheck;
+                    $myurl = JUri::current();
+                    //echo $myurl;
+                    list($file, $parameters) = explode('?', $myurl);
+                    parse_str($parameters, $output);
+                    $output["return"] = $b64url;
+
+                    $loginURLStatic = $file . '?' . http_build_query($output); // Rebuild the url to avoid state loss if refresh and wrong return param
+					//die($loginURLStatic);
+                    JFactory::getApplication()->redirect($loginURLStatic);
+                    
+                }
+            }
+        } catch (Exception $noretstate) {
+            
+        }
+        
 
         $user = JFactory::getUser();
         $type = ($user->guest) ? 'login' : 'logout';
