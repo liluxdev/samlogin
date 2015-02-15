@@ -94,7 +94,9 @@ $samloginParams = JComponentHelper::getParams('com_samlogin');
 $discotype = $samloginParams->get('sspas_discotype', '0');
 
 
-if ($discotype == "nonsaml" || $discotype == "nonsaml-enforced" ||$discotype == "wsfed" ) {
+
+
+if ($discotype == "nonsaml" || $discotype == "nonsaml-enforced" ) {
     $customRediLogin = $samloginParams->get('sspas_discocustomnonauthnurl', '');
     if (!empty($customRediLogin)) {
         $ssoLink = $customRediLogin;
@@ -103,10 +105,15 @@ if ($discotype == "nonsaml" || $discotype == "nonsaml-enforced" ||$discotype == 
         } else {
             $ssoLink .= urlencode("?rret=" . $returnURL);
         }
-        if ($discotype == "nonsaml-enforced"  || $discotype == "wsfed") {
+        if ($discotype == "nonsaml-enforced") {
             if ($user->guest) {
-                $app = JFactory::getApplication();
-                $app->redirect($ssoLink);
+                   $sspsession = SimpleSAML_Session::getInstance();
+       if (!$sspsession->isValid('saml20')){ //avoid infinite loops if authz fails
+               $app->redirect($ssoLink);
+       }else{
+           JFactory::getApplication()->enqueueMessage("Valid SSO session dectected but can't authorize user, please enable debug mode or clear browser cache and retry","error");
+       }
+               
             }
         }
     } else {
@@ -136,6 +143,20 @@ if ($discotype == "nonsaml" || $discotype == "nonsaml-enforced" ||$discotype == 
     }
 }
 
+if ($discotype == "wsfed-enforced") {
+    if ($user->guest) {
+        $app = JFactory::getApplication();
+        //      die($ssoLink);
+require_once(JPATH_BASE . '/components/com_samlogin/simplesamlphp/lib/_autoload.php');
+        $sspsession = SimpleSAML_Session::getInstance();
+       if (!$sspsession->isValid('wsfed')){ //avoid infinite loops if authz fails
+               $app->redirect($ssoLink);
+       }else{
+           JFactory::getApplication()->enqueueMessage("Valid SSO session dectected but can't authorize user, please enable debug mode or clear browser cache and retry","error");
+       }
+    
+    }
+}
 
 
 $layoutFile = JModuleHelper::getLayoutPath('mod_samlogin', $params->get('template', 'default') . '/' . $layout);
