@@ -29,7 +29,8 @@ class SAMLoginControllerLogin extends SAMLoginController {
         Facebook\FacebookSession::setDefaultApplication($params->get("fb_appid", ""), $params->get("fb_appsecret", ""));
         // die($returnAfterFacebook);
         $helper = new Facebook\SamloginFacebookRedirectLoginHelper($returnAfterFacebook);
-        $loginUrl = $helper->getLoginUrl();
+        $scope = array("email");
+        $loginUrl = $helper->getLoginUrl($scope);
         // die($loginUrl);
         $app->redirect($loginUrl);
     }
@@ -80,6 +81,10 @@ class SAMLoginControllerLogin extends SAMLoginController {
             echo("<script type='text/javascript'>window.location.href='$returnTo';</script><a href='" . $returnTo . "'>click here if you don't get automatically redirected to the login page...</a>");
             die();
         }
+        /*   if (!stristr($returnTo,"http")){
+          $returnTo= JURI::root().$return;
+          $returnTo=strtr($returnTo,array(JURI::root()."/"=>JURI::root()));
+          } */
         $app->redirect($returnTo);
     }
 
@@ -148,6 +153,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
             $return = base64_decode($return);
         }
         JFactory::getSession()->set("rret", $return);
+        // die(var_dump($params->toArray()));
         if ($params->get("fb_fulllogout", 0)) {
             // JFactory::getSession()->close(true);
             $returnAfterFacebook = JURI::root() . 'index.php?option=com_samlogin&view=login&task=finishFacebookSSO'; /* ,$params->get('usesecure', false) */;
@@ -155,54 +161,57 @@ class SAMLoginControllerLogin extends SAMLoginController {
             Facebook\FacebookSession::setDefaultApplication($params->get("fb_appid", ""), $params->get("fb_appsecret", ""));
             // die($returnAfterFacebook);
             $fbsess = new Facebook\FacebookSession($sess->get("FacebookAccessToken"));
-            $helper = new Facebook\SamloginFacebookRedirectLoginHelper($returnAfterFacebookRebuilded);
-            $logoutUrl = $helper->getLogoutUrl($fbsess, $return);
+            $helper = new Facebook\SamloginFacebookRedirectLoginHelper("");
+            $logoutUrl = $helper->getLogoutUrl($fbsess, JURI::root() . $return);
+
+            // die($logoutUrl);
             $app->logout();
-            die($logoutUrl);
             $app->redirect($logoutUrl);
         } else { //NOrmal SSO case
             //Destroy only local fb session
             self::cleanSessionViaCookie();
+            if (!stristr($return, "http")) {
+                $return = JURI::root() . $return;
+                $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
+            }
             $app->redirect($return);
         }
 
         //   }
     }
 
-    
-     public static function cleanSessionViaCookie(){
-         if (isset($_SERVER['HTTP_COOKIE'])) {
-                            $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-                            $frontendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('site')));
-                            $backendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('administrator')));
-                            //print "<hr/>front: ".$frontendSessId;
-                            // print "<hr/>back: ".$backendSessId;
-                            //print "<hr/>sessname: ".$sessname;
-                            $sessionCookieValueToRemove = array(
-                                $frontendSessId,
-                                $backendSessId
-                            );
+    public static function cleanSessionViaCookie() {
+        if (isset($_SERVER['HTTP_COOKIE'])) {
+            $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+            $frontendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('site')));
+            $backendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('administrator')));
+            //print "<hr/>front: ".$frontendSessId;
+            // print "<hr/>back: ".$backendSessId;
+            //print "<hr/>sessname: ".$sessname;
+            $sessionCookieValueToRemove = array(
+                $frontendSessId,
+                $backendSessId
+            );
 
-                            $sessionCookieNameToRemove = array(
-                                "SAMLoginCookieAuthToken",
-                                "SAMLoginSimpleSAMLSessionID"
-                            );
-                            // die(print_r($cookies,true));
+            $sessionCookieNameToRemove = array(
+                "SAMLoginCookieAuthToken",
+                "SAMLoginSimpleSAMLSessionID"
+            );
+            // die(print_r($cookies,true));
 
-                            foreach ($cookies as $cookie) {
+            foreach ($cookies as $cookie) {
 
-                                $parts = explode('=', $cookie);
-                                $name = trim($parts[0]);
-                                $value = trim($parts[1]);
-                                if (in_array($value, $sessionCookieValueToRemove) || in_array($name, $sessionCookieNameToRemove)) {
-                                    setcookie($name, '', 1);
-                                    setcookie($name, '', 1, '/');
-                                }
-                            }
+                $parts = explode('=', $cookie);
+                $name = trim($parts[0]);
+                $value = trim($parts[1]);
+                if (in_array($value, $sessionCookieValueToRemove) || in_array($name, $sessionCookieNameToRemove)) {
+                    setcookie($name, '', 1);
+                    setcookie($name, '', 1, '/');
+                }
+            }
         }
     }
 
-    
     public function initSLO() {
 
         $app = JFactory::getApplication();
@@ -233,6 +242,10 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $returnTo = JURI::root() . '/components/com_samlogin/loginReceiver.php?task=initSLO' . $extraReturnURLParams;
 
         $sess->set("SAMLoginIsAuthN", false);
+        /*   if (!stristr($returnTo,"http")){
+          $returnTo= JURI::root().$returnTo;
+          $returnTo=strtr($returnTo,array(JURI::root()."/"=>JURI::root()));
+          } */
         $app->redirect($returnTo);
         //   }
     }
@@ -307,6 +320,10 @@ class SAMLoginControllerLogin extends SAMLoginController {
                         if (!empty($customSLOURL)) {
                             $app->redirect($customSLOURL);
                         } else {
+                            if (!stristr($return, "http")) {
+                                $return = JURI::root() . $return;
+                                $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
+                            }
                             $app->redirect($return);
                         }
                     }
@@ -319,6 +336,10 @@ class SAMLoginControllerLogin extends SAMLoginController {
                         $app->redirect($errUrl);
                     } else {
                         //  die("@".__LINE__.$return);
+                        if (!stristr($return, "http")) {
+                            $return = JURI::root() . $return;
+                            $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
+                        }
                         $app->redirect($return);
                     }
                 }
@@ -389,7 +410,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
                 $currentSession->set("SAMLoginIsAuthN", true);
 
                 $currentSession->set("SAMLoginSession", null);
-                $currentSession->set("SAMLoginAttrs", array(
+                $fbAttrs = array(
                     "givenName" => array($me->getFirstName()),
                     "sn" => array($me->getMiddleName() . "" . $me->getLastName()),
                     "fbid" => array($me->getId()),
@@ -401,7 +422,21 @@ class SAMLoginControllerLogin extends SAMLoginController {
                     "timezone" => array($me->getProperty("timezone")),
                     "fbVerified" => array($me->getProperty("verified")),
                         //"username"=>$me->getProperty("username"),seems not avail anymore
-                ));
+                );
+
+                $email = $me->getEmail();
+                if (!isset($email) || empty($email)) {
+                  //  file_put_contents(JPATH_BASE . "/samlogin.debug", "\n\n ========= \nnew NOEMAIL Facebook login: \n " . print_r($fbAttrs, true), FILE_APPEND);
+
+                    $app->enqueueMessage("Devi fornire l'email per accedere a questo sito", "error");
+                    if (!stristr($return, "http")) {
+                        $return = JURI::root() . $return;
+                        $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
+                    }
+                    $app->redirect($return);
+                }
+
+                $currentSession->set("SAMLoginAttrs", $fbAttrs);
                 $currentSession->set("SAMLoginIdP", "Facebook");
                 $currentSession->set("SAMLoginSP", "FacebookSDK");
                 $currentSession->set("SAMLoginNameId", $me->getId());
@@ -457,8 +492,12 @@ class SAMLoginControllerLogin extends SAMLoginController {
         if (!$user->guest) {
             // $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
             //  phpconsole("rret decoded is ".$return,"rastrano");
+            if (!stristr($return, "http")) { //ensure redirect is absolute URL or problems in mobile browsers
+                $return = JURI::root() . $return;
+                $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
+            }
             $app->redirect($return);
-        } else {
+        } else { //TODO: better error page, see ssp error redirection
             $sess = JFactory::getSession();
             $errcode = $sess->get("samloginFailErrcode", "GENERIC");
             $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
