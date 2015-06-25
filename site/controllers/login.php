@@ -12,6 +12,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
     const DISCOTYPE_ONE_IDP_ONLY = "-1";
 
     public function initFacebookSSO() {
+        //   file_put_contents(JPATH_BASE . "/samlogin.debug", "\n\n ========= \nnew Facebook login initSSO phase: " . print_r($_REQUEST, true), FILE_APPEND);
         //  define('FACEBOOK_SDK_V4_SRC_DIR', JPATH_COMPONENT_SITE.'/libs/facebook-sdk/');
         require JPATH_COMPONENT_SITE . '/libs/facebook-sdk/autoload.php';
 
@@ -27,7 +28,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $returnAfterFacebook = JURI::root() . 'index.php?option=com_samlogin&view=login&task=finishFacebookSSO'; /* ,$params->get('usesecure', false) */;
 //die($returnAfterFacebook);
         Facebook\FacebookSession::setDefaultApplication($params->get("fb_appid", ""), $params->get("fb_appsecret", ""));
-        // die($returnAfterFacebook);
+
         $helper = new Facebook\SamloginFacebookRedirectLoginHelper($returnAfterFacebook);
         $scope = array("email");
         $loginUrl = $helper->getLoginUrl($scope);
@@ -36,6 +37,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
     }
 
     public function initSSO() {
+
         $app = JFactory::getApplication();
 
         $sess = JFactory::getSession();
@@ -71,7 +73,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
         if (!is_null($return)) {
             $extraReturnURLParams .= "&rret=" . $return;
         } else {
-            $extraReturnURLParams .= "&rret=" . base64_encode(JURI::root(true));  //default to homepage
+            $extraReturnURLParams .= "&rret=" . base64_encode("/");  //default to homepage //no 
         }
 
         $returnTo = JURI::root() . '/components/com_samlogin/loginReceiver.php?task=initSSO' . $extraReturnURLParams;
@@ -171,8 +173,10 @@ class SAMLoginControllerLogin extends SAMLoginController {
             //Destroy only local fb session
             self::cleanSessionViaCookie();
             if (!stristr($return, "http")) {
-                $return = JURI::root() . $return;
+                $return = JURI::root() . strtr($return,array(''.JURI::root(true)=>'')); //remove double path 
                 $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
+               
+
             }
             $app->redirect($return);
         }
@@ -237,7 +241,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
             $wsfedsp = $params->get("wsfed_idp_realm_1", JURI::root());
             //  die($wsfedsp);
             $wsfedidp = $params->get("wsfed_idp_issuer_1", "please check you wsfed config");
-            $extraReturnURLParams = "&proto=wsfed&wsfedidp=" . urlencode($wsfedidp) . "&wsfedsp=" . urlencode($wsfedsp) . "&dologout=1";
+            $extraReturnURLParams .= "&proto=wsfed&wsfedidp=" . urlencode($wsfedidp) . "&wsfedsp=" . urlencode($wsfedsp) . "&dologout=1";
         }
         $returnTo = JURI::root() . '/components/com_samlogin/loginReceiver.php?task=initSLO' . $extraReturnURLParams;
 
@@ -320,10 +324,6 @@ class SAMLoginControllerLogin extends SAMLoginController {
                         if (!empty($customSLOURL)) {
                             $app->redirect($customSLOURL);
                         } else {
-                            if (!stristr($return, "http")) {
-                                $return = JURI::root() . $return;
-                                $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
-                            }
                             $app->redirect($return);
                         }
                     }
@@ -337,7 +337,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
                     } else {
                         //  die("@".__LINE__.$return);
                         if (!stristr($return, "http")) {
-                            $return = JURI::root() . $return;
+                            $return = JURI::root() . strtr($return,array(''.JURI::root(true)=>'')); //remove double path
                             $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
                         }
                         $app->redirect($return);
@@ -423,24 +423,23 @@ class SAMLoginControllerLogin extends SAMLoginController {
                     "fbVerified" => array($me->getProperty("verified")),
                         //"username"=>$me->getProperty("username"),seems not avail anymore
                 );
-
                 $email = $me->getEmail();
                 if (!isset($email) || empty($email)) {
-                  //  file_put_contents(JPATH_BASE . "/samlogin.debug", "\n\n ========= \nnew NOEMAIL Facebook login: \n " . print_r($fbAttrs, true), FILE_APPEND);
+                    //    file_put_contents(JPATH_BASE . "/samlogin.debug", "\n\n ========= \nnew NOEMAIL Facebook login: \n " . print_r($fbAttrs, true), FILE_APPEND);
 
                     $app->enqueueMessage("Devi fornire l'email per accedere a questo sito", "error");
                     if (!stristr($return, "http")) {
-                        $return = JURI::root() . $return;
+                        $return = JURI::root() . strtr($return,array(''.JURI::root(true)=>'')); //remove double path
                         $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
                     }
                     $app->redirect($return);
                 }
-
                 $currentSession->set("SAMLoginAttrs", $fbAttrs);
                 $currentSession->set("SAMLoginIdP", "Facebook");
                 $currentSession->set("SAMLoginSP", "FacebookSDK");
                 $currentSession->set("SAMLoginNameId", $me->getId());
                 $currentSession->set("SAMLoginIsFacebookSession", true);
+                //    file_put_contents(JPATH_BASE . "/samlogin.debug", "\n\n ========= \nnew Facebook login: \n " . print_r($fbAttrs, true), FILE_APPEND);
                 //     print_r($currentSession->get("SAMLoginAttrs")); die("123testing");
                 /* this fixes issue 4 */ $currentSession->close();
 
@@ -464,6 +463,8 @@ class SAMLoginControllerLogin extends SAMLoginController {
     }
 
     public function handleSAMLResponse() {
+        //  file_put_contents(JPATH_BASE . "/samlogin.debug", "\n\n ========= \nnew SSO login HANDLERESP: \n " . print_r(null, true), FILE_APPEND);
+
         $rret = JRequest::getString('rret');
         if (!is_null($rret)) {
             if ($this->is_base64($rret)) {
@@ -484,20 +485,22 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $sess = JFactory::getSession();
         $user = JFactory::getUser();
         $params = JComponentHelper::getParams('com_samlogin');
-//die(print_r($app,true));
+        //die(print_r($app,true));
         $loginStatus = $app->login(array('username' => '', 'password' => ''), array('silent' => true, 'remember' => false)); //TODO: when silent is enabled and login fails this returns false, add a check for this
 
         $user = JFactory::getUser();
         //die("testing at line".print_r($user,true).__LINE__);
         if (!$user->guest) {
+            //      file_put_contents(JPATH_BASE . "/samlogin.debug", "\n\n ========= \nnew Facebook login LOGGEDIN: \n " . print_r($user, true), FILE_APPEND);
             // $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
             //  phpconsole("rret decoded is ".$return,"rastrano");
             if (!stristr($return, "http")) { //ensure redirect is absolute URL or problems in mobile browsers
-                $return = JURI::root() . $return;
+                $return = JURI::root() . strtr($return,array(''.JURI::root(true)=>'')); //remove double path
                 $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
             }
             $app->redirect($return);
         } else { //TODO: better error page, see ssp error redirection
+            //      file_put_contents(JPATH_BASE . "/samlogin.debug", "\n\n ========= \nnew Facebook login FAIL: \n " . print_r($user, true), FILE_APPEND);
             $sess = JFactory::getSession();
             $errcode = $sess->get("samloginFailErrcode", "GENERIC");
             $this->handleError("JOOMLA_LOGIN_FAILED_" . $errcode);
