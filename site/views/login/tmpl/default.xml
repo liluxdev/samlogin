@@ -121,8 +121,13 @@
                                   
               
                 <field name="loginButtonLabel" 
-                   type="text" default="SAMLOGIN_SSO" 
+                   type="text" default="SSO Login" filter="raw" 
                    label="SAMLOGIN_LOGIN_BUTTON_LABEL" 
+                   description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
+                
+                  <field name="facebookloginButtonLabel" 
+                   type="text" default="Login with Facebook" filter="raw"  
+                   label="Facebook Loogin Button Label" 
                    description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
                                 
                 <field name="loginButtonClasses" 
@@ -147,7 +152,7 @@
           
             
                 <field name="logoutButtonLabel" 
-                   type="text" default="SAMLOGIN_SIGNOUT_CLASSIC" 
+                   type="text" default="Logout" 
                    label="SAMLOGIN_LOGIN_BUTTON_LABEL" 
                    description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
            

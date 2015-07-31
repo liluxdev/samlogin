@@ -22,7 +22,7 @@ class SamloginFieldIdpEntity extends SamloginField
                 
                 $metadataFiles=array(
                     JPATH_SITE.'/components/com_samlogin/simplesamlphp/metadata/federations/saml20-idp-remote.php',
-                   // JPATH_SITE.'/components/com_samlogin/simplesamlphp/metadata/saml20-idp-hosted.php',
+               //     JPATH_SITE.'/components/com_samlogin/simplesamlphp/metadata/saml20-idp-hosted.php',
                     JPATH_SITE.'/components/com_samlogin/simplesamlphp/metadata/saml20-idp-remote.php'
                 );
                 

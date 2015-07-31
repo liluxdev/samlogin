@@ -39,7 +39,7 @@ class plgAuthenticationSamlogin extends JPlugin {
         return $attributes[$key];
     }
 
-    private function _pregMatchSAMLAttributeValues($attrname, $regex, $attributes,$samloginParams) {
+    private function _pregMatchSAMLAttributeValues($attrname, $regex, $attributes, $samloginParams) {
         if (!array_key_exists($attrname, $attributes)) {
             return FALSE;
         }
@@ -76,6 +76,16 @@ class plgAuthenticationSamlogin extends JPlugin {
 
         $defaultRegistered = $samloginParams->get("defaultRegistered", true);
         $newusergroups = array();
+
+
+        $defaultRegisteredForManualAssigned = $samloginParams->get("skipDefaultRegisteredForManual", false);
+
+        if ($defaultRegistered && is_array($oldusergroups) && count($oldusergroups) > 0 && $defaultRegisteredForManualAssigned) {
+            $defaultRegistered = false;
+            if ($samloginParams->get("debug_auth", 0)) {
+                echo "<br/>SKIPPING Default registered group, cause the user already got manual assignments and option is set to not process in that case</pre>";
+            }
+        }
         if ($defaultRegistered) {
             $registeredGroupId = $samloginParams->get("registeredGroupId", 2);
             $newusergroups = array($registeredGroupId); //2 is registered
@@ -87,207 +97,221 @@ class plgAuthenticationSamlogin extends JPlugin {
             echo "<br/>Default registered group: <pre>" . print_r($newusergroups, true) . "</pre>";
         }
 
-        //phpconsole("New  groups:".print_r($newusergroups,true),"rastrano");
-        $newusergroupsForHist[] = array();
-        $authorized = false;
-        foreach ($rulesConf as $key => $val) {
+        $skipAutZProcessingForManual = $samloginParams->get("skipAutZProcessingForManual", false);
+        $processAuthZForManualAssigned=!$skipAutZProcessingForManual;
+        
+        if (($processAuthZForManualAssigned && is_array($oldusergroups) && count($oldusergroups) > 0) 
+                || (count($oldusergroups) == 0 || !is_array($oldusergroups))) {
+            //phpconsole("New  groups:".print_r($newusergroups,true),"rastrano");
+            $newusergroupsForHist[] = array();
+            $authorized = false;
+            foreach ($rulesConf as $key => $val) {
 
-            if (strpos($key, 'rule_') === 0) {
-                if (stristr($key, "_attr")) {
-                    $ruleno = str_replace("rule_", "", $key);
-                    $ruleno = str_replace("_attr", "", $ruleno);
+                if (strpos($key, 'rule_') === 0) {
+                    if (stristr($key, "_attr")) {
+                        $ruleno = str_replace("rule_", "", $key);
+                        $ruleno = str_replace("_attr", "", $ruleno);
 
-                    $ruleattr = $samloginParams->get("rule_" . $ruleno . "_attr", "");
-
-
-
-
-                    if ($ruleattr) {
-
-                        if ($samloginParams->get("debug_auth", 0)) {
-                            echo "<br/>Processing authz rule n." . $ruleno . " on attribute $ruleattr";
-                        }
-
-                        $ruleassigngroup = $samloginParams->get("rule_" . $ruleno . "_assigngroup", "");
-                        $ruleRegexp = $samloginParams->get("rule_" . $ruleno . "_regex", "");
-
-                        $sqlMatch = $samloginParams->get("rule_" . $ruleno . "_sql", "");
-                        $sqlMatchOrig = $sqlMatch;
+                        $ruleattr = $samloginParams->get("rule_" . $ruleno . "_attr", "");
 
 
 
 
-                        // echo $sqlMatch;
-
-                        $ruleType = "";
-                        if (!empty($sqlMatch)) {
+                        if ($ruleattr) {
 
                             if ($samloginParams->get("debug_auth", 0)) {
-                                echo "<br/>Processing authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch;
+                                echo "<br/>Processing authz rule n." . $ruleno . " on attribute $ruleattr";
                             }
-                            $db = JFactory::getDbo();
-                            $matches = array();
-                            preg_match_all("/::([a-zA-Z0-9\.:]{1,99})::/", $sqlMatch, $matches);
-                            $matchcount = -1;
-                            foreach ($matches as $matcharrelm) {
-                                $match = $matcharrelm[0];
-                                $matchcount++;
-                                if ($matchcount == 0) {
-                                    continue;
-                                }
 
-                                if ($match != "NAMEID") {
-                                    $attrValues = $this->_getSAMLAttributeValues($match, $samlresponse, null);
-                                } else {
-                                    $currentSession = JFactory::getSession();
-                                    $SAMLoginnameId = $currentSession->get("SAMLoginNameId", '');
-                                    if (empty($SAMLoginnameId)) {
-                                        die("Empty NameID array");
+                            $ruleassigngroup = $samloginParams->get("rule_" . $ruleno . "_assigngroup", "");
+                            $ruleRegexp = $samloginParams->get("rule_" . $ruleno . "_regex", "");
+
+                            $sqlMatch = $samloginParams->get("rule_" . $ruleno . "_sql", "");
+                            $sqlMatchOrig = $sqlMatch;
+
+
+
+
+                            // echo $sqlMatch;
+
+                            $ruleType = "";
+                            if (!empty($sqlMatch)) {
+
+                                if ($samloginParams->get("debug_auth", 0)) {
+                                    echo "<br/>Processing authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch;
+                                }
+                                $db = JFactory::getDbo();
+                                $matches = array();
+                                preg_match_all("/::([a-zA-Z0-9\.:]{1,99})::/", $sqlMatch, $matches);
+                                $matchcount = -1;
+                                foreach ($matches as $matcharrelm) {
+                                    $match = $matcharrelm[0];
+                                    $matchcount++;
+                                    if ($matchcount == 0) {
+                                        continue;
+                                    }
+
+                                    if ($match != "NAMEID") {
+                                        $attrValues = $this->_getSAMLAttributeValues($match, $samlresponse, null);
                                     } else {
-                                        $SAMLoginnameId = json_decode($SAMLoginnameId, true);
-                                        $SAMLoginnameId = $SAMLoginnameId["Value"];
+                                        $currentSession = JFactory::getSession();
+                                        $SAMLoginnameId = $currentSession->get("SAMLoginNameId", '');
                                         if (empty($SAMLoginnameId)) {
-                                            die("Empty NameID");
-                                        }
-                                        $attrValues = array();
-                                        $attrValues[] = $SAMLoginnameId;
-                                    }
-                                }
-
-                                if (!is_null($attrValues)) {
-                                    if (count($attrValues) > 1) {
-                                        //SQL Match can only used on single valued attributes for now and for security constraint
-                                        if ($samloginParams->get("debug_auth", 0)) {
-                                            echo "<br/><b>Skipped for multiple value attribute (no supported yet)</b>: Processing authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch;
-                                        }
-                                    } else {
-                                        if (count($attrValues) == 1) {
-                                            $value = $attrValues[0];
-                                            $antiSQLiValue = "'" . addslashes(trim($value)) . "'";
-                                            $sqlMatch = strtr($sqlMatch, array(
-                                                "::" . $match . "::" => $antiSQLiValue
-                                                    )
-                                            );
+                                            die("Empty NameID array");
+                                        } else {
+                                            $SAMLoginnameId = json_decode($SAMLoginnameId, true);
+                                            $SAMLoginnameId = $SAMLoginnameId["Value"];
+                                            if (empty($SAMLoginnameId)) {
+                                                die("Empty NameID");
+                                            }
+                                            $attrValues = array();
+                                            $attrValues[] = $SAMLoginnameId;
                                         }
                                     }
+
+                                    if (!is_null($attrValues)) {
+                                        if (count($attrValues) > 1) {
+                                            //SQL Match can only used on single valued attributes for now and for security constraint
+                                            if ($samloginParams->get("debug_auth", 0)) {
+                                                echo "<br/><b>Skipped for multiple value attribute (no supported yet)</b>: Processing authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch;
+                                            }
+                                        } else {
+                                            if (count($attrValues) == 1) {
+                                                $value = $attrValues[0];
+                                                $antiSQLiValue = "'" . addslashes(trim($value)) . "'";
+                                                $sqlMatch = strtr($sqlMatch, array(
+                                                    "::" . $match . "::" => $antiSQLiValue
+                                                        )
+                                                );
+                                            }
+                                        }
+                                    }
                                 }
+                                /*  $sqlMatch=preg_replace_callback(
+                                  '|<p>\s*\w|',
+                                  create_function(
+                                  // l'apice singolo è essenziale qui,
+                                  // o in alternativa occorre usare la sequenza di escape \$
+                                  // per tutte le occorrenze di $
+                                  '$matches',
+                                  'return strtolower($matches[0]);'
+                                  ),
+                                  $sqlMatch
+                                  ); */
+                                if ($sqlMatch != $sqlMatchOrig) { //check if strtr replaced the placeholders
+                                    $db->setQuery($sqlMatch);
+                                    //    echo "<br/>query is:".$sqlMatch;
+                                    $matchingArr = $db->loadAssocList();
+                                    //  echo "<br/>result is:".print_r($matchingArr,true);
+                                    $matching = count($matchingArr) > 0;
+                                    if ($samloginParams->get("debug_auth", 0)) {
+                                        echo "<br/>Processed authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch . " <b>result is " . ($matching ? "true" : "false") . "</b>";
+                                    }
+                                } else {
+                                    if ($samloginParams->get("debug_auth", 0)) {
+                                        echo "<br/><b>Skipped (no placeholder replacement)</b>: authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch . " result is " . ($matching ? "true" : "false");
+                                    }
+                                    $matching = FALSE;
+                                }
+                                $ruleType = "sql";
                             }
-                            /*  $sqlMatch=preg_replace_callback(
-                              '|<p>\s*\w|',
-                              create_function(
-                              // l'apice singolo è essenziale qui,
-                              // o in alternativa occorre usare la sequenza di escape \$
-                              // per tutte le occorrenze di $
-                              '$matches',
-                              'return strtolower($matches[0]);'
-                              ),
-                              $sqlMatch
-                              ); */
-                            if ($sqlMatch != $sqlMatchOrig) { //check if strtr replaced the placeholders
-                                $db->setQuery($sqlMatch);
-                                //    echo "<br/>query is:".$sqlMatch;
-                                $matchingArr = $db->loadAssocList();
-                                //  echo "<br/>result is:".print_r($matchingArr,true);
-                                $matching = count($matchingArr) > 0;
+
+
+                            if (!empty($ruleRegexp)) {
+                                $ruleType = "regex";
+                                //phpconsole($ruleattr." matches ".$ruleRegexp,"rastrano");
+                                $matching = $this->_pregMatchSAMLAttributeValues($ruleattr, $ruleRegexp, $samlresponse, $samloginParams);
+
                                 if ($samloginParams->get("debug_auth", 0)) {
-                                    echo "<br/>Processed authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch . " <b>result is " . ($matching ? "true" : "false") ."</b>";
+                                    echo "<br/>Processed authz rule n." . $ruleno . " on attribute $ruleattr regexp is: " . $ruleRegexp . "<b> result is " . ($matching ? "true" : "false") . "</b>";
                                 }
-                            } else {
-                                if ($samloginParams->get("debug_auth", 0)) {
-                                    echo "<br/><b>Skipped (no placeholder replacement)</b>: authz rule n." . $ruleno . " on attribute $ruleattr sqlMatch is: " . $sqlMatch . " result is " .  ($matching ? "true" : "false");
-                                }
-                                $matching = FALSE;
                             }
-                            $ruleType = "sql";
-                        }
 
-
-                        if (!empty($ruleRegexp)) {
-                            $ruleType = "regex";
-                            //phpconsole($ruleattr." matches ".$ruleRegexp,"rastrano");
-                            $matching = $this->_pregMatchSAMLAttributeValues($ruleattr, $ruleRegexp, $samlresponse,$samloginParams);
-
-                            if ($samloginParams->get("debug_auth", 0)) {
-                                echo "<br/>Processed authz rule n." . $ruleno . " on attribute $ruleattr regexp is: " . $ruleRegexp . "<b> result is " . ($matching ? "true" : "false")."</b>";
+                            ////phpconsole($ruleno." matches? ".$ruleRegexp."??? ".print_r($samlresponse,true),"rastrano");
+                            if ($matching !== FALSE) {
+                                $authorized = true;
+                                //phpconsole($ruleno." matches ".$ruleRegexp,"rastrano");
+                                $newusergroups[] = $ruleassigngroup;
+                                $currentSession = JFactory::getSession();
+                                $SAMLoginIdP = $currentSession->get("SAMLoginIdP", '');
+                                $keytomem = "rule_" . $ruleno .
+                                        " v:" . $matching . " t:" . $ruleType
+                                        . " idp:" . $SAMLoginIdP;
+                                $newusergroupsForHist[$keytomem] = $ruleassigngroup;
                             }
-                        }
-
-                        ////phpconsole($ruleno." matches? ".$ruleRegexp."??? ".print_r($samlresponse,true),"rastrano");
-                        if ($matching !== FALSE) {
-                            $authorized = true;
-                            //phpconsole($ruleno." matches ".$ruleRegexp,"rastrano");
-                            $newusergroups[] = $ruleassigngroup;
-                            $currentSession = JFactory::getSession();
-                            $SAMLoginIdP = $currentSession->get("SAMLoginIdP", '');
-                            $keytomem = "rule_" . $ruleno .
-                                    " v:" . $matching . " t:" . $ruleType
-                                    . " idp:" . $SAMLoginIdP;
-                            $newusergroupsForHist[$keytomem] = $ruleassigngroup;
                         }
                     }
                 }
             }
-        }
 
 //die("testing");
-        if (!$authorized) {
-            if ($samloginParams->get("debug_auth", 0)) {
-                echo "<br/><b>Processed authz rules and found no matching rule</b> ";
-            }
-            $defaultDeny = $samloginParams->get("defaultDeny", false);
-            if ($defaultDeny) {
+            if (!$authorized) {
                 if ($samloginParams->get("debug_auth", 0)) {
-                    echo "<br/><b>Processed authz rules and found no matching rule and deny mode is on: aborting login!</b> ";
-                    die();
+                    echo "<br/><b>Processed authz rules and found no matching rule</b> ";
                 }
-                return false;
+                $defaultDeny = $samloginParams->get("defaultDeny", false);
+                if ($defaultDeny) {
+                    if ($samloginParams->get("debug_auth", 0)) {
+                        echo "<br/><b>Processed authz rules and found no matching rule and deny mode is on: aborting login!</b> ";
+                        die();
+                    }
+                    return false;
+                }
             }
-        }
-        $timeid = time();
+            $timeid = time();
 
-        //   //phpconsole(print_r($latestSamloginAssignedGroups,true),"rastrano");
+            //   //phpconsole(print_r($latestSamloginAssignedGroups,true),"rastrano");
 
 
-        $preserveManualUserGroup = $samloginParams->get("preserveManualUserGroup", true);
-        if ($preserveManualUserGroup) {
-            $latestSamloginAssignedGroups = $this->_getLastestGroupAssigned($user);
+            $preserveManualUserGroup = $samloginParams->get("preserveManualUserGroup", true);
+            if ($preserveManualUserGroup) {
+                $latestSamloginAssignedGroups = $this->_getLastestGroupAssigned($user);
 
-            $manualOldUsergroups = array_diff($oldusergroups, $latestSamloginAssignedGroups);
+                $manualOldUsergroups = array_diff($oldusergroups, $latestSamloginAssignedGroups);
+                if ($samloginParams->get("debug_auth", 0)) {
+                    echo "<br/>Autz rules, newusergroups are: <pre>" . print_r($newusergroups, true) . "</pre> manual old usergroups are:  <pre>" . print_r($manualOldUsergroups, true) . "</pre>";
+                }
+                //merge only the old groups NON-samlogin assigned groups
+                $newusergroups = array_merge($newusergroups, $manualOldUsergroups);
+                foreach ($newusergroupsForHist as $key => $hitem) {
+                    if (in_array($hitem, $manualOldUsergroups)) {
+                        //don't storicize as saml added a manually added usergroup
+                        unset($newusergroupsForHist[$key]);
+                        $newusergroupsForHist["manual"] = $hitem; //bust storicize it as a manual! (to track/log access time authz)
+                    }
+                }
+            }
+
+            $this->_saveAddedGroupHist($newusergroupsForHist, $user, $timeid); //don't save the modified newusergroups array here: only the saml added one
+            $user->set("groups", $newusergroups);
             if ($samloginParams->get("debug_auth", 0)) {
-                echo "<br/>Autz rules, newusergroups are: <pre>" . print_r($newusergroups, true) . "</pre> manual old usergroups are:  <pre>" . print_r($manualOldUsergroups, true) . "</pre>";
+                echo "<br/>Autz rules, merged newusergroups are: <pre>" . print_r($newusergroups, true) . "</pre>";
             }
-            //merge only the old groups NON-samlogin assigned groups
-            $newusergroups = array_merge($newusergroups, $manualOldUsergroups);
-            foreach ($newusergroupsForHist as $key => $hitem) {
-                if (in_array($hitem, $manualOldUsergroups)) {
-                    //don't storicize as saml added a manually added usergroup
-                    unset($newusergroupsForHist[$key]);
-                    $newusergroupsForHist["manual"] = $hitem; //bust storicize it as a manual! (to track/log access time authz)
+            //     $user->name = $response->fullname; //bug: different field naming in joomla table, check will fail
+
+            $saved = $user->save();
+
+            //Reflection: TODO maintain protected __authGroups in user.php JUser
+            $refObject = new ReflectionObject($user);
+            $refProperty = $refObject->getProperty('_authGroups');
+            $refProperty->setAccessible(true);
+            $refProperty->setValue($user, $newusergroups); //schedure a re fetch of auth group for the in-memory session user object
+            //
+        //also JAccess has a group cache
+            //
+        JAccess::clearStatics(); //this clears things up $groupByUser cahced array!
+            //
+        //see user.php getAuthorisedGroups() method
+            @$user->getAuthorisedGroups(); //ensure the re-fetch of auth groups for the in-memory session user object
+        } else {
+            if ($samloginParams->get("debug_auth", 0)) {
+                if($skipAutZProcessingForManual){
+                    echo "<br/>SKIPPING AuthZ processing, because the user already got manual assignments and option is set to not process in that case</pre>";
+                }else{
+                     echo "<br/>SKIPPING AuthZ processing (error)</pre>";
                 }
             }
         }
-
-        $this->_saveAddedGroupHist($newusergroupsForHist, $user, $timeid); //don't save the modified newusergroups array here: only the saml added one
-        $user->set("groups", $newusergroups);
-        if ($samloginParams->get("debug_auth", 0)) {
-            echo "<br/>Autz rules, merged newusergroups are: <pre>" . print_r($newusergroups, true) . "</pre>";
-        }
-        //     $user->name = $response->fullname; //bug: different field naming in joomla table, check will fail
-
-        $saved = $user->save();
-
-        //Reflection: TODO maintain protected __authGroups in user.php JUser
-        $refObject = new ReflectionObject($user);
-        $refProperty = $refObject->getProperty('_authGroups');
-        $refProperty->setAccessible(true);
-        $refProperty->setValue($user, $newusergroups); //schedure a re fetch of auth group for the in-memory session user object
-        //
-        //also JAccess has a group cache
-        //
-        JAccess::clearStatics(); //this clears things up $groupByUser cahced array!
-        //
-        //see user.php getAuthorisedGroups() method
-        @$user->getAuthorisedGroups(); //ensure the re-fetch of auth groups for the in-memory session user object
 
         return true;
     }
@@ -366,18 +390,16 @@ class plgAuthenticationSamlogin extends JPlugin {
         }
     }
 
-    
-    private function generateRandomPassword($pwlen=20)
-    {
+    private function generateRandomPassword($pwlen = 20) {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
         $pw = '';
         $bytes = openssl_random_pseudo_bytes($pwlen);
         for ($i = 0; $i < $pwlen; $i++) {
-        $pw .= $chars[ord($bytes[$i]) % strlen($chars)];
+            $pw .= $chars[ord($bytes[$i]) % strlen($chars)];
         }
         return $pw;
     }
-    
+
     private function _mapAttributes(&$response, $samlresponse, $samloginParams) {
         $mappingConf = $samloginParams->toArray();
         //   //phpconsole($mappingConf, "rastrano");
@@ -472,7 +494,7 @@ class plgAuthenticationSamlogin extends JPlugin {
         }
         //    die(print_r($extraFieldsTmp,true));
 
-    
+
 
 
         $useNameID = $samloginParams->get("useNameId", false);
@@ -498,14 +520,13 @@ class plgAuthenticationSamlogin extends JPlugin {
                 $regexMail = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
                 if (preg_match($regexMail, $response->username)) {
                     $response->email = $response->username;
-                }else{
+                } else {
                     $response->email = $response->username . "@" . $samloginParams->get("dummyEmailDomain", strtr($_SERVER['HTTP_HOST'], array("www." => "")));
                 }
-                
             }
         }
-        
-        if (empty($response->fullname)){
+
+        if (empty($response->fullname)) {
             $response->fullname = $response->username;
         }
 
@@ -625,7 +646,7 @@ class plgAuthenticationSamlogin extends JPlugin {
                 $user->block = 0;
                 $user->activation = 0;
             }
-            $user->sendEmail = 1;
+            $user->sendEmail = 0;
             //$user->registerDate='0000-00-00 00:00:00';
             //$user->lastvisitDate='0000-00-00 00:00:00';
             $user->params = '';
@@ -673,7 +694,7 @@ class plgAuthenticationSamlogin extends JPlugin {
 
 
 
-            JPluginHelper::importPlugin('samlattributeauthority');
+            JPluginHelper::importPlugin('samlattrauth');
             $isJoomla3 = ((float) JVERSION) >= 3.0;
             if ($isJoomla3) {
                 $dispatcher = JEventDispatcher::getInstance();

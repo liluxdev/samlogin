@@ -15,9 +15,14 @@ JLoader::register('SAMLoginView', JPATH_COMPONENT_ADMINISTRATOR.'/views/view.php
 
 
 //	JLoader::register('SamloginHelper', JPATH_COMPONENT.'/helpers/samlogin.php');
-	require_once (JPATH_COMPONENT.'/controllers/'.$view.'.php');
+ //die('/controllers/'.$view.'.php');
+	require_once ('controllers/'.$view.'.php'); //no JPATH or windows issue
+          //die(JPATH_COMPONENT.'/controllers/'.$view.'.php');
 	$classname = 'SAMLoginController'.$view;
 	$controller = new $classname();
-	$controller->execute(JRequest::getWord('task'));
+        $task=JRequest::getWord('task');
+        //die(print_r(array($task,$controller),true));
+	$controller->execute($task);
+      
 	$controller->redirect();
 }

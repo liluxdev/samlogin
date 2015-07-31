@@ -25,6 +25,12 @@ jQuery(".saveSettingsButton").removeClass("uk-button-primary");
             setTimeout(function() {
                 samlogin_doConfigTests();
             }, 1500);
+        }).fail(function(xhr,textStatus,err){
+             if (xhr.getResponseHeader("x-logged-in").toLowerCase()=="Maybe-In-Transition".toLowerCase()){
+                location.reload(true);
+            }else{
+                alert(err);
+            }
         });
     
 }
@@ -57,6 +63,12 @@ function samlogin_regenkeys() {
             setTimeout(function() {
                 samlogin_doConfigTests();
             }, 1000);
+        }).fail(function(xhr,textStatus,err){
+           if (xhr.getResponseHeader("x-logged-in").toLowerCase()=="Maybe-In-Transition".toLowerCase()){
+                location.reload(true);
+            }else{
+                alert(err);
+            }
         });
     }
 }
@@ -87,6 +99,12 @@ function samlogin_keyRotateEndPeriod() {
             setTimeout(function() {
                 samlogin_doConfigTests();
             }, 1000);
+        }).fail(function(xhr,textStatus,err){
+            if (xhr.getResponseHeader("x-logged-in").toLowerCase()=="Maybe-In-Transition".toLowerCase()){
+                location.reload(true);
+            }else{
+                alert(err);
+            }
         });
     }
 }
@@ -116,7 +134,13 @@ function samlogin_saveSSPConf() {
         setTimeout(function() {
             samlogin_doConfigTests();
         }, 1000);
-    });
+    }).fail(function(xhr,textStatus,err){
+             if (xhr.getResponseHeader("x-logged-in").toLowerCase()=="Maybe-In-Transition".toLowerCase()){
+                location.reload(true);
+            }else{
+                alert(err);
+            }
+        });
 }
 
 function samlogin_showToaster(msg,level){

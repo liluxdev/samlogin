@@ -36,7 +36,9 @@
             <li class="tools_keyupload">
                 <p><em>Please ensure you are browsing your Joomla admin via a secure HTTPS while uploading the private key. 
                        Also please use a modern and up-to-date browser to do this operation as there's some javascript keypair validation
-                       that may fail in old borwsers</em></p>
+                       that may fail in old borwsers</em>
+                   
+                </p>
                 <table>
                     <tr style="vertical-align: top;">
                         <td style="margin-right: 5px;">
@@ -92,6 +94,10 @@
                     </button>
                     <hr/>
                     <div class='customKeyCheck' class='uk-button'></div>
+                    
+                     <div class="uk-alert uk-alert-warning">If this certificate upload procedure fails (not all certificate formats are supported), please try to use the key generator once, and then upload manually your X.509 keypair in following location:
+                        <em>JOOMLA_ROOT_DIRECTORY/components/com_samlogin/simplesamlphp/certs</em>, name the private key file (PEM encoded, unencrypted) <em>saml.key</em> and the public key file <em>saml.crt</em>
+                    </div>
 
                 </div>
 
@@ -676,8 +682,11 @@
         } else {
 
             jQuery(".customKeyCheck").addClass("uk-button-danger").removeClass("uk-button-success")
-                    .html("<i class='uk-icon-warning'></i> Signature test failed, maybe you coupled a wrong keypair"
+                    .html("<i class='uk-icon-warning'></i> Signature test failed, maybe you coupled a wrong keypair, \n\
+                            but as this validation test can also be wrong you can save the keypair if you are sure that all is ok"
                             + " <pre>" + certInfo + "</pre>");
+                    
+                        jQuery(".keypairCustomSavebutton").removeClass("uk-hidden");
             return false;
 
         }
@@ -715,8 +724,8 @@
             jQuery(".customKeyCheck").removeClass("uk-button-danger").addClass("uk-button-success").html("<i class='uk-icon-check'></i> Encryption test passed, ready to save");
         }
         else {
-            alert(uncrypted);
-            jQuery(".customKeyCheck").addClass("uk-button-danger").removeClass("uk-button-success").html("<i class='uk-icon-warning'></i> Encryption test failed, maybe you coupled a wrong keypair");
+         //   alert(uncrypted);
+            jQuery(".customKeyCheck").addClass("uk-button-danger").removeClass("uk-button-success").html("<i class='uk-icon-warning'></i> Encryption test failed, maybe you coupled a wrong keypair, please save only if you are sure the .crt matches private .key (this browser side validation can fail)");
 
         }
 

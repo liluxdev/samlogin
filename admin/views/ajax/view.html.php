@@ -99,8 +99,8 @@ class SAMLoginViewAjax extends SAMLoginView
 		$doc->addScript(JURI::root(true)."/media/samlogin/assets/uikit/js/addons/sticky.min.js");
                
                // $doc->addScript(JURI::base(true).'/components/com_samlogin/resources/js/jsencrypt.js?v=1');
-                $doc->addScript(JURI::base(true).'/components/com_samlogin/resources/js/jsrsasing-4.2.2-all-min.js?v=1');
-            
+                $doc->addScript(JURI::base(true).'/components/com_samlogin/resources/js/jsrsasign-latest-all-min.js?v=1');
+                $doc->addScript(JURI::base(true).'/components/com_samlogin/resources/js/Sortable.js');
                 
                 $toolbar->appendButton('Custom', $helpButton); //TODO: redmine ask for support
 		$checks = array();

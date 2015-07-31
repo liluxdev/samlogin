@@ -2,12 +2,12 @@
 <extension type="module" version="2.5" method="upgrade" client="site">
 	<name>SAMLogin</name>
 	<author>creativeprogramming.it</author>
-	<creationDate>August 2013</creationDate>
+	<creationDate>Jan 2015</creationDate>
 	
 	<authorEmail>info@creativeprogramming.it</authorEmail>
 	<authorUrl>http://www.creativeprogramming.it</authorUrl>
-	<version>0.9.7</version>
-        <copyright>Copyright (c) 2013 creativeprogramming.it All rights reserved.</copyright>
+	<version>0.9.9b</version>
+        <copyright>Copyright (c) 2013-2015 creativeprogramming.it All rights reserved.</copyright>
         <license>Provided "as it is" http://creativeprogramming.it/provided-as-it-is</license>
 	<description>SAMLL_SC_FRONTEND_MOD_DESC</description>
 	<files>
@@ -29,6 +29,12 @@
                                     type="text" default="SSO Login" 
                                     label="SSO login button label" 
                                     description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
+                                 
+                                            <field name="facebookloginButtonLabel" 
+                   type="text" default="Login with Facebook" filter="raw"  
+                   label="Facebook Loogin Button Label" 
+                   description="SAMLOGIN_LOGIN_BUTTON_LABEL"/>
+                                            
                                 <field name="preLogoutMessage" type="editor" filter="raw" rows="3" cols="30" width="300px" height="100px" buttons="false" 
                                        default="" label="Logout intro message" description="SAMLOGIN_LOGIN_FORM_CUSTOM_INTRODUCTION_MESSSAGE_DESC"/>
                               
@@ -37,7 +43,7 @@
                                 </field>
                                 
                                 <field name="logoutButtonLabel" 
-                                    type="text" default="SSO Logout" 
+                                    type="text" default="Logout" 
                                     label="SSO logout button label" 
                                     description="SAMLOGIN_LOGOUT_BUTTON_LABEL"/>
                               

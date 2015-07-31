@@ -16,9 +16,9 @@ class SamloginHelper {
                 }
             }
 
-            if (!isset($user->samloginImage) || empty($user->samloginImage)) {
-                $user->samloginImage = 'http://www.gravatar.com/avatar/' . md5($user->email) . '?s=80&d=' . urlencode(JURI::root() . 'media/samlogin/images/avatar.jpg');
-            }
+           // if (!isset($user->samloginImage) || empty($user->samloginImage)) {
+                $user->samloginImage = 'https://secure.gravatar.com/avatar/' . md5($user->email) . '?s=80&d=' . urlencode(JURI::root() . self::getK2Avatar($user));
+            //}
         }
     }
 
@@ -54,11 +54,24 @@ class SamloginHelper {
         }
         return '';
     }
+    
+      public static function getJRequestVar($name){
+        if (version_compare(JVERSION, '3.0', 'gt'))
+				{
+      
+        $val= JFactory::getApplication()->input->getVar($name);
+                                }else{
+                                     $val= JRequest::getVar($name); 
+                                }
+return $val;
+    }
 
     public static function setVariables($params) {
         $user = JFactory::getUser();
         $variables = array();
         $variables['returnURL'] = self::getReturnURL($params);
+       
+        $variables['k2Avatar'] = self::getK2Avatar(JFactory::getUser());
         if (version_compare(JVERSION, '1.6.0', 'ge')) {
             $variables['option'] = 'com_users';
             $variables['task'] = ($user->guest) ? 'user.login' : 'user.logout';
@@ -154,7 +167,8 @@ class SamloginHelper {
 
     public static function getReturnURL($params) {
         $url = "/";
-        $returl = JRequest::getVar('return', null, 'GET', 'BASE64');
+        $returl = self::getJRequestVar('return');
+      //  die("r:".$returl);
         if (isset($returl) && !$params->get('systemreturngotpriority', true)) {
             $session = JFactory::getSession();
             $session->set('samloginReturnURL', $returl);
@@ -328,6 +342,7 @@ class SamloginHelper {
     }
 
     public static function getK2Avatar($user) {
+        try{
         $avatar = null;
         $db = JFactory::getDBO();
         $query = "SELECT id FROM #__k2_users WHERE userID = " . (int) $user->id;
@@ -339,7 +354,12 @@ class SamloginHelper {
             $row->load($K2UserID);
             if ($row->image) {
                 $avatar = JURI::root(true) . '/media/k2/users/' . $row->image;
+            }else{
+                $avatar = JURI::root(true) .'media/samlogin/images/avatar.jpg';
             }
+        }
+        }catch(Exception $noK2Installed){
+            $avatar=null;
         }
         return $avatar;
     }

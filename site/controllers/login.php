@@ -47,15 +47,35 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $extraReturnURLParams = "";
         //   $return = JRequest::getVar('return', null, 'GET', 'BASE64');
 
-
         $idp = JRequest::getVar('idp', null, 'GET', 'STRING');
-        $discotype = $params->get("sspas_discotype", "0");
-        $singleIDP = $params->get("sspas_idpentityid", "");
-        if ($discotype == self::DISCOTYPE_ONE_IDP_ONLY) {
-            if (empty($singleIDP)) {
-                $this->handleError("The \"No discovery service mode\" requires you to provide an IdP entityID");
-            } else {
-                $idp = $singleIDP;
+        
+        $useremail = JRequest::getVar('useremail', null, 'POST', 'STRING');
+        if (isset($useremail) && !empty($useremail)){
+         //   echo("x.".$useremail);
+            $maildisco=$params->get("maildiscoverysettings", "");
+            if (!empty($maildisco)){
+                //die($maildisco);
+                $maildisco =  json_decode($maildisco,true);
+                foreach($maildisco as $index=>$rule){
+                    if (preg_match("/".$rule['regex']."/", $useremail)){
+                        $idp = $rule['entity'];
+                        JFactory::getSession()->set("samlogin_discoemail",$useremail);
+                        JFactory::getSession()->close();
+                        break;
+                     //   die($idp);
+                    }
+                }
+            }
+        }
+        if (is_null($idp)){
+            $discotype = $params->get("sspas_discotype", "0");
+            $singleIDP = $params->get("sspas_idpentityid", "");
+            if ($discotype == self::DISCOTYPE_ONE_IDP_ONLY) {
+                if (empty($singleIDP)) {
+                    $this->handleError("The \"No discovery service mode\" requires you to provide an IdP entityID");
+                } else {
+                    $idp = $singleIDP;
+                }
             }
         }
         if (!is_null($idp)) {

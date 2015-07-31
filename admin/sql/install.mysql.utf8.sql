@@ -8,6 +8,17 @@ CREATE TABLE IF NOT EXISTS `#__samlogin_authz_hist` (
   `timeid` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `samlogin_user` (`username`(255)),
-  KEY `samlogin_timeid` (`timeid`),
+  KEY `samlogin_timeid` (`time`),
   KEY `samlogin_group` (`group`)
-) DEFAULT CHARSET=utf8
+) DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `#__samlogin_authz_adv_mapping` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `attrvalue` varchar(255) NOT NULL,
+  `attrname` varchar(255) NOT NULL,
+  `userid` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `samlogin_unq_mapping_id` (`attrvalue`,`attrname`),
+  KEY `samlogin_userid` (`userid`)
+) DEFAULT CHARSET=utf8;

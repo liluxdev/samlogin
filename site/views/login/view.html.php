@@ -48,11 +48,15 @@ class SamloginViewLogin extends SAMLoginView
 
 	private function addTemplatePaths()
 	{
+            	// Get params
+		$params = $this->getParams();
+                $loginPageMode=$params->get("loginpagemode","default");
+                $params->set('template', $loginPageMode);
+            
 		// Get application
 		$application = JFactory::getApplication();
 
-		// Get params
-		$params = $this->getParams();
+	
 
 		// Look for template files in component folders
 		$this->addTemplatePath(JPATH_COMPONENT.'/templates/login');

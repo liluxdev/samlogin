@@ -118,13 +118,13 @@ class plgSystemSamlogin extends JPlugin {
         if ($params->get('usesecure', false)) {
             $url = strtr($url, array("http://" => "https://"));
         }
-         if (!stristr($url, "mergesess")) {
-        if (stristr($url, "?")) {
-            $url.="&mergesess=1";
-        } else {
-            $url.="?mergesess=1";
+        if (!stristr($url, "mergesess")) {
+            if (stristr($url, "?")) {
+                $url.="&mergesess=1";
+            } else {
+                $url.="?mergesess=1";
+            }
         }
-         }
         return base64_encode($url);
     }
 
@@ -133,40 +133,54 @@ class plgSystemSamlogin extends JPlugin {
         $view = $this->getJRequestCmd('view');
         $application = JFactory::getApplication();
         $this->setNoCacheHeaders(false);
-
-        if ($application->isAdmin() && $_GET["mergesess"] == "1") {
+ 
+        if ($application->isAdmin() && isset($_GET["mergesess"]) && $_GET["mergesess"] == "1") {
             $this->mergeFrontendWithAdminSessions(JURI::current());
         }
 
         if ($application->isAdmin() && $option == "com_login" && $view = "login") {
+
             //die($option.":".$view);
             $this->setNoCacheHeaders(true);
-            $body = JResponse::getBody();
+
             if (version_compare(JVERSION, '1.6.0', 'ge')) {
                 $componentParams = JComponentHelper::getParams('com_samlogin');
             } else {
                 $component = JComponentHelper::getComponent('com_samlogin');
                 $componentParams = new JParameter($component->params);
             }
-
-            $variables = array();
-            $variables["returnURL"] = self::getReturnURLAdminMergeSess($componentParams);
-
-
-            $variables['facebookSSOLink'] = JRoute::_(JURI::root() . 'index.php?option=com_samlogin&view=login&task=initFacebookSSO&return=' . $variables['returnURL'], false);
+            if ($componentParams->get("enable_adminside", 0)) {
+                $body = JResponse::getBody();
+                $variables = array();
+                $variables["returnURL"] = self::getReturnURLAdminMergeSess($componentParams);
 
 
-
-
-            $variables['ssoLink'] = JRoute::_(JURI::root() . 'index.php?option=com_samlogin&view=login&task=initSSO&return=' . $variables['returnURL'], false);
-
-            $body = strtr($body, array("</form>" => "</from><a href=" . $variables['ssoLink'] . " tabindex=3 class='btn btn-success btn-large'>
-<i class='icon-lock icon-white'></i> SSO Login	</a><br/>
+                $fbloginHTML = "";
+                $extraMessage = "";
+                $variables['ssoLink'] = JRoute::_(JURI::root() . 'index.php?option=com_samlogin&view=login&task=initSSO&return=' . $variables['returnURL'], false);
+                $variables['facebookSSOLink'] = JRoute::_(JURI::root() . 'index.php?option=com_samlogin&view=login&task=initFacebookSSO&return=' . $variables['returnURL'], false);
+                if ($componentParams->get("enable_fbconnect", 0)) {
+                    $fbloginHTML = "
 <a href=" . $variables['facebookSSOLink'] . " tabindex=3 class='btn btn-primary btn-large'>
-<i class='icon-lock icon-white'></i> Facebook Login	</a>
-
- "));
-            JResponse::setBody($body);
+<i class='icon-lock icon-white'></i> Facebook Login	</a>";
+                }
+$ssoHTML="";
+  if ($componentParams->get("enable_samlogin", 1)) {
+                $ssoHTML = "<a href=" . $variables['ssoLink'] . " tabindex=3 class='btn btn-success btn-large'>
+<i class='icon-lock icon-white'></i> SSO Login	</a>";
+  }
+                $variables['ssoLink'] = JRoute::_(JURI::root() . 'index.php?option=com_samlogin&view=login&task=initSSO&return=' . $variables['returnURL'], false);
+                if (isset($_GET["notAuthorized"]) && $_GET["notAuthorized"] == 403) {
+                    $extraMessage = "<hr/><b>Your SSO attempt worked but you are still not authorized "
+                            . "to access the administrative interface, if you think you need this"
+                            . " kind of access contact site administrators<br/><br/>"
+                            . "For security reasons this failed access caused a reset also of your frontend session,"
+                            . "if any, but your SSO session is still active, if you need to retry logout from your SSO server"
+                            . "central service or close/clean your browser";
+                }
+                $body = strtr($body, array("</form>" => "</from>".$ssoHTML . $fbloginHTML . $extraMessage));
+                JResponse::setBody($body);
+            }
         }
     }
 
@@ -186,7 +200,7 @@ class plgSystemSamlogin extends JPlugin {
         }
     }
 
-    public function onAfterRoute() {
+        public function onAfterRoute() {
         $application = JFactory::getApplication();
         $option = JRequest::getCmd('option');
         $view = JRequest::getCmd('view');
@@ -199,7 +213,11 @@ class plgSystemSamlogin extends JPlugin {
 
 
         if ($application->isSite() && $view == 'login' && ($option == 'com_users' || $option == 'com_user') && $_SERVER['REQUEST_METHOD'] == 'GET') {
-            $return = JRequest::getString("return");
+            $return = self::getJRequestVar("return");
+ /*           if(!empty($return)){
+                strip_tags($return);
+            }*/
+           // die("ret: ".$return);
             jimport('joomla.application.component.helper');
             $samloginParams = JComponentHelper::getParams('com_samlogin');
 
@@ -212,6 +230,9 @@ class plgSystemSamlogin extends JPlugin {
                 if (count($items)) {
                     $router = JSite::getRouter();
                     $link = $router->getMode() == JROUTER_MODE_SEF ? 'index.php?Itemid=' . $items[0]->id : $items[0]->link . '&Itemid=' . $items[0]->id;
+                     if (!empty($return)) {
+                            $link .= "&return=" . $return;
+                        }
                 } else {
                     $link = 'index.php?option=com_samlogin&view=login';
                     if (!empty($return)) {
@@ -223,6 +244,7 @@ class plgSystemSamlogin extends JPlugin {
                     $customItem = $samloginParams->get('loginPage', 0);
                     if ($customItem) {
                         $link = 'index.php?Itemid=' . $customItem;
+                        
                         if (!empty($return)) {
                             $link .= "&return=" . $return;
                         }
@@ -237,77 +259,127 @@ class plgSystemSamlogin extends JPlugin {
     public function mergeFrontendWithAdminSessions($finalURL) {
         $u = JFactory::getUser();
         if (JFactory::getApplication()->isAdmin() && $_GET["mergesess"] == "1") {
-            if ($u->guest) {
 
-                // die("test");
-                //    $currentSession = JFactory::getSession(array("name"=>"administratorjapplicationcms"));
-//die(print_r($currentSession->get("SAMLoginAttrs", '-'),true));
-                $app = JFactory::getApplication();
-                $sessname = $app->input->cookie->get(md5(JApplication::getHash('site')));
-                $db = JFactory::getDbo();
-                $query = $db->getQuery(true)
-                        ->select('*')
-                        ->from('#__session')
-                        ->where('session_id = ' . $db->quote(JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('site')))))
-                        ->where('client_id = 0') //client id 0 is site 1 admin 
-                        ->where('guest = 0');
-
-                $db->setQuery($query);
-                $sessrow = $db->loadAssoc();
-                //  $sessrow["decdata1"]= session_decode( (string) $sessrow["data"]);
-                $sessrow["session_decode"] = session_decode(str_replace('\0\0\0', chr(0) . '*' . chr(0), (string) $sessrow["data"]));
-                // die(print_r($_SESSION));
-                $sessrow["decdata"] = $_SESSION["__default"];
-                // echo "<pre>";
-             //   die(print_r( $sessrow["decdata"]["user"]->get("groups")));
-                // $instance = JFactory::getUser($userId);
-                $instance = $sessrow["decdata"]["user"];
-                if ($instance instanceof Exception) {
-                    return $app->redirect('index.php', JText::_('User login failed'), 'error');
-                }
-
-                if ($instance->get('block') == 1) {
-                    return $app->redirect('index.php', JText::_('JERROR_NOLOGIN_BLOCKED'), 'error');
-                }
-                JFactory::getApplication()->checkSession();
-
-             //   $allowedViewLevels = JAccess::getAuthorisedViewLevels($instance->id);
-               // die(print_r($allowedViewLevels));
-                $isadmin = $instance->authorise('core.login.admin');
-                $isroot = $instance->authorise('core.admin');
-                if ($isadmin||$isroot) {
-                   // die("isadmin");
-                    $instance->set('guest', 0);
-
-                    $session = JFactory::getSession();
-                    $session->set('user', $instance);
-
-                    $app->checkSession();
-
-                    $query = $db->getQuery(true)
-                            ->update($db->quoteName('#__session'))
-                            ->set($db->quoteName('guest') . ' = ' . $db->quote($instance->get('guest')))
-                            ->set($db->quoteName('username') . ' = ' . $db->quote($instance->get('username')))
-                            ->set($db->quoteName('userid') . ' = ' . (int) $instance->get('id'))
-                            ->where($db->quoteName('session_id') . ' = ' . $db->quote($session->getId()));
-                    $db->setQuery($query);
-                    $db->execute();
-
-
-                    // $app->enqueueMessage(JText::sprintf('You have login successfully as user &quot;%s&quot;', $instance->name));
-                    $app->redirect($finalURL, JText::sprintf('You have login successfully as user &quot;%s&quot;', $instance->name));
-                } else {
-                    // die("not auth");
-                   
-                    JFactory::getApplication()->logout();
-                    $app->redirect("index.php?notAuthorized=403", JText::sprintf('Not authorised', $instance->name));
-                }
-                //   JFactory::getApplication()->loadSession(new JSession('database', array("name"=>$sessname,"id"=>$sessname)));
-                //     echo($sessname."::".print_r($sessrow,true));
-                // $currentSession = JFactory::getSession(array("name"=>$sessname,"id"=>$sessname));
-                //         die(print_r($currentSession,true));
+            if (version_compare(JVERSION, '1.6.0', 'ge')) {
+                $componentParams = JComponentHelper::getParams('com_samlogin');
             } else {
-                JFactory::getApplication()->logout();
+                $component = JComponentHelper::getComponent('com_samlogin');
+                $componentParams = new JParameter($component->params);
+            }
+            if ($componentParams->get("enable_adminside", 0)) {
+                if ($u->guest) {
+
+                    // die("test");
+                    //    $currentSession = JFactory::getSession(array("name"=>"administratorjapplicationcms"));
+//die(print_r($currentSession->get("SAMLoginAttrs", '-'),true));
+                    $app = JFactory::getApplication();
+                    $sessname = $app->input->cookie->get(md5(JApplication::getHash('site')));
+
+                    $db = JFactory::getDbo();
+                    $query = $db->getQuery(true)
+                            ->select('*')
+                            ->from('#__session')
+                            ->where('session_id = ' . $db->quote(JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('site')))))
+                            ->where('client_id = 0') //client id 0 is site 1 admin 
+                            ->where('guest = 0');
+
+                    $db->setQuery($query);
+                    $sessrow = $db->loadAssoc();
+                    //  $sessrow["decdata1"]= session_decode( (string) $sessrow["data"]);
+                    $sessrow["session_decode"] = session_decode(str_replace('\0\0\0', chr(0) . '*' . chr(0), (string) $sessrow["data"]));
+                    // die(print_r($_SESSION));
+                    $sessrow["decdata"] = $_SESSION["__default"];
+                    // echo "<pre>";
+                    //   die(print_r( $sessrow["decdata"]["user"]->get("groups")));
+                    // $instance = JFactory::getUser($userId);
+                    $instance = $sessrow["decdata"]["user"];
+                    if ($instance instanceof Exception) {
+                        return $app->redirect('index.php', JText::_('User login failed'), 'error');
+                    }
+
+                    if ($instance->get('block') == 1) {
+                        return $app->redirect('index.php', JText::_('JERROR_NOLOGIN_BLOCKED'), 'error');
+                    }
+                    JFactory::getApplication()->checkSession();
+
+                    //   $allowedViewLevels = JAccess::getAuthorisedViewLevels($instance->id);
+                    // die(print_r($allowedViewLevels));
+                    $isadmin = $instance->authorise('core.login.admin');
+                    $isroot = $instance->authorise('core.admin');
+                    if ($isadmin || $isroot) {
+                        // die("isadmin");
+                        $instance->set('guest', 0);
+
+                        $session = JFactory::getSession();
+                        $session->set('user', $instance);
+
+                        $app->checkSession();
+
+                        $query = $db->getQuery(true)
+                                ->update($db->quoteName('#__session'))
+                                ->set($db->quoteName('guest') . ' = ' . $db->quote($instance->get('guest')))
+                                ->set($db->quoteName('username') . ' = ' . $db->quote($instance->get('username')))
+                                ->set($db->quoteName('userid') . ' = ' . (int) $instance->get('id'))
+                                ->where($db->quoteName('session_id') . ' = ' . $db->quote($session->getId()));
+                        $db->setQuery($query);
+                        $db->execute();
+
+
+                        // $app->enqueueMessage(JText::sprintf('You have login successfully as user &quot;%s&quot;', $instance->name));
+                        $app->redirect($finalURL, JText::sprintf('You have login successfully as user &quot;%s&quot;', $instance->name));
+                    } else {
+                        // die("not auth");
+                        // unset cookies to cleanup fb and also simplesamlphp
+                        // @session_destroy();
+
+                        /* TODO a better way to destroy only the sessions, 
+                         * this anyway is a quick fix to destroy only local sessions
+                         *  that it's what we need (and not to trigger an initSLO)
+                         * but as drawback it erases also all cookies sets for preferences and advertising */
+                        if (isset($_SERVER['HTTP_COOKIE'])) {
+                            $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+                            $frontendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('site')));
+                            $backendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('administrator')));
+                            //print "<hr/>front: ".$frontendSessId;
+                            // print "<hr/>back: ".$backendSessId;
+                            //print "<hr/>sessname: ".$sessname;
+                            $sessionCookieValueToRemove = array(
+                                $frontendSessId,
+                                $backendSessId
+                            );
+
+                            $sessionCookieNameToRemove = array(
+                                "SAMLoginCookieAuthToken",
+                                "SAMLoginSimpleSAMLSessionID"
+                            );
+                            // die(print_r($cookies,true));
+
+                            foreach ($cookies as $cookie) {
+
+                                $parts = explode('=', $cookie);
+                                $name = trim($parts[0]);
+                                $value = trim($parts[1]);
+                                if (in_array($value, $sessionCookieValueToRemove) || in_array($name, $sessionCookieNameToRemove)) {
+                                    setcookie($name, '', 1);
+                                    setcookie($name, '', 1, '/');
+                                }
+                            }
+                        }
+                        $currentSession = JFactory::getSession();
+
+
+                        //  $currentSession->set("SAMLoginPreventDoubleLogout", true);
+                        //  $currentSession->close();
+                        //   JFactory::getApplication()->logout();
+                        $app->redirect("index.php?notAuthorized=403", JText::sprintf('Not authorised', $instance->name));
+                    }
+                    //   JFactory::getApplication()->loadSession(new JSession('database', array("name"=>$sessname,"id"=>$sessname)));
+                    //     echo($sessname."::".print_r($sessrow,true));
+                    // $currentSession = JFactory::getSession(array("name"=>$sessname,"id"=>$sessname));
+                    //         die(print_r($currentSession,true));
+                } else {
+                    JFactory::getApplication()->logout();
+                }
             }
         }
     }

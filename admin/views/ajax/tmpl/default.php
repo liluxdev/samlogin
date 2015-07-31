@@ -137,6 +137,92 @@ defined('_JEXEC') or die;
 
 </style>
 <script type="text/javascript">
+
+    window.maildiscojsonruleprogressive = 0;
+    function getMailDiscoRuleEditorNewLine(regexp, idp) {
+        maildiscojsonruleprogressive++;
+        var toret = "<li class='maildiscorule maildiscorule_" + maildiscojsonruleprogressive + "'>" +
+                "<table><tr><td rowspan=2><i class='drag-handle uk-icon-bars'></i><td colspan=2>" +
+                "<input type='text' class='regexp' value='" + regexp + "' placeholder='regexp'>" +
+                "<select class='idp' >" + jQuery("#jformsspas_idpentityid").html() + "</select>" +
+                "<i class='js-remove uk-icon-times'></i></td></tr></table>" +
+                "</li>";
+        console.debug(regexp,idp);
+        setTimeout(function(){
+           console.debug(maildiscojsonruleprogressive,regexp,idp);    
+        jQuery(".maildiscorule_" + maildiscojsonruleprogressive + " .idp").val(idp);
+    },50);
+        return toret;
+    }
+
+    function toJSONMailDiscoRuleEditor() {
+        var arr = [];
+        jQuery(".maildiscorule").each(function (i, e) {
+            var regexp = jQuery(".regexp", e).val();
+            var idp = jQuery(".idp", e).val();
+            arr.push({regex: regexp, entity: idp});
+        });
+        jQuery("#jform_maildiscoverysettings").attr("readonly", "false");
+        var textarea = jQuery("#jform_maildiscoverysettings");
+        textarea.val(JSON.stringify(arr));
+        jQuery("#jform_maildiscoverysettings").attr("readonly", "true");
+    }
+
+    function addDiscoRuleEditor() {
+        jQuery("#maildiscoeditor").append(getMailDiscoRuleEditorNewLine("", ""));
+        jQuery(".maildiscoeditor .regexp").on("change", toJSONMailDiscoRuleEditor);
+        jQuery(".maildiscoeditor .idp").on("change", toJSONMailDiscoRuleEditor);
+    }
+
+    function fromJSONMailDiscoRuleEditor() {
+        var arr = JSON.parse(jQuery("#jform_maildiscoverysettings").val());
+        var html = "";
+        jQuery.each(arr, function (i, e) {
+            html += getMailDiscoRuleEditorNewLine(e.regex, e.entity);
+        });
+        jQuery("#maildiscoeditor").html(html);
+        jQuery(".maildiscoeditor .regexp").on("change", toJSONMailDiscoRuleEditor);
+        jQuery(".maildiscoeditor .idp").on("change", toJSONMailDiscoRuleEditor);
+    }
+
+    function prepareJSONMailDiscoRuleEditor() {
+        // Editable list
+        var textarea = jQuery("#jform_maildiscoverysettings").attr("readonly", "true");
+        var json = jQuery.parseJSON(textarea.val());
+        var li = "<ul id='maildiscoeditor' class='maildiscoeditor uk-list uk-list-striped'>";
+        li +=
+                // getMailDiscoRuleEditorNewLine("","")+
+                // getMailDiscoRuleEditorNewLine("","")+
+                "</ul><a class='uk-button uk-button-success' onClick='addDiscoRuleEditor();'>+ add rule</a><hr/><small>RESULTING JSON RULESET</small>";
+        if (jQuery('#maildiscoeditor').length == 0) {
+            var jsonEditor = textarea.parent().prepend(
+                    li);
+        }
+        var editable = jQuery('#maildiscoeditor').get(0);
+        var editableList = Sortable.create(maildiscoeditor, {
+            filter: '.js-remove',
+            handle: '.drag-handle',
+            animation: 150,
+            onFilter: function (evt) {
+                var el = editableList.closest(evt.item); // get dragged item
+                el && el.parentNode.removeChild(el);
+                toJSONMailDiscoRuleEditor();
+            },
+            onSort: function (evt) {
+                toJSONMailDiscoRuleEditor();
+            },
+            onEnd: function (evt) {
+                toJSONMailDiscoRuleEditor();
+            }
+        });
+        jQuery(".maildiscoeditor .regexp").on("change", toJSONMailDiscoRuleEditor);
+        jQuery(".maildiscoeditor .idp").on("change", toJSONMailDiscoRuleEditor);
+    }
+
+    jQuery(document).ready(function () {
+        prepareJSONMailDiscoRuleEditor();
+        fromJSONMailDiscoRuleEditor();
+    });
     function samlogin_doConfigTests() {
 
         jQuery(".statusOfCheck").html("<i class='uk-icon-refresh uk-icon-spin'></i>");
@@ -146,11 +232,11 @@ defined('_JEXEC') or die;
             data: {
                 task: "doConfigTests"
             },
-            beforeSend: function(xhr) {
+            beforeSend: function (xhr) {
                 //xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
             },
             dataType: 'json'
-        }).done(function(data) {
+        }).done(function (data) {
 
             if (data == undefined || data == null || data == "" || data.additionalMessages == undefined) {
                 data = {};
@@ -162,7 +248,6 @@ defined('_JEXEC') or die;
             }
 
             samlogin_processMessages(data);
-
             if (data.cronLink) {
                 jQuery(".cronLink").attr("href", data.cronLink);
             }
@@ -170,7 +255,11 @@ defined('_JEXEC') or die;
                 jQuery(".cronSuggestion").html(data.cronSuggestion);
             }
 
-
+            if (data.sessionHandler == "database") {
+                jQuery(".sessionHandler .statusOfCheck").html("<i class='uk-icon-check'></i>" + data.sessionHandler).removeClass("uk-button-warning").removeClass("uk-button-primary").addClass("uk-button-success");
+            } else {
+                jQuery(".sessionHandler .statusOfCheck").html("<i class='uk-icon-check'></i>" + data.sessionHandler).addClass("uk-button-warning").removeClass("uk-button-primary").removeClass("uk-button-success");
+            }
             if (data.sspCheck !== false) {
                 jQuery(".sspCheck .statusOfCheck").html("<i class='uk-icon-check'></i>" + data.sspCheck).removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
                 jQuery(".sspCheck .guideLink").html("<div style='cursor:pointer;' class='uk-button uk-button-danger uk-button-mini' data-uk-modal=\"{target:'#install-ssp-modal'}\">reinstall</div>");
@@ -186,7 +275,7 @@ defined('_JEXEC') or die;
                             .html("<i class='uk-icon-check'> </i>").off("click");
                 } else {
                     jQuery(".sspCheck .configIsInSync").css("cursor", "pointer").removeClass("uk-button-success").addClass("uk-button-danger")
-                            .html("<i class='uk-icon-warning'></i> conf. not in sync").on("click", function(e) {
+                            .html("<i class='uk-icon-warning'></i> conf. not in sync").on("click", function (e) {
                         samlogin_saveSSPConf();
                     });
                 }
@@ -194,7 +283,6 @@ defined('_JEXEC') or die;
 
             if (data.keyrotation) {
                 jQuery(".keyRotation .statusOfCheck").html("<i class='uk-icon-warning'></i> Key Rotation is ON").removeClass("uk-button-danger").removeClass("uk-button-success").addClass("uk-button-primary");
-
             } else {
                 jQuery(".keyRotation .statusOfCheck").html("<i class='uk-icon-check'></i> Key Rotation is OFF")
                         .removeClass("uk-button-primary").removeClass("uk-button-danger").addClass("uk-button-success");
@@ -207,15 +295,14 @@ defined('_JEXEC') or die;
                 } else {
                     jQuery(".baseURLPath .statusOfCheck").html("<i class='uk-icon-check'></i> ")
                             .removeClass("uk-button-primary").addClass("uk-button-success").removeClass("uk-button-danger");
-
                 }
                 //jQuery(".baseURLPath .statusOfCheck").html("<i class='uk-icon-check'></i>").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
             } else {
                 jQuery(".baseURLPath .statusOfCheck").html("<i class='uk-icon-times'></i>")
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
             }
-            
-               if (data.userPlugin !== false) {
+
+            if (data.userPlugin !== false) {
                 jQuery(".userPlugin .statusOfCheck").html("<i class='uk-icon-check'></i> " + data.userPlugin).removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
             } else {
                 jQuery(".userPlugin .statusOfCheck").html("<i class='uk-icon-times'></i>")
@@ -255,7 +342,6 @@ defined('_JEXEC') or die;
                 } else {
                     jQuery(".metadataPublished .statusOfCheck").html("<i class='uk-icon-check'></i> ")
                             .removeClass("uk-button-primary").addClass("uk-button-success").removeClass("uk-button-danger");
-
                 }
             } else {
                 jQuery(".metadataPublished .statusOfCheck").html("<i class='uk-icon-times'></i>")
@@ -270,12 +356,9 @@ defined('_JEXEC') or die;
                 if (data.metadataPublishedSSL !== true) {
                     jQuery(".metadataPublishedSSL .statusOfCheck").html("<i class='uk-icon-warning'></i> " + data.metadataPublishedSSL)
                             .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
-
-
                 } else {
                     jQuery(".metadataPublished .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
                     jQuery(".metadataPublishedSSL .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
-
                 }
             } else {
                 jQuery(".metadataPublishedSSL .statusOfCheck").html("<i class='uk-icon-times'></i>")
@@ -287,7 +370,6 @@ defined('_JEXEC') or die;
                     jQuery(".certProtected .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
                 } else {
                     jQuery(".certProtected .statusOfCheck").html(data.privatekey).removeClass("uk-button-danger").removeClass("uk-button-primary");
-
                 }
             } else {
                 jQuery(".certProtected .statusOfCheck").html("<i class='uk-icon-times'></i>")
@@ -299,7 +381,6 @@ defined('_JEXEC') or die;
                     jQuery(".certProtected_ssl .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
                 } else {
                     jQuery(".certProtected_ssl .statusOfCheck").html(data.privatekeySSL).removeClass("uk-button-danger").removeClass("uk-button-primary");
-
                 }
             } else {
                 jQuery(".certProtected_ssl .statusOfCheck").html("<i class='uk-icon-times'></i>")
@@ -313,7 +394,6 @@ defined('_JEXEC') or die;
                     jQuery(".logsProtected .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
                 } else {
                     jQuery(".logsProtected .statusOfCheck").html(data.logswww).removeClass("uk-button-danger").removeClass("uk-button-primary");
-
                 }
 
             } else {
@@ -326,7 +406,6 @@ defined('_JEXEC') or die;
                     jQuery(".logsProtected_ssl .statusOfCheck").html("<i class='uk-icon-check'></i> ").removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-success");
                 } else {
                     jQuery(".logsProtected_ssl .statusOfCheck").html(data.logswwws).removeClass("uk-button-danger").removeClass("uk-button-primary");
-
                 }
 
             } else {
@@ -342,7 +421,7 @@ defined('_JEXEC') or die;
                         .removeClass("uk-button-primary").removeClass("uk-button-success").addClass("uk-button-danger");
             }
 
-            if (data.metarefreshSAML2IdpLastUpdate !== false) {
+            if (data.metarefreshSAML2IdpLastUpdate !== false && data.metarefreshSAML2IdpLastUpdate !== "Never") {
                 jQuery(".lastCronjobUpdate .statusOfCheck").html("<i class='uk-icon-clock-o'></i> " + data.metarefreshSAML2IdpLastUpdate).removeClass("uk-button-danger").removeClass("uk-button-primary").addClass("uk-button-info");
             } else {
                 jQuery(".lastCronjobUpdate .statusOfCheck").html("<i class='uk-icon-times'></i>")
@@ -351,21 +430,26 @@ defined('_JEXEC') or die;
 
             jQuery('.statusOfCheck .uk-icon-question-circle').parent().removeClass('uk-button-danger'); //this makes the metadata not red when check result is unknown
 
+        }).fail(function (xhr, textStatus, err) {
+            if (xhr.getResponseHeader("x-logged-in").toLowerCase() == "Maybe-In-Transition".toLowerCase()) {
+                location.reload(true);
+            } else {
+                samlogin_showToaster("JSON response error: " + err, "warning");
+                samlogin_showToaster("You may want to disable php error reporting in Joomla global configuration to be able to go forward", "warning");
+            }
         });
     }
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         samlogin_doConfigTests();
-        jQuery(".samloginParamForm").on("submit", function(e) {
+        jQuery(".samloginParamForm").on("submit", function (e) {
             samlogin_saveSettings();
             e.preventDefault();
             return false;
         });
-
-        jQuery(".samloginParamForm input,.samloginParamForm select,.samloginParamForm textarea").on("change", function(e) {
+        jQuery(".samloginParamForm input,.samloginParamForm select,.samloginParamForm textarea").on("change", function (e) {
             jQuery(".saveSettingsButton").addClass("uk-button-primary");
         });
-    });
-</script>
+    });</script>
 <!--
 <aside>    
     <div class="samlogin-dash-minipanel  samlogin-dash-minipanel-left   samlogin-dash-leftcontent-medium uk-panel uk-panel-box">
@@ -416,10 +500,16 @@ defined('_JEXEC') or die;
                         </thead>
                         <tbody>
                             <tr></tr>
+
                             <tr class="sspCheck">
                                 <td class="">Linked SimpleSAMLphp installation</td>
                                 <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
                                 <td class=""><span class="guideLink"></span> <span style="margin-top: 2px;" class="configIsInSync uk-button uk-button-mini"></span></td>
+                            </tr>
+                            <tr class='sessionHandler'>
+                                <td class=" ">Joomla Session Storage (Session Handler)</td>
+                                <td class=" "><span class='statusOfCheck uk-button uk-button-mini uk-button-primary'><i class='uk-icon-refresh uk-icon-spin'></i></span></td>
+                                <td class="   "><span class="guideLink">Suggested setting is `database` <i class='uk-icon-database'></i> <a  href='index.php?option=com_config#page-system'>set it here</a> <small>(changing will log all users out)</small></span></td>
                             </tr>
                             <?php if ($this->checks['sspCheck']) { ?>
                                 <tr class='keyRotation'>
@@ -509,11 +599,11 @@ defined('_JEXEC') or die;
 
         <li class="SettingsTab">
             <div class="SettingsTab_Actionbar" style="position: relative;">  
-    <?php if (version_compare(JVERSION, '3.0', 'ge')) { ?>
-                <div data-uk-sticky="{top:90}" style="text-align: right;
-           <?php }else{ ?>
-                 <div data-uk-sticky="{top:15}" style="text-align: right;
-          <?php }  ?>
+                <?php if (version_compare(JVERSION, '3.0', 'ge')) { ?>
+                    <div data-uk-sticky="{top:90}" style="text-align: right;
+                <?php } else { ?>
+                         <div data-uk-sticky="{top:15}" style="text-align: right;
+                     <?php } ?>
                      margin-top: -16px;
                      background: whitesmoke;
                      position: relative;
@@ -578,9 +668,9 @@ defined('_JEXEC') or die;
             ?>
         </li> 
         <li class="">
-                    <?php
-                    include dirname(__FILE__) . "/snippets/tools.php";
-                    ?>
+            <?php
+            include dirname(__FILE__) . "/snippets/tools.php";
+            ?>
         </li>
         <li class="">
             Log section not yet available
@@ -620,7 +710,15 @@ defined('_JEXEC') or die;
                             <?php echo $this->checks['xml'] ? "<i class='uk-icon-check-circle'></i>" : "<i class='uk-icon-warning'></i>"; ?>
                         </span>
                     </td>
-                </tr>
+                </tr>    
+                <tr>
+                    <td class="samlogin-system-label">php-pdo</td>
+                    <td class="samlogin-system-value">
+                        <span class="uk-button uk-button-mini <?php echo class_exists('PDO') ? 'uk-button-success' : 'uk-button-danger'; ?>">
+                            <?php echo class_exists('PDO') ? "<i class='uk-icon-check-circle'></i>" : "<i class='uk-icon-warning'></i>"; ?>
+                        </span>
+                    </td>
+                </tr>    
                <!-- <tr>
                         <td class="samlogin-system-label">JSON</td>
                         <td class="samlogin-system-value">
@@ -743,7 +841,7 @@ defined('_JEXEC') or die;
                                         <div style="width: 100%; font-size: 90%;" class="uk-dropdown">
                                             <ul style="text-align: center;" class="uk-nav uk-nav-dropdown">
                                                 <li class="uk-nav-header">Select version and flavour</li>
-                                                  <li><a href="#" onClick="samlogin_installSSP('1.12.n1');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.12</b><i>.n1 (from our github repo)</i> 
+                                                <li><a href="#" onClick="samlogin_installSSP('1.12.n1');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.12</b><i>.n1 (from our github repo)</i> 
                                                         <span style="float: none; font-size: 70%;">
                                                             <div class="uk-badge uk-badge-warning">samlogin</div>                                                      
                                                             <div class="uk-badge uk-badge-warning">nginx</div>
@@ -776,7 +874,7 @@ defined('_JEXEC') or die;
                                                         </span>
                                                     </a>
                                                 </li> 
-                                              -->
+                                                -->
                                                 <li><a href="#" onClick="samlogin_installSSP('1.11.n');" in_tag="ul"><i class="uk-icon-cloud-download"></i> Install SimpleSAMLphp <b>v.1.11</b><i>.n (from our github repo)</i> 
                                                         <span style="float: none; font-size: 70%;">
                                                             <div class="uk-badge uk-badge-warning">samlogin</div>
@@ -793,7 +891,7 @@ defined('_JEXEC') or die;
                                                     </a>
                                                 </li>
                                                 <li class="uk-nav-header">If the Github download fails try those alternative repos:</li>
-                                                   <li><a href="#" onClick="samlogin_installSSP('1.12.n1-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.12</b><i>.n1 (from alternate repo)</i> 
+                                                <li><a href="#" onClick="samlogin_installSSP('1.12.n1-a');"  in_tag="ul">Install SimpleSAMLphp <b>v.1.12</b><i>.n1 (from alternate repo)</i> 
                                                         <span style="float: none; font-size: 70%;">
                                                             <div class="uk-badge uk-badge-warning">samlogin</div>
                                                             <div class="uk-badge uk-badge-warning">nginx</div>

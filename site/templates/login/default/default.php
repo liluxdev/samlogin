@@ -12,8 +12,8 @@ defined('_JEXEC') or die; ?>
 	<div class="samloginIntroMessage"><?php echo $this->introductionMessage; ?></div>
 	<?php endif; ?>
 
-	<div class="samloginBlock">
-	        
+		<div class="samloginBlock">
+	      <?php if ($this->params->get('enable_samlogin', 1)) { ?>   
                <div class="samloginSAMLLoginBlock">
 					<h2 class="samloginServicesMessage"><?php echo $this->params->get('ssoLoginTitle',"Federated Login");?></h2>
 					<div class="samloginBlock">
@@ -25,6 +25,19 @@ defined('_JEXEC') or die; ?>
 						
 					</div>
 	        </div>
+              <?php }?>
+             <?php if ($this->params->get('enable_fbconnect', 0)) { ?>
+            	      <?php if ($this->params->get('enable_samlogin', 1)) { ?>   
+            <div class="SamloginOrSpacer"><h4> <?php echo JText::_('SAMLOGIN_OR') ?> </h4></div>
+                      <?php }?>
+            <div class="samloginFacebookBlock">
+                <a class="<?php echo $this->params->get('loginButtonClasses',"btn btn-primary uk-button uk-button-primary");?>" href="<?php echo $this->facebookSSOLink; ?>">
+							<i></i>
+							<span> <?php echo $this->params->get('facebookLoginButtonLabel',JText::_('SAMLOGIN_FACEBOOK_SSO'));?> </span>
+		</a>
+            </div>
+            <?php }?>
+            
 	
             <?php if ($this->params->get('showClassic', 1)) : ?>
             

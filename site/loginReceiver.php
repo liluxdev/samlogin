@@ -90,13 +90,15 @@ try {
 
     $samlsession = null;
     $proto = isset($_GET["proto"]) ? $_GET["proto"] : "saml";
-    if (isset($_REQUEST["wresult"])) {
-        $proto = "wsfed";
-    }
 
     if (!empty($_GET['wa']) and ( $_GET['wa'] == 'wsignoutcleanup1.0')) {
         if (isset($session) && $session->isValid('wsfed')) {
-            //   die("test");
+            error_reporting(0);
+            $session->doLogout('wsfed');
+            //TODO better callbacks
+            /**
+             * Booting joomla (for get control on its own session managment system)
+             */
             define('_JEXEC', 1);
             if (!defined('_JDEFINES')) {
                 require_once JPATH_BASE . '/includes/defines.php';
@@ -104,39 +106,87 @@ try {
             require_once JPATH_BASE . '/includes/framework.php';
             JDEBUG ? $_PROFILER->mark('afterLoad') : null;
 // Instantiate the application.
-            $app = JFactory::getApplication('site');
-            $app = JFactory::getApplication();
-            $currentSession = JFactory::getSession();
-            $currentSession->set("SAMLoginPreventDoubleLogout", true);
-            $currentSession->close();
+
+
+
+            $app = JFactory::getApplication("site");
+            /*
               $currentSession = JFactory::getSession();
-                 error_reporting(0);
-            $session->doLogout('wsfed');
-            $app->logout();
+              $currentSession->set("SAMLoginPreventDoubleLogout", true);
+              $currentSession->close();
+
+              $app->logout(); */
+            $noCookieRemoved = true;
+            if (isset($_SERVER['HTTP_COOKIE'])) {
+                $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+                $frontendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('site')));
+                $backendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('administrator')));
+                //print "<hr/>front: ".$frontendSessId;
+                // print "<hr/>back: ".$backendSessId;
+                //print "<hr/>sessname: ".$sessname;
+                $sessionCookieValueToRemove = array(
+                    $frontendSessId,
+                    $backendSessId
+                );
+
+                $sessionCookieNameToRemove = array(
+                        //    "SAMLoginCookieAuthToken",
+                        //    "SAMLoginSimpleSAMLSessionID"
+                );
+                // die(print_r($cookies,true));
+
+                foreach ($cookies as $cookie) {
+
+                    $parts = explode('=', $cookie);
+                    $name = trim($parts[0]);
+                    $value = trim($parts[1]);
+                    if (in_array($value, $sessionCookieValueToRemove) || in_array($name, $sessionCookieNameToRemove)) {
+                        setcookie($name, '', 1);
+                        setcookie($name, '', 1, '/');
+                        $noCookieRemoved = false;
+                    }
+                }
+            }
+            if ($noCookieRemoved) {
+                $currentSession = JFactory::getSession();
+                $currentSession->set("SAMLoginPreventDoubleLogout", true);
+                $currentSession->close();
+
+                $app->logout();
+            }
             die("logged out");
         } else {
-            die("no wsfed session to logout");
+            die("already logged out or session broken");
         }
+        if (!empty($_GET['wreply'])) {
+            SimpleSAML_Utilities::redirectUntrustedURL(urldecode($_GET['wreply']));
+        }
+        exit;
     }
 
+
+    if (isset($_REQUEST["wresult"])) {
+        $proto = "wsfed";
+    }
     if ($proto == "wsfed") {
 
         $idpWSEnt = $_REQUEST["wsfedidp"];
         $spWSEnt = $_REQUEST["wsfedsp"];
-
-
-
-        $session = SimpleSAML_Session::getInstance();
         if (!$session->isValid('wsfed') && !isset($_REQUEST["wresult"])) {
-            //  die($idpWSEnt); 
             SimpleSAML_Utilities::redirectTrustedURL(
-                    '/' . $config->getBaseURL() . 'wsfed/sp/initSSO.php', array('RelayState' => SimpleSAML_Utilities::selfURL(),
+                    '/' . $config->getBaseURL() . 'wsfed/sp/initSSO.php', array('RelayState' => SimpleSAML_Utilities::selfURL()/* "/" */,
                 "idpentityid" => $idpWSEnt,
                 "spenityid" => $spWSEnt)
             );
         }
-        if (isset($_REQUEST["wresult"])) {
 
+        if (!$config->getBoolean('enable.wsfed-sp', false))
+            throw new SimpleSAML_Error_Error('NOACCESS');
+
+
+
+        // print_r($_REQUEST["wresult"]);die();
+        if (isset($_REQUEST["wresult"])) {
             /**
              * WS-Federation/ADFS PRP protocol support for simpleSAMLphp.
              *
@@ -150,7 +200,7 @@ try {
              * @version $Id$
              */
             $config = SimpleSAML_Configuration::getInstance();
-            // $session = SimpleSAML_Session::getInstance();
+            $session = SimpleSAML_Session::getInstance();
             $metadata = SimpleSAML_Metadata_MetaDataStorageHandler::getMetadataHandler();
 
 
@@ -158,15 +208,6 @@ try {
             if (!$config->getBoolean('enable.wsfed-sp', false))
                 throw new SimpleSAML_Error_Error('NOACCESS');
 
-            if (!empty($_GET['wa']) and ( $_GET['wa'] == 'wsignoutcleanup1.0')) {
-                if (isset($session) && $session->isValid('wsfed')) {
-                    $session->doLogout('wsfed');
-                }
-                if (!empty($_GET['wreply'])) {
-                    SimpleSAML_Utilities::redirectUntrustedURL(urldecode($_GET['wreply']));
-                }
-                exit;
-            }
 
             /* Make sure that the correct query parameters are passed to this script. */
             try {
@@ -189,13 +230,14 @@ try {
                 $wa = $_POST['wa'];
                 $wresult = $_POST['wresult'];
                 $wctx = $_POST['wctx'];
-
+                //print_r($wresult);die();
                 /* Load and parse the XML. */
                 $dom = new DOMDocument();
                 /* Accommodate for MS-ADFS escaped quotes */
                 $wresult = str_replace('\"', '"', $wresult);
                 $dom->loadXML(str_replace("\r", "", $wresult));
-
+                //print_r($wresult);die();
+                //  print_r($_POST);
 //echo "wsresult xml is: <textarea><![CDATA[".$wresult."]]></textarea>"; 
 //echo "<hr/>parses xml is: ".print_r($dom,true)."";
 //error_reporting(E_ALL);
@@ -377,13 +419,17 @@ try {
                 $t->data['remaining'] = $session->getAuthData('wsfed', 'Expire') - time();
                 $t->data['sessionsize'] = $session->getSize();
                 $t->data['attributes'] = $attributes;
-                $t->data['logouturl'] = '/' . $config->getBaseURL() . 'wsfed/sp/initSLO.php?RelayState=/' . $config->getBaseURL() . 'logout.php&spentityid=' . $spWSEnt;
+                $t->data['logouturl'] = '/' . $config->getBaseURL() . 'wsfed/sp/initSLO.php?RelayState=' . $config->getBaseURL() . 'logout.php&spentityid=' . $spWSEnt;
                 $t->show();
             } else {
-                $logoutURL = $wsfedLogoutURL = '/' . $config->getBaseURL() . 'wsfed/sp/initSLO.php?'
-                        . 'RelayState=/' . SimpleSAML_Utilities::selfURL() . "&task=finishSLO"
-                        . '&spentityid=' . $spWSEnt;
+                /* $logoutURL =  '/' . $config->getBaseURL() . 'wsfed/sp/initSLO.php?'
+                  . 'RelayState=' . urlencode(SimpleSAML_Utilities::selfURL()) . "&task=finishSLO"
+                  . '&spentityid=' . $spWSEnt; */
 
+                // $logoutURL = '/' . $config->getBaseURL() . 'wsfed/sp/initSLO.php?';
+                $logoutURL = '/' . $config->getBaseURL() . 'wsfed/sp/initSLO.php?'
+                        . 'RelayState={LOGOUT_CALLBACK_URL}'
+                        . '&spentityid=' . $spWSEnt;
                 $attributes = $session->getAuthData('wsfed', 'Attributes');
                 //  print_r($attributes); die("12testing");
                 $metadata = SimpleSAML_Metadata_MetaDataStorageHandler::getMetadataHandler();
@@ -408,8 +454,20 @@ try {
                 require_once JPATH_BASE . '/includes/framework.php';
                 JDEBUG ? $_PROFILER->mark('afterLoad') : null;
 // Instantiate the application.
+
+
+
                 $app = JFactory::getApplication('site');
+                
+                
+                $siteRootURL=strtr(JURI::root(), array("/components/com_samlogin" => ""));
+                $logoutURL = strtr($logoutURL,array("{LOGOUT_CALLBACK_URL}"=>$siteRootURL));
                 $currentSession = JFactory::getSession();
+
+                /*  $logoutURL .= 'RelayState=' . strtr(JURI::root(), array("/components/com_samlogin" => "")) . "&task=finishSLO"
+                  . '&spentityid=' . $spWSEnt; */
+                $wsfedLogoutURL = $logoutURL;
+                //die($logoutURL);
                 $currentSession->set("SAMLoginIsAuthN", SAMLoginSessionBridge::$isAuthN);
 
                 $currentSession->set("SAMLoginSession", SAMLoginSessionBridge::$SAMLSess);
@@ -420,10 +478,11 @@ try {
                 $currentSession->set("SAMLoginIsWSFEDSession", true);
                 //     print_r($currentSession->get("SAMLoginAttrs")); die("123testing");
                 /* this fixes issue 4 */ $currentSession->close(); //ensure session data storage session_write_close()
+                //echo "index.php?option=com_samlogin&view=login&task=handleSAMLResponse&rret=" . $_GET['rret'];die();
                 //print_r($currentSession->get("SAMLoginAttrs")); die("3testing");
                 $redirectTo = JRoute::_("index.php?option=com_samlogin&view=login&task=handleSAMLResponse&rret=" . $_GET['rret'], false);
                 $redirectTo = str_ireplace("/components/com_samlogin/", "/", $redirectTo);
-                //  //phpconsole("finishing login at $redirectTo", "rastrano");
+                // phpconsole("finishing login at $redirectTo", "rastrano");
 
 
                 if (isset($_REQUEST["dologout"])) {
@@ -435,6 +494,7 @@ try {
                     // die($wsfedLogoutURL);
                     $redirectTo = $wsfedLogoutURL;
                 }
+
                 $app->redirect($redirectTo);
                 // die($redirectTo);
 

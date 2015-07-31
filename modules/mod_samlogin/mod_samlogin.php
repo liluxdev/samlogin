@@ -93,7 +93,8 @@ $returnURL = getSAMLoginReturnURL($params);
 $samloginParams = JComponentHelper::getParams('com_samlogin');
 $discotype = $samloginParams->get('sspas_discotype', '0');
 
-
+$facebookSSOLink = JRoute::_('index.php?option=com_samlogin&view=login&task=initFacebookSSO&return=' . $returnURL, false, $params->get('usesecure', false));
+      
 
 
 if ($discotype == "nonsaml" || $discotype == "nonsaml-enforced" ) {

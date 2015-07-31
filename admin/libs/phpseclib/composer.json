@@ -1,0 +1,12 @@
+{
+    "name": "samlogin/seclib",
+    "require": {
+        "phpseclib/phpseclib": "0.3.*"
+    },
+    "authors": [
+        {
+            "name": "Stefano Gargiulo",
+            "email": "info@creativeprogramming.it"
+        }
+    ]
+}

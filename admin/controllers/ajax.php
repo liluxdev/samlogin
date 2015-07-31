@@ -762,6 +762,10 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 //   die($JoomlaBaseURLPath);
                 $checks['baseurlpath'] = ($sspConf["baseurlpath"] == $neededJoomlaBaseURLPath) ? TRUE : "Should be: `" . $neededJoomlaBaseURLPath . "` but `" . $sspConf["baseurlpath"] . "` found";
 
+                
+                $jconf = JFactory::getConfig();
+                $checks["sessionHandler"] =  $jconf->get('session_handler');
+          
 
                 $checks["metadataURL"] = $sslTestURL;
 
@@ -913,9 +917,9 @@ class SAMLoginControllerAjax extends SAMLoginController {
                 }
 
                 $privKeyFile = SSPConfManager::getCertDirPath() . "/saml.key";
-                $privKey = file_get_contents($privKeyFile);
+                $privKey = @file_get_contents($privKeyFile);
                 $privKeyDefFile = JPATH_SITE . "/components/com_samlogin/simplesamlphp/cert/saml.default.key";
-                $privKeyDef = file_get_contents($privKeyDefFile);
+                $privKeyDef = @file_get_contents($privKeyDefFile);
 
                 if ($privKey == $privKeyDef) {
                     $checks['privKeyChanged'] = false;

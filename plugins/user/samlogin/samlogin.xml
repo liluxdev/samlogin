@@ -2,12 +2,12 @@
 <extension version="2.5" type="plugin" group="user" method="upgrade">
 	<name>User - SAMLogin</name>
 	<author>creativeprogramming.it</author>
-	<creationDate>August 28th, 2014</creationDate>
+	<creationDate>Jan 2015</creationDate>
         <copyright>Copyright (c) 2014 creativeprogramming.it All rights reserved.</copyright>
         <license>Commercial</license>
 	<authorEmail>info@creativeprogramming.it</authorEmail>
 	<authorUrl>http://www.creativeprogramming.it</authorUrl>
-	<version>0.9.7</version>
+	<version>0.9.9b</version>
 	<description>SAMLL_AUTHPLG_TITLE</description>
 	<files>
 		<filename plugin="samlogin">samlogin.php</filename>

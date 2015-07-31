@@ -2,13 +2,17 @@
 
 // No direct access to this file
 defined('_JEXEC') or die;
-$phpseclibPath = JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/";
-set_include_path(get_include_path() . PATH_SEPARATOR . $phpseclibPath);
-include_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/Crypt/RSA.php");
-include_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/Crypt/Hash.php");
-include_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/File/X509.php");
-include_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/Math/BigInteger.php");
-include_once(JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/phpseclib0.3.5/Crypt/AES.php"); //mcrypt is used
+$phpseclibPath = JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/";
+
+$phpseclibPathBuild = JPATH_COMPONENT_ADMINISTRATOR . "/libs/phpseclib/vendor/phpseclib/phpseclib/phpseclib/";
+set_include_path(get_include_path() . PATH_SEPARATOR . $phpseclibPathBuild);
+include_once( $phpseclibPathBuild . "Crypt/RSA.php");
+include_once( $phpseclibPathBuild . "Crypt/Hash.php");
+include_once($phpseclibPathBuild . "File/X509.php");
+include_once($phpseclibPathBuild . "Math/BigInteger.php");
+//include_once($phpseclibPath. "Crypt/AES.php"); //mcrypt is used
+
+include_once( $phpseclibPath . "vendor/autoload.php");
 include_once("sspconfmanager.php");
 
 class KeyManager {
@@ -78,7 +82,7 @@ class KeyManager {
             file_put_contents($SSPKeyPath . $pubkeybackupname, $pubBackup);
 
             $message = "ciao";
-            $rsa = new Crypt_RSA();
+            $rsa = self::newPhpseclibCryptRSA();
             $rsa->loadKey($privateKey);
 
 
@@ -88,23 +92,23 @@ class KeyManager {
             $signature = $rsa->sign($message);
 
             /* not working
-            $rsa2 = new Crypt_RSA();
-            $x509 = new File_X509;
-            $x509->loadX509($publicKey);
-            $rsa2->loadKey($x509->getPublicKey());
-            $isVerified = $rsa2->verify($message, $signature);
+              $rsa2 = new Crypt_RSA();
+              $x509 = new File_X509;
+              $x509->loadX509($publicKey);
+              $rsa2->loadKey($x509->getPublicKey());
+              $isVerified = $rsa2->verify($message, $signature);
 
-            if ($isVerified) {
-                SAMLoginControllerAjax::enqueueAjaxMessage("Signature test passed (php server side)", SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
-            }
-            */
-            $isVerified=false;
-            $noOpenSSL=false;
-            if (function_exists("openssl_x509_export")){
+              if ($isVerified) {
+              SAMLoginControllerAjax::enqueueAjaxMessage("Signature test passed (php server side)", SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
+              }
+             */
+            $isVerified = false;
+            $noOpenSSL = false;
+            if (function_exists("openssl_x509_export")) {
                 openssl_x509_export($publicKey, $str_cert);
                 $res_pubkey = openssl_get_publickey($str_cert);
                 $isVerified = openssl_verify($message, $signature, $res_pubkey);
-            }else{
+            } else {
                 $isVerified = false;
                 $noOpenSSL = true;
             }
@@ -136,13 +140,12 @@ class KeyManager {
 
 
             if ($isVerified || $noOpenSSL) {
-                if ($noOpenSSL===false){
+                if ($noOpenSSL === false) {
                     SAMLoginControllerAjax::enqueueAjaxMessage("Signature test passed (server side)", SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
-                }else{
+                } else {
                     SAMLoginControllerAjax::enqueueAjaxMessage("Warning: php-openssl bindings not available, cannot verify keypair server side, anyway we consider it valid", SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
-              
                 }
-                
+
                 if ($privBackup == $privateKey && $pubBackup == $publicKey) {
                     SAMLoginControllerAjax::enqueueAjaxMessage("Already using this keypair. Operation aborted.", SAMLoginControllerAjax::$AJAX_MESSAGE_SUCCSS);
                     SAMLoginControllerAjax::releaseLock("nosimulate");
@@ -199,15 +202,22 @@ class KeyManager {
         if (SAMLoginControllerAjax::aquireLock("nosimulate")) {
             // create private key for CA cert
             // (you should probably print it out if you want to reuse it)
-            $CAPrivKey = new Crypt_RSA();
-            define('CRYPT_RSA_EXPONENT', 65537); 
-            $bits=1024;
-            $bits=2048;
-            SAMLoginControllerAjax::enqueueAjaxMessage("Notice: Using '$bits' bits for the random CSR",SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
+            // echo "class exists this. ".class_exists("JFactory");
+            //    echo "class exists this. ".class_exists("\\phpseclib\\Crypt\\RSA");
+            // echo "class exists this. ".class_exists("Crypt\\RSA");
+            // echo "class exists this. ".class_exists("\\Crypt\\RSA");
+            // echo "class exists this. ".class_exists("RSA");
+            //    die("test@".__LINE__);
+            $CAPrivKey = self::newPhpseclibCryptRSA();
+            //  die("test@".__LINE__);
+            define('CRYPT_RSA_EXPONENT', 65537);
+            $bits = 1024;
+            $bits = 2048;
+            SAMLoginControllerAjax::enqueueAjaxMessage("Notice: Using '$bits' bits for the random CSR", SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
             extract($CAPrivKey->createKey($bits));
             $CAPrivKey->loadKey($privatekey);
 
-            $pubKey = new Crypt_RSA();
+            $pubKey = self::newPhpseclibCryptRSA();
             $pubKey->loadKey($publickey);
             $pubKey->setPublicKey();
 
@@ -215,15 +225,18 @@ class KeyManager {
             //echo $privatekey;
             //echo "\r\n\r\n";
             // create a self-signed cert that'll serve as the CA
-            $subject = new File_X509();
+            $subject = self::newPhpseclibFileX509();
             $subject->setPublicKey($pubKey);
-            $subject->setDNProp('samlogin', 'SAMLogin Generated Cert');
+            $certDN = "SAMLogin Self Signing CA";
+            $subject->setDNProp('id-at-organizationName', $certDN);
 
-            $issuer = new File_X509();
+            $issuer = self::newPhpseclibFileX509();
             $issuer->setPrivateKey($CAPrivKey);
-            $issuer->setDN($CASubject = $subject->getDN());
+            $issuer->setDNProp('id-at-organizationName', $certDN);
 
-            $x509 = new File_X509();
+            SAMLoginControllerAjax::enqueueAjaxMessage("Notice: Using DN " . json_encode($subject->getDN()), SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
+
+            $x509 = self::newPhpseclibFileX509();
             $x509->setStartDate('-1 month');
             $x509->setEndDate('+10 year');
             $x509->setSerialNumber(chr(1));
@@ -234,22 +247,21 @@ class KeyManager {
             // echo $x509->saveX509($result);
             // echo "\r\n\r\n";
             // create private key / x.509 cert for stunnel / website
-            $privKey = new Crypt_RSA();
+            $privKey = self::newPhpseclibCryptRSA();
             extract($privKey->createKey());
             $privKey->loadKey($privatekey);
 
-            $pubKey = new Crypt_RSA();
+            $pubKey = self::newPhpseclibCryptRSA();
             $pubKey->loadKey($publickey);
             $pubKey->setPublicKey();
 
-            $subject = new File_X509();
+            $subject = self::newPhpseclibFileX509();
             $subject->setPublicKey($pubKey);
-            $subject->setDNProp('samlogin', 'SAMLogin Generated Cert');
             // $subject->setDomain('nomatter.nomatter');
 
             $domain = JURI::getInstance()->getHost();
-            if (preg_match("/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/", $domain)){
-                $domain="foobar.org";
+            if (preg_match("/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/", $domain)) {
+                $domain = "foobar.org";
             }
 
             $subject->setDomain($domain);
@@ -257,11 +269,12 @@ class KeyManager {
             SAMLoginControllerAjax::enqueueAjaxMessage("Notice: Using '$domain' as domain name in the CN of the XML Signing & Encryption certificate", SAMLoginControllerAjax::$AJAX_MESSAGE_WARNING);
 
 
-            $issuer = new File_X509();
+            $issuer = self::newPhpseclibFileX509();
             $issuer->setPrivateKey($CAPrivKey);
-            $issuer->setDN($CASubject);
+            $issuer->setDNProp('id-at-organizationName', $certDN);
+            $subject->setDNProp('id-at-organizationName', $certDN);
 
-            $x509 = new File_X509();
+            $x509 = self::newPhpseclibFileX509();
             $x509->setStartDate('-1 month');
             $x509->setEndDate('+10 year');
             $x509->setSerialNumber(chr(1));
@@ -368,11 +381,21 @@ class KeyManager {
         }
     }
 
+    static function newPhpseclibCryptRSA() {
+        //retunr new \phpseclib\Crypt\RSA();
+        return new Crypt_RSA();
+    }
+
+    static function newPhpseclibFileX509() {
+        //retunr new \phpseclib\File\X509();
+        return new File_X509();
+    }
+
     static function _depr_genkey($app) {
 
 
 // see samples: http://phpseclib.sourceforge.net/x509/compare.html
-        $rsa = new Crypt_RSA();
+        $rsa = self::newPhpseclibCryptRSA();
 
         $rsa->setPrivateKeyFormat(CRYPT_RSA_PRIVATE_FORMAT_PKCS1);
         $rsa->setPublicKeyFormat(CRYPT_RSA_PUBLIC_FORMAT_PKCS1);
@@ -380,7 +403,7 @@ class KeyManager {
         //$rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);    
         //define('CRYPT_RSA_EXPONENT', 65537);
         //define('CRYPT_RSA_SMALLEST_PRIME', 64); // makes it so multi-prime RSA is used
-        define('CRYPT_RSA_EXPONENT', 65537); 
+        define('CRYPT_RSA_EXPONENT', 65537);
         extract($rsa->createKey(2048)); // == $rsa->createKey(1024) where 1024 is the key size
         $SSPKeyPath = SSPConfManager::getCertDirPath();
 
