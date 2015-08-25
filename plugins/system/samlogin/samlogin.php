@@ -54,7 +54,7 @@ class plgSystemSamlogin extends JPlugin {
     }
 
     public static function getReturnURLAdminMergeSess($params) {
-        $url = JURI::root(false);//"/";
+        $url = Juri::root(false);//"/";
         $returl = self::getJRequestVar('return');
         // die($returl);
         if (isset($returl) && !$params->get('systemreturngotpriority', true)) {
@@ -125,9 +125,9 @@ class plgSystemSamlogin extends JPlugin {
                 $url.="?mergesess=1";
             }
         }
-        if (!stristr($url, "http")) { //ensure redirect is absolute URL 
-                $return = JURI::root() . strtr($url,array(''.JURI::root(true)=>'')); //remove double path
-                $return = strtr($url, array(JURI::root() . "/" => JURI::root()));
+       
+        if (!strpos($url, "http")!==0) { //ensure redirect is absolute URL 
+                $url = JURI::root() . $url;
         }
         return base64_encode($url);
     }
