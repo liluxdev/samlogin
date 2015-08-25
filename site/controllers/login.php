@@ -48,26 +48,26 @@ class SAMLoginControllerLogin extends SAMLoginController {
         //   $return = JRequest::getVar('return', null, 'GET', 'BASE64');
 
         $idp = JRequest::getVar('idp', null, 'GET', 'STRING');
-        
+
         $useremail = JRequest::getVar('useremail', null, 'POST', 'STRING');
-        if (isset($useremail) && !empty($useremail)){
-         //   echo("x.".$useremail);
-            $maildisco=$params->get("maildiscoverysettings", "");
-            if (!empty($maildisco)){
+        if (isset($useremail) && !empty($useremail)) {
+            //   echo("x.".$useremail);
+            $maildisco = $params->get("maildiscoverysettings", "");
+            if (!empty($maildisco)) {
                 //die($maildisco);
-                $maildisco =  json_decode($maildisco,true);
-                foreach($maildisco as $index=>$rule){
-                    if (preg_match("/".$rule['regex']."/", $useremail)){
+                $maildisco = json_decode($maildisco, true);
+                foreach ($maildisco as $index => $rule) {
+                    if (preg_match("/" . $rule['regex'] . "/", $useremail)) {
                         $idp = $rule['entity'];
-                        JFactory::getSession()->set("samlogin_discoemail",$useremail);
+                        JFactory::getSession()->set("samlogin_discoemail", $useremail);
                         JFactory::getSession()->close();
                         break;
-                     //   die($idp);
+                        //   die($idp);
                     }
                 }
             }
         }
-        if (is_null($idp)){
+        if (is_null($idp)) {
             $discotype = $params->get("sspas_discotype", "0");
             $singleIDP = $params->get("sspas_idpentityid", "");
             if ($discotype == self::DISCOTYPE_ONE_IDP_ONLY) {
@@ -193,10 +193,8 @@ class SAMLoginControllerLogin extends SAMLoginController {
             //Destroy only local fb session
             self::cleanSessionViaCookie();
             if (!stristr($return, "http")) {
-                $return = JURI::root() . strtr($return,array(''.JURI::root(true)=>'')); //remove double path 
+                $return = JURI::root() . strtr($return, array('' . JURI::root(true) => '')); //remove double path 
                 $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
-               
-
             }
             $app->redirect($return);
         }
@@ -283,8 +281,47 @@ class SAMLoginControllerLogin extends SAMLoginController {
         $sess = JFactory::getSession();
         $user = JFactory::getUser();
         $params = JComponentHelper::getParams('com_samlogin');
+        if ($params->get("enable_adminside", 0)) {
+            $noCookieRemoved = true;
+            if (isset($_SERVER['HTTP_COOKIE'])) {
+                $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+                $frontendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('site')));
+                $backendSessId = JFactory::getApplication()->input->cookie->get(md5(JApplication::getHash('administrator')));
 
-        $app->logout();
+                $sessionCookieValueToRemove = array(
+                    $frontendSessId,
+                    $backendSessId
+                );
+
+                $sessionCookieNameToRemove = array(
+                        //    "SAMLoginCookieAuthToken",
+                        //    "SAMLoginSimpleSAMLSessionID"
+                );
+
+
+                foreach ($cookies as $cookie) {
+
+                    $parts = explode('=', $cookie);
+                    $name = trim($parts[0]);
+                    $value = trim($parts[1]);
+                    if (in_array($value, $sessionCookieValueToRemove) || in_array($name, $sessionCookieNameToRemove)) {
+                        setcookie($name, '', 1);
+                        setcookie($name, '', 1, '/');
+                        $noCookieRemoved = false;
+                    }
+                }
+            }
+            if ($noCookieRemoved) {
+                /*     $currentSession = JFactory::getSession();
+                  $currentSession->set("SAMLoginPreventDoubleLogout", true);
+                  $currentSession->close(); */
+
+                $app->logout();
+            }
+        } else {
+            $app->logout();
+        }
+
         $user = JFactory::getUser();
         if (!$user->guest) {
             $this->handleError("Joomla LogOut Failed");
@@ -357,7 +394,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
                     } else {
                         //  die("@".__LINE__.$return);
                         if (!stristr($return, "http")) {
-                            $return = JURI::root() . strtr($return,array(''.JURI::root(true)=>'')); //remove double path
+                            $return = JURI::root() . strtr($return, array('' . JURI::root(true) => '')); //remove double path
                             $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
                         }
                         $app->redirect($return);
@@ -449,7 +486,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
 
                     $app->enqueueMessage("Devi fornire l'email per accedere a questo sito", "error");
                     if (!stristr($return, "http")) {
-                        $return = JURI::root() . strtr($return,array(''.JURI::root(true)=>'')); //remove double path
+                        $return = JURI::root() . strtr($return, array('' . JURI::root(true) => '')); //remove double path
                         $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
                     }
                     $app->redirect($return);
@@ -515,7 +552,7 @@ class SAMLoginControllerLogin extends SAMLoginController {
             // $rret = JRequest::getVar('rret', null, 'GET', 'BASE64');
             //  phpconsole("rret decoded is ".$return,"rastrano");
             if (!stristr($return, "http")) { //ensure redirect is absolute URL or problems in mobile browsers
-                $return = JURI::root() . strtr($return,array(''.JURI::root(true)=>'')); //remove double path
+                $return = JURI::root() . strtr($return, array('' . JURI::root(true) => '')); //remove double path
                 $return = strtr($return, array(JURI::root() . "/" => JURI::root()));
             }
             $app->redirect($return);
