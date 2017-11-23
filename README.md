@@ -2,5 +2,5 @@
 SAML Authentication Extension for Joomla
 
 
-simpleSAMLphp Layer part is at:
+simpleSAMLphp layer is at:
 https://github.com/creativeprogramming/simplesamlphp_samlogin
