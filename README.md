@@ -2,4 +2,5 @@
 SAML Authentication Extension for Joomla
 
 
-see also https://github.com/creativeprogramming/simplesamlphp_samlogin
+SAML Layer part also is needed to make it work:
+https://github.com/creativeprogramming/simplesamlphp_samlogin
